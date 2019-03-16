@@ -1,0 +1,65 @@
+body {
+    min-width: 800px;
+}
+
+.myloading {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.745);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.wrap {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+
+.wrap > * {
+    margin-bottom: 15px;
+}
+
+.wrap > .title {
+    text-align: center;
+}
+
+.indexBox > p {
+    margin-bottom: 10px;
+}
+
+.indexBox > .indexTable {
+    width: 100%;
+}
+
+.indexTable td {
+    border: 1px solid #000;
+    text-align: center;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.filterBox {
+    display: flex;
+    align-items: center;
+}
+
+.filterBox > label {
+    width: 80px;
+    margin-bottom: 0;
+}
+
+.filterBox > select {
+    flex: 1;
+}
+
+
+
+
+

@@ -1,5 +1,11 @@
 body {
-    min-width: 850px;
+    min-width: 900px;
+}
+
+ul{
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
 }
 
 .myloading {
@@ -23,7 +29,7 @@ body {
 }
 
 .wrap > * {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 .wrap > .title {
@@ -73,7 +79,6 @@ body {
 
 .contentBox > .contentR {
     flex: 0 0 60%;
-    background-color: gray;
     padding-left: 15px;
 }
 
@@ -104,9 +109,7 @@ body {
 }
 
 .outer > .detailList {
-    list-style: none;
     padding: 15px;
-    margin-bottom: 0;
 }
 
 .detailList > li {
@@ -132,6 +135,42 @@ body {
 .detailList > li > p > small {
     margin-left: 5px;
 }
+
+.contentR > .townList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.contentR > .townList > li {
+    flex: 0 0 48%;
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid #000;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.contentR > .townList > li > div {
+    padding: 15px;
+}
+
+.contentR > .townList > li > .townName {
+    flex: 0 0 65%;
+    border-right: 2px solid #000;
+}
+
+.contentR > .townList > li > .town_aqi {
+    flex: 0 0 35%;
+}
+
+
+
+
+
+
 
 
 

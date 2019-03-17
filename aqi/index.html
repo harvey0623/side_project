@@ -52,44 +52,49 @@
             <!-- 內容 -->
             <div class="contentBox">
                 <div class="contentL">
-                    <div class="outer">
+                    <div class="outer" v-if="metarial">
                         <div class="siteBox">
-                            <div class="countyName">台北</div>
-                            <div class="county_aqi">100</div>
+                            <div class="countyName">{{ metarial.SiteName }}</div>
+                            <div 
+                                class="county_aqi" 
+                                :style="{backgroundColor: rangeColor(metarial.AQI)}"
+                            >{{ metarial.AQI }}
+                            </div>
                         </div>
                         <ul class="detailList">
                             <li>
                                 <p>臭氧<small>O3 (PPB)</small></p>
-                                <p>100</p>
+                                <p>{{ metarial.O3 }}</p>
                             </li>
                             <li>
                                 <p>懸浮微粒<small>PM10 (ΜG/M³)</small></p>
-                                <p>100</p>
+                                <p>{{ metarial.PM10 }}</p>
                             </li>
                             <li>
                                 <p>細懸浮微粒<small>PM2.5 (ΜG/M³)</small></p>
-                                <p>100</p>
+                                <p>{{ metarial['PM25'] }}</p>
                             </li>
                             <li>
                                 <p>一氧化碳<small>CO (PPM)</small></p>
-                                <p>100</p>
+                                <p>{{ metarial.CO }}</p>
                             </li>
                             <li>
                                 <p>二氧化硫<small>SO2 (PPB)</small></p>
-                                <p>100</p>
+                                <p>{{ metarial.SO2 }}</p>
                             </li>
                             <li>
                                 <p>二氧化氮<small>NO2 (PPB)</small></p>
-                                <p>100</p>
+                                <p>{{ metarial.NO2 }}</p>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="contentR">
-                    <ul class="townList" v-if="targetCounty.length">
+                    <ul class="townList" v-if="targetCounty">
                         <li 
-                            v-for="(item,idx) in targetCounty[0].site"
-                            :key="idx" 
+                            v-for="(item,idx) in targetCounty.site"
+                            :key="idx"
+                            @click="showDetail(item)"
                         >
                             <div class="townName">{{ item.SiteName }}</div>
                             <div 

@@ -97,6 +97,7 @@ ul{
 
 .siteBox > div {
     padding: 10px;
+    min-height: 60px;
 }
 
 .siteBox > .countyName {

@@ -39,7 +39,8 @@
                 ],
                 isLoading: false,
                 selected: null,
-                tempData: []
+                tempData: [],
+                order: 0
             }
         },
         computed: {
@@ -47,7 +48,7 @@
                 if (!this.tempData.length) return [];
                 let countyArr = [];
                 this.tempData.forEach(data => {
-                    if (countyArr.indexOf(data.County) === -1) countyArr.push(data.County);   
+                    if (countyArr.indexOf(data.County) === -1) countyArr.push(data.County);
                 });
 
                 let resultArr = countyArr.map(county => {
@@ -61,8 +62,17 @@
                 return resultArr;
             },
             targetCounty() {  //目前縣市
-                if (this.selected === null) return [];
-                return this.countyList.filter(item => item.county === this.selected);
+                if (this.selected === null) return null;
+                this.order = 0;
+                return this.countyList.filter(item => item.county === this.selected)[0];
+            },
+            metarial() {  //空氣成分
+                if (!this.targetCounty) return null;
+                let targetObj = this.targetCounty.site[this.order];
+                let { SiteName, AQI, O3, PM10, CO, SO2, NO2 } = targetObj;
+                let tempObj = { SiteName, AQI, O3, PM10, CO, SO2, NO2 };
+                tempObj.PM25 = targetObj['PM2.5'];
+                return tempObj;
             }
         },
         methods: {
@@ -80,6 +90,9 @@
                 if (point >= 151 && point <= 200) return 'red';
                 if (point >= 201 && point <= 300) return '#9777FF';
                 if (point >= 301) return '#AD1774';
+            },
+            showDetail(obj) {  //顯示詳情
+                this.order = this.targetCounty.site.findIndex(item => item === obj);
             }
         },
         mounted() {

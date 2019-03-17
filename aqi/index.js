@@ -62,7 +62,7 @@
             },
             targetCounty() {  //目前縣市
                 if (this.selected === null) return [];
-                return this.countyList.filter(item => item.county === this.selected)
+                return this.countyList.filter(item => item.county === this.selected);
             }
         },
         methods: {

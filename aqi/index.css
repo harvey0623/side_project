@@ -1,5 +1,5 @@
 body {
-    min-width: 800px;
+    min-width: 850px;
 }
 
 .myloading {
@@ -30,6 +30,7 @@ body {
     text-align: center;
 }
 
+/*指標*/
 .indexBox > p {
     margin-bottom: 10px;
 }
@@ -45,6 +46,7 @@ body {
     font-weight: bold;
 }
 
+/*縣市*/
 .filterBox {
     display: flex;
     align-items: center;
@@ -58,6 +60,82 @@ body {
 .filterBox > select {
     flex: 1;
 }
+
+/*內容*/
+.contentBox {
+    display: flex;
+}
+
+.contentBox > .contentL {
+    flex: 0 0 40%;
+    padding-right: 15px;
+}
+
+.contentBox > .contentR {
+    flex: 0 0 60%;
+    background-color: gray;
+    padding-left: 15px;
+}
+
+.contentL > .outer {
+    border: 2px solid #000;
+}
+
+.contentL > .outer > .siteBox {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #000;
+}
+
+.siteBox > div {
+    padding: 10px;
+}
+
+.siteBox > .countyName {
+    flex: 0 0 65%;
+    border-right: 2px solid #000;
+}
+
+.siteBox > .county_aqi {
+    flex: 0 0 35%;
+}
+
+.outer > .detailList {
+    list-style: none;
+    padding: 15px;
+    margin-bottom: 0;
+}
+
+.detailList > li {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+}
+
+.detailList > li:last-child {
+    margin-bottom: 0px;
+    border-bottom: none;
+}
+
+.detailList > li > p {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.detailList > li > p > small {
+    margin-left: 5px;
+}
+
+
+
+
 
 
 

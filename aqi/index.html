@@ -15,6 +15,7 @@
         <div class="myloading" v-if="isLoading">Loading...</div>
         <div class="wrap">
             <h2 class="title">空氣品質AQI</h2>
+            <!-- 指標 -->
             <div class="indexBox">
                 <p>空氣指標:</p>
                 <table class="indexTable">
@@ -35,6 +36,7 @@
                     </tbody>
                 </table>
             </div>
+            <!-- 縣市 -->
             <div class="filterBox">
                 <label>選擇縣市:</label>
                 <select class="form-control" v-model="selected">
@@ -47,8 +49,45 @@
                     </option>
                 </select>
             </div>
+            <!-- 內容 -->
             <div class="contentBox">
-                
+                <div class="contentL">
+                    <div class="outer">
+                        <div class="siteBox">
+                            <div class="countyName">台北</div>
+                            <div class="county_aqi">100</div>
+                        </div>
+                        <ul class="detailList">
+                            <li>
+                                <p>臭氧<small>O3 (PPB)</small></p>
+                                <p>100</p>
+                            </li>
+                            <li>
+                                <p>懸浮微粒<small>PM10 (ΜG/M³)</small></p>
+                                <p>100</p>
+                            </li>
+                            <li>
+                                <p>細懸浮微粒<small>PM2.5 (ΜG/M³)</small></p>
+                                <p>100</p>
+                            </li>
+                            <li>
+                                <p>一氧化碳<small>CO (PPM)</small></p>
+                                <p>100</p>
+                            </li>
+                            <li>
+                                <p>二氧化硫<small>SO2 (PPB)</small></p>
+                                <p>100</p>
+                            </li>
+                            <li>
+                                <p>二氧化氮<small>NO2 (PPB)</small></p>
+                                <p>100</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="contentR">
+
+                </div>
             </div>
         </div>
     </div>

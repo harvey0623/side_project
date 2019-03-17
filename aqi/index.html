@@ -86,22 +86,17 @@
                     </div>
                 </div>
                 <div class="contentR">
-                    <ul class="townList">
-                        <li>
-                            <div class="townName">台北</div>
-                            <div class="town_aqi">100</div>
-                        </li>
-                        <li>
-                            <div class="townName">台北</div>
-                            <div class="town_aqi">100</div>
-                        </li>
-                        <li>
-                            <div class="townName">台北</div>
-                            <div class="town_aqi">100</div>
-                        </li>
-                        <li>
-                            <div class="townName">台北</div>
-                            <div class="town_aqi">100</div>
+                    <ul class="townList" v-if="targetCounty.length">
+                        <li 
+                            v-for="(item,idx) in targetCounty[0].site"
+                            :key="idx" 
+                        >
+                            <div class="townName">{{ item.SiteName }}</div>
+                            <div 
+                                class="town_aqi" 
+                                :style="{backgroundColor: rangeColor(item.AQI)}"
+                            >{{ item.AQI }}
+                            </div>
                         </li>
                     </ul>
                 </div>

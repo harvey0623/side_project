@@ -43,19 +43,26 @@
             }
         },
         computed: {
-            countyList() {
+            countyList() {  //縣市清單
                 if (!this.tempData.length) return [];
                 let countyArr = [];
                 this.tempData.forEach(data => {
                     if (countyArr.indexOf(data.County) === -1) countyArr.push(data.County);   
                 });
 
-                return countyArr.map(county => {
+                let resultArr = countyArr.map(county => {
                     return {
                         county,
                         site: this.tempData.filter(data => data.County === county)
                     }
                 });
+
+                this.selected = resultArr[0].county;
+                return resultArr;
+            },
+            targetCounty() {  //目前縣市
+                if (this.selected === null) return [];
+                return this.countyList.filter(item => item.county === this.selected)
             }
         },
         methods: {

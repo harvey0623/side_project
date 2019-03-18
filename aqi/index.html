@@ -24,7 +24,7 @@
                             <td 
                                 v-for="(item,idx) in indexData"
                                 :key="idx"
-                                :style="{backgroundColor: rangeColor(item.point)}"
+                                :class="rangeColor(item.point)"
                             >{{ item.title }}
                             </td>
                         </tr>
@@ -97,10 +97,8 @@
                             @click="showDetail(item)"
                         >
                             <div class="townName">{{ item.SiteName }}</div>
-                            <div 
-                                class="town_aqi" 
-                                :style="{backgroundColor: rangeColor(item.AQI)}"
-                            >{{ item.AQI }}
+                            <div :class="[rangeColor(item.AQI),'town_aqi']">
+                                {{ item.AQI }}
                             </div>
                         </li>
                     </ul>

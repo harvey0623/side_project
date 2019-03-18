@@ -2,7 +2,7 @@ body {
     min-width: 900px;
 }
 
-ul{
+ul {
     list-style: none;
     padding-left: 0;
     margin-bottom: 0;
@@ -14,7 +14,7 @@ ul{
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.745);
+    background-color: rgba(0, 0, 0, 0.745);
     color: white;
     display: flex;
     align-items: center;
@@ -28,20 +28,21 @@ ul{
     padding-top: 15px;
 }
 
-.wrap > * {
+.wrap>* {
     margin-bottom: 25px;
 }
 
-.wrap > .title {
+.wrap>.title {
     text-align: center;
 }
 
 /*指標*/
-.indexBox > p {
+
+.indexBox>p {
     margin-bottom: 10px;
 }
 
-.indexBox > .indexTable {
+.indexBox>.indexTable {
     width: 100%;
 }
 
@@ -53,40 +54,42 @@ ul{
 }
 
 /*縣市*/
+
 .filterBox {
     display: flex;
     align-items: center;
 }
 
-.filterBox > label {
+.filterBox>label {
     width: 80px;
     margin-bottom: 0;
 }
 
-.filterBox > select {
+.filterBox>select {
     flex: 1;
 }
 
 /*內容*/
+
 .contentBox {
     display: flex;
 }
 
-.contentBox > .contentL {
+.contentBox>.contentL {
     flex: 0 0 40%;
     padding-right: 15px;
 }
 
-.contentBox > .contentR {
+.contentBox>.contentR {
     flex: 0 0 60%;
     padding-left: 15px;
 }
 
-.contentL > .outer {
+.contentL>.outer {
     border: 2px solid #000;
 }
 
-.contentL > .outer > .siteBox {
+.contentL>.outer>.siteBox {
     display: flex;
     align-items: center;
     font-size: 25px;
@@ -95,25 +98,25 @@ ul{
     border-bottom: 2px solid #000;
 }
 
-.siteBox > div {
+.siteBox>div {
     padding: 10px;
     min-height: 60px;
 }
 
-.siteBox > .countyName {
+.siteBox>.countyName {
     flex: 0 0 65%;
     border-right: 2px solid #000;
 }
 
-.siteBox > .county_aqi {
+.siteBox>.county_aqi {
     flex: 0 0 35%;
 }
 
-.outer > .detailList {
+.outer>.detailList {
     padding: 15px;
 }
 
-.detailList > li {
+.detailList>li {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -122,28 +125,28 @@ ul{
     padding-bottom: 10px;
 }
 
-.detailList > li:last-child {
+.detailList>li:last-child {
     margin-bottom: 0px;
     border-bottom: none;
 }
 
-.detailList > li > p {
+.detailList>li>p {
     margin-bottom: 0;
     font-weight: bold;
     font-size: 18px;
 }
 
-.detailList > li > p > small {
+.detailList>li>p>small {
     margin-left: 5px;
 }
 
-.contentR > .townList {
+.contentR>.townList {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.contentR > .townList > li {
+.contentR>.townList>li {
     flex: 0 0 48%;
     display: flex;
     justify-content: space-between;
@@ -152,32 +155,47 @@ ul{
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 20px;
+    transition: transform .25s;
 }
 
-.contentR > .townList > li > div {
+.contentR>.townList>li:hover {
+    transform: translate(-2px, -2px);
+}
+
+.contentR>.townList>li>div {
     padding: 15px;
 }
 
-.contentR > .townList > li > .townName {
+.contentR>.townList>li>.townName {
     flex: 0 0 65%;
     border-right: 2px solid #000;
 }
 
-.contentR > .townList > li > .town_aqi {
+.contentR>.townList>li>.town_aqi {
     flex: 0 0 35%;
 }
 
+/*顏色類別*/
+.good {
+    background-color: #00e800;
+}
 
+.normal {
+    background-color: #ff0;
+}
 
+.allergyer {
+    background-color: #ff7e00;
+}
 
+.aller {
+    background-color: red;
+}
 
+.notHealth {
+    background-color: #9777FF;
+}
 
-
-
-
-
-
-
-
-
-
+.danger {
+    background-color: #AD1774;
+}

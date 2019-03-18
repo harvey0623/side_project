@@ -84,12 +84,12 @@
                 });
             },
             rangeColor(point) {  //顏色區間
-                if (point >= 0 && point <= 50) return '#00e800';
-                if (point >= 51 && point <= 100) return '#ff0';
-                if (point >= 101 && point <= 150) return '#ff7e00';
-                if (point >= 151 && point <= 200) return 'red';
-                if (point >= 201 && point <= 300) return '#9777FF';
-                if (point >= 301) return '#AD1774';
+                if (point >= 0 && point <= 50) return 'good';
+                if (point >= 51 && point <= 100) return 'normal';
+                if (point >= 101 && point <= 150) return 'allergyer';
+                if (point >= 151 && point <= 200) return 'aller';
+                if (point >= 201 && point <= 300) return 'notHealth';
+                if (point >= 301) return 'danger';
             },
             showDetail(obj) {  //顯示詳情
                 this.order = this.targetCounty.site.findIndex(item => item === obj);

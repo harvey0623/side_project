@@ -56,8 +56,7 @@
                         <div class="siteBox">
                             <div class="countyName">{{ metarial.SiteName }}</div>
                             <div 
-                                class="county_aqi" 
-                                :style="{backgroundColor: rangeColor(metarial.AQI)}"
+                                :class="[ rangeColor(metarial.AQI),'county_aqi']"
                             >{{ metarial.AQI }}
                             </div>
                         </div>

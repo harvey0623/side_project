@@ -162,7 +162,7 @@
                     this._zipCode = null;
                 }
                 async getData() {
-                    this.zipCodeData = await axios.get('/zipeCode.json').then(res => res.data.cities);
+                    this.zipCodeData = await axios.get('./zipeCode.json').then(res => res.data.cities);
                 }
                 get_district() {
                     return this.zipCodeData.map(item => {

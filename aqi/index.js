@@ -1,5 +1,5 @@
 (function (Vue) {
-    const api = 'https://script.google.com/macros/s/AKfycby_w1xfzcoj5mSKfYGOgO9Rc3aU6kAGGeEJmqZuYlifkWJpojZl/exec?url=http://opendata.epa.gov.tw/webapi/Data/REWIQA/?format=json';
+    const api = 'https://json2jsonp.com/?url=http://opendata.epa.gov.tw/webapi/Data/REWIQA/?format=json&callback=cbfunc';
 
     new Vue({
         el: '#app',
@@ -78,10 +78,14 @@
         methods: {
             getAqi() {
                 this.isLoading = true;
-                axios.get(api).then(res => {
-                    this.tempData = res.data;
-                    this.isLoading = false;
-                });
+                $.ajax({
+                    url: api,
+                    dataType: 'jsonp',
+                    success: (res) => {
+                        this.tempData = res;
+                        this.isLoading = false;
+                    }
+                })
             },
             rangeColor(point) {  //顏色區間
                 if (point >= 0 && point <= 50) return 'good';

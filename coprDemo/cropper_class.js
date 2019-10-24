@@ -43,11 +43,11 @@ let PhotoCrop = (function ($, Cropper) {
             let isValidSize = (fileObj.size / 1024 / 1024) <= this._maxFileSzie;
             return isValidType && isValidSize;
         }
-        bsShown(event) {
+        bsShown(evt) {
             this.cropInit();
             if (typeof this._bsShowCallback === 'function') this._bsShowCallback();
         }
-        bsHidden(event) {
+        bsHidden(evt) {
             this.destroyCrop();
             if (typeof this._bsHideCallback === 'function') this._bsHideCallback();
         }

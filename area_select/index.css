@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+#app {
+    max-width: 700px;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cityList {
+    padding: 5px 8px;
+    margin-right: 5px;
+}
+
+.btnReset {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.chooseList {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.chooseList > li {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.chooseList > li > .fa {
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.areaBox {
+    margin-top: 20px;
+}
+
+.areaBox > label {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 20px;
+}
+
+.areaBox input[type=checkbox] {
+    width: 16px;
+    height: 16px;
+    transform: translateY(4px);
+}

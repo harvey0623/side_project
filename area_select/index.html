@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'/>
+    <link rel="stylesheet" href="./index.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1 class="title">最多選{{ limit }}個</h1>
+        <div class="panel">
+            <select v-model="cityIndex" class="cityList">
+                <option
+                    v-for="city in cities" 
+                    :value="city.id" 
+                    :key="city.id"
+                >{{ city.name }}
+                </option>
+            </select>
+            <button @click="clearHandler" class="btnReset">清空</button>
+        </div>
+        <ul class="chooseList">
+            <li v-for="item in uiList" :key="item.code">
+                <i 
+                    class="fa fa-times" 
+                    aria-hidden="true"
+                    @click="cancelHandler(item, true)"
+                ></i>
+                <span>{{ item.name }}</span>
+            </li>
+        </ul>
+        <div class="areaBox">
+            <label v-for="area in areas" :key="area.code">
+                <input 
+                    type="checkbox" 
+                    :value="area.name"
+                    :checked="area.checked"
+                    :disabled="area.disabled"
+                    @change="changeStatus(area, $event)"
+                >
+                <span>{{ area.name }}</span>
+            </label>
+        </div>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    cityIndex: 1,
+                    list: [],
+                    output: [],
+                    limit: 5
+                }
+            },
+            computed: {
+                cities() {
+                    return this.list.map(({ name, id }) => {
+                        return { name, id };
+                    });
+                },
+                areas() {
+                    if (this.list.length === 0 || this.cityIndex === null) return [];
+                    return this.list.find(item => item.id === this.cityIndex)['region'];
+                },
+                limitOutput() {
+                    if (this.output.length === this.limit) {
+                        this.areas.forEach(item => {
+                            if (this.output.indexOf(item) === -1) {
+                                item.disabled = true;
+                            }
+                        });
+                    } else {
+                        let index = this.output.findIndex(item => item.code === this.cityIndex);
+                        if (index === -1) {
+                            this.areas.forEach(item => {
+                                item.disabled = false;
+                            });
+                        }
+                    }
+                    return this.output;
+                },
+                uiList() {
+                    return this.limitOutput;
+                }  
+            },
+            methods: {
+                async getData() { //取得資料並加需要的欄位
+                    let result = await axios.get('./data.json').then(res => res.data.cities);
+                    this.list = result.reduce((prev, current) => {
+                        current.region = current.region.map(({ name, code }) => {
+                            return { name, code, checked: false, disabled: false }
+                        });
+                        prev.push(current);
+                        return prev;
+                    }, []);
+                },
+                changeStatus(obj, evt) {
+                    let isChecked = evt.target.checked;
+                    this[isChecked ? 'addHandler' : 'cancelHandler'](obj, false);
+                    //====全區域判斷
+                    if (obj.code === this.cityIndex) {
+                        this.areas.forEach(item => {
+                            item.checked = obj.checked ? true : false;
+                            item.disabled = (function() {
+                                if (obj.checked) return obj.code === item.code ? false : true;
+                                else return false;
+                            })();
+                        });
+                        if (obj.checked) this.removeSameDsitrict();
+                    }
+                },
+                removeSameDsitrict() {
+                    let temp = this.output.filter(item => item.code === this.cityIndex)[0];
+                    this.output = this.output.filter((item, index) => {
+                        return this.areas.indexOf(item) === -1;
+                    });
+                    if (temp) this.output.push(temp);
+                },
+                addHandler(obj) {
+                    obj.checked = true;
+                    this.output.push(obj);
+                },
+                cancelHandler(obj, isReset) {
+                    obj.checked = false;
+                    let index = this.output.indexOf(obj);
+                    this.output.splice(index, 1);
+                    //如果是點擊叉叉刪除全部區域就要reset同區的checked值
+                    if (!isReset) return;
+                    let isAllDsitrict = this.cities.some(city => city.id === obj.code);
+                    if (isAllDsitrict) {
+                        let regions = this.list.find(item => item.id === obj.code)['region'];
+                        regions.forEach(region => {
+                            region.checked = false;
+                            region.disabled = false
+                        });
+                    }
+                },
+                clearHandler() {
+                    this.list.forEach(city => {
+                        city.region.forEach(region => {
+                            region.checked = false;
+                            region.disabled = false;
+                        });
+                    });
+                    this.output = [];
+                }
+            },
+            mounted() {
+                this.getData();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

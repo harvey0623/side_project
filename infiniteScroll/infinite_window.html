@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="./infiniteScroll.css">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'/>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js'></script>
+</head>
+
+<body>
+	<div class="wrap">
+		<h2 class="title">User list</h2>
+		<ul class="userList"></ul>
+		<div id="loading">
+			<i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw"></i>
+			<p>Loading...</p>
+		</div>
+	</div>
+
+	<script>
+		class View {
+			constructor() {}
+			static el_userList = document.querySelector('.userList');
+			static el_loading = document.querySelector('#loading');
+			static renderHTML(data) {
+				data.forEach(item => {
+					let li = document.createElement('li');
+					li.innerHTML = `
+						<div class="pic">
+							<img src="${item.picture.large}" alt="">
+						</div>
+						<div class="descBox">
+							<p>name: ${item.name.first} ${item.name.last}</p>
+							<p>gender: ${item.gender}</p>
+							<p>email: ${item.email}</p>
+						</div>`;
+					this.el_userList.appendChild(li);
+				});
+			}
+		}
+
+		class InfiniteScroll {
+			constructor() {
+				this._isLoading = false;
+				this._currentPage = 1;
+				this._maxPage = 3;
+				this._hasNextPage = true;
+				this._api = 'https://randomuser.me/api/?results=25&seed=abc&page=';
+				this._view = View;
+				this.getData();
+				this.bindEvent();
+			}
+			bindEvent() {
+				window.addEventListener('scroll', this.scrollHandler.bind(this));
+				window.addEventListener('beforeunload', this.beforeunloadHandler);
+			}
+			beforeunloadHandler() {
+				window.scrollTo(0, 0);
+			}
+			async getData() {
+				this.isLoading = true;
+				let result = await axios.get(`${this._api}${this._currentPage}`)
+					.then(res => res.data.results);
+				this._currentPage++;
+				if (this._currentPage > this._maxPage) this.hasNextPage = false;
+				this._view.renderHTML(result);
+				this.isLoading = false;
+			}
+			scrollHandler() {
+				let windowH = window.innerHeight;
+				let documentH = document.documentElement.scrollHeight;
+				let diff_pos = documentH - windowH;
+				let scrollPos = window.pageYOffset;
+            if (scrollPos >= diff_pos * 0.9 && !this.isLoading && this.hasNextPage) {
+					this.getData();
+            }
+			}
+			get isLoading() {
+				return this._isLoading;
+			}
+			set isLoading(val) {
+				this._isLoading = val;
+				this._view.el_loading.style.display = val ? 'block' : 'none';
+			}
+			get hasNextPage() {
+				return this._hasNextPage;
+			}
+			set hasNextPage(val) {
+				this._hasNextPage = val;
+			}
+		}
+
+		let scroller = new InfiniteScroll();
+		
+	</script>
+</body>
+
+</html>

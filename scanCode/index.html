@@ -37,6 +37,18 @@
 			console.log(hasCamera);
 		});
 
+		
+		function setResult(label, result) {
+			label.textContent = result;
+			camQrResultTimestamp.textContent = new Date().toString();
+			label.style.color = 'teal';
+			clearTimeout(label.highlightTimeout);
+			label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
+    	}
+
+		const scanner = new QrScanner(video, result => setResult(camQrResult, result));
+    	scanner.start();
+
 	</script>
 </body>
 

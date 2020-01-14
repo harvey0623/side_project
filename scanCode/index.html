@@ -28,15 +28,11 @@
 		let scanner = null;
 
 		function initScan() {
-			try {
-				scanner = new QrScanner(camera, function(result) {
-					console.log(result)
-				});
-				scanner.setInversionMode('both');
-				scanner.start();
-			} catch(err) {
-				alert(JSON.stringify(err))
-			}
+			let scanner = new QrScanner(camera, function(result) {
+				console.log(result)
+			});
+			// scanner.setInversionMode('both');
+			scanner.start();
 		}
 
 		QrScanner.hasCamera().then(hasCamera => {

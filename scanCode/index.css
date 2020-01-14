@@ -20,8 +20,8 @@ body {
    height: 280px;
    position: relative;
    z-index: 2;
-   /* background-color: #fff; */
-   /* object-fit: cover; */
+   background-color: #fff;
+   object-fit: cover;
 }
 
 #camera.notActive {

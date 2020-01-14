@@ -40,8 +40,10 @@
 		}
 
 		QrScanner.hasCamera().then(hasCamera => {
-			if (hasCamera) initScan();
+			hasCamera
 		});
+		
+		initScan();
 
 
 	</script>

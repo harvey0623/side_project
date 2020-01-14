@@ -53,14 +53,14 @@
     const fileSelector = document.getElementById('file-selector');
     const fileQrResult = document.getElementById('file-qr-result');
 
-    function setResult(label, result) {
+    function setResult(result) {
 			alert(result)
     }
 
     // ####### Web Cam Scanning #######
 
     QrScanner.hasCamera().then(hasCamera => {
-		 console.log(hasCamera);
+		console.log(hasCamera);
 	 });
 
     const scanner = new QrScanner(video, result => setResult(result));

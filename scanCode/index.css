@@ -21,7 +21,7 @@ body {
    position: relative;
    z-index: 2;
    /* background-color: #fff; */
-   object-fit: cover;
+   /* object-fit: cover; */
 }
 
 #camera.notActive {

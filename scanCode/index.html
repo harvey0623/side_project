@@ -64,6 +64,7 @@
 	 });
 
     const scanner = new QrScanner(video, result => setResult(result));
+	 scanner.setInversionMode('both');
     scanner.start();
 
 

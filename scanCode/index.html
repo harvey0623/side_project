@@ -1,56 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<title>掃描條碼</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="icon" href="" type="image/jpg" sizes="16x16">
-	<style>
-		.mycontainer {
-			max-width: 576px;
-			margin: 0 auto;
-			padding: 25px 15px 20px;
-		}
-
-		#camera {
-			display: block;
-			width: 300px;
-			height: 300px;
-			margin: 0 auto;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <title>QR Scanner Demo</title>
 </head>
-
 <body>
-	<div class="mycontainer">
-		<video id="camera"></video>
-	</div>
+<style>
+    canvas {
+        display: none;
+    }
+    hr {
+        margin-top: 32px;
+    }
+    input[type="file"] {
+        display: block;
+        margin-bottom: 16px;
+    }
+    div {
+        margin-bottom: 16px;
+    }
+</style>
+<h1>Scan from WebCam:</h1>
+<div>
+    <b>Device has camera: </b>
+    <span id="cam-has-camera"></span>
+    <br>
+    <video muted playsinline id="qr-video"></video>
+</div>
+<div>
+    <select id="inversion-mode-select">
+        <option value="original">Scan original (dark QR code on bright background)</option>
+        <option value="invert">Scan with inverted colors (bright QR code on dark background)</option>
+        <option value="both">Scan both</option>
+    </select>
+    <br>
+</div>
+<b>Detected QR code: </b>
+<span id="cam-qr-result">None</span>
+<br>
+<b>Last detected at: </b>
+<span id="cam-qr-result-timestamp"></span>
 
 
-	<script type="module">
-		import QrScanner from './lib/qr-scanner.min.js';
-		QrScanner.WORKER_PATH = './lib/qr-scanner.min.js';
-		let camera = document.querySelector('#camera');
+<script type="module">
+    import QrScanner from "./lib/qr-scanner.min.js";
+    QrScanner.WORKER_PATH = './lib/qr-scanner-worker.min.js';
 
-		QrScanner.hasCamera().then(hasCamera => {
-			console.log(hasCamera);
-		});
+    const video = document.getElementById('qr-video');
+    const camHasCamera = document.getElementById('cam-has-camera');
+    const camQrResult = document.getElementById('cam-qr-result');
+    const camQrResultTimestamp = document.getElementById('cam-qr-result-timestamp');
+    const fileSelector = document.getElementById('file-selector');
+    const fileQrResult = document.getElementById('file-qr-result');
 
-		
-		function setResult(label, result) {
-			label.textContent = result;
-			camQrResultTimestamp.textContent = new Date().toString();
-			label.style.color = 'teal';
-			clearTimeout(label.highlightTimeout);
-			label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
-    	}
+    function setResult(label, result) {
+			alert(result)
+    }
 
-		const scanner = new QrScanner(camera, result => setResult(camQrResult, result));
-    	scanner.start();
+    // ####### Web Cam Scanning #######
 
-	</script>
+    QrScanner.hasCamera().then(hasCamera => {
+		 console.log(hasCamera);
+	 });
+
+    const scanner = new QrScanner(video, result => setResult(result));
+    scanner.start();
+
+
+</script>
 </body>
-
 </html>

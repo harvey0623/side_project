@@ -32,6 +32,7 @@
 	<script type="module">
 		import QrScanner from './lib/qr-scanner.min.js';
 		QrScanner.WORKER_PATH = './lib/qr-scanner.min.js';
+		let camera = document.querySelector('#camera');
 
 		QrScanner.hasCamera().then(hasCamera => {
 			console.log(hasCamera);
@@ -46,7 +47,7 @@
 			label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
     	}
 
-		const scanner = new QrScanner(video, result => setResult(camQrResult, result));
+		const scanner = new QrScanner(camera, result => setResult(camQrResult, result));
     	scanner.start();
 
 	</script>

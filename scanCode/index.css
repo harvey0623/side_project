@@ -20,7 +20,7 @@ body {
    height: 280px;
    position: relative;
    z-index: 2;
-   background-color: #fff;
+   /* background-color: #fff; */
    object-fit: cover;
 }
 

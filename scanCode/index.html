@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>掃描條碼</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css' />
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/terms.css">
+	<script src='./lib/jquery.3.4.1.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue.js'></script>
+	<script src="./lib/vee-validate.js"></script>
+	<script src=""></script>
+	<style>
+		/* #camera {
+			display: block;
+			width: 500px;
+			height: 500px;
+		} */
+	</style>
+</head>
+
+<body>
+	<div class="mycontainer">
+		<video id="camera"></video>
+	</div>
+
+
+	<script src="./js/components/veevalidate.js"></script>
+	<script src="./js/components/all.js"></script>
+	<script type="module">
+		import QrScanner from './lib/qrcode/qr-scanner.min.js';
+		QrScanner.WORKER_PATH = '/lib/qrcode/qr-scanner.min.js';
+
+		QrScanner.hasCamera().then(hasCamera => {
+			console.log(hasCamera);
+		});
+
+	</script>
+</body>
+
+</html>

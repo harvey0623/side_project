@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>QR Scanner Demo</title>
+	<meta charset="UTF-8">
+	<title>QR Scanner Demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./index.css">
 </head>
+
 <body>
-<style>
-    canvas {
-        display: none;
-    }
-    hr {
-        margin-top: 32px;
-    }
-    input[type="file"] {
-        display: block;
-        margin-bottom: 16px;
-    }
-    div {
-        margin-bottom: 16px;
-    }
-</style>
-<h1>Scan from WebCam:</h1>
-<div>
-    <video muted playsinline id="qr-video"></video>
-</div>
+	<div class="mycontainer">
+		<div class="videoBox">
+			<video  id="camera" playsinline></video>
+			<div class="corner corner1"></div>
+			<div class="corner corner2"></div>
+			<div class="corner corner3"></div>
+			<div class="corner corner4"></div>
+		</div>
+	</div>
 
 
-<script type="module">
-    import QrScanner from "./lib/qr-scanner.min.js";
-    QrScanner.WORKER_PATH = './lib/qr-scanner-worker.min.js';
+	<script type="module">
+		import QrScanner from "./lib/qr-scanner.min.js";
+		QrScanner.WORKER_PATH = './lib/qr-scanner-worker.min.js';
+		let camera = document.querySelector('#camera');
+		let scanner = null;
 
-    const video = document.getElementById('qr-video');
+		function initScan() {
+			scanner = new QrScanner(camera, function(result) {
+				console.log(result)
+			});
+			scanner.setInversionMode('both');
+			scanner.start();
+		}
 
-    QrScanner.hasCamera().then(hasCamera => camHasCamera.textContent = hasCamera);
+		QrScanner.hasCamera().then(hasCamera => {
+			if (hasCamera) initScan();
+		});
 
-    const scanner = new QrScanner(video, function(result) {
-      
-    });
-    scanner.start();
 
-</script>
+	</script>
 </body>
+
 </html>

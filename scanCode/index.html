@@ -30,7 +30,7 @@
 		function initScan() {
 			try {
 				scanner = new QrScanner(camera, function(result) {
-				console.log(result)
+					console.log(result)
 				});
 				scanner.setInversionMode('both');
 				scanner.start();

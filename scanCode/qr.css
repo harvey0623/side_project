@@ -3,33 +3,9 @@ body {
   padding-top: 20px;
 }
 
-#loadingMessage {
-  text-align: center;
-  background-color: #eee;
-}
-
-#canvas {
-  width: 100%;
-}
-
-#output {
-  margin-top: 20px;
-  background: #eee;
-  padding: 10px;
-  padding-bottom: 0;
-}
-
-#output div {
-  padding-bottom: 10px;
-  word-wrap: break-word;
-}
-
-#noQRFound {
-  text-align: center;
-}
-
 #canvas {
   display: block;
+  width: 100%;
   max-width: 300px;
   min-height: 300px;
   margin: 0 auto;

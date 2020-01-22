@@ -14,6 +14,10 @@
 		let video = document.createElement("video");
 		let canvasElement = document.getElementById("canvas");
 		let ctx = canvasElement.getContext("2d");
+		let canvasSize = {
+			width: 300,
+			height: 300
+		}
 
 		function drawLine(begin, end) {
 			ctx.beginPath();
@@ -27,8 +31,8 @@
 		function tick() {
 			if (video.readyState === video.HAVE_ENOUGH_DATA) {
 				canvasElement.classList.remove('notActive');
-				ctx.drawImage(video, 0, 0, 300, 300);
-				var { data, width, height } = ctx.getImageData(0, 0, 300, 300);
+				ctx.drawImage(video, 0, 0, canvasSize.width, canvasSize.height);
+				var { data, width, height } = ctx.getImageData(0, 0, canvasSize.width, canvasSize.height);
 				var code = jsQR(data, width, height, {
 					inversionAttempts: "dontInvert",
 				});
@@ -38,21 +42,25 @@
 					drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner);
 					drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner);
 				} else {
-					
+					alert('發生錯次');
 				}
 			}
 			requestAnimationFrame(tick);
 		}
 
 		async function getMedia() {
-			let stream = await navigator.mediaDevices.getUserMedia({ 
-				video: { facingMode: "environment" }
-			});
-			video.srcObject = stream;
-			// required to tell iOS safari we don't want fullscreen
-			video.setAttribute('playsinline', true);
-			video.play();
-			requestAnimationFrame(tick);
+			try {
+				let stream = await navigator.mediaDevices.getUserMedia({ 
+					video: { facingMode: "environment" }
+				});
+				video.srcObject = stream;
+				// required to tell iOS safari we don't want fullscreen
+				video.setAttribute('playsinline', true);
+				video.play();
+				requestAnimationFrame(tick);
+			} catch(err) {
+				alert('reject camera');
+			}
 		}
 
 

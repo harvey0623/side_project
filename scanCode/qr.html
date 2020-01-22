@@ -10,17 +10,10 @@
 
 <body>
 	<canvas id="canvas" class="notActive"></canvas>
-	<!-- <div id="output" hidden>
-		<div id="outputMessage">No QR code detected.</div>
-		<div hidden><b>Data:</b> <span id="outputData"></span></div>
-	</div> -->
 	<script>
 		var video = document.createElement("video");
 		var canvasElement = document.getElementById("canvas");
 		var canvas = canvasElement.getContext("2d");
-		var outputContainer = document.getElementById("output");
-		var outputMessage = document.getElementById("outputMessage");
-		var outputData = document.getElementById("outputData");
 
 		function drawLine(begin, end, color) {
 			canvas.beginPath();
@@ -33,13 +26,10 @@
 
 		function tick() {
 			if (video.readyState === video.HAVE_ENOUGH_DATA) {
-
-				// canvasElement.height = video.videoHeight;
-				// canvasElement.width = video.videoWidth;
 				canvasElement.classList.remove('notActive');
 				canvas.drawImage(video, 0, 0, 300, 300);
-				var imageData = canvas.getImageData(0, 0, 300, 300);
-				var code = jsQR(imageData.data, imageData.width, imageData.height, {
+				var { data, width, height } = canvas.getImageData(0, 0, 300, 300);
+				var code = jsQR(data, width, height, {
 					inversionAttempts: "dontInvert",
 				});
 				if (code) {
@@ -47,12 +37,8 @@
 					drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
 					drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
 					drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
-					// outputMessage.hidden = true;
-					// outputData.parentElement.hidden = false;
-					// outputData.innerText = code.data;
 				} else {
-					// outputMessage.hidden = false;
-					// outputData.parentElement.hidden = true;
+					
 				}
 			}
 			requestAnimationFrame(tick);
@@ -60,11 +46,11 @@
 
 		async function getMedia() {
 			let stream = await navigator.mediaDevices.getUserMedia({ 
-				video: {facingMode: "environment"}
+				video: { facingMode: "environment" }
 			});
 			video.srcObject = stream;
 			// required to tell iOS safari we don't want fullscreen
-			video.setAttribute("playsinline", true);
+			video.setAttribute('playsinline', true);
 			video.play();
 			requestAnimationFrame(tick);
 		}

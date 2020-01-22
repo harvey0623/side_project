@@ -19,7 +19,6 @@
 		</div>
 		<p class="tipText">請掃描 QR code 以存入禮物卡</p>
 		<p class="restartText">您以拒絕掃qr code功能,如要使用請清除快取並重新整理網頁</p>
-		<button class="btnPlay">play</button>
 	</div>
 	<script>
 		let scanner = null;
@@ -52,10 +51,11 @@
 					});
 					if (code) {
 						this.isScan = true;
-						this.drawLine(code.location.topLeftCorner, code.location.topRightCorner);
-						this.drawLine(code.location.topRightCorner, code.location.bottomRightCorner);
-						this.drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner);
-						this.drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner);
+						let { topLeftCorner, topRightCorner, bottomRightCorner, bottomLeftCorner } = code.location;
+						this.drawLine(topLeftCorner, topRightCorner);
+						this.drawLine(topRightCorner, bottomRightCorner);
+						this.drawLine(bottomRightCorner, bottomLeftCorner);
+						this.drawLine(bottomLeftCorner, topLeftCorner);
 						console.log(code.data);
 						this.video.pause();
 						cancelAnimationFrame(this.animateFrame);
@@ -91,15 +91,13 @@
 			scanner = new Scanner({
 				el: '#canvas',
 				scanEvent() {
-					console.log('scanning');
+					setTimeout(() => {
+						initScan();
+					}, 3000);
 				}
 			});
 			scanner.getMedia();
 		}
-
-		document.querySelector('.btnPlay').addEventListener('click', function() {
-			initScan();
-		});
 
 		initScan();
 

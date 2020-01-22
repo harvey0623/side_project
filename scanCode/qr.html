@@ -19,15 +19,19 @@
 		</div>
 		<p class="tipText">請掃描 QR code 以存入禮物卡</p>
 		<p class="restartText">您以拒絕掃qr code功能,如要使用請清除快取並重新整理網頁</p>
+		<button class="btnPlay">play</button>
 	</div>
 	<script>
+		let scanner = null;
 		class Scanner {
-			constructor({ el, scanning }) {
+			constructor({ el, scanEvent }) {
 				this.video = document.createElement('video');
 				this.canvas = document.querySelector(el);
 				if (this.canvas.tagName !== 'CANVAS') throw new Error('element must be canvas element');
 				this.ctx = this.canvas.getContext('2d');
+				this.animateFrame = null;
 				this.isScan = false;
+				this.scanEvent = scanEvent;
 			}
 			drawLine(begin, end) {
 				this.ctx.beginPath();
@@ -38,104 +42,67 @@
 				this.ctx.stroke();
 			}
 			tick() {
-				alert(this.video);
-				try {
-					if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
-						let size = { w: 300, h: 300 };
-						this.canvas.classList.remove('notActive');
-						this.ctx.drawImage(this.video, 0, 0, size.w, size.h);
-						let { data, width, height } = this.ctx.getImageData(0, 0, size.w, size.h);
-						let code = jsQR(data, width, height, {
-							inversionAttempts: 'dontInvert',
-						});
-						if (code) {
-							this.drawLine(code.location.topLeftCorner, code.location.topRightCorner);
-							this.drawLine(code.location.topRightCorner, code.location.bottomRightCorner);
-							this.drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner);
-							this.drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner);
-							alert(code.data);
-						}
+				if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
+					let size = { w: 300, h: 300 };
+					this.canvas.classList.remove('notActive');
+					this.ctx.drawImage(this.video, 0, 0, size.w, size.h);
+					let { data, width, height } = this.ctx.getImageData(0, 0, size.w, size.h);
+					let code = jsQR(data, width, height, {
+						inversionAttempts: 'dontInvert',
+					});
+					if (code) {
+						this.isScan = true;
+						this.drawLine(code.location.topLeftCorner, code.location.topRightCorner);
+						this.drawLine(code.location.topRightCorner, code.location.bottomRightCorner);
+						this.drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner);
+						this.drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner);
+						console.log(code.data);
+						this.video.pause();
+						cancelAnimationFrame(this.animateFrame);
+						this.scanEvent();
 					}
-					requestAnimationFrame(this.tick);
-				} catch(err) {
-					alert(err);
+				}
+
+				if (!this.isScan) {
+					this.animateFrame = requestAnimationFrame(() => {
+						this.tick();
+					});
 				}
 			}
 			async getMedia() {
 				try {
 					let stream = await navigator.mediaDevices.getUserMedia({ 
-						video: { facingMode: "environment" }
+						video: { facingMode: 'environment' }
 					});
 					this.video.srcObject = stream;
 					this.video.setAttribute('playsinline', true);
 					this.video.play();
-					requestAnimationFrame(this.tick);
+					this.animateFrame = requestAnimationFrame(() => {
+						this.tick();
+					});
 				} catch(err) {
 					document.querySelector('.restartText').classList.add('show');
-					console.log(this.video);
 				}
 			}
 		}
 
-		new Scanner({
-			el: '#canvas',
-			// scanning() {
-			// 	alert('scanning');
-			// }
-		}).getMedia();
+		function initScan() {
+			scanner = null;
+			scanner = new Scanner({
+				el: '#canvas',
+				scanEvent() {
+					console.log('scanning');
+				}
+			});
+			scanner.getMedia();
+		}
 
+		document.querySelector('.btnPlay').addEventListener('click', function() {
+			initScan();
+		});
 
-		// let video = document.createElement("video");
-		// let canvasElement = document.getElementById("canvas");
-		// let ctx = canvasElement.getContext("2d");
-		// let canvasSize = { width: 300, height: 300 };
+		initScan();
 
-		// function drawLine(begin, end) {
-		// 	ctx.beginPath();
-		// 	ctx.moveTo(begin.x, begin.y);
-		// 	ctx.lineTo(end.x, end.y);
-		// 	ctx.lineWidth = 2;
-		// 	ctx.strokeStyle = '#FF3B58';
-		// 	ctx.stroke();
-		// }
-
-		// function tick() {
-		// 	if (video.readyState === video.HAVE_ENOUGH_DATA) {
-		// 		canvasElement.classList.remove('notActive');
-		// 		ctx.drawImage(video, 0, 0, canvasSize.width, canvasSize.height);
-		// 		let { data, width, height } = ctx.getImageData(0, 0, canvasSize.width, canvasSize.height);
-		// 		let code = jsQR(data, width, height, {
-		// 			inversionAttempts: "dontInvert",
-		// 		});
-
-		// 		if (code) {
-		// 			drawLine(code.location.topLeftCorner, code.location.topRightCorner);
-		// 			drawLine(code.location.topRightCorner, code.location.bottomRightCorner);
-		// 			drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner);
-		// 			drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner);
-		// 			alert(code.data);
-		// 		} else {
-					
-		// 		}
-		// 	}
-		// 	requestAnimationFrame(tick);
-		// }
-
-		// async function getMedia() {
-		// 	try {
-		// 			let stream = await navigator.mediaDevices.getUserMedia({ 
-		// 				video: { facingMode: "environment" }
-		// 			});
-		// 			this.video.srcObject = stream;
-		// 			this.video.setAttribute('playsinline', true);
-		// 			this.video.play();
-		// 			requestAnimationFrame(tick);
-		// 		} catch(err) {
-					
-		// 		}
-		// }
-
-		// getMedia();
 	</script>
 </body>
 

@@ -3,17 +3,15 @@
 <head>
 	<meta charset="utf-8">
 	<title>jsQR Demo</title>
-	<link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./lib/jsQR.js">
 	<link rel="stylesheet" href="./qr.css">
 	<script src="./lib/jsQR.js"></script>
 </head>
 
 <body>
-	<div id="loadingMessage">
-		Unable to access video stream (please make sure you have a webcam enabled)
-	</div>
-	<canvas id="canvas" hidden></canvas>
+	<canvas id="canvas" class="notActive"></canvas>
+	<div id="loadingMessage"></div>
 	<div id="output" hidden>
 		<div id="outputMessage">No QR code detected.</div>
 		<div hidden><b>Data:</b> <span id="outputData"></span></div>
@@ -26,6 +24,10 @@
 		var outputContainer = document.getElementById("output");
 		var outputMessage = document.getElementById("outputMessage");
 		var outputData = document.getElementById("outputData");
+		let canvasSize = {
+			width: 300,
+			height: 300
+		};
 
 		function drawLine(begin, end, color) {
 			canvas.beginPath();
@@ -39,14 +41,11 @@
 		function tick() {
 			loadingMessage.innerText = "⌛ Loading video..."
 			if (video.readyState === video.HAVE_ENOUGH_DATA) {
-				loadingMessage.hidden = true;
-				canvasElement.hidden = false;
-				outputContainer.hidden = false;
-
-				canvasElement.height = video.videoHeight;
-				canvasElement.width = video.videoWidth;
-				canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
-				var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+				// canvasElement.height = video.videoHeight;
+				// canvasElement.width = video.videoWidth;
+				canvasElement.classList.remove('notActive');
+				canvas.drawImage(video, 0, 0, canvasSize.width, canvasSize.height);
+				var imageData = canvas.getImageData(0, 0, canvasSize.width, canvas.height);
 				var code = jsQR(imageData.data, imageData.width, imageData.height, {
 					inversionAttempts: "dontInvert",
 				});

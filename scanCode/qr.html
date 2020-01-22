@@ -11,32 +11,32 @@
 <body>
 	<canvas id="canvas" class="notActive"></canvas>
 	<script>
-		var video = document.createElement("video");
-		var canvasElement = document.getElementById("canvas");
-		var canvas = canvasElement.getContext("2d");
+		let video = document.createElement("video");
+		let canvasElement = document.getElementById("canvas");
+		let ctx = canvasElement.getContext("2d");
 
-		function drawLine(begin, end, color) {
-			canvas.beginPath();
-			canvas.moveTo(begin.x, begin.y);
-			canvas.lineTo(end.x, end.y);
-			canvas.lineWidth = 4;
-			canvas.strokeStyle = color;
-			canvas.stroke();
+		function drawLine(begin, end) {
+			ctx.beginPath();
+			ctx.moveTo(begin.x, begin.y);
+			ctx.lineTo(end.x, end.y);
+			ctx.lineWidth = 2;
+			ctx.strokeStyle = '#FF3B58';
+			ctx.stroke();
 		}
 
 		function tick() {
 			if (video.readyState === video.HAVE_ENOUGH_DATA) {
 				canvasElement.classList.remove('notActive');
-				canvas.drawImage(video, 0, 0, 300, 300);
-				var { data, width, height } = canvas.getImageData(0, 0, 300, 300);
+				ctx.drawImage(video, 0, 0, 300, 300);
+				var { data, width, height } = ctx.getImageData(0, 0, 300, 300);
 				var code = jsQR(data, width, height, {
 					inversionAttempts: "dontInvert",
 				});
 				if (code) {
-					drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
-					drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
-					drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
-					drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
+					drawLine(code.location.topLeftCorner, code.location.topRightCorner);
+					drawLine(code.location.topRightCorner, code.location.bottomRightCorner);
+					drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner);
+					drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner);
 				} else {
 					
 				}

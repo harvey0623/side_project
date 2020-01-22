@@ -10,7 +10,6 @@
 </head>
 
 <body>
-	<h1>jsQR Demo</h1>
 	<div id="loadingMessage">
 		Unable to access video stream (please make sure you have a webcam enabled)
 	</div>
@@ -78,11 +77,12 @@
 				});
 				video.srcObject = stream;
 				// required to tell iOS safari we don't want fullscreen
-				video.setAttribute("playsinline", true);
+				video.setAttribute('playsinline', true);
 				video.play();
 				requestAnimationFrame(tick);
 			} catch(err) {
-				alert(err);
+				// alert(err);
+				console.log(err);
 			}
 		}
 

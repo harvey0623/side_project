@@ -70,7 +70,11 @@
 		async function getMedia() {
 			try {
 				let stream = await navigator.mediaDevices.getUserMedia({ 
-					video: { facingMode: "environment" }
+					video: { 
+						width: 600,
+						height: 600,
+						facingMode: 'environment' 
+					}
 				});
 				video.srcObject = stream;
 				// required to tell iOS safari we don't want fullscreen

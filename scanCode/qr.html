@@ -3,15 +3,18 @@
 <head>
 	<meta charset="utf-8">
 	<title>jsQR Demo</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
 	<link rel="stylesheet" href="./lib/jsQR.js">
 	<link rel="stylesheet" href="./qr.css">
 	<script src="./lib/jsQR.js"></script>
 </head>
 
 <body>
-	<canvas id="canvas" class="notActive"></canvas>
-	<div id="loadingMessage"></div>
+	<h1>jsQR Demo</h1>
+	<div id="loadingMessage">
+		Unable to access video stream (please make sure you have a webcam enabled)
+	</div>
+	<canvas id="canvas" hidden></canvas>
 	<div id="output" hidden>
 		<div id="outputMessage">No QR code detected.</div>
 		<div hidden><b>Data:</b> <span id="outputData"></span></div>
@@ -24,10 +27,6 @@
 		var outputContainer = document.getElementById("output");
 		var outputMessage = document.getElementById("outputMessage");
 		var outputData = document.getElementById("outputData");
-		let canvasSize = {
-			width: 300,
-			height: 300
-		};
 
 		function drawLine(begin, end, color) {
 			canvas.beginPath();
@@ -39,13 +38,12 @@
 		}
 
 		function tick() {
-			loadingMessage.innerText = "⌛ Loading video..."
 			if (video.readyState === video.HAVE_ENOUGH_DATA) {
-				// canvasElement.height = video.videoHeight;
-				// canvasElement.width = video.videoWidth;
-				canvasElement.classList.remove('notActive');
-				canvas.drawImage(video, 0, 0, canvasSize.width, canvasSize.height);
-				var imageData = canvas.getImageData(0, 0, canvasSize.width, canvas.height);
+
+				canvasElement.height = video.videoHeight;
+				canvasElement.width = video.videoWidth;
+				canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+				var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
 				var code = jsQR(imageData.data, imageData.width, imageData.height, {
 					inversionAttempts: "dontInvert",
 				});
@@ -54,35 +52,24 @@
 					drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
 					drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
 					drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
-					outputMessage.hidden = true;
-					outputData.parentElement.hidden = false;
-					outputData.innerText = code.data;
+					// outputMessage.hidden = true;
+					// outputData.parentElement.hidden = false;
+					// outputData.innerText = code.data;
 				} else {
-					outputMessage.hidden = false;
-					outputData.parentElement.hidden = true;
+					// outputMessage.hidden = false;
+					// outputData.parentElement.hidden = true;
 				}
 			}
 			requestAnimationFrame(tick);
 		}
 
 		async function getMedia() {
-			try {
-				let stream = await navigator.mediaDevices.getUserMedia({ 
-					video: { 
-						width: 600,
-						height: 600,
-						facingMode: 'environment' 
-					}
-				});
-				video.srcObject = stream;
-				// required to tell iOS safari we don't want fullscreen
-				video.setAttribute('playsinline', true);
-				video.play();
-				requestAnimationFrame(tick);
-			} catch(err) {
-				// alert(err);
-				console.log(err);
-			}
+			let stream = await navigator.mediaDevices.getUserMedia({ video: {facingMode: "environment"}});
+			video.srcObject = stream;
+			// required to tell iOS safari we don't want fullscreen
+			video.setAttribute("playsinline", true);
+			video.play();
+			requestAnimationFrame(tick);
 		}
 
 		getMedia();

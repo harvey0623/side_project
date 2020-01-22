@@ -38,6 +38,7 @@
 				this.ctx.stroke();
 			}
 			tick() {
+				alert(this.video);
 				try {
 					if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
 						let size = { w: 300, h: 300 };

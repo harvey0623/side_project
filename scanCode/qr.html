@@ -3,18 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<title>jsQR Demo</title>
-	<link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
-	<link rel="stylesheet" href="./lib/jsQR.js">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./qr.css">
 	<script src="./lib/jsQR.js"></script>
 </head>
 
 <body>
 	<canvas id="canvas"></canvas>
-	<div id="output" hidden>
+	<!-- <div id="output" hidden>
 		<div id="outputMessage">No QR code detected.</div>
 		<div hidden><b>Data:</b> <span id="outputData"></span></div>
-	</div>
+	</div> -->
 	<script>
 		var video = document.createElement("video");
 		var canvasElement = document.getElementById("canvas");

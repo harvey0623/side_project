@@ -9,15 +9,21 @@
 </head>
 
 <body>
-	<canvas id="canvas" class="notActive"></canvas>
+	<div class="box">
+		<div class="videoBox">
+			<canvas id="canvas" class="notActive"></canvas>
+			<div class="corner corner1"></div>
+			<div class="corner corner2"></div>
+			<div class="corner corner3"></div>
+			<div class="corner corner4"></div>
+		</div>
+		<p class="tipText">請掃描 QR code 以存入禮物卡</p>
+	</div>
 	<script>
 		let video = document.createElement("video");
 		let canvasElement = document.getElementById("canvas");
 		let ctx = canvasElement.getContext("2d");
-		let canvasSize = {
-			width: 300,
-			height: 300
-		}
+		let canvasSize = { width: 300, height: 300 };
 
 		function drawLine(begin, end) {
 			ctx.beginPath();
@@ -59,7 +65,7 @@
 				video.play();
 				requestAnimationFrame(tick);
 			} catch(err) {
-				alert('reject camera');
+				
 			}
 		}
 

@@ -21,58 +21,115 @@
 		<p class="restartText">您以拒絕掃qr code功能,如要使用請清除快取並重新整理網頁</p>
 	</div>
 	<script>
-		let video = document.createElement("video");
-		let canvasElement = document.getElementById("canvas");
-		let ctx = canvasElement.getContext("2d");
-		let canvasSize = { width: 300, height: 300 };
-
-		function drawLine(begin, end) {
-			ctx.beginPath();
-			ctx.moveTo(begin.x, begin.y);
-			ctx.lineTo(end.x, end.y);
-			ctx.lineWidth = 2;
-			ctx.strokeStyle = '#FF3B58';
-			ctx.stroke();
-		}
-
-		function tick() {
-			if (video.readyState === video.HAVE_ENOUGH_DATA) {
-				canvasElement.classList.remove('notActive');
-				ctx.drawImage(video, 0, 0, canvasSize.width, canvasSize.height);
-				let { data, width, height } = ctx.getImageData(0, 0, canvasSize.width, canvasSize.height);
-				let code = jsQR(data, width, height, {
-					inversionAttempts: "dontInvert",
-				});
-
-				if (code) {
-					drawLine(code.location.topLeftCorner, code.location.topRightCorner);
-					drawLine(code.location.topRightCorner, code.location.bottomRightCorner);
-					drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner);
-					drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner);
-					alert(code.data);
-				} else {
-					
+		class Scanner {
+			constructor({ el, scanning }) {
+				this.video = document.createElement('video');
+				this.canvas = document.querySelector(el);
+				if (this.canvas.tagName !== 'CANVAS') throw new Error('element must be canvas element');
+				this.ctx = this.canvas.getContext('2d');
+				this.isScan = false;
+			}
+			drawLine(begin, end) {
+				this.ctx.beginPath();
+				this.ctx.moveTo(begin.x, begin.y);
+				this.ctx.lineTo(end.x, end.y);
+				this.ctx.lineWidth = 2;
+				this.ctx.strokeStyle = '#FF3B58';
+				this.ctx.stroke();
+			}
+			tick() {
+				if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
+					let size = { w: 300, h: 300 };
+					this.canvas.classList.remove('notActive');
+					this.ctx.drawImage(this.video, 0, 0, size.w, size.h);
+					let { data, width, height } = this.ctx.getImageData(0, 0, size.w, size.h);
+					let code = jsQR(data, width, height, {
+						inversionAttempts: 'dontInvert',
+					});
+					if (code) {
+						drawLine(code.location.topLeftCorner, code.location.topRightCorner);
+						drawLine(code.location.topRightCorner, code.location.bottomRightCorner);
+						drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner);
+						drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner);
+						alert(code.data);
+					}
+				}
+				requestAnimationFrame(this.tick);
+			}
+			async getMedia() {
+				try {
+					let stream = await navigator.mediaDevices.getUserMedia({ 
+						video: { facingMode: "environment" }
+					});
+					this.video.srcObject = stream;
+					this.video.setAttribute('playsinline', true);
+					this.video.play();
+					requestAnimationFrame(this.tick);
+				} catch(err) {
+					document.querySelector('.restartText').classList.add('show');
 				}
 			}
-			requestAnimationFrame(tick);
 		}
 
-		async function getMedia() {
-			try {
-				let stream = await navigator.mediaDevices.getUserMedia({ 
-					video: { facingMode: "environment" }
-				});
-				video.srcObject = stream;
-				// required to tell iOS safari we don't want fullscreen
-				video.setAttribute('playsinline', true);
-				video.play();
-				requestAnimationFrame(tick);
-			} catch(err) {
-				
-			}
-		}
+		new Scanner({
+			el: '#canvas',
+			// scanning() {
+			// 	alert('scanning');
+			// }
+		}).getMedia();
 
-		getMedia();
+
+		// let video = document.createElement("video");
+		// let canvasElement = document.getElementById("canvas");
+		// let ctx = canvasElement.getContext("2d");
+		// let canvasSize = { width: 300, height: 300 };
+
+		// function drawLine(begin, end) {
+		// 	ctx.beginPath();
+		// 	ctx.moveTo(begin.x, begin.y);
+		// 	ctx.lineTo(end.x, end.y);
+		// 	ctx.lineWidth = 2;
+		// 	ctx.strokeStyle = '#FF3B58';
+		// 	ctx.stroke();
+		// }
+
+		// function tick() {
+		// 	if (video.readyState === video.HAVE_ENOUGH_DATA) {
+		// 		canvasElement.classList.remove('notActive');
+		// 		ctx.drawImage(video, 0, 0, canvasSize.width, canvasSize.height);
+		// 		let { data, width, height } = ctx.getImageData(0, 0, canvasSize.width, canvasSize.height);
+		// 		let code = jsQR(data, width, height, {
+		// 			inversionAttempts: "dontInvert",
+		// 		});
+
+		// 		if (code) {
+		// 			drawLine(code.location.topLeftCorner, code.location.topRightCorner);
+		// 			drawLine(code.location.topRightCorner, code.location.bottomRightCorner);
+		// 			drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner);
+		// 			drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner);
+		// 			alert(code.data);
+		// 		} else {
+					
+		// 		}
+		// 	}
+		// 	requestAnimationFrame(tick);
+		// }
+
+		// async function getMedia() {
+		// 	try {
+		// 			let stream = await navigator.mediaDevices.getUserMedia({ 
+		// 				video: { facingMode: "environment" }
+		// 			});
+		// 			this.video.srcObject = stream;
+		// 			this.video.setAttribute('playsinline', true);
+		// 			this.video.play();
+		// 			requestAnimationFrame(tick);
+		// 		} catch(err) {
+					
+		// 		}
+		// }
+
+		// getMedia();
 	</script>
 </body>
 

@@ -62,4 +62,9 @@ body {
 .restartText {
 	color: #fff;
 	line-height: 25px;
+	display: none;
+}
+
+.restartText.show {
+	display: block;
 }

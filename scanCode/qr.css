@@ -54,7 +54,11 @@ body {
 
 .tipText {
    text-align: center;
-   color: white;
+   color: #fff;
 	margin-top: 50px;
 	margin-bottom: 0;
+}
+
+.restartText {
+	color: #fff
 }

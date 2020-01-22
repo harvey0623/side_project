@@ -11,9 +11,9 @@
 
 <body>
 	<h1>jsQR Demo</h1>
-	<a id="githubLink" href="https://github.com/cozmo/jsQR">View documentation on Github</a>
-	<p>Pure JavaScript QR code decoding library.</p>
-	<div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
+	<div id="loadingMessage">
+		Unable to access video stream (please make sure you have a webcam enabled)
+	</div>
 	<canvas id="canvas" hidden></canvas>
 	<div id="output" hidden>
 		<div id="outputMessage">No QR code detected.</div>
@@ -36,14 +36,6 @@
 			canvas.strokeStyle = color;
 			canvas.stroke();
 		}
-
-		// Use facingMode: environment to attemt to get the front camera on phones
-		navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
-			video.srcObject = stream;
-			video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
-			video.play();
-			requestAnimationFrame(tick);
-		});
 
 		function tick() {
 			loadingMessage.innerText = "⌛ Loading video..."
@@ -74,6 +66,23 @@
 			}
 			requestAnimationFrame(tick);
 		}
+
+		async function getMedia() {
+			try {
+				let stream = await navigator.mediaDevices.getUserMedia({ 
+					video: { facingMode: "environment" }
+				});
+				video.srcObject = stream;
+				// required to tell iOS safari we don't want fullscreen
+				video.setAttribute("playsinline", true);
+				video.play();
+				requestAnimationFrame(tick);
+			} catch(err) {
+				alert(err);
+			}
+		}
+
+		getMedia();
 	</script>
 </body>
 

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<canvas id="canvas"></canvas>
+	<canvas id="canvas" class="notActive"></canvas>
 	<!-- <div id="output" hidden>
 		<div id="outputMessage">No QR code detected.</div>
 		<div hidden><b>Data:</b> <span id="outputData"></span></div>
@@ -36,6 +36,7 @@
 
 				// canvasElement.height = video.videoHeight;
 				// canvasElement.width = video.videoWidth;
+				canvasElement.classList.remove('notActive');
 				canvas.drawImage(video, 0, 0, 300, 300);
 				var imageData = canvas.getImageData(0, 0, 300, 300);
 				var code = jsQR(imageData.data, imageData.width, imageData.height, {
@@ -58,13 +59,16 @@
 		}
 
 		async function getMedia() {
-			let stream = await navigator.mediaDevices.getUserMedia({ video: {facingMode: "environment"}});
+			let stream = await navigator.mediaDevices.getUserMedia({ 
+				video: {facingMode: "environment"}
+			});
 			video.srcObject = stream;
 			// required to tell iOS safari we don't want fullscreen
 			video.setAttribute("playsinline", true);
 			video.play();
 			requestAnimationFrame(tick);
 		}
+
 
 		getMedia();
 	</script>

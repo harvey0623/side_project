@@ -69,6 +69,7 @@
 
 		async function getMedia() {
 			try {
+				alert(navigator.mediaDevices);
 				let stream = await navigator.mediaDevices.getUserMedia({ 
 					video: { facingMode: "environment" }
 				});

@@ -18,7 +18,6 @@
 			<div class="corner corner4"></div>
 		</div>
 		<p class="tipText">請掃描 QR code 以存入禮物卡</p>
-		<p class="restartText">您以關閉相機功能,請清除快取並重新整理</p>
 	</div>
 	<script>
 		let video = document.createElement("video");
@@ -43,14 +42,14 @@
 				let code = jsQR(data, width, height, {
 					inversionAttempts: "dontInvert",
 				});
-				let { topLeftCorner, topRightCorner, bottomLeftCorner, bottomRightCorner } = code.location;
+				
 				if (code) {
-					drawLine(topLeftCorner, topRightCorner);
-					drawLine(topRightCorner, bottomRightCorner);
-					drawLine(bottomRightCorner, bottomLeftCorner);
-					drawLine(bottomLeftCorner, topLeftCorner);
+					drawLine(code.location.topLeftCorner, code.location.topRightCorner);
+					drawLine(code.location.topRightCorner, code.location.bottomRightCorner);
+					drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner);
+					drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner);
 				} else {
-					console.log('no response data');
+					
 				}
 			}
 			requestAnimationFrame(tick);
@@ -70,6 +69,7 @@
 				
 			}
 		}
+
 
 		getMedia();
 	</script>

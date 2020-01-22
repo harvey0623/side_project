@@ -60,5 +60,6 @@ body {
 }
 
 .restartText {
-	color: #fff
+	color: #fff;
+	line-height: 25px;
 }

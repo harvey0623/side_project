@@ -18,6 +18,7 @@
 			<div class="corner corner4"></div>
 		</div>
 		<p class="tipText">請掃描 QR code 以存入禮物卡</p>
+		<p class="restartText">您以拒絕掃qr code功能,如要使用請清除快取並重新整理網頁</p>
 	</div>
 	<script>
 		let video = document.createElement("video");
@@ -42,7 +43,7 @@
 				let code = jsQR(data, width, height, {
 					inversionAttempts: "dontInvert",
 				});
-				
+
 				if (code) {
 					drawLine(code.location.topLeftCorner, code.location.topRightCorner);
 					drawLine(code.location.topRightCorner, code.location.bottomRightCorner);

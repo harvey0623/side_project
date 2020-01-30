@@ -26,10 +26,11 @@
 			constructor({ el, scanEvent }) {
 				this.video = document.createElement('video');
 				this.canvas = document.querySelector(el);
-				if (this.canvas.tagName !== 'CANVAS') throw new Error('element must be canvas element');
+				if (this.canvas.tagName !== 'CANVAS') throw new Error('element must be canvas');
 				this.ctx = this.canvas.getContext('2d');
 				this.animateFrame = null;
 				this.isScan = false;
+				if (typeof scanEvent !== 'function') throw new Error('scanEvent must be function'); 
 				this.scanEvent = scanEvent;
 			}
 			drawLine(begin, end) {
@@ -62,7 +63,6 @@
 						this.scanEvent();
 					}
 				}
-
 				if (!this.isScan) {
 					this.animateFrame = requestAnimationFrame(() => {
 						this.tick();

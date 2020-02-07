@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+</head>
+
+<body>
+
+   <script>
+      let myLiff = null;
+
+      const initLiff = function() {
+         return liff.init({ liffId: 'Ude596081a47d07e1372e7a2ba9228bdd' });
+      }
+
+      const init = async function() {
+         try {
+            let result = await initLiff().then(res => res );
+            myLiff = liff;
+            alert('ok');
+         } catch(err) {
+            console.log(err);
+         }
+      }
+
+      
+      
+      init();
+
+   </script>
+</body>
+
+</html>

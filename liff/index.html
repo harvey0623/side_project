@@ -21,8 +21,7 @@
       const init = async function() {
          try {
             let result = await initLiff().then(res => res );
-            myLiff = liff;
-            alert('ok');
+            liff.login();
          } catch(err) {
             console.log(err);
          }

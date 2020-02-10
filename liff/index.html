@@ -11,32 +11,46 @@
    <body>
       <p>liff-app</p>
       <button class="btnLogin">login</button>
+      <button class="btnScan">scan</button>
 
       <script>
          let btnLogin = document.querySelector('.btnLogin');
+         let btnScan = document.querySelector('.btnScan');
 
          function initializeApp() {
             if (!liff.isLoggedIn()) {
-               alert('not login')
+               alert('not login');
                liff.login({ redirectUri: 'https://harvey0623.github.io/side_project/liff/' });
             } else {
-               let result = liff.getDecodedIDToken()
-               console.log(result);
                liff.getProfile().then(profile => {
                   console.log(profile);
                });
             }
          }
 
+         function scanHandler() {
+            if (!liff.isInClient()) {
+               alert('請使用line-app瀏覽器');
+            } else {
+               if (liff.scanCode) {
+                  liff.scanCode().then(result => {
+                     // e.g. result = { value: "Hello LIFF app!" }
+                     let scanResult = JSON.stringify(result);
+                     alert(scanResult);
+                  }).catch(err => {
+                     alert('scanCode failed');
+                  });
+               }
+            }
+         }
 
          function initializeLiff(myLiffId) {
             liff.init({
                   liffId: '1653839303-x2RKROGO'
-               })
-               .then(() => {
+               }).then(() => {
                   btnLogin.addEventListener('click', initializeApp);
-               })
-               .catch(err => {
+                  btnScan.addEventListener('click', scanHandler);
+               }).catch(err => {
                   alert(err.message)
                });
          }

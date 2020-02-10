@@ -20,7 +20,7 @@
                alert('not login')
                liff.login({ redirectUri: 'https://harvey0623.github.io/side_project/liff/' });
             } else {
-               let result = liff.getContext();
+               let result = liff.getDecodedIDToken()
                console.log(result);
             }
          }

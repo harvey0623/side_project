@@ -10,18 +10,18 @@
 
    <body>
       <p>liff-app</p>
+      <button class="btnLogin">login</button>
 
       <script>
+         let btnLogin = document.querySelector('.btnLogin');
+
          function initializeApp() {
-            alert(liff.getOS());
             if (!liff.isLoggedIn()) {
                alert('not login')
-               liff.login({ redirectUri: 'https://harvey0623.github.io/side_project/liff/page.html' });
+               liff.login({ redirectUri: 'page.html' });
             } else {
-               liff.openWindow({
-                  url: 'https://harvey0623.github.io/side_project/liff/page.html',
-                  external: true
-               });
+               let result = liff.getContext();
+               alert(result);
             }
          }
 
@@ -31,8 +31,7 @@
                   liffId: '1653839303-x2RKROGO'
                })
                .then(() => {
-                  // start to use LIFF's api
-                  initializeApp();
+                  btnLogin.addEventListener('click', initializeApp);
                })
                .catch(err => {
                   alert(err.message)

@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>Document</title>
+      <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+   </head>
 
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>Document</title>
-   <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-</head>
+   <body>
+      <p>liff-app</p>
 
-<body>
-   <p>liff-app</p>
+      <script>
+         function initializeApp() {
+            alert(liff.getOS());
+         }
 
-   <script>
-      // liff.init({
-      //       liffId: '1653836847-M5ynyrml'
-      //    }).then(() => {
-      //       alert('ok')
-      //    }).catch((err) => {
-      //       document.getElementById("liffAppContent").classList.add('hidden');
-      //       document.getElementById("liffInitErrorMessage").classList.remove('hidden');
-      //    });
-         
-         
-   </script>
-</body>
 
+         function initializeLiff(myLiffId) {
+            liff.init({
+                  liffId: '1653839303-x2RKROGO'
+               })
+               .then(() => {
+                  // start to use LIFF's api
+                  initializeApp();
+               })
+               .catch(err => {
+                  alert(err.message)
+               });
+         }
+
+
+         initializeLiff()
+      </script>
+   </body>
 </html>

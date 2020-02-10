@@ -14,6 +14,12 @@
       <script>
          function initializeApp() {
             alert(liff.getOS());
+            if (!liff.isLoggedIn()) {
+               alert('not login')
+               liff.login({ redirectUri: 'https://harvey0623.github.io/side_project/liff/page.html' });
+            } else {
+               alert('login');
+            }
          }
 
 

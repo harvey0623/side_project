@@ -22,6 +22,9 @@
             } else {
                let result = liff.getDecodedIDToken()
                console.log(result);
+               liff.getProfile().then(profile => {
+                  console.log(profile);
+               });
             }
          }
 

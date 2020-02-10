@@ -18,7 +18,10 @@
                alert('not login')
                liff.login({ redirectUri: 'https://harvey0623.github.io/side_project/liff/page.html' });
             } else {
-               alert('login');
+               liff.openWindow({
+                  url: 'https://harvey0623.github.io/side_project/liff/page.html',
+                  external: true
+               });
             }
          }
 

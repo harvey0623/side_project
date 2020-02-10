@@ -18,10 +18,12 @@
          function initializeApp() {
             if (!liff.isLoggedIn()) {
                alert('not login')
-               liff.login({ redirectUri: 'page.html' });
+               liff.login({ redirectUri: 'https://harvey0623.github.io/side_project/liff/' });
+               let result = liff.getContext();
+               console.log(result);
             } else {
                let result = liff.getContext();
-               alert(result);
+               alert(JSON.parse(JSON.stringify(result)));
             }
          }
 

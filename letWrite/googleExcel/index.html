@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js'></script>
+</head>
+<body>
+   
+
+   <script>
+      const excelApi = 'https://spreadsheets.google.com/feeds/list/1x8xVJ74p0jAi48QghTxXhi6rQKsQQ55FkWRpALg3owI/1/public/values?alt=json'
+
+      const getExcelData = function() {
+         return axios.get(excelApi);
+      }
+
+      const transformKey = function(key) {
+         let startText = 'gsx$';
+         if (key.startsWith(startText)) {
+            return key.split(startText)[1];
+         } else {
+            return key;
+         }
+      }
+
+      const dataHandler = function(data) {
+         let tempArr = [];
+         let keepKey = ['id', 'gsx$name', 'gsx$gender', 'gsx$birthday', 'gsx$educate'];
+         data.forEach(item => tempArr.push(_.pick(item, keepKey)));
+         return tempArr.reduce((prev, current) => {
+            let obj = {};
+            for (let item in current) {
+               if (current.hasOwnProperty(item)) {
+                  obj[transformKey(item)] = current[item]['$t'];
+               }
+            }
+            prev.push(obj);
+            return prev;
+         }, []);
+      }
+
+      const init = async function() {
+         try {
+            let responseArr = await getExcelData().then(res => res.data.feed.entry);
+            let userData = dataHandler(responseArr);
+            console.log(userData);
+         } catch(err) {
+            console.log(err);
+         }
+      }
+
+      init();
+
+   </script>
+</body>
+</html>

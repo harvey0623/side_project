@@ -1,4 +1,4 @@
-(function(Vue) {
+(function(Vue, axios) {
    new Vue({
       el: '#app',
       data: () => ({
@@ -75,4 +75,4 @@
          }
       }
    });
-})(Vue);
+})(Vue, axios);

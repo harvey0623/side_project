@@ -25,3 +25,8 @@
    margin-right: 15px;
    cursor: pointer;
 }
+
+.highlight {
+   color: red;
+   font-weight: bold;
+}

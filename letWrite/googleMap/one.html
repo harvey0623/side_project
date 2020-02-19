@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>google map 1</title>
+   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'/>
+   <link rel="stylesheet" href="./css/one.css">
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
+</head>
+
+<body>
+   <div id="app">
+      <div id="map"></div>
+      <div class="modeBox">
+         <span>夜間模式:</span>
+         <button 
+            class="btn btn-info"
+            :class="{ active: nightMode }"
+            @click="nightMode = true"
+         >開啟</button>
+         <button 
+            class="btn btn-info"
+            :class="{ active: !nightMode }"
+            @click="nightMode = false"
+         >關閉</button>
+      </div>
+      <div class="btnBox">
+         <button 
+            v-for="item in features"
+            :key="item.properties.id"
+            class="btn btn-primary"
+            @click="clickHandler(item.properties.id)"
+         >{{ item.properties.name }}</button>
+      </div>
+   </div>
+
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4XIUbLIq21tyulO5EKoO8_M9FYzfp1JA"></script>
+   <script src="./js/one.js"></script>
+</body>
+
+</html>

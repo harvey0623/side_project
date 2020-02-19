@@ -1,0 +1,27 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+#app {
+   width: 1000px;
+   margin: 0 auto;
+}
+
+#map {
+   height: 600px;
+}
+
+.modeBox {
+   margin: 25px 0;
+}
+
+.btnBox {
+   margin-top: 15px;
+}
+
+.btnBox > button {
+   margin-right: 15px;
+   cursor: pointer;
+}

@@ -42,7 +42,7 @@
             new google.maps.visualization.HeatmapLayer({
                data: heatData,
                dissipating: true,
-               radius: 20,
+               radius: 10,
                map: this.map,
                gradient: [
                   "rgba(255, 255, 255, 0)",

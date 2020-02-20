@@ -1,0 +1,24 @@
+#map {
+   margin-bottom: 20px;
+}
+
+.descBox > * {
+   margin-bottom: 20px;
+}
+
+.reviewsList > li {
+   margin-bottom: 30px;
+}
+
+.top {
+   margin-bottom: 15px;
+}
+
+.top > * {
+   margin-right: 10px;
+}
+
+.top > img {
+   width: 80px;
+   height: 80px;
+}

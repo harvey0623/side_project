@@ -4,9 +4,18 @@
    box-sizing: border-box;
 }
 
+ul {
+   list-style: none;
+}
+
 #app {
    width: 1000px;
    margin: 0 auto;
+}
+
+.searchBox {
+   padding-top: 20px;
+   margin-bottom: 20px;
 }
 
 #map {

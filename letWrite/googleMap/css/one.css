@@ -11,6 +11,8 @@ ul {
 #app {
    width: 1000px;
    margin: 0 auto;
+   padding-top: 15px;
+   position: relative;
 }
 
 .searchBox {

@@ -1,3 +1,5 @@
 1. 如何用Google Excel當作資料庫
 2. Google Apps Script 基本使用：跨網域AJAX
 3. 氣象開放平台
+
+//====google map 系列

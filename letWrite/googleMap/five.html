@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>google map 5(place api)</title>
+   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'/>
+   <link rel="stylesheet" href="./css/one.css">
+   <link rel="stylesheet" href="./css/five.css">
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
+</head>
+<body>
+   <div id="app">
+      <div class="methodBox">
+         <button 
+            v-for="item in methodList"
+            :key="item.id"
+            class="btn btn-info" 
+            :class="{ active: currentMethod === item.id }"
+            @click="getCurrent(item.id)"
+         >{{ item.name }}</button>
+      </div>
+      <div id="map" ref="map"></div>
+      <ul class="info" v-if="targetInfo.length !== 0">
+         <li 
+            v-for="(item,index) in targetInfo" 
+            :key="index">
+            <h1>{{ item.name }}</h1>
+            <p>{{ item.site }}</p>
+            <p>{{ item.duration.text }}</p>
+            <p>{{ item.distance.text }}</p>
+         </li>
+      </ul>
+   </div>
+
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4XIUbLIq21tyulO5EKoO8_M9FYzfp1JA&libraries=places"></script>
+   <script src="./js/five.js"></script>
+</body>
+</html>

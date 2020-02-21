@@ -1,0 +1,38 @@
+.methodBox {
+   margin-bottom: 15px;
+}
+
+.methodBox > button {
+   min-width: 100px;
+   margin-right: 15px;
+}
+
+.info {
+   position: absolute;
+   top: 15px;
+   left: 105%;
+   width: 300px;
+   min-height: 300px;
+   border: 1px solid #ccc;
+}
+
+.info > li {
+   padding: 10px;
+   border-bottom: 1px solid #ccc;
+}
+
+.info > li:last-child {
+   margin-bottom: 0px;
+}
+
+.info > li > * {
+   margin-bottom: 15px;
+}
+
+.info > li > *:last-child {
+   margin-bottom: 0px;
+}
+
+.info > li > h1 {
+   font-size: 20px;
+}

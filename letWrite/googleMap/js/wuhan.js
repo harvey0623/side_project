@@ -1,4 +1,4 @@
-const api = 'https://script.google.com/macros/s/AKfycbxC425IS9ntTUJ2k1rLzyDhKmj4R5wnyTS4JFaUnysctbQ1mXAO/exec'
+const api = 'https://script.google.com/macros/s/AKfycbxC425IS9ntTUJ2k1rLzyDhKmj4R5wnyTS4JFaUnysctbQ1mXAO/exec';
 
 new Vue({
    el: '#app',
@@ -6,10 +6,19 @@ new Vue({
       map: null,
       wuhanData: null,
       currentId: '',
+      currentType: '',
       infoWindowArr: [],
+      typeList: [
+         { id: 'confirmed', title: '確診' },
+         { id: 'recovered', title: '康復' },
+         { id: 'death', title: '死亡' }
+      ]
    }),
+   created() {
+      this.currentType = this.typeList[0].id;
+   },
    computed: {
-      medicalRecord() {
+      medicalRecord() {  //全部資料整理
          if (this.wuhanData === null) return [];
          let { confirmed, recovered, death } = this.wuhanData;
          return confirmed.reduce((prev, current, index) => {
@@ -30,20 +39,28 @@ new Vue({
          if (this.medicalRecord.length === 0) return [];
          return this.medicalRecord.reduce((prev, current) => {
             let { lat, Long, confirmed, province } = current;
-            if (province === 'Hubei') confirmed = confirmed * 0.15;
+            if (province === 'Hubei') confirmed *= 0.15;
             prev.push({
                location: this.getLatLngInstance(lat, Long),
                weight: confirmed
             });
             return prev;
          }, []);
+      },
+      targetTypeList() {  //目前總類列表
+         if (this.medicalRecord.length == 0) return [];
+         return this.medicalRecord.map(item => ({
+            id: item.id,
+            title: item.province || item.country,
+            count: item[this.currentType]
+         })).sort((a, b) => b.count - a.count);
       }
    },
    methods: {
       createId(index) { //建立id
          return 'A' + new Date().getTime() + (index * 2);
       },
-      getData() {
+      getData() { //取得資料
          return axios.get(api);
       },
       getLastKeyValue(obj) {  //取得最後一個key值
@@ -60,10 +77,10 @@ new Vue({
             center: this.getLatLngInstance(30.97564, 112.2707),
             zoom: 5,
             mapTypeId: 'roadmap',
-            zoomControl: true,
+            zoomControl: false,
             mapTypeControl: false,
             streetViewControl: false,
-            fullscreenControl: true,
+            fullscreenControl: false,
             styles: wuhanMapStyle
          });
       },
@@ -100,17 +117,17 @@ new Vue({
          let button = document.querySelector(`#${this.currentId}`);
          button.addEventListener('click', this.showChart);
       },
-      showChart() {
+      showChart() {  //顯示圖表
          console.log('hello')
       },
-      setHeatMap() {
+      setHeatMap() {  //設置地圖熱點
          new google.maps.visualization.HeatmapLayer({
             data: this.heatMapData,
             map: this.map,
             dissipating: true,
             radius: 40,
          });
-      }
+      },
    },
    async mounted() {
       this.wuhanData = await this.getData().then(res => res.data);

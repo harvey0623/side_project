@@ -1,5 +1,7 @@
 const api = 'https://script.google.com/macros/s/AKfycbxC425IS9ntTUJ2k1rLzyDhKmj4R5wnyTS4JFaUnysctbQ1mXAO/exec';
 
+const excludeKey = ['Province/State', 'Country/Region', 'Lat', 'Long'];
+
 new Vue({
    el: '#app',
    data: () => ({
@@ -33,9 +35,9 @@ new Vue({
                confirmedNumber: this.getLastKeyValue(current),
                recoveredNumber: this.getLastKeyValue(recovered[index]),
                deathNumber: this.getLastKeyValue(death[index]),
-               confirmed: confirmed[index],
-               recovered: recovered[index],
-               death: death[index]
+               confirmedValue: this.getTypeValue(confirmed[index]),
+               recoveredValue: this.getTypeValue(recovered[index]),
+               deathVlaue: this.getTypeValue(death[index])
             });
             return prev;
          }, []);
@@ -53,7 +55,7 @@ new Vue({
          }, []);
       },
       targetTypeList() {  //目前總類列表
-         if (this.medicalRecord.length == 0) return [];
+         if (this.medicalRecord.length === 0) return [];
          return this.medicalRecord.map(item => ({
             id: item.id,
             title: item.province || item.country,
@@ -66,23 +68,34 @@ new Vue({
          if (targetObj !== undefined) return targetObj;
          else return {};
       },
-      chartData() {  //圖表需要的資料
-         if (this.targetRecord.id === undefined) return {};
-         let { confirmed, recovered, death } = this.targetRecord;
-         let excludeKey = ['Province/State', 'Country/Region', 'Lat', 'Long'];
-         let tempArr = [];
-         for (let key in confirmed) {
-            if (confirmed.hasOwnProperty(key)) {
-               if (excludeKey.indexOf(key) === -1) tempArr.push(confirmed[key])
+      chartLabelX() {  //取得圖表的label
+         if (this.wuhanData === null) return [];
+         let data = this.wuhanData.confirmed[0];
+         let keyArr = [];
+         for (let key in data) {
+            if (data.hasOwnProperty(key)) {
+               if (excludeKey.indexOf(key) === -1) {
+                  keyArr.push(key.replace(/\r/g, ''));
+               }
             }
          }
-         console.log(tempArr);
-         return 'aaa'
+         return keyArr;
       }
    },
    methods: {
       createId(index) { //建立id
          return 'A' + new Date().getTime() + (index * 2);
+      },
+      getTypeValue(obj) {  //取得圖表需要的欄位值
+         let tempArr = [];
+         for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+               if (excludeKey.indexOf(key) === -1) {
+                  tempArr.push(parseInt(obj[key]));
+               } 
+            }
+         }
+         return tempArr;
       },
       getData() { //取得資料
          return axios.get(api);
@@ -154,17 +167,14 @@ new Vue({
          let { infowInstance, markerInstance } = this.infoWindowArr.find(info => info.id === id);
          infowInstance.open(this.map, markerInstance);
       },
-      getChartConfig() {  //取得圖表需要的參數
-         let excludeKey = ['Province/State', 'Country/Region', 'Lat', 'Long'];
-      },
       clickHandler(evt) {  //顯示圖表
          this.currentId = evt.target.id;
          this.createChart();
          this.showChart = true;
-         console.log(this.targetRecord);
       },
       createChart() {
-         
+         console.log(this.targetRecord);
+         console.log(this.chartLabelX);
       },
       destroChart() {
          

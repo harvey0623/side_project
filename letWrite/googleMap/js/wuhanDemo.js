@@ -226,7 +226,6 @@ const GoogleMap = new Vue({
                const confirmed = res.confirmed;
                const recovered = res.recovered;
                const death = res.death;
-               console.log(confirmed);
                for (let i = 0, len = confirmed.length; i < len; i++) {
                   let len = Object.keys(confirmed[0]).length - 1;
                   let state = confirmed[i]['Province/State'].replace('--', ', ') || confirmed[i]['Country/Region'].replace('--', ', ');
@@ -235,7 +234,6 @@ const GoogleMap = new Vue({
                   dataFormat.state = translateCh(state);
                   dataFormat.lat = confirmed[i]['Lat'];
                   dataFormat.lng = confirmed[i]['Long'];
-                  console.log(Number(confirmed[i][Object.keys(confirmed[0])[len]]) || 0);
                   dataFormat.confirmed = Number(confirmed[i][Object.keys(confirmed[0])[len]]) || 0;
                   dataFormat.recovered = Number(recovered[i][Object.keys(recovered[0])[len]]) || 0;
                   dataFormat.death = Number(death[i][Object.keys(death[0])[len]]) || 0;

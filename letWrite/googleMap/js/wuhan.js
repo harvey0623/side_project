@@ -15,13 +15,25 @@ new Vue({
          return confirmed.reduce((prev, current, index) => {
             prev.push({
                id: this.createId(index),
-               'Province/State': current['Province/State'],
-               'Country/Region': current['Country/Region'],
+               province: current['Province/State'],
+               country: current['Country/Region'],
                lat: parseFloat(current.Lat),
                Long: parseFloat(current.Long),
                confirmed: this.getLastKeyValue(current),
                recovered: this.getLastKeyValue(recovered[index]),
                death: this.getLastKeyValue(death[index])
+            });
+            return prev;
+         }, []);
+      },
+      heatMapData() {  //地圖熱點資料
+         if (this.medicalRecord.length === 0) return [];
+         return this.medicalRecord.reduce((prev, current) => {
+            let { lat, Long, confirmed, province } = current;
+            if (province === 'Hubei') confirmed = confirmed * 0.15;
+            prev.push({
+               location: this.getLatLngInstance(lat, Long),
+               weight: confirmed
             });
             return prev;
          }, []);
@@ -72,10 +84,11 @@ new Vue({
       setInfowWindow(medical) {  //建立視窗
          let infowindow = new google.maps.InfoWindow({
             content: `
-               <h6>${medical['Province/State']}</h6>
-               <p>確診：${medical.confirmed}</p>
-               <p>康復：${medical.recovered}</p>
-               <p>死亡：${medical.death}</p>
+               <h6>Country: ${medical.country}</h6>
+               <h6>Province: ${medical.province}</h6>
+               <p>確診: ${medical.confirmed}</p>
+               <p>康復: ${medical.recovered}</p>
+               <p>死亡: ${medical.death}</p>
                <button class="btn btn-secondary" id="${medical.id}">
                   開啟圖表
                </button>`
@@ -89,11 +102,20 @@ new Vue({
       },
       showChart() {
          console.log('hello')
+      },
+      setHeatMap() {
+         new google.maps.visualization.HeatmapLayer({
+            data: this.heatMapData,
+            map: this.map,
+            dissipating: true,
+            radius: 40,
+         });
       }
    },
    async mounted() {
       this.wuhanData = await this.getData().then(res => res.data);
       this.initMap();
       this.setMarker();
+      this.setHeatMap();
    }
 });

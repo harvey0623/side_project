@@ -86,15 +86,15 @@ new Vue({
       },
       setMarker() {  //建立圖標
          this.medicalRecord.forEach(medical => {
-            let marker = new google.maps.Marker({
+            let markerInstance = new google.maps.Marker({
                position: this.getLatLngInstance(medical.lat, medical.Long),
                map: this.map
             });
             let infowInstance = this.setInfowWindow(medical);
-            this.infoWindowArr.push({ id: medical.id, infowInstance });
-            marker.addListener('click', () => {
+            this.infoWindowArr.push({ id: medical.id, infowInstance, markerInstance });
+            markerInstance.addListener('click', () => {
                this.currentId = medical.id;
-               infowInstance.open(this.map, marker);
+               infowInstance.open(this.map, markerInstance);
             });
          });
       },
@@ -128,6 +128,11 @@ new Vue({
             radius: 40,
          });
       },
+      triggerInfoWindow(id) {  //開啟infowindow視窗
+         this.currentId = id;
+         let { infowInstance, markerInstance } = this.infoWindowArr.find(info => info.id === id);
+         infowInstance.open(this.map, markerInstance);
+      }
    },
    async mounted() {
       this.wuhanData = await this.getData().then(res => res.data);

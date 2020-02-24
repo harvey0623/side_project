@@ -185,7 +185,6 @@ const GoogleMap = new Vue({
          fetch(api)
             .then(res => res.json())
             .then(res => {
-               console.log(res);
                const _this = this;
 
                // 預設顯示的中心點
@@ -469,6 +468,5 @@ const GoogleMap = new Vue({
    },
    async mounted() {
       this.initMap();
-      // let result = await this.getData().then(res => res.data);
    }
 });

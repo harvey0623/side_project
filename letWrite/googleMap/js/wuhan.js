@@ -9,10 +9,12 @@ new Vue({
       currentType: '',
       infoWindowArr: [],
       typeList: [
-         { id: 'confirmed', title: '確診' },
-         { id: 'recovered', title: '康復' },
-         { id: 'death', title: '死亡' }
-      ]
+         { id: 'confirmedNumber', title: '確診' },
+         { id: 'recoveredNumber', title: '康復' },
+         { id: 'deathNumber', title: '死亡' }
+      ],
+      chartInstance: null,
+      showChart: false
    }),
    created() {
       this.currentType = this.typeList[0].id;
@@ -28,9 +30,12 @@ new Vue({
                country: current['Country/Region'],
                lat: parseFloat(current.Lat),
                Long: parseFloat(current.Long),
-               confirmed: this.getLastKeyValue(current),
-               recovered: this.getLastKeyValue(recovered[index]),
-               death: this.getLastKeyValue(death[index])
+               confirmedNumber: this.getLastKeyValue(current),
+               recoveredNumber: this.getLastKeyValue(recovered[index]),
+               deathNumber: this.getLastKeyValue(death[index]),
+               confirmed: confirmed[index],
+               recovered: recovered[index],
+               death: death[index]
             });
             return prev;
          }, []);
@@ -38,11 +43,11 @@ new Vue({
       heatMapData() {  //地圖熱點資料
          if (this.medicalRecord.length === 0) return [];
          return this.medicalRecord.reduce((prev, current) => {
-            let { lat, Long, confirmed, province } = current;
-            if (province === 'Hubei') confirmed *= 0.15;
+            let { lat, Long, confirmedNumber, province } = current;
+            if (province === 'Hubei') confirmedNumber *= 0.15;
             prev.push({
                location: this.getLatLngInstance(lat, Long),
-               weight: confirmed
+               weight: confirmedNumber
             });
             return prev;
          }, []);
@@ -54,6 +59,25 @@ new Vue({
             title: item.province || item.country,
             count: item[this.currentType]
          })).sort((a, b) => b.count - a.count);
+      },
+      targetRecord() {  //特定地點記錄
+         if (this.medicalRecord.length === 0) return {};
+         let targetObj = this.medicalRecord.find(item => item.id === this.currentId);
+         if (targetObj !== undefined) return targetObj;
+         else return {};
+      },
+      chartData() {  //圖表需要的資料
+         if (this.targetRecord.id === undefined) return {};
+         let { confirmed, recovered, death } = this.targetRecord;
+         let excludeKey = ['Province/State', 'Country/Region', 'Lat', 'Long'];
+         let tempArr = [];
+         for (let key in confirmed) {
+            if (confirmed.hasOwnProperty(key)) {
+               if (excludeKey.indexOf(key) === -1) tempArr.push(confirmed[key])
+            }
+         }
+         console.log(tempArr);
+         return 'aaa'
       }
    },
    methods: {
@@ -103,9 +127,9 @@ new Vue({
             content: `
                <h6>Country: ${medical.country}</h6>
                <h6>Province: ${medical.province}</h6>
-               <p>確診: ${medical.confirmed}</p>
-               <p>康復: ${medical.recovered}</p>
-               <p>死亡: ${medical.death}</p>
+               <p>確診: ${medical.confirmedNumber}</p>
+               <p>康復: ${medical.recoveredNumber}</p>
+               <p>死亡: ${medical.deathNumber}</p>
                <button class="btn btn-secondary" id="${medical.id}">
                   開啟圖表
                </button>`
@@ -115,10 +139,7 @@ new Vue({
       },
       infoWindowReady() {  //視窗ready事件
          let button = document.querySelector(`#${this.currentId}`);
-         button.addEventListener('click', this.showChart);
-      },
-      showChart() {  //顯示圖表
-         console.log('hello')
+         button.addEventListener('click', this.clickHandler);
       },
       setHeatMap() {  //設置地圖熱點
          new google.maps.visualization.HeatmapLayer({
@@ -132,6 +153,21 @@ new Vue({
          this.currentId = id;
          let { infowInstance, markerInstance } = this.infoWindowArr.find(info => info.id === id);
          infowInstance.open(this.map, markerInstance);
+      },
+      getChartConfig() {  //取得圖表需要的參數
+         let excludeKey = ['Province/State', 'Country/Region', 'Lat', 'Long'];
+      },
+      clickHandler(evt) {  //顯示圖表
+         this.currentId = evt.target.id;
+         this.createChart();
+         this.showChart = true;
+         console.log(this.targetRecord);
+      },
+      createChart() {
+         
+      },
+      destroChart() {
+         
       }
    },
    async mounted() {

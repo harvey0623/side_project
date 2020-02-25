@@ -1,4 +1,5 @@
 const api = 'https://script.google.com/macros/s/AKfycbxC425IS9ntTUJ2k1rLzyDhKmj4R5wnyTS4JFaUnysctbQ1mXAO/exec';
+const excludeKey = ['Province/State', 'Country/Region', 'Lat', 'Long'];
 
 new Vue({
    el: '#app',
@@ -14,7 +15,8 @@ new Vue({
          { id: 'deathNumber', title: '死亡' }
       ],
       chartInstance: null,
-      showChart: false
+      showChart: false,
+      isLoading: false
    }),
    created() {
       this.currentType = this.typeList[0].id;
@@ -33,9 +35,9 @@ new Vue({
                confirmedNumber: this.getLastKeyValue(current),
                recoveredNumber: this.getLastKeyValue(recovered[index]),
                deathNumber: this.getLastKeyValue(death[index]),
-               confirmed: confirmed[index],
-               recovered: recovered[index],
-               death: death[index]
+               confirmedValue: this.getTypeValue(confirmed[index]),
+               recoveredValue: this.getTypeValue(recovered[index]),
+               deathVlaue: this.getTypeValue(death[index])
             });
             return prev;
          }, []);
@@ -53,7 +55,7 @@ new Vue({
          }, []);
       },
       targetTypeList() {  //目前總類列表
-         if (this.medicalRecord.length == 0) return [];
+         if (this.medicalRecord.length === 0) return [];
          return this.medicalRecord.map(item => ({
             id: item.id,
             title: item.province || item.country,
@@ -66,23 +68,34 @@ new Vue({
          if (targetObj !== undefined) return targetObj;
          else return {};
       },
-      chartData() {  //圖表需要的資料
-         if (this.targetRecord.id === undefined) return {};
-         let { confirmed, recovered, death } = this.targetRecord;
-         let excludeKey = ['Province/State', 'Country/Region', 'Lat', 'Long'];
-         let tempArr = [];
-         for (let key in confirmed) {
-            if (confirmed.hasOwnProperty(key)) {
-               if (excludeKey.indexOf(key) === -1) tempArr.push(confirmed[key])
+      chartLabelX() {  //取得圖表的label
+         if (this.wuhanData === null) return [];
+         let data = this.wuhanData.confirmed[0];
+         let keyArr = [];
+         for (let key in data) {
+            if (data.hasOwnProperty(key)) {
+               if (excludeKey.indexOf(key) === -1) {
+                  keyArr.push(key.replace(/\r/g, ''));
+               }
             }
          }
-         console.log(tempArr);
-         return 'aaa'
+         return keyArr;
       }
    },
    methods: {
       createId(index) { //建立id
          return 'A' + new Date().getTime() + (index * 2);
+      },
+      getTypeValue(obj) {  //取得圖表需要的欄位值
+         let tempArr = [];
+         for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+               if (excludeKey.indexOf(key) === -1) {
+                  tempArr.push(parseInt(obj[key]));
+               } 
+            }
+         }
+         return tempArr;
       },
       getData() { //取得資料
          return axios.get(api);
@@ -127,9 +140,9 @@ new Vue({
             content: `
                <h6>Country: ${medical.country}</h6>
                <h6>Province: ${medical.province}</h6>
-               <p>確診: ${medical.confirmedNumber}</p>
-               <p>康復: ${medical.recoveredNumber}</p>
-               <p>死亡: ${medical.deathNumber}</p>
+               <p class="typeP">確診: ${medical.confirmedNumber}人</p>
+               <p class="typeP">康復: ${medical.recoveredNumber}人</p>
+               <p class="typeP">死亡: ${medical.deathNumber}人</p>
                <button class="btn btn-secondary" id="${medical.id}">
                   開啟圖表
                </button>`
@@ -154,26 +167,92 @@ new Vue({
          let { infowInstance, markerInstance } = this.infoWindowArr.find(info => info.id === id);
          infowInstance.open(this.map, markerInstance);
       },
-      getChartConfig() {  //取得圖表需要的參數
-         let excludeKey = ['Province/State', 'Country/Region', 'Lat', 'Long'];
+      moveMap() {  //移動地圖位置
+         let { id, lat, Long } = this.targetRecord;
+         if (id === undefined) return;
+         this.map.panTo(this.getLatLngInstance(lat, Long));
       },
-      clickHandler(evt) {  //顯示圖表
+      clickHandler(evt) {
          this.currentId = evt.target.id;
          this.createChart();
          this.showChart = true;
-         console.log(this.targetRecord);
       },
-      createChart() {
-         
+      createChart() {  //繪製圖表
+         let { confirmedValue, recoveredValue, deathVlaue } = this.targetRecord;
+         let confirmedItem  = {
+            label: '確診',
+            backgroundColor: '#2196F3',
+            borderColor: '#2196F3',
+            data: confirmedValue,
+            fill: false
+         };
+         let recoveredItem = {
+            label: '康復',
+            backgroundColor: '#4CAF50',
+            borderColor: '#4CAF50',
+            data: recoveredValue,
+            fill: false
+         };
+         let deathItem = {
+            label: '死亡',
+            backgroundColor: '#f44336',
+            borderColor: '#f44336',
+            data: deathVlaue,
+            fill: false
+         };
+         var config = {
+            type: 'line',
+            data: {
+               labels: this.chartLabelX,
+               datasets: [confirmedItem, recoveredItem, deathItem]
+            },
+            options: {
+               responsive: true,
+               tooltips: {
+                  mode: 'index',
+                  intersect: false,
+               },
+               hover: {
+                  mode: 'nearest',
+                  intersect: true
+               },
+               scales: {
+                  xAxes: [{
+                     display: true,
+                     scaleLabel: {
+                        display: true,
+                        labelString: '日期'
+                     }
+                  }],
+                  yAxes: [{
+                     display: true,
+                     scaleLabel: {
+                        display: true,
+                        labelString: '人數'
+                     }
+                  }]
+               }
+            }
+         };
+         this.destroChart();
+         let ctx = this.$refs.chart.getContext('2d');
+         this.chartInstance = new Chart(ctx, config);
       },
       destroChart() {
-         
+         if (this.chartInstance !== null) this.chartInstance.destroy();
+      }
+   },
+   watch: {
+      targetRecord() {
+         this.moveMap();
       }
    },
    async mounted() {
+      this.isLoading = true;
       this.wuhanData = await this.getData().then(res => res.data);
       this.initMap();
       this.setMarker();
       this.setHeatMap();
+      this.isLoading = false;
    }
 });

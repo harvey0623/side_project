@@ -10,12 +10,14 @@
    </head>
    <body>
       <div id="app" class="container-fluid">
+         <div class="loading" v-if="isLoading"></div>
+
          <div class="full-screen">
             <div id="map" ref="map"></div>
          </div>
 
          <!-- 表列數據 -->
-         <div class="data-list card text-white bg-dark for-mobile-up">
+         <div class="data-list card text-white bg-dark for-mobile-up" v-show="!isLoading">
             <div class="card-header">
                <ul class="nav nav-tabs card-header-tabs">
                   <li 

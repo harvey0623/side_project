@@ -15,7 +15,8 @@ new Vue({
          { id: 'deathNumber', title: '死亡' }
       ],
       chartInstance: null,
-      showChart: false
+      showChart: false,
+      isLoading: false
    }),
    created() {
       this.currentType = this.typeList[0].id;
@@ -166,6 +167,11 @@ new Vue({
          let { infowInstance, markerInstance } = this.infoWindowArr.find(info => info.id === id);
          infowInstance.open(this.map, markerInstance);
       },
+      moveMap() {  //移動地圖位置
+         let { id, lat, Long } = this.targetRecord;
+         if (id === undefined) return;
+         this.map.panTo(this.getLatLngInstance(lat, Long));
+      },
       clickHandler(evt) {
          this.currentId = evt.target.id;
          this.createChart();
@@ -236,10 +242,17 @@ new Vue({
          if (this.chartInstance !== null) this.chartInstance.destroy();
       }
    },
+   watch: {
+      targetRecord() {
+         this.moveMap();
+      }
+   },
    async mounted() {
+      this.isLoading = true;
       this.wuhanData = await this.getData().then(res => res.data);
       this.initMap();
       this.setMarker();
       this.setHeatMap();
+      this.isLoading = false;
    }
 });

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'/>
+   <link rel="stylesheet" href="./css/random.css">
+	<link rel="stylesheet" href="./css/test.css">
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'></script>
+</head>
+<body>
+	<main class="full-block" id="app">
+		<div class="main-block">
+			<!--  顯示區塊  -->
+			<section class="god">
+				<h1>
+					<span class="wrap">
+						<span 
+							v-for="item in drawList" 
+							:key="item.id"
+							:class="runAnimate"
+						>{{ item.shopName }}</span>
+					</span>
+				</h1>
+			</section>
+
+			<!--  按鈕  -->
+			<section class="btns">
+				<div class="checkbox">
+					<p class="vegetarian">Vegetarian？</p>
+					<!--  素食  -->
+					<div class="check">
+						<label class="toggle">
+							<input id="vage" type="checkbox" v-model="isMeat">
+							<span class="button round"></span>
+						</label>
+					</div> 
+				</div>
+
+				<!--  start  -->
+				<a class="btn-start" href="javascript:;" @click="drawHandler">
+					<span class="line top -h"></span>
+					<span class="line right -v"></span>
+					<span class="line bottom -h"></span>
+					<span class="line left -v"></span>
+            </a>
+			</section>
+
+			<!--  地圖  -->
+			<section id="map" class="map">
+				<iframe frameborder="0" style="border:0" src="" allowfullscreen></iframe>
+         </section>
+		</div>
+	</main>
+
+
+	<script src="./js/random.js"></script>
+	<!-- <script src="./js/randomDemo.js"></script> -->
+</body>
+</html>

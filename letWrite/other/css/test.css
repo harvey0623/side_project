@@ -1,0 +1,93 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;;
+}
+
+.box {
+   width: 200px;
+   height: 60px;
+   border: 2px solid#ccc;
+   cursor: pointer;
+   position: relative;
+}
+
+.box:after {
+   content: '抽獎';
+   display: block;
+   height: 100%;
+   line-height: 60px;
+}
+
+.line {
+   position: absolute;
+   background-color: red;
+   transform: scale(0);
+   transition: transform 0.1s;
+   box-shadow: 0 0 5px red;
+}
+
+.top {
+   left: 0;
+   top: -2px;
+   width: 100%;
+   height: 2px;
+   transform-origin: left top;
+   transition-delay: 0.3s;
+}
+
+.right {
+   left: 100%;
+   top: 0;
+   width: 2px;
+   height: 100%;
+   transform-origin: left top;
+   transition-delay: 0.2s;
+}
+
+.bottom {
+   left: 0;
+   top: 100%;
+   width: 100%;
+   height: 2px;
+   transform-origin: right bottom;
+   transition-delay: 0.1s;
+}
+
+.left {
+   left: -2px;
+   top: 0;
+   width: 2px;
+   height: 100%;
+   transform-origin: left bottom;
+   transition-delay: 0s;
+}
+
+.box:hover .line {
+   transform: scale(1);
+}
+
+.box:hover .top {
+   transition-delay: 0s;
+}
+
+.box:hover .right {
+   transition-delay: 0.1s;
+}
+
+.box:hover .bottom {
+   transition-delay: 0.2s;
+}
+
+.box:hover .left {
+   transition-delay: 0.3s;
+}
+
+/* 
+   <div class="box">
+      <span class="line top"></span>
+      <span class="line right"></span>
+      <span class="line bottom"></span>
+      <span class="line left"></span>
+   </div>
+*/

@@ -180,8 +180,8 @@ body {
    display: none;
 }
 
-.noopener[rel="noopener"] {
-   display: none;
+a[rel="noopener"] {
+   display: none !important;
 }
 
 @media screen and (max-width: 480px) {

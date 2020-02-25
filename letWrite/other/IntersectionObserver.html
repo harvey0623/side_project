@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'/>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+      section {
+         min-height: 100vh;
+         padding-top: 20px;
+      }
+      .box {
+         width: 100px;
+         height: 100px;
+         background-color: green;
+      }
+      .imgBox {
+         height: 200px;
+         margin-bottom: 50px;
+      }
+      .img {
+         display: block;
+      }
+   </style>
+</head>
+<body>
+   <section></section>
+   <section>
+      <div class="imgBox" data-src="https://fakeimg.pl/350x200/?text=Hello1">
+         <img src="" class="img">
+      </div>
+      <div class="imgBox" data-src="https://fakeimg.pl/350x200/?text=Hello2">
+         <img src="" class="img">
+      </div>
+      <div class="imgBox" data-src="https://fakeimg.pl/350x200/?text=Hello3">
+         <img src="" class="img">
+      </div>
+   </section>
+   <section></section>
+
+   
+   <script>
+      const callback = function(entries) {
+         entries.forEach(entry => {
+            let targetEl = entry.target;
+            if (entry.isIntersecting) {
+               console.log('yes')
+               targetEl.classList.add('animated', 'fadeIn');
+               targetEl.querySelector('img').src = targetEl.dataset.src;
+            } else {
+               console.log('no');
+               targetEl.classList.remove('animated', 'fadeIn');
+               targetEl.querySelector('img').src= '';
+            }
+         });
+      }
+
+      const observer = new IntersectionObserver(callback, {
+         threshold: 0.5
+      });
+
+      document.querySelectorAll('.imgBox').forEach(item => {
+         observer.observe(item);
+      });
+      
+   </script>
+</body>
+</html>

@@ -184,8 +184,8 @@ a[rel="noopener"] {
    display: none !important;
 }
 
-@media screen and (max-width: 480px) {
+/* @media screen and (max-width: 480px) {
    .for-mobile-up {
       display: none;
    }
-}
+} */

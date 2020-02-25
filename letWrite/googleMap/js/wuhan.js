@@ -1,5 +1,4 @@
 const api = 'https://script.google.com/macros/s/AKfycbxC425IS9ntTUJ2k1rLzyDhKmj4R5wnyTS4JFaUnysctbQ1mXAO/exec';
-
 const excludeKey = ['Province/State', 'Country/Region', 'Lat', 'Long'];
 
 new Vue({
@@ -140,9 +139,9 @@ new Vue({
             content: `
                <h6>Country: ${medical.country}</h6>
                <h6>Province: ${medical.province}</h6>
-               <p>確診: ${medical.confirmedNumber}</p>
-               <p>康復: ${medical.recoveredNumber}</p>
-               <p>死亡: ${medical.deathNumber}</p>
+               <p class="typeP">確診: ${medical.confirmedNumber}人</p>
+               <p class="typeP">康復: ${medical.recoveredNumber}人</p>
+               <p class="typeP">死亡: ${medical.deathNumber}人</p>
                <button class="btn btn-secondary" id="${medical.id}">
                   開啟圖表
                </button>`
@@ -167,17 +166,74 @@ new Vue({
          let { infowInstance, markerInstance } = this.infoWindowArr.find(info => info.id === id);
          infowInstance.open(this.map, markerInstance);
       },
-      clickHandler(evt) {  //顯示圖表
+      clickHandler(evt) {
          this.currentId = evt.target.id;
          this.createChart();
          this.showChart = true;
       },
-      createChart() {
-         console.log(this.targetRecord);
-         console.log(this.chartLabelX);
+      createChart() {  //繪製圖表
+         let { confirmedValue, recoveredValue, deathVlaue } = this.targetRecord;
+         let confirmedItem  = {
+            label: '確診',
+            backgroundColor: '#2196F3',
+            borderColor: '#2196F3',
+            data: confirmedValue,
+            fill: false
+         };
+         let recoveredItem = {
+            label: '康復',
+            backgroundColor: '#4CAF50',
+            borderColor: '#4CAF50',
+            data: recoveredValue,
+            fill: false
+         };
+         let deathItem = {
+            label: '死亡',
+            backgroundColor: '#f44336',
+            borderColor: '#f44336',
+            data: deathVlaue,
+            fill: false
+         };
+         var config = {
+            type: 'line',
+            data: {
+               labels: this.chartLabelX,
+               datasets: [confirmedItem, recoveredItem, deathItem]
+            },
+            options: {
+               responsive: true,
+               tooltips: {
+                  mode: 'index',
+                  intersect: false,
+               },
+               hover: {
+                  mode: 'nearest',
+                  intersect: true
+               },
+               scales: {
+                  xAxes: [{
+                     display: true,
+                     scaleLabel: {
+                        display: true,
+                        labelString: '日期'
+                     }
+                  }],
+                  yAxes: [{
+                     display: true,
+                     scaleLabel: {
+                        display: true,
+                        labelString: '人數'
+                     }
+                  }]
+               }
+            }
+         };
+         this.destroChart();
+         let ctx = this.$refs.chart.getContext('2d');
+         this.chartInstance = new Chart(ctx, config);
       },
       destroChart() {
-         
+         if (this.chartInstance !== null) this.chartInstance.destroy();
       }
    },
    async mounted() {

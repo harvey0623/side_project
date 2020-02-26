@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="./reset.css">
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js'></script>
+</head>
+
+<body>
+   <div id="app">
+      <canvas id="myChart"></canvas>
+   </div>
+
+   <script>
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+         type: 'bar',
+         data: {
+            labels: ['Apple', 'Banana', 'Orange', 'Car', 'Cookie', 'Nike'],
+            datasets: [
+               {
+                  label: '1月業績',
+                  data: [12, 19, 3, 5, 2, 3],
+                  borderWidth: 1,
+                  barPercentage: 0.85,
+                  backgroundColor: [
+                     'rgba(255, 99, 132, 0.2)',
+                     'rgba(54, 162, 235, 0.2)',
+                     'rgba(255, 206, 86, 0.2)',
+                     'rgba(75, 192, 192, 0.2)',
+                     'rgba(153, 102, 255, 0.2)',
+                     'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                     'rgba(255, 99, 132, 1)',
+                     'rgba(54, 162, 235, 1)',
+                     'rgba(255, 206, 86, 1)',
+                     'rgba(75, 192, 192, 1)',
+                     'rgba(153, 102, 255, 1)',
+                     'rgba(255, 159, 64, 1)'
+                  ]
+               },
+               {
+                  label: '2月業績',
+                  data: [3, 2, 5, 3, 19, 12],
+                  borderWidth: 1,
+                  barPercentage: 0.85,
+                  backgroundColor: [
+                     'rgba(255, 99, 132, 0.2)',
+                     'rgba(54, 162, 235, 0.2)',
+                     'rgba(255, 206, 86, 0.2)',
+                     'rgba(75, 192, 192, 0.2)',
+                     'rgba(153, 102, 255, 0.2)',
+                     'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                     'rgba(255, 99, 132, 1)',
+                     'rgba(54, 162, 235, 1)',
+                     'rgba(255, 206, 86, 1)',
+                     'rgba(75, 192, 192, 1)',
+                     'rgba(153, 102, 255, 1)',
+                     'rgba(255, 159, 64, 1)'
+                  ]
+               },
+            ]
+         },
+         options: {
+            responsive: true,
+            title: {
+               display: true,
+               text: 'Products',
+               fontSize: 16,
+               fontColor: 'black',
+               padding: 20,
+            },
+            legend: {
+               position: 'right',
+               labels: {
+                  fontColor: 'black',
+                  fontSize: 14,
+                  boxWidth: 40
+               }
+            },
+            hover: {
+               mode: 'nearest',
+               intersect: false,
+            },
+            animation: {
+               duration: 1000,
+            },
+            tooltips: {
+               mode: 'nearest',
+               backgroundColor: 'rgba(13,123,123,0.8)',
+               titleAlign: 'center',
+               bodyFontColor: 'black',
+            },
+            layout: {
+               padding: 10
+            },
+            scales: {
+               xAxes: [
+                  {
+                     gridLines: {
+                        color: 'red',
+                        
+                     },
+                     scaleLabel: {
+                        display: true,
+                        labelString: '產品名稱'
+                     }
+                  },
+               ],
+               yAxes: [
+                  {
+                     type: 'linear',
+                     scaleLabel: {
+                        display: true,
+                        labelString: '單位(萬)'
+                     },
+                     ticks: {
+                        beginAtZero: true,
+                        minRotation: 45
+                     }
+                  },
+               ]
+            }
+         }
+      });
+   </script>
+</body>
+
+</html>

@@ -44,7 +44,7 @@
                   if (res.status === 'unknown') {
                      this.isLogin = false;
                   } else if (res.status === 'connected') {
-                     this.isLogin = true;
+                     this.getFbProfile();
                   }
                });
             },

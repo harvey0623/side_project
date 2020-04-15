@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>首頁</title>
+	<link rel="stylesheet" href="js/plugin/BS3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/plugin/fontAwesome/css/fontAwesome.min.css">
+	<link rel="stylesheet" href="js/plugin/slick/slick.css">
+	<link rel="stylesheet" href="js/plugin/slick/slick-theme.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/plugin/jquery-3.2.1.min.js"></script>
+	<script src="js/plugin/BS3/bootstrap.min.js"></script>
+	<script src="js/plugin/slick/slick.min.js"></script>
+</head>
+
+<body>
+	<!-- header -->
+	<header>
+		<div class="headerInner">
+			<a href="javascript:history.back();" class="back">
+				<i class="fa fa-angle-left" aria-hidden="true"></i>
+			</a>
+			<div class="pageTitle">會員註冊</div>
+			<div class="logo">
+				<img src="img/logo.png" alt="">
+			</div>
+			<div class="function">
+				<span class="maginify">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</span>
+				<span class="totalMail">
+					<a href="javascript:;">NEW</a>
+				</span>
+				<span class="goMail">
+					<i class="fa fa-envelope-o" aria-hidden="true"></i>
+				</span>
+				<span class="login">
+					<a href="./login-f.html">
+						<i class="fa fa-sign-in" aria-hidden="true"></i>
+					</a>
+				</span>
+				<span class="menuSwitch">
+					<i class="fa fa-bars" aria-hidden="true"></i>
+				</span>
+			</div>
+			<div class="clearData">清除</div>
+		</div>
+		<hr>
+		<div class="menuOuter">
+			<ul class="mainMenu">
+				<li>
+					<a href="./index.html">回首頁</a>
+				</li>
+				<li>
+					<a href="./lastVacancy.html">找工作</a>
+				</li>
+				<li>
+					<a href="./findTalentIndex.html">找人才</a>
+				</li>
+				<li>
+					<a href="./msgBoard.html">留言版</a>
+				</li>
+				<li>
+					<a href="./news.html">最新消息</a>
+				</li>
+				<li class="member">
+					<a href="javascript:;">
+						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+						會員中心
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</a>
+				</li>
+				<li class="share">
+					<a href="javascript:;">
+						<i class="fa fa-share-alt" aria-hidden="true"></i>
+						網站分享
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</a>
+				</li>
+				<li>
+					<a href="./login-m.html">
+						<i class="fa fa-sign-in" aria-hidden="true"></i>求職登入
+					</a>
+				</li>
+				<li>
+					<a href="./register.html">
+						<i class="fa fa-pencil" aria-hidden="true"></i>求職註冊
+					</a>
+				</li>
+			</ul>
+			<a href="./about.html">關於我們</a>
+		</div>
+		<div class="memberOuter">
+			<p>
+				<i class="fa fa-angle-left returnIcon" aria-hidden="true"></i>求職者會員中心
+			</p>
+			<ul class="memberMenu">
+				<li>
+					<a href="./lastBrowse.html">近期職缺瀏覽</a>
+				</li>
+				<li>
+					<a href="./mycollect.html">我的收藏</a>
+				</li>
+				<li>
+					<a href="./myResume.html">我的履歷</a>
+				</li>
+				<li>
+					<a href="./myPair.html">我的配對</a>
+				</li>
+				<li>
+					<a href="./notice.html">企業通知</a>
+				</li>
+				<li>
+					<a href="javascript:;">應徵紀錄</a>
+				</li>
+				<li>
+					<a href="./fixPassword.html">更改密碼</a>
+				</li>
+				<li>
+					<a href="./infoRecord.html">通知紀錄</a>
+				</li>
+				<li>
+					<a href="./myfavor.html">我的最愛</a>
+				</li>
+				<li>
+					<a href="./special_offer.html">特約商</a>
+				</li>
+			</ul>
+		</div>
+		<div class="shareOuter">
+			<p>
+				<i class="fa fa-angle-left returnIcon" aria-hidden="true"></i>分享
+			</p>
+			<ul class="shareMenu">
+				<li>
+					<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.w3schools.com/">
+						<img src="img/fb.png">FACEBOOK
+					</a>
+				</li>
+				<li>
+					<a href="http://line.naver.jp/R/msg/text/https://www.w3schools.com/">
+						<img src="img/line.png">LINE
+					</a>
+				</li>
+				<li>
+					<a href="https://plus.google.com/share?url=http%3A//sam0512.blogspot.tw/2013/10/sass.html">
+						<img src="img/plus.png">G+
+					</a>
+				</li>
+			</ul>
+		</div>
+	</header>
+	<div class="cover"></div>
+
+	<!-- content -->
+	<div class="content">
+		<div class="searchJob">
+			<h3>
+				<img src="./img/logo-small.png" alt="">求職查詢
+			</h3>
+			<ul class="searchList seekMenu">
+				<li>
+					<div>關鍵字查詢</div>
+					<div>
+						<input type="text" name="keyword" class="form-control" placeholder="輸入職務、工作地區、公司名...等">
+					</div>
+				</li>
+				<li class="fake">
+					<div>職務性質</div>
+					<div>
+						<div class="fakeSelect" data-id="0">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li class="fake">
+					<div>職務類型</div>
+					<div>
+						<div class="fakeSelect" data-id="1">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li class="fake">
+					<div>職缺地區</div>
+					<div>
+						<div class="areaSelect">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li class="fake salaryFake">
+					<div>薪資待遇</div>
+					<div>
+						<div class="salarySelect">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li class="fake">
+					<div>應徵方式</div>
+					<div>
+						<div class="fakeSelect" data-id="3">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li class="fake">
+					<div>福利制度</div>
+					<div>
+						<div class="fakeSelect" data-id="4">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li class="fake">
+					<div>最高學歷</div>
+					<div>
+						<div class="fakeSelect" data-id="5">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li class="fake">
+					<div>學歷科系</div>
+					<div>
+						<div class="fakeSelect" data-id="6">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li class="fake">
+					<div>工作經驗</div>
+					<div>
+						<div class="fakeSelect" data-id="7">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li class="fake">
+					<div>上班時段</div>
+					<div>
+						<div class="fakeSelect" data-id="8">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li class="fake">
+					<div>外語能力</div>
+					<div>
+						<div class="fakeSelect" data-id="9">
+							<span>請選擇</span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div></div>
+					<div class="other">
+						<label for="resident">
+							<input id="resident" type="checkbox" value="20">
+							<span>新住民</span>
+						</label>
+						<label for="physical">
+							<input id="physical" type="checkbox" value="30">
+							<span>接受身心障礙</span>
+						</label>
+					</div>
+				</li>
+			</ul>
+			<div class="checkSearch">
+				<div class="advanced mymore">進階查詢&nbsp;
+					<i class="fa fa-chevron-down" aria-hidden="true"></i>
+				</div>
+				<div class="seekBg myfind">
+					<button class="btn-seek">搜尋</button>
+				</div>
+			</div>
+		</div>
+		<div class="latestNews">
+			<a class="lastVacancy" href="./lastVacancy.html">
+				<img src="./img/new_job.png" alt="">最新職缺
+			</a>
+			<a class="talentNews" href="./talentNews.html">
+				<img src="./img/ask_people.png" alt="">求才快訊
+			</a>
+		</div>
+		<hr>
+		<div class="recommend">
+			<p>優質企業推薦</p>
+			<div class="myslider1">
+				<div class="companySlick companySlick1">
+					<div>
+						<img src="http://fakeimg.pl/350x200/?text=1">
+					</div>
+					<div>
+						<img src="http://fakeimg.pl/350x200/?text=2">
+					</div>
+				</div>
+			</div>
+			<p>優質企業推薦</p>
+			<div class="myslider1">
+				<div class="companySlick companySlick2">
+					<div>
+						<img src="http://fakeimg.pl/350x200/?text=1">
+					</div>
+					<div>
+						<img src="http://fakeimg.pl/350x200/?text=2">
+					</div>
+					<div>
+						<img src="http://fakeimg.pl/350x200/?text=3">
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="commerce">
+			<div class="newsBox">
+				<a href="javascript:;">
+					<h3>
+						<img src="./img/new_job_blue.png">
+						<span>活動消息</span>
+					</h3>
+					<p>6家熱血企業的高階主管依新鮮人入職場的起承轉家熱血企業的高階主管依新鮮人入職場的起承轉</p>
+				</a>
+				<a href="javascript:;">
+					<h3>
+						<img src="./img/job_tips_blue.png">
+						<span>求職指南</span>
+					</h3>
+					<p>打工族也有假了！快看 ~ 打工族各項請假懶人包</p>
+				</a>
+				<a href="javascript:;">
+					<h3>
+						<img src="./img/job_class_blue.png">
+						<span>職務類別推薦</span>
+					</h3>
+					<p>中信房屋(生活加盟店)-生活資產管理顧問有限公</p>
+				</a>
+			</div>
+			<div class="orderPaper">
+				<h3>
+					<img src="./img/news_order.png">訂閱電子報
+				</h3>
+				<div class="fillMail">
+					<input class="form-control" type="text" placeholder="輸入mail將會不定期收到活動訊息">
+					<button class="btn-order">訂閱</button>
+				</div>
+			</div>
+			<ul class="concatList">
+				<li>
+					<div class="branch">彰化總公司</div>
+					<div class="addr">
+						<img src="./img/map_small.png" alt="">
+						<a href="http://maps.google.com.tw/maps?q=彰化市曉陽路247號">50063彰化市曉陽路247號</a>
+					</div>
+					<div class="phone">電話：
+						<a href="tel:048370538">04-8370538</a>
+					</div>
+					<div>傳真：04-7294487</div>
+				</li>
+				<li>
+					<div class="branch">員林分公司</div>
+					<div class="addr">
+						<img src="./img/map_small.png" alt="">
+						<a href="http://maps.google.com.tw/maps?q=彰化縣員林市林森路422號">51056員林市林森路422號</a>
+					</div>
+					<div class="phone">電話：
+						<a href="tel:048370538">04-8370538</a>
+					</div>
+					<div>傳真：04-8370598</div>
+					<div class="email">Email:
+						<a href="mailto:729@8400.com.tw">729@8400.com.tw</a>
+					</div>
+				</li>
+			</ul>
+			<div class="myslider2">
+				<div class="adSlick">
+					<div>
+						<img src="http://fakeimg.pl/768x168/?text=1">
+					</div>
+					<div>
+						<img src="http://fakeimg.pl/768x168/?text=2">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 查詢類型 -->
+	<div class="typeBox">
+		<div class="fixedArea">
+			<div class="typeTitle">
+				<div class="typeCancel">取消</div>
+				<div class="typeInfo">學歷科系</div>
+				<div class="typeSure">確認</div>
+			</div>
+			<hr>
+			<div class="education">
+				<!--學歷科系介紹-->
+				<div>
+					<i class="fa fa-share-alt" aria-hidden="true"></i>
+					<span>學歷科系介紹</span>
+				</div>
+				<i class="fa fa-angle-right nextPage" aria-hidden="true"></i>
+			</div>
+			<div class="choiceTitle">
+				<p>最多可選
+					<span class="maxNum">1</span> 項，已選
+					<span class="choosen">0</span> 個</p>
+				<i class="fa fa-trash-o trash" aria-hidden="true"></i>
+			</div>
+		</div>
+		<ul class="typeMenu">
+			<li>
+				<div>
+					<span>商業及管理學科類商業及管理學科類商</span>
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<!-- 學科系介紹 -->
+	<div class="introBox">
+		<div class="fixedIntro">
+			<div class="introTitle">
+				<i class="fa fa-angle-left prevPage" aria-hidden="true"></i>
+				<span>學歷科系介紹</span>
+			</div>
+			<hr>
+		</div>
+		<ul class="introMenu">
+			<li>
+				<div>
+					<p>
+						<span>商業及管理學科類</span>
+						<i class="fa fa-chevron-down" aria-hidden="true"></i>
+					</p>
+				</div>
+				<p></p>
+			</li>
+		</ul>
+	</div>
+
+	<!-- 薪資待遇 -->
+	<div class="salaryBox">
+		<div class="fixedArea">
+			<div class="typeTitle">
+				<div class="salaryCancel">取消</div>
+				<div class="salaryInfo">薪資待遇</div>
+				<div class="salarySure">確認</div>
+			</div>
+			<hr>
+		</div>
+		<div class="salaryBody">
+			<div class="salaryOuter">
+				<select class="form-control salaryType">
+					<option value="month">月薪</option>
+					<option value="day">日薪</option>
+					<option value="hour">時薪</option>
+				</select>
+				<i class="fa fa-chevron-down" aria-hidden="true"></i>
+			</div>
+			<div class="wantedBox">
+				<input type="number" class="wantedInput">
+				<p class="upText">Up</p>
+				<button class="btn btn-primary clearSalary">清除</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- 職缺地區 -->
+	<div id="areaMenu" class="show">
+		<div class="fixedArea">
+			<div class="typeTitle">
+				<div class="areaCancel">取消</div>
+				<div class="areaInfo">職缺地區</div>
+				<div class="areaSure">確認</div>
+			</div>
+			<hr>
+		</div>
+		<div class="areaStatus">
+			<div class="countBox">
+				最多可選幾<span id="limitEl"> 5 </span>項，已選
+				<span id="countEl">2</span> 項
+			</div>
+			<i class="fa fa-trash-o trash" aria-hidden="true"></i>
+		</div>
+		<div class="areaMenuBody">
+			<div class="selectBox">
+				<div class="regionTitle">
+					<span>南投縣全區</span>
+					<i class="fa fa-chevron-down" aria-hidden="true"></i>
+				</div>
+				<ul class="regionList">
+					<li class="list">
+						<p>南投縣全區</p>
+						<label>
+							<input type="checkbox" class="areaCheckbox" data-id="159">
+							<i class="fa fa-check" aria-hidden="true"></i>
+						</label>
+					</li>
+					<li class="list">
+						<p>南投縣全區</p>
+						<label>
+							<input type="checkbox" class="areaCheckbox" data-id="159">
+							<i class="fa fa-check" aria-hidden="true"></i>
+						</label>
+					</li>
+				</ul>
+			</div>
+			<div class="selectBox">
+				<div class="regionTitle">
+					<span>南投縣全區</span>
+					<i class="fa fa-chevron-down" aria-hidden="true"></i>
+				</div>
+				<ul class="regionList">
+					<li class="list">
+						<p>南投縣全區</p>
+						<label>
+							<input type="checkbox" class="areaCheckbox" data-id="159">
+							<i class="fa fa-check" aria-hidden="true"></i>
+						</label>
+					</li>
+					<li class="list">
+						<p>南投縣全區</p>
+						<label>
+							<input type="checkbox" class="areaCheckbox" data-id="159">
+							<i class="fa fa-check" aria-hidden="true"></i>
+						</label>
+					</li>
+				</ul>
+			</div>
+			<div class="selectBox">
+				<div class="regionTitle">
+					<span>南投縣全區</span>
+					<i class="fa fa-chevron-down" aria-hidden="true"></i>
+				</div>
+				<ul class="regionList">
+					<li class="list">
+						<p>南投縣全區</p>
+						<label>
+							<input type="checkbox" class="areaCheckbox" data-id="159">
+							<i class="fa fa-check" aria-hidden="true"></i>
+						</label>
+					</li>
+					<li class="list">
+						<p>南投縣全區</p>
+						<label>
+							<input type="checkbox" class="areaCheckbox" data-id="159">
+							<i class="fa fa-check" aria-hidden="true"></i>
+						</label>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="mask"></div>
+
+	<script src="js/main.js"></script>
+	<script src="js/appMenu.js"></script>
+	<script src="js/index.js"></script>
+	<script>
+		$('.areaSelect').on('click', function() {
+			$('#areaMenu').addClass('show');
+		});
+	</script>
+</body>
+
+</html>

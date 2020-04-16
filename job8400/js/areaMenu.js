@@ -227,6 +227,7 @@ class AreaMenu {
       let listArr = this.rootEl.querySelectorAll('.list');
       listArr.forEach(list => {
          list.querySelector('.areaCheckbox').checked = false;
+         list.classList.remove('all');
       });
    }
    setDisabled(value) { //設定chckbox disabled 狀態

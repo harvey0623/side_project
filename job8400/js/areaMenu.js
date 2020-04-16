@@ -11,19 +11,19 @@ class AreaMenu {
       this.cancelEl = document.querySelector(props.cancelEl);
       this.areaList = props.areaList;
       this.limit = props.limit;
-      this.selectedArr = Array.isArray(props.selectedArr) ? props.selectedArr: [];
-      this.openIdArr = Array.isArray(props.openIdArr) ? props.openIdArr: [];
-      this.allRegionId = this.areaList.map(item => this.numberToString(item.id));
-      this.allIdArr = [];
+      this.selectedArr = Array.isArray(props.selectedArr) ? props.selectedArr: []; //已選的地區id
+      this.openIdArr = Array.isArray(props.openIdArr) ? props.openIdArr: []; //記錄menu開合紀錄
+      this.allRegionId = this.areaList.map(item => this.numberToString(item.id)); //全區id
+      this.allIdArr = []; //已選的全區id(作為包含是全區地區的依據)
       this.transitionFunc = this.transitionendHandler.bind(this);
       this.confrimFunc = this.confirmHandler.bind(this);
       this.removeFunc = this.removeHandler.bind(this);
-      this.cancelFunc = this.cancelHandler.bind(this);
+      this.cancelFunc = this.cancelHandler.bind(this);  //為了要移除事件必須先紀錄回傳的function
       this.renderHtml();
       this.init();
       this.bindEvent();
    }
-   init() {
+   init() {  //讀取之前選取的資料
       this.limitEl.textContent = this.limit;
       this.allIdArr = this.selectedArr.reduce((prev, current) => {
          if (this.allRegionId.includes(current)) prev.push(current);
@@ -39,16 +39,16 @@ class AreaMenu {
       this.removeEl.addEventListener('click', this.removeFunc);
       this.cancelEl.addEventListener('click', this.cancelFunc);
    }
-   numberToString(num) {
+   numberToString(num) {  //數字轉文字
       return num.toString();
    }
-   removeHandler() {
+   removeHandler() { //清除所有已選的資料
       this.selectedArr = [];
       this.allIdArr = [];
       this.setCount = 0;
       this.clearAllChecked();
    }
-   confirmHandler() {
+   confirmHandler() { //儲存已選的資料
       let districtArr = this.getAllData().reduce((prev, current) => {
          let id = this.numberToString(current.id);
          if (this.selectedArr.includes(id)) prev.push(current.name);
@@ -88,7 +88,7 @@ class AreaMenu {
       let openIdIndex = this.openIdArr.indexOf(openId);
       nextEl.classList[method]('open');
       iconEl.classList[method]('open');
-      if (hasClass) {
+      if (hasClass) {  //紀錄和移除打開or收合的選單id
          this.openIdArr.splice(openIdIndex, 1);
       } else {
          if (openIdIndex === -1) this.openIdArr.push(openId);
@@ -119,7 +119,7 @@ class AreaMenu {
          selectBox.appendChild(regionTitle);
          selectBox.appendChild(regionList);
          this.rootEl.appendChild(selectBox);
-         if (this.openIdArr.indexOf(this.numberToString(id)) !== -1) {
+         if (this.openIdArr.indexOf(this.numberToString(id)) !== -1) { //如果選單之前有被選取就打開
             regionTitle.dispatchEvent(new Event('click'));
          }
       });
@@ -175,7 +175,7 @@ class AreaMenu {
    addId({ id }) {  //增加id
       this.selectedArr.push(id);
       let isInAllRegion = this.isAllRegion(id);
-      if (!isInAllRegion) return;
+      if (!isInAllRegion) return;  //如果選到的是全區id就必須把包含在全區裡的地區id移掉
       this.allIdArr.push(id);
       let regionIdArr = this.getRegionIdArr(id);
       this.selectedArr = this.selectedArr.filter(item => {
@@ -195,7 +195,7 @@ class AreaMenu {
    isAllRegion(id) {  //檢查是否為全區
       return this.allRegionId.includes(id);
    } 
-   getRegionIdArr(id) { //取得目標區域
+   getRegionIdArr(id) { //取得目標區域id(不包括全區id)
       let obj = this.areaList.find(item => this.numberToString(item.id) === id)['region'];
       return obj.reduce((prev, current) => {
          let currentId = this.numberToString(current.id);
@@ -203,7 +203,7 @@ class AreaMenu {
          return prev;
       }, []);
    }
-   setRegionChecked({ id, checked }) { //設定點選全區checked狀態
+   setRegionChecked({ id, checked }) { //設定點選全區checkbox狀態和class
       let listArr = this.rootEl.querySelectorAll('.list');
       let regionIdArr = this.getRegionIdArr(id);
       listArr.forEach(list => {
@@ -231,7 +231,7 @@ class AreaMenu {
    }
    setDisabled(value) { //設定chckbox disabled 狀態
       let listArr = this.rootEl.querySelectorAll('.list');
-      let group = this.allIdArr.reduce((prev, current) => {
+      let group = this.allIdArr.reduce((prev, current) => {  //取得所有全區裡的地區id
          let regionIdArr = this.getRegionIdArr(current);
          prev = prev.concat(regionIdArr);
          return prev;

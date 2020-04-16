@@ -1,0 +1,40 @@
+body {
+    padding-top: 50px;
+    /*background-color: #d8edf8;*/
+}
+
+/*section {
+    padding: 20px 15px;
+}*/
+
+.offerBox {
+    min-height: 500px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.offer_imgBox {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #b7b7b7;
+}
+
+.offer_imgBox > img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    min-height: 180px;
+    border-radius : 10px;
+}
+
+.offer_desc {
+    color: #005bac;
+    font-size: 16px;
+    word-break: break-all;
+}
+
+.offer_desc img,
+.offer_desc iframe {
+    max-width: 100%;
+}

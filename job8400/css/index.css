@@ -106,7 +106,8 @@ header:after{
     text-overflow:ellipsis;
 }
 .fakeSelect>i,
-.salarySelect>i{
+.salarySelect>i,
+.areaSelect>i{
     position: absolute;
     right:8px;
     top:28%;

@@ -1,0 +1,286 @@
+body{
+    background-color:#f0f0f0;
+}
+/*=======header========*/
+.headerInner>.logo,
+.headerInner>.function{
+    display: none;
+}
+.headerInner>.pageTitle,
+.headerInner>.back,
+.headerInner>.clearData{
+    display: block;
+}
+/*======content=====*/
+/*刊登內容*/
+.content{
+    font-size:15px;
+}
+.publishContent>.companyData{
+    padding:15px;
+    background-color: white;
+}
+.companyData>p{
+    color:#0077cc;
+}
+.companyData>p,
+.publishType>p,
+.publishInfo>p{
+    margin-bottom:15px;
+    font-weight:bold;
+}
+.companyData label,
+.sendMethod label{
+    display: block;
+    margin-bottom:15px;
+    font-weight:normal;
+}
+.sendMethod label:last-child{
+    margin-bottom:0;
+}
+.companyData label .form-control,
+.sendMethod>.form-control{
+    height:44px;
+    margin-top:15px;
+    resize:none;
+    border-radius:2.5px;
+}
+.companyData label [type=checkbox],
+.sendMethod label [type=checkbox]{
+    position: relative;
+    top:4px;
+    width:20px;
+    height:20px;
+    margin-top:0;
+    margin-right:8px;
+}
+.companyData>*:last-child{
+    margin-bottom:0;
+}
+label.companyName [type=checkbox],
+label.workSite [type=checkbox]{
+    margin-left:8px;
+}
+/*刊登種類*/
+.publishType,
+.publishInfo{
+    padding:15px;
+}
+.publishType>*:nth-child(2),
+.publishInfo>p:first-child{
+    color:#0077cc;
+}
+/*刊登須知*/
+.publishInfo{
+    padding-top:0;
+}
+.publishInfo>p:not(:first-child){
+    font-weight:normal;
+    text-align: justify;
+    line-height: 1.6;
+}
+.publishInfo>p:last-child{
+    margin-bottom:0;
+}
+/*新增職缺*/
+.addVancancy{
+    padding-bottom:15px;
+}
+.vacancyBox{
+    display: flex;
+    margin-bottom:15px;
+}
+.vacancyBox:first-child .fa-trash{
+    display: none;
+}
+
+
+.vacancyBox>div{
+    height:80px;
+}
+.vacancyBox>.delVacancy{
+    width:50px;
+    background-color:#0076cd;
+    line-height: 80px;
+    text-align: center;
+    color:white;
+    font-size:20px;
+}
+.vacancyBox>.vacancyFill{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:calc(100% - 50px);
+    padding:15px;
+    background-color:white;
+}
+.vacancyFill>span{
+    color:#0076cd;
+}
+.vacancyFill>i{
+    color:#a8a8a8;
+    font-size:25px;
+}
+
+
+
+/*增加按鈕*/
+.plus,
+.plusLang{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding:0px 20px 15px;
+    font-size:15px;
+}
+.plus i,
+.plusLang i{
+    width:20px;
+    height:20px;
+    margin-right:8px;
+    line-height: 21px;
+    background-color: #0077cc;
+    color:white;
+    text-align: center;
+    border-radius:3px;
+}
+.plusLang{
+    padding-bottom:0;
+}
+
+/*職缺內容填寫*/
+.dataMenu{
+    display: none;
+    margin-bottom:0;
+}
+.dataMenu>li>.dataTitle{
+    padding-left:20px;
+    background-color:white;
+    font-size:15px;
+}
+.dataMenu>li>.dataTitle.myfocus{
+    box-shadow: 0px 2.5px 4px 0 rgba(132, 132, 132, 0.32);
+}
+.dataMenu .dataTitle>span{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:88px;
+    color:#0077cc;
+    padding-right:15px;
+    border-bottom:1px solid #a8a8a8;
+}
+.dataMenu .dataTitle>span.noBor{
+    border-bottom:none;
+}
+.dataTitle>span>i{
+    color:#a8a8a8;
+    font-size:25px;
+}
+.dataTitle>span>i.myrotate{
+    transform:rotate(180deg);
+}
+.dataMenu>li>form{
+    display: none;
+    padding:15px;
+}
+.dataMenu form label{
+    display: block;
+    margin-bottom:15px;
+    font-weight:normal;
+    font-size:15px;
+}
+form>label .form-control,
+.fakeSelect{
+    height:44px;
+    margin-top:15px;
+    border-color:#a8a8a8;
+    border-radius:2.5px;
+    resize:none;
+}
+textarea.jobConetnt{
+    height:85px !important; 
+    resize:none;
+}
+label.salary>label,
+label.supply>label{
+    display: flex;
+    align-items: center;
+    margin-top:15px;
+}
+label.salary>label>[type=radio],
+label.supply>label>[type=checkbox]{
+    width:20px;
+    height:20px;
+    margin-top:0;
+    margin-right:8px;
+}
+.lang{
+    padding-top:15px;
+    padding-bottom:15px;
+    border-top:1px solid #a8a8a8;
+}
+.lang>label:last-child{
+    margin-bottom:0;
+}
+
+.langBox>.lang:first-child .delLang{
+    display: none;
+}
+.editorBox{
+    display: flex;
+    justify-content: space-between;
+}
+.editorBox>i{
+    font-size:25px;
+    color:gray;
+}
+
+
+
+/*假選單*/
+.fakeSelect{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding:6px 12px 6px 12px;
+    background-color: white;
+    border:1px solid #a8a8a8;
+}
+.fakeSelect>span{
+    display: block;
+    width:100%;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+.fakeSelect>i{
+    position: absolute;
+    top:30%;
+    right:5px;
+}
+
+
+/*按鈕*/
+.final,
+.saveBox{
+    display: block;
+    height:44px;
+    line-height: 44px;
+    color:white;
+    text-align: center;
+    font-size:18px;
+    background-color: #0077cc;
+}
+.saveBox{
+    display: none;
+    position: fixed;
+    width:100%;
+    left:0;
+    bottom:0;
+}
+
+/*===modal====*/
+#saveModal .modal-body>.buttonBox{
+    justify-content: center;
+}

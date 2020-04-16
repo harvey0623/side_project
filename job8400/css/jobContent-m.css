@@ -1,0 +1,55 @@
+/*=======header========*/
+.headerInner>.logo,
+.function>.maginify{
+    display: none;
+}
+.headerInner>.pageTitle,
+.headerInner>.back,
+.function>.goMail,
+.function>.totalMail{
+    display: block;
+}
+
+
+/*按鈕*/
+.btnBox{
+    display: flex;
+}
+.btnBox>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:50%;
+    height:44px;
+    font-size:15px;
+}
+.btnBox>div>img{
+    display: block;
+    width:25px;
+    height:25px;
+}
+.btnBox>.collect{
+    background-color: #bfddf2;
+    color:#383838;
+}
+.btnBox>.apply{
+    background-color: #0077cc;
+    color:white;
+}
+.btnBox>div>img{
+    margin-right:15px;
+}
+
+/*===modal===*/
+#collectModal .modal-body span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:15px;
+}
+#collectModal .modal-body span>img{
+    display: inline-block;
+    width:30px;
+    height:30px;
+    margin-left:10px;
+}

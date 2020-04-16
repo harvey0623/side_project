@@ -1,0 +1,101 @@
+body {
+    padding-top: 187px;
+    background-color: #f0f0f0;
+}
+
+/*=====header=====*/
+.headerInner>.logo,
+.function>.goMail,
+.function>.totalMail {
+    display: none;
+}
+
+.headerInner>.pageTitle,
+.headerInner>.back {
+    display: block;
+}
+
+.function>.maginify {
+    margin-right: 15px;
+}
+
+/*==matchOuter==*/
+.matchOuter {
+    position: fixed;
+    top: 49px;
+    left: 0;
+    width: 100%;
+    z-index: 998;
+}
+
+.vacancyBox {
+    display: flex;
+    border-bottom: 1px solid #bfbfbf;
+}
+
+.vacancyBox>a {
+    width: 50%;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 15px;
+    background-color: white;
+}
+
+.vacancyBox>a.manage {
+    border-right: 1px solid #bfbfbf;
+}
+
+.jobName {
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    font-size: 16px;
+}
+
+.jobName > .workname {
+    color: #0077cc;
+    font-weight: bold;
+}
+
+/*===personList===*/
+.matchString > input[type=checkbox] {
+    transform: translateY(4px);
+}
+
+.matchString > a,
+.matchString > span {
+    display: inline-block;
+    color: #0077cc;
+}
+
+.matchString > span {
+    margin: 0 5px;
+}
+
+/* 取消 */
+.cancelAll {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    padding: 0 15px;
+    background-color: white;
+}
+
+.cancelAll > .hasArrow {
+    margin-left: 15px;
+}
+
+.cancelAll > .hasArrow > .form-control {
+    width: 120px;
+}
+
+.cancelAll > .hasArrow > span {
+    transform: translateY(-5px);
+}
+
+.cancelAll .fa-trash {
+    color: darkgrey;
+    font-size: 25px;
+    margin-left: auto;
+}

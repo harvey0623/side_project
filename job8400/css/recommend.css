@@ -1,0 +1,48 @@
+body{
+    background-color: #f0f0f0;
+}
+/*=======header========*/
+.headerInner>.logo{
+    display: none;
+}
+.headerInner>.pageTitle,
+.headerInner>.back{
+    display: block;
+}
+.headerInner>.pageTitle{
+    transform:translateX(-20%);
+}
+/*=======content=====*/
+.talentMenu{
+    margin-bottom:15px;
+}
+.talentMenu>li{
+    background-color:white;
+}
+.block{
+    padding:0 15px;
+    background-color: white;
+}
+.block>.blockInner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:44px;
+    border-bottom: 1px solid #bfbfbf;
+}
+.blockInner>a{
+    font-size:15px;
+}
+.blockInner>i{
+    font-size: 25px;
+    color: #bfbfbf;
+}
+.blockInner>i.rotate{
+    transform: rotate(-180deg)
+}
+.block+p{
+    display: none;
+    padding:15px;
+    margin-bottom: 0;
+    background-color: #f0f0f0;
+}

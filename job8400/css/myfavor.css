@@ -1,0 +1,32 @@
+body {
+    background-color: #f0f0f0;
+    padding-top: 94.5px;
+}
+
+/*=====header====*/
+header > .headerInner {
+    justify-content: space-between;
+}
+
+.headerInner > .logo {
+    display: none;
+}
+
+.headerInner > .pageTitle,
+.headerInner > .back {
+    display: block;
+}
+
+.function > .maginify {
+    display: none;
+}
+
+/* 篩選 */
+.sortList {
+    padding-left: 15px;
+}
+
+.sortList > li {
+    justify-content: flex-start;
+    flex: initial;
+}

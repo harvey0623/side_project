@@ -1,0 +1,65 @@
+body{
+    background-color:#f0f0f0;
+}
+/*=====header=====*/
+header>.headerInner{
+    justify-content:space-between;
+}
+.headerInner>.logo{
+    display: none;
+}
+.headerInner>.pageTitle,
+.headerInner>.back{
+    display: block;
+}
+/*======content======*/
+.msgMenu{
+    margin-bottom:0;
+    padding:15px 15px 0 15px;
+    background-color: white;
+    word-break: break-all;
+}
+.msgMenu>li{
+    padding-bottom:15px;
+    margin-bottom:15px;
+    border-bottom:1px solid #bfddf2;
+}
+.msgMenu>li:last-child{
+    margin-bottom:0;
+    border-bottom:none;
+}
+.msgMenu>li p{
+    margin-bottom:0;
+}
+.msgMenu>li>.whoBox{
+    display: flex;
+    align-items: center;
+    margin-bottom:15px;
+}
+.myphoto>img{
+    display: block;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+}
+.whoBox>.mydetail{
+    padding-left:15px;
+}
+.mydetail>p{
+    font-size:15px;
+}
+.mydetail>.time{
+    color:#8a8a8a;
+    margin-bottom:5px;
+}
+.mydetail>.myname{
+    color:#0077cc;   
+}
+.msgMenu>li>.mymsg{
+    padding-left:15px;
+    border-left:1.5px solid #bfddf2; 
+    font-size:15px;
+    text-align: justify;
+}
+
+

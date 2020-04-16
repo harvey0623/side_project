@@ -1,0 +1,30 @@
+/*=======header========*/
+.headerInner>.logo{
+    display: none;
+}
+.headerInner>.pageTitle,
+.headerInner>.back{
+    display: block;
+}
+/*=======content=====*/
+.content{
+    padding:15px;
+}
+.content>*{
+    margin-bottom:15px;
+}
+.content>*:last-child{
+    margin-bottom:0;
+}
+.content img{
+    display: block;
+    width:100%;
+    max-width:100%;
+    height:auto;
+}
+.content>p{
+    font-size:15px;
+    line-height: 1.5;
+    color:#383838;
+    text-align: justify;
+}

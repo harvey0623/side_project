@@ -1,0 +1,83 @@
+body {
+    padding-top: 143.5px;
+    background-color: #f0f0f0;
+}
+
+/*=====header=====*/
+.headerInner>.logo,
+.goMail>.totalMail {
+    display: none;
+}
+
+.headerInner>.pageTitle,
+.headerInner>.back {
+    display: block;
+}
+
+/* filterBox */
+.filterBox > .filterMenu {
+    margin-bottom: 5px;
+}
+
+.sortList {
+    position: static;
+}
+
+/*======結果顯示=======*/
+.totalBox {
+    padding: 10px;
+}
+
+.resultMenu {
+    margin-bottom: 0;
+}
+
+.resultMenu>li {
+    padding: 15px 15px 23px 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.resultMenu>li:last-child {
+    margin-bottom: 0;
+}
+
+.resultMenu>li>label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+
+.resultMenu label>input {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.resultMenu label>span {
+    font-size: 15px;
+    color: #8a8a8a;
+}
+
+.resultMenu>li>p {
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.resultMenu>li>.company {
+    color: #8a8a8a
+}
+
+.resultMenu>li>.duties {
+    color: #0077cc;
+}
+
+.resultMenu>li>.des {
+    padding: 10px;
+    border: 1px solid #bedaef;
+    font-size: 15px;
+    line-height: 1.6;
+}

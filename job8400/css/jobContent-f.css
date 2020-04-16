@@ -1,0 +1,174 @@
+body{
+    font-size:15px;
+}
+/*=======header========*/
+.headerInner>.logo,
+.function>.goMail,
+.function>.totalMail{
+    display: none;
+}
+.headerInner>.pageTitle,
+.headerInner>.back{
+    display: block;
+}
+.function>.maginify{
+    margin-right:20px;
+}
+/*======content=====*/
+.nameOuter{
+    padding:15px;
+}
+.nameOuter>.jobName{
+    max-height:54px;
+    margin-bottom:15px;
+    font-size:18px;
+    color:#0077cc;
+    font-weight:bold;
+    line-height: 1.5;
+    overflow:hidden;
+}
+.nameOuter>.companyName{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    color:#8a8a8a;
+    padding-bottom:15px;
+    border-bottom:1px solid #bebebe;
+}
+.companyName>span{
+    width:calc(100% - 20px);
+}
+.companyName>i{
+    width:20px;
+    height:20px;
+    text-align: center;
+    line-height: 20px;
+    font-size:25px;
+}
+.jobTable,
+.vacancyTable,
+.requireTable,
+.applyTable{
+    width:100%;
+}
+.jobTable td,
+.vacancyTable td,
+.requireTable td,
+.applyTable td{
+    padding:0px 15px 15px 15px;
+    font-size:15px;
+    vertical-align: top;
+}
+.jobTable td:first-child,
+.vacancyTable td:first-child,
+.requireTable td:first-child,
+.applyTable td:first-child{
+    width:25%;
+    padding-right:0px;
+    color:#8a8a8a;
+}
+.jobTable td:nth-child(2){
+    width:15%;
+}
+.jobTable td:last-child{
+    width:63%;
+    padding-left:0;
+}
+.jobTable td>img{
+    display: block;
+    width:20px;
+    height:20px;
+}
+.jobTable td>.addr{
+    text-decoration: underline;
+}
+/*====職缺資訊=====*/
+.jobInfo>p,
+.requirement>p,
+.welfare>p,
+.apply>p{
+    height:30px;
+    padding-left:15px;
+    margin-bottom:15px;
+    line-height: 30px;
+    color:#383838;
+    background-color: #f0f0f0;
+    font-size:15px;
+    font-weight:bold;
+}
+.vacancyTable td:last-child,
+.requireTable td:last-child,
+.applyTable td:last-child{
+    width:75%;
+}
+
+/*====應徵資訊====*/
+.applyTable a{
+    display: inline-flex;
+    align-items: center;
+}
+.applyTable a>img{
+    display: inline-block;
+    width:20px;
+    height:20px;
+    margin-right:5px;
+}
+.applyTable a>span{
+    display: inline-block;
+    color:black;
+    margin-left:5px;
+}
+.applyTable .phone{
+    color:#0077cc;
+}
+/*====福利制度====*/
+.welfareGroup{
+    padding:0 15px;
+}
+.welfareGroup:after{
+    content:"";
+    display: block;
+    clear:both;
+}
+.welfareGroup>button{
+    float:left;
+    width:31.5%;
+    margin:0 1.5% 10px 0;
+    border:1px solid #0077cc;
+    border-radius:2.5px;
+    text-align: center;
+    color:#0077cc;
+    line-height: 30px;
+    background-color: white;
+    font-size:15px;
+}
+.otherWelfare {
+    padding: 0 15px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+.otherWelfare> p{
+    margin-bottom: 0;
+}
+.otherWelfare >p:first-child {
+    flex: 0 0 75px;
+}
+.otherWelfare >p:last-child {
+    flex: 1;
+}
+
+
+/*按鈕*/
+.btnBox{
+    background-color: #0077cc;
+}
+.btnBox>div{
+    display: block;
+    height:44px;
+    line-height: 44px;
+    color:white;
+    font-size:18px;
+    text-align: center;
+}

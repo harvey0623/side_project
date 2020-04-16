@@ -1,0 +1,99 @@
+/* ===seekBox=== */
+.seekBox {
+    padding: 15px;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.seekBox > .hasArrow {
+    flex: 0 0 150px;
+}
+
+.seekBox > .hasArrow > span {
+    transform: translateY(-7px);
+}
+
+.seekBox > .keywordBox {
+    flex: 0 0 160px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.seekBox > .keywordBox > .form-control {
+    flex: 1 0 0;
+    border-radius: 0;
+}
+
+.seekBox > .keywordBox > button {
+    width: 34px;
+    background-color: #0376cb;
+    border: none;
+    color: white;
+}
+
+
+/* ===offerList=== */
+.offerList > li {
+    padding: 15px;
+    padding-bottom: 0px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.offerList > li:last-child {
+    margin-bottom: 0;
+}
+
+.offerList > li > .imgBox {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #bebebe;
+}
+
+.offerList > li > .imgBox > img {
+    width: 100%;
+    height: auto;
+}
+
+/* ===itemBox=== */
+.itemTitle {
+    color: #005bac;
+    margin: 15px 0;
+}
+
+.mytable td {
+    padding-bottom: 18px;
+    vertical-align: top;
+}
+
+.mytable td:first-child {
+    width: 100px;
+}
+
+.mytable td:last-child {
+    width: calc(100% - 100px);
+    padding-left: 12px;
+}
+
+.mytable td .url{
+    color: #005bac;
+}
+
+.mytable td .fa-angle-right{
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    background-color: #005bac;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    border-radius: 2px;
+    margin-right: 3px;
+}
+
+.mytable td.item_desc {
+    color: #005bac;
+}

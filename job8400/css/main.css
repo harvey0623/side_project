@@ -26,7 +26,9 @@ body {
     font-family: "Microsoft JhengHei";
     font-size: 16px;
 }
-
+body.fixScroll {
+    overflow: hidden;
+}
 /*=======header=======*/
 header {
     position: fixed;
@@ -1190,7 +1192,7 @@ input[type=date] {
     padding-left: 10px;
 }
 
-/* === 2020/04/15修改 === */
+/* === 2020/04/15修改(職缺地區popup樣式) === */
 .areaStatus {
     display: flex;
     align-items: center;
@@ -1199,81 +1201,74 @@ input[type=date] {
     padding: 0 15px;
     background-color: #f0f0f0;
 }
-
 .areaStatus > .countBox {
     font-size: 15px;
 }
-
 .areaStatus > .countBox > #countEl{
     color: #0077cc;
 }
-
 .areaStatus > i {
     color: #ca2222;
     font-size: 20px;
 }
-.areaMenuBody {
-    padding: 15px;
+#areaMenuBody {
+    padding-bottom: 15px;
     height: calc(100vh - 49px - 45px);
     overflow: auto;
 }
-
-.areaMenuBody > .selectBox {
-    margin-bottom: 25px;
-}
-
-.areaMenuBody > .selectBox:last-child {
+#areaMenuBody > .selectBox:last-child {
     margin-bottom: 0;
 }
-
 .regionTitle {
+    padding: 15px 15px 0 15px;
+    color: #005ba9;
+}
+.regionTitle>.titleInner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 15px;
     border-bottom: 1px solid #bfbfbf;
 }
-
-.regionTitle > span {
+.regionTitle span {
     font-size: 20px;
 }
-
-.regionTitle > i {
-    color: #005ba9;
+.regionTitle i.open {
+    transform: rotate(-180deg);
 }
-
 .regionList {
-    padding-top: 15px;
-    padding-left: 5px;
+    display: none;
     margin-bottom: 0;
 }
-
+.regionList.open {
+    display: block;
+}
 .regionList > li {
+    padding: 0 15px;
+    font-size: 16px;
+}
+.regionList > li.all {
+    background-color: #f0f0f0;
+}
+.regionList > li:last-child {
+    margin-bottom: 0;
+}
+.regionList > li > .listInner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 45px;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
+    padding: 12px 0px 12px 15px;
     border-bottom: 1px solid #bfbfbf;
-    font-size: 16px;
 }
- 
-.regionList > li:last-child{
+.regionList > li  p,
+.regionList > li label {
     margin-bottom: 0;
 }
-
-.regionList > li > p,
-.regionList > li > label {
-    margin-bottom: 0;
-}
- 
 .areaCheckbox:checked + .fa-check {
     border-color: #0076cd;
     background-color: #0076cd;
     color: white;
 }
- 
 .fa-check {
     width: 25px;
     height: 25px;
@@ -1284,4 +1279,3 @@ input[type=date] {
     color: #bfbfbf;
     cursor: pointer;
 }
- 

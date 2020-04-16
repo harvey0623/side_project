@@ -186,7 +186,7 @@
 						</div>
 					</div>
 				</li>
-				<li class="fake">
+				<li class="fake areaFake" data-result>
 					<div>職缺地區</div>
 					<div>
 						<div class="areaSelect">
@@ -484,100 +484,55 @@
 	</div>
 
 	<!-- 職缺地區 -->
-	<div id="areaMenu" class="show">
+	<div id="areaMenu">
 		<div class="fixedArea">
 			<div class="typeTitle">
 				<div class="areaCancel">取消</div>
 				<div class="areaInfo">職缺地區</div>
-				<div class="areaSure">確認</div>
+				<div id="confirmEl" class="areaSure">確認</div>
 			</div>
 			<hr>
 		</div>
 		<div class="areaStatus">
 			<div class="countBox">
 				最多可選幾<span id="limitEl"> 5 </span>項，已選
-				<span id="countEl">2</span> 項
+				<span id="countEl">0</span> 項
 			</div>
-			<i class="fa fa-trash-o trash" aria-hidden="true"></i>
+			<i class="fa fa-trash-o trash" id="removeEl" aria-hidden="true"></i>
 		</div>
-		<div class="areaMenuBody">
-			<div class="selectBox">
-				<div class="regionTitle">
-					<span>南投縣全區</span>
-					<i class="fa fa-chevron-down" aria-hidden="true"></i>
-				</div>
-				<ul class="regionList">
-					<li class="list">
-						<p>南投縣全區</p>
-						<label>
-							<input type="checkbox" class="areaCheckbox" data-id="159">
-							<i class="fa fa-check" aria-hidden="true"></i>
-						</label>
-					</li>
-					<li class="list">
-						<p>南投縣全區</p>
-						<label>
-							<input type="checkbox" class="areaCheckbox" data-id="159">
-							<i class="fa fa-check" aria-hidden="true"></i>
-						</label>
-					</li>
-				</ul>
-			</div>
-			<div class="selectBox">
-				<div class="regionTitle">
-					<span>南投縣全區</span>
-					<i class="fa fa-chevron-down" aria-hidden="true"></i>
-				</div>
-				<ul class="regionList">
-					<li class="list">
-						<p>南投縣全區</p>
-						<label>
-							<input type="checkbox" class="areaCheckbox" data-id="159">
-							<i class="fa fa-check" aria-hidden="true"></i>
-						</label>
-					</li>
-					<li class="list">
-						<p>南投縣全區</p>
-						<label>
-							<input type="checkbox" class="areaCheckbox" data-id="159">
-							<i class="fa fa-check" aria-hidden="true"></i>
-						</label>
-					</li>
-				</ul>
-			</div>
-			<div class="selectBox">
-				<div class="regionTitle">
-					<span>南投縣全區</span>
-					<i class="fa fa-chevron-down" aria-hidden="true"></i>
-				</div>
-				<ul class="regionList">
-					<li class="list">
-						<p>南投縣全區</p>
-						<label>
-							<input type="checkbox" class="areaCheckbox" data-id="159">
-							<i class="fa fa-check" aria-hidden="true"></i>
-						</label>
-					</li>
-					<li class="list">
-						<p>南投縣全區</p>
-						<label>
-							<input type="checkbox" class="areaCheckbox" data-id="159">
-							<i class="fa fa-check" aria-hidden="true"></i>
-						</label>
-					</li>
-				</ul>
-			</div>
-		</div>
+		<div id="areaMenuBody"></div>
 	</div>
 
 	<div class="mask"></div>
 
 	<script src="js/main.js"></script>
 	<script src="js/appMenu.js"></script>
+	<script src="./js/areaList.js"></script>
+	<script src="./js/areaMenu.js"></script>
 	<script src="js/index.js"></script>
 	<script>
 		$('.areaSelect').on('click', function() {
-			$('#areaMenu').addClass('show');
+			let areaFakeEl = document.querySelector('.areaFake');
+			let district = areaFakeEl.dataset.result;
+			let openIdArr = areaFakeEl.dataset.opentitle;
+			district = (district === undefined || district === '') ? [] : district.split(',');
+			openIdArr = openIdArr === undefined ? [] : JSON.parse(openIdArr);
+			let instance = new AreaMenu({
+				areaMenuEl: '#areaMenu',
+				rootEl: '#areaMenuBody',
+				limitEl: '#limitEl',
+				countEl: '#countEl',
+				removeEl: '#removeEl',
+				confirmEl: '#confirmEl',
+				saveIdEl: '.areaFake',
+				showTextEl: '.areaSelect>span',
+				cancelEl: '.areaCancel',
+				limit: 5,
+				selectedArr: district,
+				openIdArr,
+				areaList,
+      	});
+			instance.areaMenuEl.classList.add('show');
 		});
 	</script>
 </body>

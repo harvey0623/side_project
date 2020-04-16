@@ -1,0 +1,30 @@
+/*=======header========*/
+.headerInner>.logo{
+    display: none;
+}
+.headerInner>.pageTitle,
+.headerInner>.back{
+    display: block;
+}
+/*=======content=====*/
+.totalBox{
+    justify-content: flex-end;
+    padding:10px;
+    background-color:#f0f0f0;
+}
+.publishImg{
+    padding:15px;
+}
+.publishImg>a{
+    display: block;
+    margin-top:15px;
+    margin-bottom:15px;
+}
+.publishImg>a:last-child{
+    margin-bottom:0;
+}
+.publishImg>a>img{
+    display: block;
+    width:100%;
+    max-height:100px;
+}

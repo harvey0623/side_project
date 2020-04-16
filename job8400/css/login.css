@@ -1,0 +1,255 @@
+body {
+    background-color:#f0f0f0;
+    padding-top: 94px;
+}
+/*=====header=====*/
+.headerInner>.logo{
+    display: none;
+}
+.headerInner>.pageTitle,
+.headerInner>.back{
+    display: block;
+}
+/*=====content=====*/
+.content{
+    padding:15px;
+}
+.content>.dataMenu{
+    margin-bottom:0;
+}
+.dataMenu>li{
+    margin-bottom:15px;
+}
+.dataMenu>li:last-child{
+    margin-bottom:0;
+}
+.dataMenu>li>span{
+    color:#0077cc;
+    font-size:15px;
+    font-weight:bold;
+}
+.dataMenu>li input{
+    height:43px;
+    margin-top:15px;
+    border:0.5px solid #a8a8a8;
+    border-radius:2.5px;
+}
+.dataMenu>.detail {
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+}
+#interview .detail {
+    display: block;
+    text-align: center;
+}
+.factoryTip {
+    text-decoration: underline;
+    text-align: center;
+}
+.registerfactoryTip {
+    height: 200px;
+    line-height: 200px;
+}
+.dataMenu>.detail>a:first-child {
+    margin-right: 30px;
+}
+#interview .detail>a:first-child {
+    display: inline-block;
+    margin-right: 0;
+    margin-bottom: 15px;
+}
+.detail>label{
+    display: flex;
+    align-items: center;
+    margin-bottom:0;
+    font-weight:normal;
+}
+.detail>label>input{
+    width:20px;
+    height:20px;
+    margin-top:-2px;
+    margin-right:10px;
+}
+.detail>label>span{
+    color:#0077cc;
+}
+.dataMenu>.want{
+    text-align: center;
+}
+.detail>a,
+.want>a{
+    font-size:15px;
+    text-decoration: underline;
+}
+.want>a.noBorder{
+    padding-bottom:0;
+    border-bottom:none;
+}
+/*====忘記密碼=====*/
+.forgotOuter{
+    position: fixed;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+    transition: transform 0.15s linear;
+    z-index: 1001;
+}
+.forgotOuter.show {
+    transform: translateY(0%);
+}
+.forgotHeader>div{
+    height:44px;
+    line-height: 44px;
+    background-color: #005bac;
+    text-align: center;
+    color:white;
+    font-size:15px;
+}
+.forgotHeader>hr {
+    border-top:5px solid #bfddf2;
+}
+.forgotBody {
+    height: calc(100vh - 49px);
+    background-color: #f0f0f0;
+    overflow: auto;
+}
+.forgotInner {
+    position: relative;
+    min-height: calc(100vh - 49px);
+    padding-bottom: 50px;
+}
+.forgotMenu{
+    margin-bottom:0;
+    padding:15px;
+}
+.forgotMenu>li{
+    margin-bottom:15px;
+}
+.forgotMenu>li>span{
+    color:#0077cc;
+    font-size:15px;
+}
+.forgotMenu>li:last-child{
+    margin-bottom:0;
+}
+.forgotMenu .form-control{
+    height:44px;
+    margin-top:15px;
+    border-radius:2.5px;
+}
+.codeBox{
+    display: flex;
+    justify-content: space-between;
+    height:44px;
+    margin-top:15px;
+}
+.codeBox>.form-control{
+    width:calc(100% - 54px);
+    margin-top:0;
+}
+.codeBox>button{
+    width:44px;
+    border:none;
+    background-color: #f9b902;
+    border-radius:2.5px;
+    font-size:18px;
+    color:#383838;
+    line-height: 43px;
+    outline: none;
+    color:white;
+}
+.sendMsg>p{
+    margin-bottom:15px;
+    font-size:18px;
+    text-align: center;
+}
+.sendMsg>p:last-child{
+    margin-bottom:0;
+}
+
+/*===login-f.html====*/
+.sendMethod{
+    display: flex;
+    justify-content: space-between;
+    margin-top:15px;
+}
+.sendMethod>*{
+    width:47.5%;
+}
+.sendMethod .form-control{
+    margin-top:0;
+}
+.sendMethod>button{
+    border:none;
+    background-color: #f9b902;
+    border-radius:2.5px;
+    font-size:18px;
+}
+
+
+/*=====取消、登入鍵=======*/
+.btnBox,
+.forgotBtn{
+    display: flex;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 44px;
+}
+.btnBox>button,
+.forgotBtn>button{
+    width:50%;
+    height:100%;
+    border:none;
+    font-size:18px;
+    line-height: 44px;
+    text-align: center;
+    outline: none;
+}
+.mycancel{
+    background-color:#bfddf2;
+}
+.mylogin{
+    background-color:#0077cc;
+    color:white;
+}
+.btnBox{
+    z-index:998;
+}
+
+/* === 2020/4/15修改 === */
+.filterBox {
+    top: 50px;
+}
+
+.filterBox > ul {
+    display: flex;
+}
+
+.filterBox > ul > li {
+    flex: 1;
+}
+
+.filterBox > ul > li > a  {
+    display: inline-block;
+    font-size: 16px;
+}
+
+.filterBox > ul > li  i  {
+    font-size: 22px;
+    color: rgba(56, 56, 56, 0.5);
+}
+
+.filterBox > ul > li.active  i {
+    color: #0077cc;
+}
+
+.loginOuter {
+    position: relative;
+    padding-bottom: 50px;
+    min-height: calc(100vh - 94px);
+}
+

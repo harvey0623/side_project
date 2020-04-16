@@ -1,0 +1,754 @@
+body {
+    background-color: white;
+}
+
+/*=======header========*/
+.headerInner>.logo,
+.headerInner>.clearData {
+    display: none;
+}
+
+.headerInner>.pageTitle,
+.headerInner>.back {
+    display: block;
+}
+
+/*======all=====*/
+.moveInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+    padding: 10px;
+    background-color: #005bac;
+    color: white;
+    font-size: 18px;
+}
+
+.moveInner>i {
+    margin-top: 4px;
+    font-size: 25px;
+}
+
+.moveInner>i+span {
+    margin-left: 20px;
+}
+
+.moveInner+hr {
+    border-top: 5px solid #bfddf2;
+}
+
+.profileBox,
+.personWrap,
+.aboutWrap,
+.criteriaWrap,
+.skillWrap,
+.expWrap,
+.previewWrap,
+.lockWrap {
+    position: fixed;
+    width: 100%;
+}
+
+.personWrap,
+.aboutWrap,
+.criteriaWrap,
+.skillWrap,
+.expWrap,
+.previewWrap,
+.lockWrap {
+    top: 0px;
+    left: 100%;
+}
+
+.profileBox,
+.personBox,
+.aboutBox,
+.criteriaBox,
+.skillBox,
+.expBox,
+.previewBox,
+.lockBox {
+    overflow: auto;
+}
+
+.noValue {
+    display: none;
+    margin-top: 15px;
+    color: red;
+}
+
+
+/*profileBox*/
+.profileBox {
+    /* display: none; */
+    top: 49px;
+    left: 0;
+    background-color: white;
+}
+
+.profileBox>.mypanel {
+    padding: 15px;
+    font-size: 15px;
+    border-bottom: 1px solid #bfbfbf;
+    background-color: #f0f0f0;
+}
+
+.mypanel>.account {
+    padding-bottom: 15px;
+}
+
+.account>span {
+    margin-left: 45px;
+}
+
+.mypanel>.status {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status>.switchBtn {
+    position: relative;
+    width: 35px;
+    height: 23px;
+    border: 1px solid #bfbfbf;
+    border-radius: 20px;
+    background-color: white;
+    transition: background-color 0.3s;
+}
+
+.status>.switchBtn.myon {
+    background-color: #0077cc;
+}
+
+.switchBtn>span {
+    position: absolute;
+    left: 0;
+    top: -1.5px;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #bfbfbf;
+    border-radius: 50%;
+    background-color: white;
+    transform: translateX(-50%);
+    transition: left 0.2s
+}
+
+.switchBtn>span.mymove {
+    left: 100%;
+}
+
+.status>button {
+    height: 44px;
+    border: none;
+    line-height: 44px;
+    text-align: center;
+    color: white;
+    background-color: #0077cc;
+    outline: none;
+    border-radius: 2.5px;
+}
+
+.status>.btn-prev {
+    width: 80px;
+}
+
+.status>.btn-lock {
+    width: 112px;
+}
+
+.profileBox>.profileList {
+    padding-left: 15px;
+    border-bottom: 1px solid #bfbfbf;
+    margin-bottom: 0;
+    font-size: 15px;
+}
+
+.profileList>li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 85px;
+    padding-right: 15px;
+    border-bottom: 1px solid #bfbfbf;
+}
+
+.profileList>li:last-child {
+    border-bottom: none;
+}
+
+.profileList>li>img {
+    margin-right: 15px;
+    width: 50px;
+    height: 50px;
+}
+
+.profileList>li>span {
+    margin-right: auto;
+    color: #2f2f2f;
+}
+
+.profileList>li>i {
+    color: #bfbfbf;
+    font-size: 25px;
+}
+
+/*personalData*/
+.personOuter {
+    padding: 15px;
+}
+
+.personOuter>.warn {
+    color: #0077cc;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.personOuter .photoBox {
+    text-align: right;
+}
+
+.personOuter .photoBox>img {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.mydata>* {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.mydata>*:last-child {
+    margin-bottom: 0;
+}
+
+.mydata>label>span {
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.mydata>label input,
+.mydata>label select {
+    height: 44px;
+    border-radius: 2.5px
+}
+
+.mybirth {
+    display: flex;
+}
+
+.mybirth>.hasArrow {
+    flex: 1;
+}
+
+.mybirth>div:first-child {
+    margin-right: 5px;
+}
+
+.mybirth>div:last-child {
+    margin-left: 5px;
+}
+
+[name=city] {
+    margin-bottom: 15px;
+}
+
+[name=district] {
+    margin-top: 15px;
+}
+
+.identity>label {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 0;
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+.identity>label>[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    margin-top: 0;
+    margin-right: 4px;
+    outline: none;
+}
+
+/*aboutBox*/
+.aboutBox {
+    position: relative;
+    background-color: #f0f0f0;
+}
+
+.aboutOuter {
+    padding: 15px;
+}
+
+.aboutTitle {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.aboutTitle>div {
+    margin-right: 15px;
+}
+
+.aboutTitle>.aboutList {
+    margin-bottom: 0;
+}
+
+.aboutList {
+    display: flex;
+}
+
+.aboutList>li {
+    margin-right: 15px;
+}
+
+.aboutList>li>span {
+    color: #0077cc;
+}
+
+.aboutOuter>textarea {
+    height: calc(100vh - 350px);
+    border-color: #a8a8a8;
+    border-radius: 2.5px;
+    resize: none;
+}
+
+/*previewResume*/
+.previewBox>.photoBox {
+    padding: 15px;
+    border-bottom: 1px solid #bfbfbf;
+    text-align: right;
+}
+
+.previewBox>.photoBox>img {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.previewBox table {
+    width: 100%;
+}
+
+.previewBox table td {
+    padding: 10px;
+    vertical-align: top;
+    font-size: 15px;
+}
+
+.previewBox table td:first-child {
+    width: 25%;
+    color: #8a8a8a;
+}
+
+.previewBox table td:last-child {
+    width: 75%;
+    color: #383838;
+}
+
+.previewBox .title {
+    padding: 10px;
+    background-color: #f0f0f0;
+    color: #383838;
+    font-weight: bold;
+}
+
+td>span {
+    margin-right: 10px;
+}
+
+.biography>.desBox {
+    padding: 10px;
+    text-align: justify;
+    word-break: break-all;
+}
+
+.noticeMe {
+    display: flex;
+}
+
+.noticeMe>a {
+    width: 50%;
+    height: 44px;
+    text-align: center;
+    line-height: 44px;
+}
+
+.noticeMe>a>img {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.noticeMe>.mynotice {
+    background-color: #bfddf2;
+}
+
+.noticeMe>.myinterview {
+    background-color: #0077cc;
+    color: white;
+}
+
+
+/*skillBox*/
+.langBox label,
+.technicBox label,
+.diploma label,
+.stayCompany label,
+.criteria label,
+.Inc label,
+.matchInc label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+.langBox label:last-child,
+.technicBox label:last-child,
+.diploma label:last-child,
+.stayCompany label:last-child,
+.criteria label:last-child,
+.Inc label:last-child,
+.matchInc label:last-child {
+    margin-bottom: 0;
+}
+
+.langBox {
+    padding: 15px;
+    background-color: #f0f0f0;
+}
+
+.langBox>.myLang {
+    margin-bottom: 15px;
+}
+
+.myLang>.lang {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.myLang>.lang+.lang {
+    padding-top: 15px;
+}
+
+.myLang>.lang:last-child {
+    border-bottom: none;
+}
+
+.technicBox {
+    padding: 15px;
+    font-size: 15px;
+}
+
+.technicBox>p {
+    margin-bottom: 15px;
+}
+
+.technicBox>label>textarea,
+.diploma .form-control,
+.stayCompany .form-control,
+.expect .form-control,
+.matchBox .form-control {
+    height: 44px;
+    margin-top: 15px;
+    resize: none;
+    border-radius: 2.5px;
+}
+
+/*學歷經歷*/
+.expBox {
+    font-size: 15px;
+}
+
+.diploma {
+    padding: 15px;
+}
+
+.diploma>p,
+.work>p,
+.criteria>p {
+    margin-bottom: 15px;
+    color: #0077cc;
+    font-weight: bold;
+}
+
+.work>p {
+    padding: 0 15px 15px;
+    margin-bottom: 0;
+    color: black;
+}
+
+.work>.stayCompany {
+    padding: 15px 15px 0;
+    background-color: #f0f0f0;
+}
+
+.stayCompany>.workExp {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.stayCompany>.workExp+.workExp {
+    padding-top: 15px;
+}
+
+.stayCompany>.workExp:last-child {
+    border-bottom: none;
+}
+
+.stayCompany>.workExp:first-child .delExp,
+.myLang>.lang:first-child .delLang {
+    display: none;
+}
+
+.editorBox {
+    display: flex;
+    justify-content: space-between;
+}
+
+.editorBox>i {
+    font-size: 25px;
+    color: gray;
+}
+
+
+.workExp>label:first-child>label,
+.expect label,
+.Inc label,
+.matchInc label {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.workExp [type=checkbox],
+.expect [type=radio],
+.Inc [type=checkbox],
+.matchInc [type=checkbox] {
+    width: 20px;
+    height: 20px;
+    margin-top: 0;
+    margin-right: 5px;
+}
+
+.stayCompany textarea.form-control {
+    height: 100px;
+}
+
+.work>.newWork {
+    padding: 15px 15px 15px 0;
+}
+
+/*求職條件*/
+.criteria {
+    padding: 15px;
+    font-size: 15px;
+}
+
+/*封鎖公司*/
+.lockWrap .moveInner>i+span {
+    margin-left: 0;
+}
+
+.lockBox {
+    position: relative;
+}
+
+.lockTitle,
+.locked,
+.matchBox,
+.matchResult {
+    padding: 15px;
+    background-color: #f0f0f0;
+}
+
+.lockTitle>h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.lockTitle>p {
+    font-size: 15px;
+    margin-bottom: 0;
+    line-height: 1.8;
+}
+
+.locked {
+    background-color: white;
+}
+
+.locked>p {
+    margin-bottom: 15px;
+    color: #0077cc;
+    font-size: 15px;
+}
+
+.matchBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.matchBox>.form-control {
+    width: 250px;
+    margin-top: 0;
+}
+
+.matchBox>button {
+    width: 85px;
+    height: 44px;
+    border: none;
+    color: white;
+    line-height: 44px;
+    background-color: #0077cc;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 2.5px;
+}
+
+.matchResult {
+    background-color: white;
+}
+
+.matchResult>p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.matchResult>p>span {
+    color: #0077cc;
+    text-decoration: underline;
+}
+
+
+
+
+/*新增按鈕*/
+.plusStyle {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 15px;
+    background-color: #f0f0f0;
+}
+
+.plusStyle .fa-plus {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    line-height: 21px;
+    background-color: #0077cc;
+    color: white;
+    text-align: center;
+    border-radius: 3px;
+}
+
+/*假選單*/
+.fakeSelect {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 44px;
+    margin-top: 15px;
+    padding: 6px 12px 6px 12px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 2.5px;
+}
+
+.fakeSelect>span {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fakeSelect>i {
+    position: absolute;
+    top: 30%;
+    right: 6px;
+}
+
+/*必填樣式*/
+.should {
+    border-color: #0077cc;
+}
+
+/*====按鈕====*/
+.btnBox {
+    display: flex;
+    width: 100%;
+    height: 44px;
+}
+
+.btnBox>button {
+    width: 50%;
+    height: 100%;
+    border: none;
+    font-size: 18px;
+    line-height: 44px;
+    text-align: center;
+    outline: none;
+}
+
+.mycancel {
+    background-color: #bfddf2;
+}
+
+.mysure {
+    background-color: #0077cc;
+    color: white;
+}
+
+/*===modal====*/
+.modal-body>.buttonBox {
+    justify-content: center;
+}
+
+#demoModal .modal-dialog {
+    top: 15%;
+}
+
+#demoModal .demoBody {
+    height: 350px;
+    overflow-y: scroll;
+}
+
+.demoContent div {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.demoContent div:last-child {
+    margin-bottom: 0;
+}
+
+/* 2019/5/31 修改*/
+.stay_work[type=checkbox] {
+    transform: translateY(5px);
+    margin-left: 5px;
+}
+
+.salary_range > .form-control {
+    margin-top: 0;
+}
+
+.salary_range > p {
+    margin: 8px 0;
+}
+
+

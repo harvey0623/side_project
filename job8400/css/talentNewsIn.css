@@ -1,0 +1,52 @@
+/*=======header========*/
+.headerInner>.logo{
+    display: none;
+}
+.headerInner>.pageTitle,
+.headerInner>.back{
+    display: block;
+}
+/*=======content=====*/
+.content{
+    padding:15px;
+}
+.totalBox{
+    justify-content: center;
+    margin:30px 0;
+}
+.box>p{
+    margin-bottom:10px;
+    text-align: center;
+}
+.imgBox img{
+    display: block;
+    width:100%;
+    height:auto;
+}
+
+/*===時間按鈕===*/
+.dateGroup{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    justify-content: flex-start;
+}
+
+.dateGroup>button{
+    margin: 5px 3px;
+    outline: none !important;
+}
+
+.nowDate{
+    background-color: rgb(253, 187, 2) !important;
+    border-color: rgb(253, 187, 2) !important;
+}
+
+
+/*====fixPlugin===*/
+.image-rate{
+    overflow:visible;
+}
+.image-rate:after{
+    display: none;
+}

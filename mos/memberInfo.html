@@ -376,6 +376,9 @@
 						$('.operationModal').modal('show');
 					} else {
 						this.currentCity = '台北市';
+						this.$nextTick().then(() => {
+							this.currentArea = '中正區';
+						});
 						$('.storeModal').modal('show');
 					}
 				},

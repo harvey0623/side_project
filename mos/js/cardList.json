@@ -1,0 +1,304 @@
+[
+   {
+      "ResultBool": true,
+      "CardNo": "8945000309609234",
+      "ReturnCode": "00",
+      "ArtworkID": "000",
+      "ArtWorkURL": "https://weborder.mos.com.tw/000.png",
+      "CardTypeName": "摩斯行動卡",
+      "VerifyCode": "01855209",
+      "Cash": 100,
+      "CoAmt": 100,
+      "EV": 100,
+      "Bonus": 0,
+      "Green": 0,
+      "Gold": 200,
+      "EInvoiceID": "0",
+      "EInvDonateID": "",
+      "EInvPrint": "N",
+      "Status": "01",
+      "StatusName": "已開卡",
+      "Session": "97220f540e01d0129d04f7a2bc3e571a5fd3ad1ce2c7b0cc793a405f8623ad83",
+      "VCard": "Y",
+      "CardReFund": "N",
+      "Notes": "測試",
+      "GoldExpire1": 200,
+      "GoldExpire2": 200,
+      "GoldExpire3": 200,
+      "links": {
+         "checkoutCard": {
+            "id": "checkoutCard",
+            "name": "結帳",
+            "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/checkoutCard"
+         },
+         "saveCard": {
+            "id": "saveCard",
+            "name": "儲值",
+            "path": "",
+            "links": [
+               {
+                  "id": "store",
+                  "name": "門市儲值 / 餘額查詢",
+                  "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/save_card/store"
+               },
+               {
+                  "id": "creditTerm",
+                  "name": "信用卡線上儲值",
+                  "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/save_card/creditTerm"
+               }
+            ]
+         },
+         "other": {
+            "id": "other",
+            "name": "其他",
+            "links": [
+               {
+                  "id": "invoice",
+                  "name": "發票",
+                  "links": [
+                     {
+                        "id": "invoiceSetting",
+                        "name": "發票設定",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/other/invoice/invoiceSetting"
+                     },
+                     {
+                        "id": "invoiceCard",
+                        "name": "發票列印",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/other/invoice/invoiceCard"
+                     },
+                     {
+                        "id": "invonus",
+                        "name": "發票查詢平台",
+                        "path": "http://invonus.mos.com.tw/"
+                     },
+                     {
+                        "id": "showVerifyCode",
+                        "name": "顯示卡片驗證碼",
+                        "path": ""
+                     }
+                  ],
+                  "path": ""
+               },
+               {
+                  "id": "tradeRecord",
+                  "name": "交易紀錄",
+                  "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/other/tradeRecord"
+               },
+               {
+                  "id": "showBalance",
+                  "name": "卡片餘額查詢",
+                  "path": ""
+               },
+               {
+                  "id": "showGoldenPoint",
+                  "name": "金點到期查詢",
+                  "path": ""
+               },
+               {
+                  "id": "cancelTrade",
+                  "name": "取消交易",
+                  "links": [
+                     {
+                        "id": "backItemCard",
+                        "name": "返回商品",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/other/backItemCard"
+                     },
+                     {
+                        "id": "cancelSaveCard",
+                        "name": "取消儲值",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/other/cancelSaveCard"
+                     }
+                  ],
+                  "path": ""
+               },
+               {
+                  "id": "transferCard",
+                  "name": "一代卡轉卡",
+                  "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/other/transferCard"
+               },
+               {
+                  "id": "setting",
+                  "name": "卡片設定",
+                  "links": [
+                     {
+                        "id": "transferTerms",
+                        "name": "卡片移轉",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/other/setting/transferTerms"
+                     },
+                     {
+                        "id": "remark",
+                        "name": "卡片備註",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945000309609234/other/setting/remark"
+                     }
+                  ],
+                  "path": ""
+               },
+               {
+                  "id": "usagedescription",
+                  "name": "卡片使用說明",
+                  "path": "https://fe6d9e8d.ap.ngrok.io/card/usagedescription"
+               }
+            ]
+         }
+      },
+      "GoldDateExpire1": "2020/12/31",
+      "GoldDateExpire2": "2021/12/31",
+      "GoldDateExpire3": "2022/12/31"
+   },
+   {
+      "ResultBool": true,
+      "CardNo": "8945021300050295",
+      "ReturnCode": "00",
+      "ArtworkID": "021",
+      "ArtWorkURL": "https://weborder.mos.com.tw/021.png",
+      "CardTypeName": "2019山海日-日版",
+      "VerifyCode": "12184432",
+      "Cash": 0,
+      "CoAmt": 0,
+      "EV": 0,
+      "Bonus": 0,
+      "Green": 0,
+      "Gold": 0,
+      "EInvoiceID": "0",
+      "EInvDonateID": "",
+      "EInvPrint": "Y",
+      "Status": "01",
+      "StatusName": "已開卡",
+      "Session": "f88d19252feec32d37014f7c95ee652cfad8ba74e3516d8f63dd3eb3f42c4c52",
+      "VCard": "N",
+      "CardReFund": "N",
+      "Notes": "",
+      "GoldExpire1": 0,
+      "GoldExpire2": 0,
+      "GoldExpire3": 0,
+      "links": {
+         "checkoutCard": {
+            "id": "checkoutCard",
+            "name": "結帳",
+            "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/checkoutCard"
+         },
+         "saveCard": {
+            "id": "saveCard",
+            "name": "儲值",
+            "links": [
+               {
+                  "id": "store",
+                  "name": "門市儲值 / 餘額查詢",
+                  "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/save_card/store"
+               },
+               {
+                  "id": "creditTerm",
+                  "name": "信用卡線上儲值",
+                  "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/save_card/creditTerm"
+               }
+            ],
+            "path": ""
+         },
+         "other": {
+            "id": "other",
+            "name": "其他",
+            "links": [
+               {
+                  "id": "invoice",
+                  "name": "發票",
+                  "path": "",
+                  "links": [
+                     {
+                        "id": "invoiceSetting",
+                        "name": "發票設定",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/other/invoice/invoiceSetting"
+                     },
+                     {
+                        "id": "invoiceCard",
+                        "name": "發票列印",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/other/invoice/invoiceCard"
+                     },
+                     {
+                        "id": "invonus",
+                        "name": "發票查詢平台",
+                        "path": "http://invonus.mos.com.tw/"
+                     },
+                     {
+                        "id": "showVerifyCode",
+                        "name": "顯示卡片驗證碼",
+                        "path": ""
+                     }
+                  ]
+               },
+               {
+                  "id": "tradeRecord",
+                  "name": "交易紀錄",
+                  "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/other/tradeRecord"
+               },
+               {
+                  "id": "showBalance",
+                  "name": "卡片餘額查詢",
+                  "path": ""
+               },
+               {
+                  "id": "showGoldenPoint",
+                  "name": "金點到期查詢",
+                  "path": ""
+               },
+               {
+                  "id": "cancelTrade",
+                  "name": "取消交易",
+                  "links": [
+                     {
+                        "id": "backItemCard",
+                        "name": "返回商品",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/other/backItemCard"
+                     },
+                     {
+                        "id": "cancelSaveCard",
+                        "name": "取消儲值",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/other/cancelSaveCard"
+                     }
+                  ],
+                  "path": ""
+               },
+               {
+                  "id": "transferCard",
+                  "name": "一代卡轉卡",
+                  "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/other/transferCard"
+               },
+               {
+                  "id": "setting",
+                  "name": "卡片設定",
+                  "links": [
+                     {
+                        "id": "removeCard",
+                        "name": "卡片移除",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/other/setting/removeCard"
+                     },
+                     {
+                        "id": "lossCard",
+                        "name": "卡片掛失",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/other/setting/lossCard"
+                     },
+                     {
+                        "id": "transferTerms",
+                        "name": "卡片移轉",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/other/setting/transferTerms"
+                     },
+                     {
+                        "id": "remark",
+                        "name": "卡片備註",
+                        "path": "https://fe6d9e8d.ap.ngrok.io/card/8945021300050295/other/setting/remark"
+                     }
+                  ],
+                  "path": ""
+               },
+               {
+                  "id": "usagedescription",
+                  "name": "卡片使用說明",
+                  "path": "https://fe6d9e8d.ap.ngrok.io/card/usagedescription"
+               }
+            ]
+         }
+      },
+      "GoldDateExpire1": "2020/12/31",
+      "GoldDateExpire2": "2021/12/31",
+      "GoldDateExpire3": "2022/12/31"
+   }
+]

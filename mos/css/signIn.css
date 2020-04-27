@@ -1,0 +1,22 @@
+.linkBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 40px;
+}
+
+.linkBox > p {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+
+.linkBox > p:first-child {
+  border-right: 1px solid #979797;
+}
+
+.linkBox > p > a {
+  color: #797979;
+}
+/*# sourceMappingURL=signIn.css.map */

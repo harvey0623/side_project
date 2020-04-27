@@ -1,0 +1,23 @@
+.swiper-slide {
+   >img {
+      @include size(100%, auto);
+   }
+}
+
+//pagination
+.swiper-container-horizontal {
+   >.swiper-pagination-bullets {
+      bottom: 0px;
+   }
+}
+
+.swiper-pagination-bullet {
+   @include size(10px);
+   border: 1px solid map-get($borderColor, primary);
+   background-color: #fff;
+   opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+   background-color: map-get($elBgColor, primary);
+}

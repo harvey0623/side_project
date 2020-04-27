@@ -1,0 +1,33 @@
+%button {
+   @include size(auto);
+   line-height: initial;
+   padding-left: 10px;
+   padding-right: 10px;
+   border-radius: map-get($radius, basic);
+   text-align: center;
+}
+
+//一般button
+@mixin normalBtn($color, $bgColor, $bdColor) {
+   @extend %button;
+   @if $bdColor==none {
+      border: none;
+   } @else {
+      border: 1px solid $bdColor;
+   }
+   color: $color;
+   background-color: $bgColor;
+   &:hover,
+   &:focus {
+      color: $color;
+      background-color: darken($bgColor, 0%);
+   }
+}
+
+//外框 button
+@mixin outlineBtn($bdWidth, $color, $bgColor, $bdColor) {
+   @extend %button;
+   color: $color;
+   background-color: $bgColor;
+   border: $bdWidth solid $bdColor;
+}

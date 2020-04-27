@@ -1,0 +1,52 @@
+@import './utility/index';
+
+.mycontainer {
+   overflow: hidden;
+}
+
+.msgBox {
+   max-width: 90%;
+   margin: 30px auto 74px;
+   padding: 20px 15px;
+   background-color: #fff;
+   position: relative;
+   >p {
+      @include elGutter(margin-bottom, 15px);
+      text-align: center;
+      color: map-get($fontColor, input);
+   }
+   >img {
+      position: absolute;
+      object-fit: contain;
+   }
+   >.block1 {
+      left: -25px;
+      top: -25px;
+      @include size(105px);
+   }
+   >.block2 {
+      left: -20px;
+      bottom: -25px;
+      @include size(190px, 77px);
+   }
+   >.block3 {
+      right: -35px;
+      top: -25px;
+      @include size(230px, 55px);
+   }
+   >.block4 {
+      right: -30px;
+      bottom: -20px;
+      @include size(95px, 100px);
+   }
+}
+
+.formLayout {
+   margin-bottom: 30px;
+   .blessing {
+      height: 150px;
+      padding-top: 40px;
+      padding-left: 10px;
+      text-align: left;
+   }
+}

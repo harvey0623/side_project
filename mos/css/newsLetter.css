@@ -1,0 +1,17 @@
+.verifyText {
+  color: #797979;
+  padding: 5px 10px 0;
+}
+
+.formLayout > .formRow {
+  margin-bottom: 30px;
+}
+
+.formLayout > .formRow .form-control {
+  padding-left: 62px;
+}
+
+.formLayout > .formRow .verifyText {
+  margin-top: 30px;
+}
+/*# sourceMappingURL=newsLetter.css.map */

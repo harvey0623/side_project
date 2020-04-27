@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>交易紀錄</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/tradeRecord.css">
+	<script src='./lib/jquery.3.4.1.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue.js'></script>
+	<script src="./lib/vee-validate.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<ul class="tradeList">
+				<li v-for="item in record" :key="item.id">
+					<div class="tradeRow">
+						<p class="storeInfo">{{ item.storeNumber }} - {{ item.storeName }}</p>
+						<p class="dollar">${{ item.total | currency }}</p>
+					</div>
+					<div class="tradeRow">
+						<p class="tradeTime">{{ item.date }} {{ item.time }}</p>
+						<p class="tradeType">{{ item.type }}</p>
+					</div>
+					<div class="tradeRow">
+						<p>消費累積贈點：{{ item.consumptionPoint | currency }}</p>
+					</div>
+					<div class="tradeRow">
+						<p>活動贈送金點：{{ item.activityPoint | currency }}</p>
+					</div>
+					<div class="tradeRow">
+						<p>金點兌換 / 轉移：{{ item.transferPoint | currency }}</p>
+						<p class="infoIcon" @click="clickHandler(item.id)">
+							<i class="fas fa-exclamation-circle"></i>
+						</p>
+					</div>
+				</li>
+			</ul>
+			<p class="tradeWarn">僅顯示最近6個月內紀錄</p>
+		</div>
+
+		<!-- 交易modal -->
+		<div class="modal fade mymodal" id="tradeModal">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<p>消費扣款</p>
+						<p>${{ singleObj.total | currency }}</p>
+					</div>
+					<div class="modal-body">
+						<ul class="tradeList">
+							<li>
+								<div class="tradeRow">
+									<p class="storeInfo">
+										{{ singleObj.storeNumber }} - {{ singleObj.storeName }}
+									</p>
+									<p class="machine">機 {{ singleObj.machineNumber }}</p>
+								</div>
+								<div class="tradeRow">
+									<p class="tradeTime">{{ singleObj.date }} {{ singleObj.time }}</p>
+									<p class="serial">序 {{ singleObj.serialNumber }}</p>
+								</div>
+								<div class="tradeRow">
+									<p>消費累積贈點：{{ singleObj.consumptionPoint | currency }}</p>
+								</div>
+								<div class="tradeRow">
+									<p>活動贈送金點：{{ singleObj.activityPoint | currency }}</p>
+								</div>
+								<div class="tradeRow">
+									<p>金點兌換 / 轉移：{{ singleObj.transferPoint | currency }}</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/components/veevalidate.js"></script>
+	<script src="./js/components/all.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: () => ({
+				currentId: 'aaa',
+				record: [
+					{
+						id: 'aaa',
+						storeNumber: 180,
+						storeName: '民權林森店',
+						total: -1000,
+						date: '2019/10/21',
+						time: '16:30:25',
+						type: '消費扣款',
+						consumptionPoint: 5,
+						activityPoint: 10,
+						transferPoint: 5,
+						machineNumber: '001',
+						serialNumber: '0048'
+					},
+					{
+						id: 'bbb',
+						storeNumber: 234,
+						storeName: '中央大學店',
+						total: 300,
+						date: '2019/09/06',
+						time: '12:30:44',
+						type: '退貨',
+						consumptionPoint: 100,
+						activityPoint: 0,
+						transferPoint: 0,
+						machineNumber: '002',
+						serialNumber: '0050'
+					},
+				]
+			}),
+			computed: {
+				singleObj() {
+					return this.record.find(item => item.id === this.currentId);
+				}
+			},
+			methods: {
+				clickHandler(id) {
+					this.currentId = id;
+					if (this.singleObj !== undefined) {
+						$('#tradeModal').modal('show');
+					}
+				}
+			},
+			mounted() {
+				
+			}
+		});
+	</script>
+</body>
+
+</html>

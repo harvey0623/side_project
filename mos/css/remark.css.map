@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,WAAW,CAAC,aAAa,CAAC;EACvB,YAAY,EAAE,IAAI;CACpB",
+    "sources": [
+        "../scss/remark.scss",
+        "../scss/utility/_index.scss",
+        "../scss/utility/_global.scss",
+        "../scss/utility/_pxToRem.scss",
+        "../scss/utility/_button.scss",
+        "../scss/utility/_limitRow.scss",
+        "../scss/utility/_triangle.scss"
+    ],
+    "names": [],
+    "file": "remark.css"
+}

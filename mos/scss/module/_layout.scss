@@ -1,0 +1,103 @@
+//置中區塊
+.mycontainer {
+   max-width: 576px;
+   margin: 0 auto;
+   padding: 30px 15px 30px;
+}
+
+//表單layout
+.formLayout {
+   margin-bottom: 40px;
+   >.formRow {
+      @include elGutter(margin-bottom, 14px);
+      position: relative;
+      >.formTitle {
+         position: absolute;
+         left: 0px;
+         top: 0px;
+         color: map-get($fontColor, formTitle);
+         transform: translate(10px, 10px);
+      }
+      // >.formContent {
+         
+      // }
+   }
+   .form-control {
+      padding-left: 55px;
+      border: none;
+   }
+}
+
+//按鈕外層
+.btnBox {
+   padding-left: 15px;
+   padding-right: 15px;
+   &.center {
+      text-align: center;
+   }
+   &.right {
+      text-align: right;
+   }
+   &.space_bwtween {
+      display: flex;
+      justify-content: space-between;
+      >button,
+      >a {
+         width: 48%;
+         margin-right: 0;
+      }
+   }
+   &.noRadius {
+      button {
+         border-radius: 0;
+      }
+   } 
+   >* {
+      @include elGutter(margin-bottom, 15px);
+   }
+   >button,
+   >a {
+      @include basicSize(100%, 45px);
+   }
+   >a {
+      line-height: 45px;
+   }
+}
+
+//===logobox
+#logoBox {
+   margin: 0 auto 60px;
+   @include size(150px, 90px);
+   background-image: url("../img/mosBurger.png");
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position-x: center;
+}
+
+//===validate error
+.validate-error {
+   padding-right: 10px;
+   margin-top: 0px;
+   color: red;
+   text-align: right;
+}
+
+//===fixLink
+.fixLink {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   @include size(100%, $fixHeight);
+   background-color: map-get($elBgColor, primary);
+   text-align: center;
+   line-height: 50px;
+   >a {
+      color: white;
+      cursor: pointer;
+   }
+}
+
+//===vue use
+[v-cloak] { 
+   display: none;
+}

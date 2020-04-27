@@ -1,0 +1,78 @@
+//===checkbox or radio
+.customRadio[type=radio],
+.customRadio[type=checkbox] {
+   @extend %resetForm;
+   @include size(22px);
+   padding: 3px;
+	background-color: transparent;
+   border: 1px solid rgb(156, 156, 156);
+   border-radius: 50%;
+   cursor: pointer;
+   &:after {
+      content: '';
+      display: block;
+      @include size(100%);
+      background-color: transparent;
+      border-radius: 50%;
+   }
+   &:checked {
+      &:after {
+         background-color: map-get($elBgColor, primary);
+      }
+   }
+   &:focus {
+      outline: none;
+   }
+}
+
+//===input
+.form-control {
+   height: 45px;
+   text-align: right;
+   color: map-get($fontColor, input);
+   &::placeholder {
+      color: #C9C9C9;
+   }
+}
+
+//===textArea
+textarea {
+   resize: none;
+}
+
+//===reafonly style
+.form-control:disabled,
+.form-control[readonly] {
+   background-color: #fff;
+}
+
+//===date
+[type=date] {
+   text-align-last: right;
+   padding-top: 14px;
+}
+
+[type=date]::-webkit-inner-spin-button,
+[type=date]::-webkit-outer-spin-button,
+[type=date]::-webkit-clear-button,
+[type=date]::-webkit-calendar-picker-indicator {
+   -moz-appearance: none;
+   appearance: none;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+   display: block;
+   position: absolute;
+   right: 0px;
+   top: 40%;
+   @include size(8px);
+}
+
+input[type=date]::-webkit-clear-button {
+   display: none;
+}
+
+input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  margin: 0; 
+}

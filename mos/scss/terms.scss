@@ -1,0 +1,27 @@
+@import './utility/index';
+
+.mycontainer {
+   padding-top: 15px;
+   padding-bottom: $fixHeight + 15px;
+}
+
+.termsBox {
+   padding: 15px;
+   background-color: #fff;
+   border-radius: map-get($radius, basic);
+   >* {
+      text-align: justify;
+      line-height: 1.8;
+      @include elGutter(margin-bottom, 12px);
+   }
+   >.block {
+      >p {
+         @include elGutter(margin-bottom, 5px);
+      }
+   }
+}
+
+//===ios picker plugin
+.mobileSelect .content .btnBar .title {
+   font-size: 18px;
+}

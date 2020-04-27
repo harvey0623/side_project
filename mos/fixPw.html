@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>修改密碼</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/signUp.css">
+	<script src='./lib/jquery.3.4.1.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue.js'></script>
+	<script src="./lib/vee-validate.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<validation-observer tag="div" class="" ref="form">
+				<div class="dataBox accountBox">
+					<p class="dataTitle">修改密碼</p>
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow pw" 
+							rules="required|password"
+							v-slot="{ errors }">
+							<input
+								type="password" 
+								class="form-control"
+								placeholder="請輸入舊密碼" 
+								v-model.trim="fixData.oldPw">
+							<p class="dataName">舊密碼</p>
+							<p class="validate-error">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required|password"
+							vid="bbb"
+							v-slot="{ errors }">
+							<input
+								type="password" 
+								class="form-control pw"
+								placeholder="6-20位字元"
+								v-model.trim="fixData.newPw">
+							<p class="dataName">新密碼</p>
+							<p class="validate-error">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required|confirmPw:@bbb"
+							v-slot="{ errors }">
+							<input
+								type="password" 
+								class="form-control pwConfirm"
+								placeholder="再次確認密碼" 
+								v-model.trim="fixData.confirmPw">
+							<p class="dataName">密碼確認</p>
+							<p class="validate-error">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+
+			</validation-observer>
+
+		</div>
+		<div class="btnBox noRadius">
+			<base-button text="確認修改" @click.native="submitHandler"></base-button>
+		</div>
+	</div>
+
+	<!-- 提示modal -->
+	<div class="modal fade mymodal" id="msgModal" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			  <div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title">提示</h1>
+				</div>
+				<div class="modal-body">
+					<p>舊密碼有誤</p>
+				</div>
+				<div class="modal-footer">
+					<p onclick="$('#msgModal').modal('hide')">確認</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="./js/components/veevalidate.js"></script>
+	<script src="./js/components/all.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: () => ({
+				fixData: {
+					oldPw: '',
+					newPw: '',
+					confirmPw: ''
+				}
+			}),
+			methods: {
+				async submitHandler() {
+					let isValid = await this.$refs.form.validate().then(res => res);
+					if (!isValid) return;
+				}
+			},
+			mounted() {
+				
+			}
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+#giftModal {
+   .modal-body {
+      >* {
+         @include elGutter(margin-bottom, 15px);
+      }
+   }
+   .giftTitle {
+      text-align: center;
+      font-size: 20px;
+      >p {
+         @include elGutter(margin-bottom, 5px);
+         >.dollar {
+            color: map-get($fontColor, primary);
+         }
+      }
+   }
+   .giftImg {
+      display: block;
+      max-width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+   }
+   .tipText {
+      font-size: 14px;
+      color: map-get($fontColor, input);
+   }
+   .modal-footer {
+      justify-content: center;
+      background-color: map-get($elBgColor, primary);
+      color: white;
+      font-size: 16px;
+      >* {
+         margin: 0;
+         cursor: pointer;
+      }
+   }
+}

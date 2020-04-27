@@ -1,0 +1,32 @@
+.tradeList {
+   margin-bottom: 40px;
+   >li {
+      padding: 15px;
+      background-color: #fff;
+      border-radius: map-get($radius, basic);
+      @include elGutter(margin-bottom, 15px);
+      >.tradeRow {
+         @extend %bwtFlex;
+         @include elGutter(margin-bottom, 8px);
+         color: map-get($fontColor, input);
+         >.storeInfo,
+         >.tradeTime {
+            font-size: 22px;
+         }
+         >.storeInfo,
+         >.tradeTime,
+         >.machine,
+         >.serial {
+            color: map-get($fontColor, formTitle);
+         }
+         >.dollar, 
+         >.infoIcon {
+            color: map-get($fontColor, info);
+         }
+         >.infoIcon {
+            font-size: 22px;
+            cursor: pointer;
+         }
+      }
+   }
+}

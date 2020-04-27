@@ -1,0 +1,90 @@
+//=======variable
+$fixHeight: 50px;
+
+//圓角
+$radius: (
+   basic: 10px
+);
+
+//字體顏色
+$fontColor: (
+   primary: #B9375E,
+   formTitle: #292929,
+   input: #797979,
+   info: #C72A04,
+   modalCancel: #288efb
+);
+
+//元素背景色(不包含按鈕)
+$elBgColor: (
+	primary: #C72A04,
+);
+
+//按鈕背景色
+$btnBgColor:(
+   primary: #C72A04,
+   reset: #C9C9C9,
+);
+
+//邊框顏色
+$borderColor: (
+   primary: #B9375E,
+   reset: #C9C9C9,
+);
+
+//======extand
+%centerFlex {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+%bwtFlex {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+%posCenter {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+}
+
+%hideTxt {
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   overflow: hidden;
+}
+
+%resetForm {
+   appearance: none;
+}
+
+%clearFix {
+   &:after {
+      content: '';
+      display: block;
+      clear: both;
+   }
+}
+
+//========mixin
+@mixin size($w, $h:$w) {
+   width: $w;
+   height: $h;
+}
+
+@mixin basicSize($w, $h) {
+   min-width: $w;
+   min-height: $h;
+}
+
+//指有margin padding能用
+@mixin elGutter($key, $value) {
+   #{$key}: $value;
+   &:last-child {
+      #{$key}: 0;
+   }
+}

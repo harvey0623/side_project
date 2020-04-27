@@ -1,0 +1,33 @@
+.mycontainer {
+  padding-top: 15px;
+  padding-bottom: 65px;
+}
+
+.termsBox {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.termsBox > * {
+  text-align: justify;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.termsBox > *:last-child {
+  margin-bottom: 0;
+}
+
+.termsBox > .block > p {
+  margin-bottom: 5px;
+}
+
+.termsBox > .block > p:last-child {
+  margin-bottom: 0;
+}
+
+.mobileSelect .content .btnBar .title {
+  font-size: 18px;
+}
+/*# sourceMappingURL=terms.css.map */

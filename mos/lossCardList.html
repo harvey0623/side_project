@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>卡片掛失清單</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel="stylesheet" href="./lib/swiper/swiper.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<script src="./lib/swiper/swiper.min.js"></script>
+	<script src='./lib/jquery.3.4.1.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue.js'></script>
+	<script src="./lib/vee-validate.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<div class="swiper-container card-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" v-for="item in lists" :key="item.id">
+						<div class="mycard">
+							<div class="imgBox loss">
+								<img class="cardImg" :src="item.imgUrl" alt="">
+							</div>
+							<div class="cardInfo">
+								<p class="cardName">{{ item.cardName }}</p>
+								<p class="cardNumber">卡號 {{ item.cardNumber }}</p>
+								<div class="pointDesc">
+									<div class="pointBox pointBoxL">
+										<h3 class="pointTitle">
+											金點
+											<i class="fal fa-chevron-right"></i>
+										</h3>
+										<p class="pointNumber">{{ item.point | currency }}</p>
+									</div>
+									<div class="pointBox">
+										<h3 class="pointTitle">
+											餘額
+											<i class="fal fa-chevron-right"></i>
+										</h3>
+										<p class="pointNumber">${{ item.dollar | currency }}</p>
+									</div>
+								</div>
+							</div>
+							<div class="cardPanel">
+								<a :href="item.link.transfer">移轉</a>
+								<a :href="item.link.remove">移除</a>
+								<a :href="item.link.trade">紀錄</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		  	<div class="dotBox" v-if="listLength !== 0">
+				<span 
+					class="dot" 
+					v-for="num in listLength"
+					:class="{active: num === currentIndex + 1}"
+					@click="clickDot(num)"
+				></span>
+		  	</div>
+
+		</div>
+	</div>
+
+
+	<script src="./js/components/veevalidate.js"></script>
+	<script src="./js/components/all.js"></script>
+	<script src="./js/cardList.js"></script>
+	<script>
+		//====先取得卡片資料再執行cardList()
+		cardList({
+			lists: [
+				{
+					id: '1',
+					imgUrl: 'https://fakeimg.pl/500x300/?text=card1',
+					cardName: 'card1',
+					cardNumber: 'abc123',
+					point: 1000,
+					dollar: 1000,
+					link: {
+						transfer: './transferTerms.html',
+						remove: './removeCard.html',
+						trade: './tradeRecord.html'
+					}
+				},
+				{
+					id: '2',
+					imgUrl: 'https://fakeimg.pl/500x300/?text=card2',
+					cardName: 'card2',
+					cardNumber: 'abc456',
+					point: 2000,
+					dollar: 2000,
+					link: {
+						transfer: './transferTerms.html',
+						remove: './removeCard.html',
+						trade: './tradeRecord.html'
+					}
+				}
+			]
+		});
+	</script>
+</body>
+
+</html>

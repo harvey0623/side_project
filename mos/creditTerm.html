@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>信用卡線上儲值條款</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/mobileSelect/index.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/terms.css">
+	<script src='./lib/jquery.3.4.1.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue.js'></script>
+	<script src="./lib/vee-validate.js"></script>
+	<script src="./lib/mobileSelect/index.js"></script>
+</head>
+
+<body>
+	<div class="mycontainer">
+		<div class="termsBox">
+			<p>
+				臺灣摩斯漢堡會員註冊服務暨MOS CARD二代卡註冊服務，係依據本服務條款提供服務(以下簡稱「本服務」)僅接受「MOS CARD二代卡」登錄註冊，MOS CARD二代卡乃指2016年3月28日後所發行之摩斯卡稱之，屬感應式卡片。 
+			</p>
+			<p>
+				當您完成二代卡記名管理之持卡人註冊手續、或開始使用本服務時，即表示您已閱讀、瞭解並同意接受本服務條款之所有內容。臺灣摩斯漢堡(安心食品服務股份有限公司)得於以電子文件通知您後於任何時間修改或變更本約定書之內容，建議您隨時注意該等修改或變更。若您於前開修改或變更後繼續使用本服務時，視為您已閱讀、瞭解並同意接受該等修改或變更。若您為未滿二十歲之未成年人、受監護宣告人或受輔助宣告人，應於您的家長（或監護人、輔助人）閱讀、瞭解並同意本約定書之所有內容及其後修改變更後，方得註冊為持卡人、使用或繼續使用本服務。當您使用或繼續使用MOS CARD二代卡線上管理服務時，即視為您的家長（或監護人、輔助人）已閱讀、瞭解並同意接受本約定書之所有內容及其後修改變更。 
+			</p>
+			<p>
+				當您完成會員註冊，視同您接受臺灣摩斯漢堡(安心食品服務股份有限公司)贈送您一張非實體卡-MOS CARD行動二代卡，卡片無實體，將於您下載使用臺灣摩斯漢堡(安心食品服務股份有限公司)之手機點餐APP-MOS ORDER時，始得使用。 MOS CARD二代卡於摩斯卡二代卡會員註冊系統完成註冊後，其在消費使用上仍屬於無記名性質之卡片，不限本人持卡消費使用。 您的註冊義務 為了能使用本服務，您同意以下事項： 依本服務註冊時應填寫之欄位提供您本人正確、最新的資料，且無利用偽造或變造之資料作為重複註冊登錄等情事。 維護並即時更新您個人資料之正確性，以獲取最佳之服務。 若您提供任何錯誤或不實的資料、或未按指示提供資料、或欠缺必要之資料時，臺灣摩斯漢堡(安心食品服務股份有限公司)有權不經事先通知，逕行暫停或終止您的帳號，並拒絕您使用本服務之全部或一部份。 隱私權政策 您於本網站註冊及使用的個人資料及其他特定資料皆依臺灣摩斯漢堡(安心食品服務股份有限公司)「隱私權政策」受到保護與規範。 持卡人帳號、密碼及安全 完成本服務的註冊登記程序之後，臺灣摩斯漢堡(安心食品服務股份有限公司)將會mail註冊認證信至您所登記的電子信箱或以手機簡訊傳送認證碼，請您於一日內完成點擊註冊認證信的連結或將手機收到的簡訊認證碼輸入，會員註冊作業方屬成功。若未於一日內完成認證，該註冊認證信將失效，而您所註冊的帳號將視為無效。
+			</p>
+		</div>
+	</div>
+	<div class="fixLink">
+		<a id="saveMoney" href="javascript:;">我同意信用卡線上儲值條款</a>
+	</div>
+
+	<script src="./js/components/veevalidate.js"></script>
+	<script src="./js/components/all.js"></script>
+	<script>
+		let choiceList = [
+			{
+				"title": "儲值1000元",
+				"value": "1000"
+			},
+			{
+				"title": "儲值2000元",
+				"value": "2000"
+			},
+			{
+				"title": "儲值3000元",
+				"value": "3000"
+			},
+			{
+				"title": "儲值5000元",
+				"value": "5000"
+			},
+			{
+				"title": "儲值500元",
+				"value": "500"
+			}
+		];
+		choiceList.sort((a, b) => parseInt(a.value) - parseInt(b.value));
+
+		const mobileSelect = new MobileSelect({
+			trigger: '#saveMoney',
+			title: '選擇儲值金額',
+			ensureBtnText: '確認',
+			cancelBtnText: '取消',
+			cancelBtnColor: 'red',
+			position:[0],
+			triggerDisplayData: false,
+			wheels: [
+				{
+					data: choiceList
+				}
+			],
+			callback(indexArr, data) {
+				console.log(data[0].value);
+			}
+		});
+
+	</script>
+</body>
+
+</html>

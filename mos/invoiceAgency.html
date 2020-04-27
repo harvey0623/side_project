@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>捐贈機構</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/invoiceAgency.css">
+	<script src='./lib/jquery.3.4.1.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue.js'></script>
+	<script src="./lib/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="searchBar">
+			<div class="outer">
+				<i class="fal fa-search"></i>
+				<input 
+					type="text"
+					placeholder="搜關鍵字或用愛心碼查詢"
+					@input="inputHandler"
+					:value="keyword">
+			</div>			
+		</div>
+		<div class="mycontainer">
+			<ul class="agencyList" v-if="agencyList.length !== 0">
+				<li v-for="(item, index) in agencyList" :key="index">
+					<p class="agencyName">{{ item.name }}</p>
+					<input
+						type="radio" 
+						class="customRadio"
+						name="agnecy" 
+						:value="item.value" 
+						v-model="agency">
+				</li>
+			</ul>
+		</div>
+
+		<div class="fixLink">
+			<a href="javascript:;" @click="saveHandler">確認</a>
+		</div>
+	</div>
+
+	<!-- 提示modal -->
+	<div class="modal fade mymodal tipModal" id="msgModal" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			  <div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title">提示</h1>
+				</div>
+				<div class="modal-body">
+					<p>此發票設定將會延用致下次更改</p>
+				</div>
+				<div class="modal-footer">
+					<p onclick="$('.tipModal').modal('hide')">確認</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 提示modal -->
+	<div class="modal fade mymodal donateModal" id="msgModal" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			  <div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title">提示</h1>
+				</div>
+				<div class="modal-body">
+					<p>請選擇捐贈機構</p>
+				</div>
+				<div class="modal-footer">
+					<p onclick="$('.donateModal').modal('hide')">確認</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="./js/components/veevalidate.js"></script>
+	<script src="./js/components/all.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: () => ({
+				keyword: '',
+				agency: '',
+				agencyList: []
+			}),
+			methods: {
+				getList() {
+					return axios.get('./js/keyword.json');
+				},
+				inputHandler(evt) {
+					this.keyword = evt.target.value.trim();
+					this.agency = '';
+				},
+				saveHandler() {
+					if (this.agency === '') {
+						$('.donateModal').modal('show');
+					} else {
+						
+					}
+				},
+			},
+			async	mounted() {
+				this.agencyList = await this.getList().then(res => res.data);
+			},
+			watch: {
+				async keyword(val) {
+					//====接api直接把直給agcncyList
+					// let result = await axios.post('', this.keyword).then(res => res.data);
+					// this.agencyList = result;
+
+					//====由前端做的時候要的判斷
+					let result = await this.getList().then(res => res.data);
+					if (this.keyword === '') {
+						this.agencyList = result;
+					} else  {
+						this.agencyList = result.filter(item => {
+							return item.name.includes(this.keyword);
+						});
+					}
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+$titleColor: map-get($fontColor, formTitle);
+
+.transferLayout {
+   >li {
+      background-color: #fff;
+      border-radius: map-get($radius, basic);
+      @include elGutter(margin-bottom, 15px);
+   }
+}
+
+.transferBody {
+   padding: 15px;
+   display: flex;
+}
+
+.transferL {
+   flex: 0 0 160px;
+   >.cardName {
+      margin-bottom: 10px;
+      color: $titleColor;
+   }
+   >.cardImg {
+      display: block;
+      @include size(100%, auto);
+      border-radius: map-get($radius, basic);
+   }
+}
+
+.transferR {
+   flex: 1;
+   >.cardNumber {
+      text-align: right;
+      color: $titleColor;
+   }
+   >.remainPoint {
+      display: flex;
+      padding-top: 22px;
+      >.pointBox {
+         flex: 1;
+         text-align: center;
+         >.pointTitle {
+            margin-bottom: 10px;
+            font-size: 22px;
+            color: $titleColor;
+         }
+         >.pointNumber {
+            color: map-get($fontColor, info);
+            font-size: 18px;
+         }
+      }
+      >.pointL {
+         position: relative;
+         &:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 30%;
+            @include size(1px, 30px);
+            background-color: #ccc;            
+         }
+      }
+   }
+}
+
+.transferFooter {
+   padding: 10px;
+   border-top: 1px solid #ccc;
+   text-align: center;
+   >p {
+      display: inline-block;
+      color: map-get($fontColor, input);
+      cursor: pointer;
+   }
+}
+
+@media (max-width: 370px) {
+   .transferL {
+      flex: 0 0 130px;
+   }
+   .transferR {
+      >.remainPoint {
+         padding-top: 20px;
+         >.pointBox {
+            >.pointTitle {
+               font-size: 20px;
+            }
+            >.pointNumber {
+               font-size: 16px;
+            }
+         }
+      }
+   }
+}

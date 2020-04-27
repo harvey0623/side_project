@@ -1,0 +1,18 @@
+@import './utility/index';
+
+.verifyText {
+   color: map-get($fontColor, input);
+   padding: 5px 10px 0;
+}
+
+.formLayout {
+   >.formRow {
+      margin-bottom: 30px;
+      .form-control {
+         padding-left: 62px;
+      }
+      .verifyText {
+         margin-top: 30px;
+      }
+   }
+}

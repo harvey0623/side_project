@@ -1,0 +1,87 @@
+$cardRadius: map-get($radius, basic);
+
+#cardModal {
+   .modal-content {
+      border-radius: $cardRadius;
+      border: none;
+   }
+   .modal-header {
+      justify-content: center;
+      padding: 10px 15px;
+      border-top-left-radius: $cardRadius;
+      border-top-right-radius: $cardRadius;
+      &.checkout {
+         background-color: #d3ab7d;
+      }
+      &.save {
+         background-color: #477c51;
+      }
+      &.gift {
+         background-color: #c55151;
+      }
+      &.backItem {
+         background-color: #1868a9;
+      }
+      &.cancel {
+         background-color: #979797;
+      }
+      &.transfer {
+         background-color: #c72a04;
+      }
+      &.invoice { 
+         background-color: #a066b5;
+      }
+      &.settle {
+         background-color: #f8f8f8;
+      }
+      .modal-title {
+         text-align: center;
+         color: white;
+         font-size: 20px;
+      }
+   }
+   .modal-body {
+      padding: 40px 20px;
+   }
+   .qrcodeBox {
+      @include size(200px);
+      margin: 0 auto 20px;
+      img {
+         display: block;
+         @include size(100%);
+      }
+   }
+   .statusBox {
+      margin: 0px 0 30px;
+      color: white;
+      text-align: center;
+      >* {
+         margin: 0 auto;
+         width: 110px;
+         min-height: 34px;
+         padding: 5px 10px;
+         border-radius: 100px;
+         background-color: #ed9f1e;
+      }
+      .read {
+         cursor: pointer;
+      }
+   }
+}
+
+.descRow {
+   display: flex;
+   align-items: flex-start;
+   @include elGutter(margin-bottom, 10px);
+   >.descTitle {
+      flex: 0 0 20px;
+      font-size: 20px;
+      color: #c72a04;
+      transform: translateY(-4px);
+   }
+   >.descContent {
+      flex: 1;
+      padding-left: 10px;
+      color: map-get($fontColor, input);
+   }
+}

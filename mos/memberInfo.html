@@ -213,11 +213,16 @@
 								</select>
 							</li>
 						</ul>
-						<a :href="storePosition" class="seeMap" target="_blank">
-							<i class="fas fa-map-marker-alt"></i>
-							<span>查看地圖</span>
-						</a>
-						<a :href="storePhoneNumber">分店電話</a>
+						<div class="contactBox">
+							<a :href="storePosition" class="seeMap" target="_blank">
+								<i class="fas fa-map-marker-alt"></i>
+								<span>查看地圖</span>
+							</a>
+							<a :href="storePhoneNumber" class="storePhone">
+								<i class="fas fa-phone"></i>
+								<span>分店電話</span>
+							</a>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<p>

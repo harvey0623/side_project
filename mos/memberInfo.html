@@ -348,9 +348,10 @@
 				},
 				storePosition() { //商店地址google map連結
 					let defaultMap = 'https://www.google.com.tw/maps/place/';
+					let latMap = 'http://maps.google.com/?q=';
 					if (this.targetStore === null) return defaultMap;
-					let { city, area, addr } = this.targetStore;
-					return defaultMap + city + area + addr;
+					let { city, area, addr, lat, lng } = this.targetStore;
+					return `${latMap}${lat},${lng}`;
 				},
 				storePhoneNumber() { //分店電話
 					if (this.targetStore === null) return '';

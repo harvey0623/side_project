@@ -414,6 +414,7 @@
 	<script src="./js/groupByDetail.js"></script>
 	<script src="./js/modules/dataSchema.js"></script>
 	<script type="module">
+		console.log(dataSchema);
 		import FormatController from './js/modules/formatController.js';
 		import PeriodController from './js/modules/periodController.js';
 		import CountController from './js/modules/countController.js';
@@ -431,8 +432,6 @@
 			});
 			return prev;
 		}, []);
-
-		alert(JSON.stringify(specData))
 
 		let info = { 
 			formatId: '',

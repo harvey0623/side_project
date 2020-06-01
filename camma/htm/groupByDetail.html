@@ -419,9 +419,8 @@
 		import CountController from './js/modules/countController.js';
 		import DescController from './js/modules/descController.js';
 		import Calculate from './js/modules/calculate.js';
-		alert(Calculate);
 		let { iType, period, formatArr, spec } = dataSchema;
-		alert(iType)
+		alert(JSON.stringify(dataSchema))
 		let packageMaxNumber = dataSchema.vProductBuyTotal;
 		let description = dataSchema.info.vProductSummary;
 		let specData = spec.reduce(( prev, current ) => {

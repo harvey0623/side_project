@@ -1,0 +1,173 @@
+.section.sidebar.num-1 .container {
+    align-items: flex-start;
+}
+/*標題*/
+.section.sidebar.num-1 .titleRegion{
+
+    padding: 50px 0 40px;
+    border-bottom: none;
+}
+/*==============================側邊-內容區塊==============================*/
+
+.wrap-region{
+	display: flex;
+	flex-wrap: wrap;
+}
+.wrap-region .title-region{
+	width: 100%;
+}
+/*日期搜尋*/
+.wrap-region .search {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 65%;
+}
+.wrap-region .search .flatpickr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+.wrap-region .search .flatpickr input{
+	border-radius: 0px;
+	min-height: 40px;
+	max-width: 150px;
+}
+.wrap-region .search .flatpickr a{
+	width: 40px;
+	height: 40px;
+	line-height: 38px;
+	border: 1px solid #cccccc;
+	border-left: none;
+	color: #acacac;
+	text-align: center;
+}
+.wrap-region .search button{
+	min-width: 100px;
+}
+
+/*狀態搜尋*/
+.wrap-region .status-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+}
+.wrap-region .status-search label {
+    font-weight: inherit;
+    margin: 0px 0 0 20px;
+    min-width: 110px;
+}
+/*配送狀趟*/
+.wrap-region .ship-status{
+	width: calc(100% - 150px);
+	margin: 20px 0;
+}
+.wrap-region .ship-status label {
+	font-weight: inherit;
+	margin: 0px 15px 0px 0px;
+}
+.wrap-region .ship-status button {
+	margin-right: 15px;
+}
+/*取消訂單*/
+.wrap-region .cancel{
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+}
+.wrap-region .cancel a{
+	color: #999999;
+	text-decoration: none;
+}
+.wrap-region .cancel a:{
+	color: #999999;
+	text-decoration: none;
+}
+.wrap-region .cancel span{
+	margin:0 4px;
+	text-decoration:underline;	
+}
+
+.wrap-region .notice{
+	width: 100%;
+	margin: 0px 0 30px;
+	color: #ff3e3e;
+}
+/*==============================側邊-表格內容區塊==============================*/
+
+.section.sidebar.num-1 .wrap-block .wrap-item{
+	align-items: center;
+}
+
+.section.sidebar.num-1 .wrap-block .wrap-item .itemBox div {
+    margin-bottom: 5px;
+}
+.section.sidebar.num-1 .wrap-block .wrap-item .itemBox div a{
+	text-decoration: none;
+	color: #333333;
+}
+.section.sidebar.num-1 .wrap-block .wrap-item .itemBox div a:hover{
+	text-decoration: none;
+	color: #fdb813;
+}
+.section.sidebar.num-1 .wrap-block .wrap-item .itemBox div:last-child {
+    margin-bottom: 0px;
+}
+/*付款按鈕*/
+.section.sidebar.num-1 .wrap-block .itemBox button {
+    width: 100%;
+}
+/*付款成功*/
+.section.sidebar.num-1 .wrap-block .itemBox .success {
+	color: #1bbc22;
+}
+
+/*==============================複製貨運編號==============================*/
+.itemNumber {
+	position: relative;
+}
+.itemNumber .itemInput {
+ 	position: absolute;
+ 	top: 0;
+ 	left: 0;
+ 	opacity: 0;
+ 	z-index: -10;
+ }
+/*複製按鈕*/
+.section.sidebar.num-1 .wrap-block .itemBox div button {
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+}
+
+/*see more*/
+.buttonRegion{
+    margin: 30px 0 50px;
+}
+
+
+/*==============================Media==============================*/
+
+@media (max-width: 991px) {}
+
+@media (max-width: 1199px) {
+
+	.wrap-region .status-search,.wrap-region .search {
+	    width: 100%;
+	    margin-bottom: 15px;
+	}
+	.wrap-region .status-search label {
+	    margin: 0px ;
+	}
+	.wrap-region .ship-status {
+	    margin: 0 0 15px;
+	}
+	.wrap-region .cancel {
+	    margin: 0 0 15px;
+	}
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {}

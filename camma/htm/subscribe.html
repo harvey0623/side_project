@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html:charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE-edge">
+	<meta name="viewport" content="width=992,initial-scale=1.0">
+	<link rel="icon" href="img/favicon.ico">
+	<title>訂閱制-全部方案</title>
+	<link rel="stylesheet" href="../dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../dist/package/fontAwesome/css/all.css">
+	<link rel="stylesheet" type="text/css" href="../dist/package/slick/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="../dist/package/slick/slick.css">
+	<link rel="stylesheet" href="../dist/css/theme.css">
+	<link rel="stylesheet" href="./css/promotions_collocate.css">
+	<link rel="stylesheet" href="./css/subscribe.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="../dist/js/bootstrap.js"></script>
+	<script src="../dist/package/slick/slick.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js'></script>
+	<script src="../dist/js/axios.min.js"></script>
+	<script src="../dist/js/theme.js"></script>
+</head>
+
+<body>
+	<!-- 導航欄區塊 -->
+	<header>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">
+					<img src="img/logo.svg" alt="">
+				</a>
+				<div class="icon-region shopcartIcon">
+					<button type="button" class="member-btn">
+						<div class="changeIcon">
+							<i class="fal fa-shopping-cart"></i></div>
+						<div class="num-box"><span>99+</span>
+						</div>
+					</button>
+				</div>
+			</div>
+			<div class="collapse navbar-collapse" id="clamp1015bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<!-- 置頂圖片 -->
+					<li class="icon-region imgRegion">
+						<img src="img/menu_bg_img.jpg" alt="">
+					</li>
+					<li>
+						<a href="#">店內餐飲</a>
+					</li>
+					<li class="dropdown iconRotate">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">商品介紹
+							<span class="">
+								<i class="fal fa-angle-down"></i>
+							</span>
+							<span class="none">
+								<i class="fal fa-angle-up"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">咖啡</a></li>
+							<li><a href="#">咖啡器具</a></li>
+							<li><a href="#">優惠禮盒組</a></li>
+							<li><a href="#">訂購固定配送</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="articleList.html">最新消息</a>
+					</li>
+					<li>
+						<a href="#">門市資訊</a>
+					</li>
+					<li class="dropdown iconRotate">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">品牌資訊
+							<span class="">
+								<i class="fal fa-angle-down"></i>
+							</span>
+							<span class="none">
+								<i class="fal fa-angle-up"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">關於 cama</a></li>
+							<li><a href="#">媒體報導</a></li>
+							<li><a href="#">cama 大事記</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="coffeeTalk.html">談咖啡</a>
+					</li>
+					<li class="dropdown iconRotate">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">聯絡我們
+							<span class="">
+								<i class="fal fa-angle-down"></i>
+							</span>
+							<span class="none">
+								<i class="fal fa-angle-up"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">填寫表單</a></li>
+							<li><a href="#">人才招募</a></li>
+							<li><a href="#">我要加盟</a></li>
+							<li><a href="#">部落格</a></li>
+						</ul>
+					</li>
+					<!-- 購物車icon -->
+					<li class="icon-region shopcartIcon">
+						<button type="button" class="member-btn">
+							<div class="changeIcon">
+								<i class="fal fa-shopping-cart"></i></div>
+							<div class="num-box"><span>99+</span>
+							</div>
+						</button>
+					</li>
+					<!-- 會員中心icon 未登入 -->
+					<li class="icon-region none">
+						<div class="member-box web">
+							<button type="button" class="member-btn">
+								<img src="img/user.svg" alt="">
+							</button>
+						</div>
+						<div class="member-box mobile">
+							<a href="#">登入/註冊</a>
+						</div>
+					</li>
+					<!-- 會員中心icon 登入 -->
+					<li class="icon-region">
+						<div class="member-box dropdown iconRotate web">
+							<button type="button" class="dropdown-toggle member-btn" data-toggle="dropdown" role="button"
+								aria-haspopup="true" aria-expanded="false">
+								<img src="img/user_hover.svg" alt="">
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#">會員資料</a></li>
+								<li><a href="#">我的點數</a></li>
+								<li><a href="#">訂單管理</a></li>
+								<li><a href="#">登出</a></li>
+							</ul>
+						</div>
+						<div class="member-box dropdown iconRotate mobile">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								aria-expanded="false">會員中心
+								<span class="">
+									<i class="fal fa-angle-down"></i>
+								</span>
+								<span class="none">
+									<i class="fal fa-angle-up"></i>
+								</span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">會員資料</a></li>
+								<li><a href="#">我的點數</a></li>
+								<li><a href="#">訂單管理</a></li>
+								<li><a href="#">登出</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<!-- 浮動側邊欄 -->
+	<menu>
+		<ul class="floatMenu">
+			<li class="goTop">
+				<a href="javascript:;"><i class="fal fa-angle-double-up"></i></a>
+			</li>
+		</ul>
+	</menu>
+
+	<!-- 內容區塊 -->
+	<div class="content">
+		<!--麵包籤 -->
+		<div class="breadcrumb-region">
+			<div class="container">
+				<ol class="breadcrumb">
+					<li><a href="index.html">首頁</a></li>
+					<li><a href="prod_list.html">訂閱制</a></li>
+				</ol>
+			</div>
+		</div>
+
+		<!-- 區塊／側欄區／01-左側欄 -->
+		<div class="section sidebar num-1">
+			<div class="container">
+				<!-- 標題部分 -->
+				<div class="titleRegion">訂閱制<span>Subscription</span></div>
+				<!-- 側邊欄區塊 -->
+				<div class="sidebar-region">
+					<ul id="sideBarUl"></ul>
+				</div>
+
+				<!-- 側邊-內容區塊 -->
+				<div class="wrap-region">
+					<!-- 輪播slick -->
+					<div class="slickBox" id="slickBox"></div>
+
+					<!-- 圖文編擊區 -->
+					<div class="categoryEditBox" id="editTop"></div>
+
+					<div id="vm">
+						<!-- 分類 標籤 -->
+						<div class="sort-region">
+							<ul class="categoryBox"></ul>
+						</div>
+
+						<!-- 分類 商品區塊 -->
+						<div class="category-content">
+							<div class="promotions-product">
+								<div class="section product num-1" id="itemBox"></div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 圖文編擊區 -->
+					<div class="categoryEditBox" id="editBottom"></div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer-->
+	<footer>
+		<div class="footer-region">
+			<div class="container">
+				<div class="logo-box">
+					<img src="img/footer_logo.png" alt="">
+				</div>
+				<div class="contact-region">
+					<ul>
+						<li class="title">總公司</li>
+						<li><i class="fas fa-map-marker-alt"></i>台北市大安區安和路一段 27 號 18 樓</li>
+						<li><i class="fas fa-phone" data-fa-transform="flip-h"></i>(02) 2775 - 3385</li>
+						<li><i class="far fa-envelope"></i>service@camacafe.com</li>
+					</ul>
+					<ul>
+						<li class="title"></li>
+						<li><a href="product_list.html">商品介紹</a></li>
+						<li><a href="menu_drink.html">店內飲品</a></li>
+						<li><a href="store_location.html">門市查詢</a></li>
+					</ul>
+					<ul>
+						<li class="title"></li>
+						<li><a href="#">關於cama</a></li>
+						<li><a href="faqs.html">常見問題</a></li>
+						<li><a href="terms.html">隱私權條款</a></li>
+					</ul>
+					<ul>
+						<li class="title"></li>
+						<li><a href="#">夥伴登入</a></li>
+						<li><a href="#">人才招募</a></li>
+						<li><a href="contact.html">聯絡我們</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="copyright-region">
+			<div class="container">
+				<div class="text">
+					Copyright © cama café 版權所有. All rights reserved.
+				</div>
+				<div class="shareRegion">
+					<button type="button" class="facebookIcon">
+						<i class="fab fa-facebook-square"></i>
+					</button>
+					<button type="button" class="lineIcon">
+						<i class="fab fa-line"></i>
+					</button>
+					<button type="button" class="instagramIcon">
+						<i class="fab fa-instagram"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="./js/modules/categorySchema.js"></script>
+	<script type="module">
+		import WindowController from './js/modules/windowController.js';
+		import SideBar from './js/modules/sideBar.js';
+		import CategoryBox from './js/modules/categoryBox.js';
+		import CategoryAjax from './js/modules/categoryAjax.js';
+		import SlickController from './js/modules/slickController.js';
+		import ItemController from './js/modules/itemController.js';
+		import EditController from './js/modules/editController.js';
+		let serverData = categorySchema;
+		let categoryList = serverData.reduce((prev, current) => {
+			let { iId:id, vCategoryName:title, vCategorySecondName:sub, vCss:color } = current;
+			prev.push({ id, title, sub, color });
+			return prev;
+		}, []);
+		categoryList.unshift({ id: 0, title: '全部方案', sub: 'all', color: '#fdb813' });
+
+		let info = {
+			categoryId: ''
+		};
+
+		let infoProxy = new Proxy(info, {
+			get(target, key) {
+				return target[key];
+			},
+			async set(target, key, value) {
+				target[key] = value;
+				let isValid = checkValideId(value);
+				if (!isValid) {
+					windowController.pushRouter(0);
+					return true;
+				}
+ 				if (key === 'categoryId') {
+					let result = await valueHandler(value).then(res => res);
+					if (result === undefined) return true;
+					let { aaData, category } = result;
+					itemController.render(aaData);
+					editController.render(category.page);
+					slickController.update(category.banner);
+				}
+				return true;
+			}
+		});
+
+		let checkValideId = function(id) {
+			return categoryList.some(item => item.id.toString() === id);
+		}
+
+		let valueHandler = async function(value) {
+			sideBar.setActiveItem(value);
+			if (value === '0') {
+				categoryBox.displayRootEl(true);
+				return categoryBox.setItemClick(0);
+			} else {
+				categoryBox.displayRootEl(false);
+				categoryBox.setClickId = '';
+				return await categoryAjax.getData({
+					categoryId: parseInt(value),
+					limit: 0
+				}).then(res => res);
+			}
+		}
+
+		let categoryAjax = new CategoryAjax({
+			apiUrl: 'https://1d8be6e8.ap.ngrok.io/api/subscription_product/getlist'
+		});
+	
+		let windowController = new WindowController({
+			popstateEvent(id) {
+				infoProxy.categoryId = id;
+			}
+		});
+	
+		let sideBar = new SideBar({
+			rootEl: '#sideBarUl',
+			categoryList
+		});
+
+		let slickController = new SlickController({
+			slickBoxEl: '#slickBox'
+		});
+
+		let itemController = new ItemController({
+			itemBoxEl: '#itemBox'
+		});
+
+		let editController = new EditController({
+			topEl: '#editTop',
+			bottomEl: '#editBottom'
+		});
+	
+		let categoryBox = new CategoryBox({
+			rootEl: '.categoryBox',
+			categoryList,
+			categoryAjax,
+			clickEvent(data, isFirst) {
+				let { aaData, category } = data;
+				itemController.render(aaData);
+				if (isFirst) {
+					editController.render(category.page);
+					slickController.update(category.banner);
+				}
+			}
+		});
+
+		windowController.init();
+	
+	</script>
+</body>
+
+</html>

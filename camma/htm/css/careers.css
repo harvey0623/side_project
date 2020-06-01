@@ -1,0 +1,15 @@
+.wrap-region{
+	margin-bottom: 50px;
+}
+/*標題*/
+.titleRegion {
+    padding: 50px 0 40px;
+    border-bottom: none;
+}
+/*==============================Media==============================*/
+
+@media (max-width: 991px) {}
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+@media (min-width: 1200px) and (max-width: 1400px) {}

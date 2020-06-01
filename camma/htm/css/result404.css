@@ -1,0 +1,82 @@
+.result404{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+}
+/*錯誤圖*/
+.result404 .img-box{
+    width: 220px;
+    margin-right: 90px;
+}
+.result404 .img-box img{
+    width: 100%;
+    height: auto;
+}
+/*文字區*/
+.result404 .text-region{
+    width: 280px;
+    text-align: center;
+}
+.result404 .text-region .text-box{
+    font-size: 35px;
+    color: #fdb813;
+    margin-bottom: 35px;
+}
+.result404 .text-region .sub-box{
+    font-size: 20px;
+    line-height: 32px;
+    margin-bottom: 35px;
+    color: #333333;
+}
+.result404 .button-region{
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    color: #333333;
+}
+.result404 .button-region button{
+    width: 180px;
+    height: 40px;
+}
+
+/*============================================================Media============================================================*/
+
+@media (max-width: 767px) {
+    .result404 .img-box {
+        width: 150px;
+        margin-right: 20px;
+    }
+    .result404 .text-region {
+        width: 260px;
+        text-align: center;
+    }
+    .result404 .text-region .text-box {
+        font-size: 30px;
+        color: #fdb813;
+        margin-bottom: 20px;
+    }
+    .result404 .text-region .sub-box {
+        font-size: 18px;
+        line-height: 28px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .result404 .img-box {
+        margin: 25px 0;
+    }
+}
+
+@media (max-width: 320px) {}
+
+@media (min-width: 768px) and (max-width: 991px) {}
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+@media (min-width: 1200px)and (max-width: 1400px) {}

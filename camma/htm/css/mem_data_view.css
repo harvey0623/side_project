@@ -1,0 +1,186 @@
+.titleRegion{
+	padding: 50px 0 40px;
+    border-bottom: none;
+}
+
+/*==============================側邊-內容區塊==============================*/
+ 
+/*會員卡區域*/
+.wrap-region .card-region{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+/*卡片框*/
+.wrap-region .card-region .card-box{
+    width: 350px;
+/*    height: 216.88px;*/
+    margin-right: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    color: #ffffff;
+}
+.wrap-region .card-region .card-box.silverVip .number-item{
+	background: rgb(114,116,123);
+    background: -moz-linear-gradient(left, rgba(114,116,123,1) 0%, rgba(203,208,219,1) 26%, rgba(123,125,132,1) 51%, rgba(162,166,175,1) 74%, rgba(229,234,246,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(114,116,123,1) 0%,rgba(203,208,219,1) 26%,rgba(123,125,132,1) 51%,rgba(162,166,175,1) 74%,rgba(229,234,246,1) 100%);
+    background: linear-gradient(to right, rgba(114,116,123,1) 0%,rgba(203,208,219,1) 26%,rgba(123,125,132,1) 51%,rgba(162,166,175,1) 74%,rgba(229,234,246,1) 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -ms-background-clip: text;
+    -webkit-filter:drop-shadow(0px -0.4px 0.1px #ffffff) drop-shadow(0px 1.2px 0.5px #000);
+}
+.wrap-region .card-region .card-box.goldVip .number-item{
+    background: rgb(108,57,0); 
+    background: -moz-linear-gradient(left, rgba(108,57,0,1) 1%, rgba(233,176,105,1) 26%, rgba(154,96,43,1) 51%, rgba(204,142,84,1) 74%, rgba(95,47,0,1) 100%); 
+    background: -webkit-linear-gradient(left, rgba(108,57,0,1) 1%,rgba(233,176,105,1) 26%,rgba(154,96,43,1) 51%,rgba(204,142,84,1) 74%,rgba(95,47,0,1) 100%);
+    background: linear-gradient(to right, rgba(108,57,0,1) 1%,rgba(233,176,105,1) 26%,rgba(154,96,43,1) 51%,rgba(204,142,84,1) 74%,rgba(95,47,0,1) 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -ms-background-clip: text;
+    -webkit-filter:drop-shadow(0px -0.4px 0.1px #ffffff) drop-shadow(0px 1.2px 0.5px #000);
+}
+.wrap-region .card-region .card-box.Vip .number-item{
+    -webkit-filter:drop-shadow(0px 1.5px 0.1px #dddddd) drop-shadow(0px 1.2px 0.5px rgba(0, 0, 0, 0.2));
+}
+.wrap-region .card-region .card-box.goldVip{
+    color: #FED120;
+}
+.wrap-region .card-region .card-box img{
+    width: 100%;
+    height: auto;
+}
+.wrap-region .card-region .number-box{
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    padding: 22px 15px;
+    position: absolute;
+    font-weight: bold;
+    -webkit-filter: drop-shadow(0px 0px 0.8px #000000);
+}
+/*卡片號碼*/
+.wrap-region .card-region .number-item{
+    width: 100%;
+    font-size: 17px;
+    text-align: right;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+.wrap-region .card-region .number-item:last-child{
+    font-size: 14px;
+}
+/*會員點數區*/
+.wrap-region .card-region .point-box{
+	 width: 230px;
+	 font-size: 16px;
+	 color: #333333;
+}
+.point-box .point,.point-box .date,.point-box .level{
+	margin-bottom: 20px;
+}
+.wrap-region .card-region .point-box .point span{
+	font-size: 24px;
+	margin-right: 20px;
+	color: #fdb813;
+}
+.wrap-region .card-region .point-box .sub{
+	color: #999999;
+}
+
+/*==============================form表==============================*/
+.section.form.num-1{
+	width: 60%;
+	margin: 0 auto;
+	margin-bottom: 25px;
+}
+.section.form.num-1 .form-group{
+	margin: 0px;
+	margin-bottom: 25px;
+	width: 100%;
+    text-align: left;
+}
+/*form內提示*/
+.section.form.num-1 .form-group.tip{
+	padding: 0 15px;
+	line-height: 30px;
+}
+/*form內按鈕*/
+.section.form.num-1 .form-group.button button{
+	width: 100%;
+    height: 40px;
+}
+.section.form.num-1 .form-group input{
+	border-radius: 0px;
+	min-height: 40px;
+	width: 100%;
+}
+.section.form.num-1 .form-group label{
+    font-size: 16px;
+    font-weight: initial;
+    text-align: left;
+    min-height: 40px;
+    padding: 9px 0 9px 15px;
+    margin: 0px;
+    color: #333333;
+}
+/*地址外掛*/
+#twzipcode select{
+	width: calc(50% - 8px);
+	font-size: 14px;
+    padding: 0 12px;
+    margin-bottom: 25px;
+    color: #ababab;
+    min-height: 40px;
+    line-height: 40px;
+    border: 1px solid #ccc;
+}
+#twzipcode select:first-child{
+	margin-right: 16px;
+}
+#twzipcode input{
+	display: none;
+}
+/*按鈕區塊*/
+.section.form.num-1 .button-region {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.section.form.num-1 .button-region button{
+	width: calc(50% - 6px);
+}
+
+.section.form.num-1 .buttonRegion{
+    text-align: right;
+    margin: 25px 0 10px;
+
+}
+/*==============================Modal／01-中尺寸-form、圖文、兩個按鈕==============================*/
+
+.section.modal.num-1 .modal-footer .button-region{
+    justify-content: center;
+}
+.section.modal.num-1 .modal-footer .button-region button {
+	max-width: 180px;
+	margin: 0 10px;
+}
+
+/*==============================Media==============================*/
+
+@media (max-width: 991px) {}
+
+@media (max-width: 1199px) {
+    .section.form.num-1{
+        width: 85%;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {}

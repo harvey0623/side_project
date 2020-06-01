@@ -1,0 +1,202 @@
+ul {
+   list-style: none;
+   margin-bottom: 0;
+}
+
+.subscribeDetail {
+   border-bottom: 1px solid #DDDDDD;
+}
+
+.subscribeDetail > .detailTop {
+   padding: 15px;
+}
+
+.subscribeDetail > .detailTop {
+   border-bottom: 1px solid #DDDDDD;
+}
+
+.itemColumn {
+   display: flex;
+   align-items: center;
+   margin-bottom: 20px;
+}
+
+.itemColumn > div:first-child {
+   flex: 0 0 60%;
+}
+
+.itemColumn > div:not(:first-child) {
+   flex: 0 0 13.33%;
+   text-align: center;
+}
+
+.itemColumn > .first {
+   display: flex;
+   align-items: center;
+}
+
+.itemColumn > .first > img {
+   display: block;
+   width: 80px;
+   height: 80px;
+}
+
+.itemColumn > .first > .itemData {
+   padding-left: 10px;
+}
+
+.itemData > .itemTitle {
+   font-size: 18px;
+   margin: 0;
+   margin-bottom: 8px;
+}
+
+.itemData > .itemPeriod {
+   color: #999999;
+   margin-bottom: 0;
+   transform: translateX(-5px);
+}
+
+.itemList {
+   padding-left: 15px;
+   border-left: 2px solid #FDB813;
+}
+
+.itemList > li {
+   display: flex;
+   margin-bottom: 12px;
+   font-size: 16px;
+}
+
+.itemList > li:last-child {
+   margin-bottom: 0;
+}
+
+.itemList > li > span {
+   margin-right: 12px;
+}
+
+.itemList > li > .multiply {
+   color: #999999;
+}
+
+.timeSchedule {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 15px;
+   border-bottom: 1px solid #DDDDDD;
+   font-size: 14px;
+   font-weight: bold;
+}
+
+.timeSchedule .doing > span {
+   color: #1AA23A;
+}
+
+.timeSchedule .stop > span {
+   color: #FF5151;
+}
+
+.shippingHead {
+   display: flex;
+   align-items: center;
+   font-size: 12px;
+   padding: 15px;
+   font-weight: bold;
+}
+
+.shippingHead > div:first-child {
+   flex: 0 0 50%;
+}
+
+.shippingHead > div:not(:first-child) {
+   flex: 1 0 0;
+   text-align: right;
+}
+
+.shippingList {
+   padding-left: 15px;
+   padding-right: 15px;
+   padding-bottom: 15px;
+}
+
+.shippingList > li {
+   display: flex;
+   align-items: center;
+   margin-bottom: 15px;
+   font-size: 12px;
+}
+
+.shippingList > li:last-child {
+   margin-bottom: 0;
+}
+
+.shippingList > li > div:first-child {
+   flex: 0 0 50%;
+   margin-bottom: 0;
+}
+
+.shippingList > li > div:not(:first-child) {
+   flex: 1 0 0;
+   text-align: right;
+}
+
+.shippingFirst {
+   display: flex;
+   align-items: center;
+}
+
+.shippingFirst > * {
+   margin-right: 10px;
+}
+
+.shippingFirst > *:last-child {
+   margin-right: 0px;
+}
+
+.shippingFirst > .fa-truck-moving {
+   font-size: 18px;
+}
+
+.shippingFirst > .shippingNumber {
+   color: #999999;
+}
+
+.shippingFirst > .shippingStatus {
+   padding: 3px 14px;
+   border-radius: 100px;
+   color: #fff;
+}
+
+.shippingFirst > .shipped {
+   background-color: #FDB813;
+}
+
+.shippingFirst > .noShip {
+   background-color: #FF5151;
+}
+
+.payStatus {
+   width: 72px;
+   height: 28px;
+   line-height: 28px;
+   color: #fff;
+   text-align: center;
+   display: inline-block;
+}
+
+.payStatus.paid {
+   background-color: #DDDDDD;
+}
+
+.payStatus.failPay {
+   background-color: #FF5151;
+}
+
+.payStatus.unpaid {
+   background-color: #fff;
+   color: #FDB813;
+   border: 1px solid #FDB813;
+   line-height: 26px;
+}

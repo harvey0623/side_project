@@ -1,0 +1,431 @@
+ul {
+   list-style: none;
+   margin-bottom: 0;
+}
+
+.form-control {
+   height: 40px;
+   border-radius: 0;
+}
+
+.subscribe-section {
+   padding: 50px 0;
+}
+
+.stepBox {
+   display: flex;
+   align-items: center;
+   margin-bottom: 50px;
+}
+
+.stepBox > div {
+   flex: 1;
+   font-size: 16px;
+   text-align: center;
+   position: relative;
+   color: #333333;
+}
+
+.stepBox > div > i {
+   position: absolute;
+   right: 0;
+   top: 0;
+   font-size: 20px;
+   color: #999999;
+}
+
+.stepBox > div.active,
+.stepBox > div.active > i {
+   color: #FDB813;
+}
+
+.cartInfo > p {
+   margin-bottom: 0;
+}
+
+.cartInfo {
+   display: flex;
+   padding: 18px;
+   font-size: 16px;
+}
+
+.cartInfo > .first-column {
+   flex: 0 0 60%;
+}
+
+.cartInfo > p:not(:first-child) {
+   flex: 0 0 13.33%;
+   text-align: center;
+}
+
+.cartInfo > p:first-child,
+.cartInfo > p:nth-child(2) {
+   color: #999999;
+}
+
+.cartInfo > p:last-child,
+.cartInfo> p:nth-child(3) {
+   color: #333333;
+}
+
+.cartList {
+   padding-left: 0;
+   border: 1px solid #DDDDDD;
+}
+
+.cartList > li {
+   display: flex;
+   padding: 18px;
+   border-bottom: 1px solid #DDDDDD;
+}
+
+.cartList > li.soldOut {
+   background-color: #f3f4f6;
+}
+
+.cartList > li:last-child {
+   border-bottom: none;
+}
+
+.cartList > li > .first-column {
+   flex: 0 0 60%;
+   display: flex;
+   align-items: flex-start;
+}
+
+.cartList > li > .columnBox:not(:first-child) {
+   flex: 0 0 13.33%;
+   text-align: center;
+}
+
+.cartLabel {
+   margin: 0;
+   margin-right: 15px;
+   cursor: pointer;
+}
+
+.cartLabel > input {
+   position: relative;
+   margin: 0;
+   width: 20px;
+   height: 20px;
+   border: 1px solid #DDDDDD;
+   appearance: none;
+   color: #fff;
+   background-color: #fff;
+   -webkit-appearance: none;
+}
+
+.cartLabel > input:after {
+   content: '';
+   display: block;
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   width: 6px;
+   height: 15px;
+   transform: translate(-50%, -60%) rotate(45deg);
+   border-right: 2px solid #fff;
+   border-bottom: 2px solid #fff;
+}
+
+.cartLabel > input:checked {
+   border: 1px solid #FDB813;
+   background-color: #FDB813;
+   outline: none;
+}
+
+.comboTop {
+   display: flex;
+   margin-bottom: 15px;
+}
+
+.comboTop > .imgBox {
+   flex: 0 0 80px;
+   height: 80px;
+}
+
+.comboTop > .imgBox > img {
+   width: 100%;
+   height: 100%;
+}
+
+.comboInfo {
+   padding-top: 5px;
+   padding-left: 10px;
+}
+
+.comboInfo > * {
+   margin-bottom: 5px;
+}
+
+.comboInfo > *:last-child {
+   margin-bottom: 0px;
+}
+
+.comboTitle {
+   margin-top: 0;
+   font-size: 18px;
+}
+
+.comboFormat {
+   color: #999999;
+}
+
+.comboDate {
+   color: red;
+}
+
+.comboList {
+   padding-left: 15px;
+   border-left: 2px solid #FDB813;
+}
+
+.comboList > li {
+   display: flex;
+   align-items: center;
+   margin-bottom: 12px;
+}
+
+.comboList > li:last-child {
+   margin-bottom: 0;
+}
+
+.comboList > li > span {
+   margin-right: 15px;
+   font-size: 16px;
+}
+
+.comboList > li > .multiply {
+   color: #DDDDDD;
+}
+
+.columnBox.fourth-column > button {
+   display: block;
+   margin: 0 auto 10px;
+   padding: 5px 12px;
+   background-color: white;
+}
+
+.columnBox.fourth-column > .btn-edit {
+   color: #FDB813;
+   border: 1px solid #FDB813;
+}
+
+.columnBox.fourth-column > .btn-edit.soldOut {
+   color: #fff;
+   border: 1px solid #999999;
+   background-color: #999999;;
+}
+
+.columnBox.fourth-column > .btn-remove {
+   color: #999999;
+   border: 1px solid #999999;
+}
+
+.summary {
+   display: flex;
+   justify-content: space-between;
+   padding: 18px 80px 18px 18px;
+   border: 1px solid #DDDDDD;
+   border-top: none;
+   font-size: 16px;
+}
+
+.summary .itemTotal,
+.summary .itemPrice {
+   color: red;
+}
+
+/* 寄送資訊 */
+.select2-container {
+   width: initial !important;
+}
+
+.deliverSelect+.select2-container {
+   width: 200px !important;
+}
+
+.sendInfo {
+   margin-top: 50px;
+}
+
+.sendInfo .infoRow {
+   margin-bottom: 60px;
+}
+
+.sendInfo .infoRow:last-child {
+   margin-bottom: 0;
+}
+
+.infoTitle {
+   color: #FDB813;
+   font-weight: normal;
+   margin-top: 0;
+   margin-bottom: 35px;
+}
+
+.infoBody {
+   font-size: 16px;
+}
+
+.infoBody .mutiColumn {
+   display: flex;
+   align-items: center;
+   margin-bottom: 30px;
+}
+
+.infoBody .mutiColumn:last-child {
+   margin-bottom: 0;
+}
+
+.mutiTitle {
+   font-size: 16px;
+   flex: 0 0 250px;
+}
+
+.mutiBody {
+   flex: 1;
+   display: flex;
+   align-items: center;
+}
+
+.mutiBody .select2-container  {
+   flex: 0 0 250px;
+}
+
+.mutiBody .form-control {
+   flex: 1;
+   margin-left: 20px;
+}
+
+.mutiBody textarea.form-control {
+   width: 100%;
+   height: 100px !important;
+   margin-left: 0;
+   resize: none;
+}
+
+.titleOuter {
+   display: flex;
+   align-items: center;
+   margin-bottom: 35px;
+}
+
+.titleOuter > .infoTitle {
+   margin-bottom: 0;
+} 
+
+.titleOuter > p {
+   margin: 0;
+   margin-left: 10px;
+   color: red;
+}
+
+.titleOuter > p > a {
+   color: red;
+   text-decoration: underline;
+}
+
+.titleOuter > label {
+   margin-bottom: 0;
+   margin-left: 15px;
+   font-size: 16px;
+}
+
+.titleOuter > label > input {
+   width: 18px;
+   height: 18px;
+   margin-top: -3px;
+   vertical-align: middle;
+}
+
+.orderBody {
+   display: flex;
+}
+
+.orderBody > .orderBox {
+   flex: 1;
+}
+
+.orderBox > .orderRow {
+   display: flex;
+   align-items: center;
+   margin-bottom: 30px;
+}
+
+.orderBox > .orderRow:last-child {
+   margin-bottom: 0;
+}
+
+.orderRow > .orderTitle {
+   flex: 0 0 250px;
+   font-size: 16px;
+}
+
+.orderRow > .orderContent {
+   flex: 1;
+}
+
+.orderRow > .orderContent > .form-control {
+   width: 250px;
+}
+
+.orderRow > .orderContent > .select2-container {
+   width: 250px !important;
+}
+
+.remark,
+.address {
+   margin-top: 30px;
+}
+
+#twzipcode {
+   display: flex;
+   justify-content: space-between;
+   width: 250px;
+}
+
+[name="county"],
+[name="district"] {
+   border: 1px solid #ccc;
+   color: #999999;
+   width: 48%;
+   height: 40px;
+   padding: 8px 10px;
+}
+
+[name="zipcode"] {
+   display: none;
+}
+
+.groupSummary {
+   margin-top: 50px;
+}
+
+ol a,
+ol a:hover {
+   color: black;
+   text-decoration: none;
+   font-weight: bold;
+}
+
+.olText {
+   transform: translateX(-15px);
+   line-height: 30px;
+   margin-bottom: 25px;
+}
+
+.buttonRegion {
+   display: flex;
+   justify-content: flex-end;
+}
+
+.buttonRegion > button:first-child {
+   margin-right: 15px;
+}
+
+.companyName {
+   margin-left: 0 !important;
+   flex: 0 0 250px !important;
+}

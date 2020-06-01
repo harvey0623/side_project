@@ -1,0 +1,111 @@
+/*內容區塊*/
+.wrap-region{
+    min-height: 300px;
+}
+/*標題*/
+.titleRegion {
+    border-bottom: none;
+}
+
+/*==============================================頁面內容==============================================*/
+.wrap-block{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 0 60px;
+}
+
+/*==============================form表==============================*/
+.section.form.num-1{
+    width: 75%;
+    margin: 0px auto;
+}
+.section.form.num-1 .form-group{
+    margin: 0px;
+    margin-bottom: 25px;
+    width: 100%;
+    text-align: left;
+}
+/*form內提示*/
+.section.form.num-1 .form-group input{
+    border-radius: 0px;
+    min-height: 40px;
+    width: 100%;
+}
+.section.form.num-1 .form-group label{
+    font-size: 16px;
+    font-weight: initial;
+    text-align: left;
+    min-height: 40px;
+    padding: 9px 0;
+    margin: 0px;
+    color: #333333;
+}
+.section.form.num-1 .form-group textarea{
+    width: 100%;
+    padding: 6px 12px;
+    resize : none;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.section.form.num-1 .form-group textarea:focus {
+    outline: none;
+    border-color: #cccccc;
+    box-shadow: none;
+}
+
+/*==============================按鈕區塊==============================*/
+.button-region{
+    width: 75%;
+    margin: 0px auto 40px;
+    text-align: right;
+}
+.button-region button{
+    width: 235px;
+}
+
+/*==============================聯絡區塊==============================*/
+.wrap-block .contact-region{
+    width: 100%;
+    margin-bottom: 40px;
+}
+.wrap-block .contact-region ul {
+    width: 75%;
+    margin: 0px auto;
+    padding: 0px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.wrap-block .contact-region li {
+    font-size: 16px;
+}
+.wrap-block .contact-region li svg{
+    height: auto;
+    margin-right: 20px;
+    color: #f1a100;
+}
+
+/*==============================Media==============================*/
+@media (max-width: 991px) {}
+
+@media (max-width: 1199px) {
+
+/*==============================================頁面內容==============================================*/
+    /*==============================聯絡區塊==============================*/
+    .wrap-block .contact-region li {
+       width: 100%;
+       margin-bottom: 10px;
+    }
+    .wrap-block .contact-region li svg{
+        margin-right: 10px;
+    }
+
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {}

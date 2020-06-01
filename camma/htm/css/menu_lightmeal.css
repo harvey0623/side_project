@@ -1,0 +1,201 @@
+/*內容區塊*/
+.wrap-region{
+    min-height: 300px;
+}
+/*分類區塊*/
+.wrap-region .sort-region ul {
+    margin: 0 0 20px 0;
+    padding: 10px 0 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.wrap-region .sort-region ul li {
+    margin-right: 40px;
+    margin-bottom:10px;
+}
+.wrap-region .sort-region ul li.active {
+    font-weight: bold;
+}
+.wrap-region .sort-region ul li.active a {
+    color: #fdb813;
+}
+.wrap-region .sort-region ul a {
+    font-size: 20px;
+    color: #333333;
+    text-decoration: none;
+}
+.wrap-region .sort-region ul a:hover {
+    color: #fdb813;
+}
+
+/*==============================================頁面內容==============================================*/
+.wrap-block{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px 0 60px;
+    min-height: 500px;
+}
+/*圖片區*/
+.wrap-block .img-region{
+    width: 30%;
+    margin-bottom: 65px;
+}
+.wrap-block .img-region .img-box:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(255,255,255,0);
+    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 30%,rgba(35,24,21,0.4) 100%);
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 30%,rgba(35,24,21,0.4) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 30%,rgba(35,24,21,0.4) 100%);
+}
+.wrap-block .img-region .img-box{
+    width: 100%;
+    height: 210px;
+    margin-bottom: 65px;
+    overflow: hidden;
+    position: relative;
+}
+.wrap-block .img-region .img-box img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/*圖片標題*/
+.wrap-block .img-region .img-box .textBox{
+    width: 100%;
+    font-size: 16px;
+    padding: 30px;
+    left: 0px;
+    bottom: 0px;
+    position: absolute;
+    color: #ffffff;
+    -webkit-filter: drop-shadow(0px 1px 1px #333);
+}
+.wrap-block .img-region .img-box .textBox .title{
+    margin-bottom: 10px;
+}
+/*圖片ICON*/
+.wrap-block .img-region .icon-item{
+    font-size: 14px;
+    width: 100%;
+    min-height: 30px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    color: #888888;
+}
+.wrap-block .img-region .icon-item .iconBox{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    padding: 3px;
+    border: 1px solid #bbbbbb;
+}
+.wrap-block .img-region .icon-item .iconBox img{
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+.wrap-block .img-region .icon-item .text{
+    width: calc(100% - 30px);
+}
+
+/*文字區*/
+.wrap-block .item-region{
+    font-size: 16px;
+    width: 70%;
+    color: #333333;
+    padding-left: 30px;
+}
+.wrap-block .item-region .title{
+    min-height: 30px;
+    padding: 3px 25px;
+    text-align: right;
+    border-bottom: 1px solid #eeeeee;
+}
+.wrap-block .item-region .item-box{
+    display: flex;
+    align-items: center;
+    padding: 15px 25px 15px 0;
+    border-bottom: 1px solid #eeeeee;
+    justify-content: space-between;
+}
+/*餐飲標題項*/
+.wrap-block .item-region .item-box .text{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: calc(100% - 50px);
+}
+/*餐飲名*/
+.wrap-block .item-region .item-box .name{
+    margin-right: 25px;
+    line-height: 26px;
+}
+.wrap-block .item-region .item-box .name span{
+    margin-left: 15px;
+}
+/*標示ICON*/
+.wrap-block .item-region .item-box .iconBox{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+}
+.wrap-block .item-region .item-box .iconBox img{
+    width: 100%;
+    height: auto;
+}
+/*餐飲價錢*/
+.wrap-block .item-region .item-box .price{
+    width: 50px;
+    text-align: right;
+    color: #999999;
+}
+
+/*==============================Media==============================*/
+@media (max-width: 991px) {}
+
+@media (max-width: 1199px) {
+    /*分類區塊*/
+    .wrap-region .sort-region ul a {
+        font-size: 16px;
+    }
+    .wrap-region .sort-region ul li {
+        margin-right: 30px;
+    }
+
+/*==============================================頁面內容==============================================*/
+    /*文字區*/
+    .wrap-block .item-region{
+        font-size: 15px;
+    }
+    /*餐飲名*/
+    .wrap-block .item-region .item-box .name{
+        margin-right: 20px;
+    }
+    /*標示ICON*/
+    .wrap-block .item-region .item-box .iconBox {
+        width: 28px;
+        height: 28px;
+        padding: 4px;
+        margin-right: 2px;
+    }
+    /*圖片標題*/
+    .wrap-block .img-region .img-box .textBox {
+        padding: 20px;
+    }
+    .wrap-block .img-region .img-box .textBox .title {
+        margin-bottom: 5px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {}

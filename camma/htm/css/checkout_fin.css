@@ -1,0 +1,90 @@
+/*流程區域*/
+.process-region .container{
+    height: 40px;
+    font-size: 16px;
+    margin: 65px auto 20px;
+    color: #333333;
+    display: flex;
+    align-items: center;
+}
+.process-region .process-box{
+    width: calc((100% - 40px) / 3);
+    text-align: center;
+}
+.process-region .process-box.active{
+    color: #fdb813;
+}
+/*流程ICON*/
+.process-region .icon-box{
+    width: 20px;
+    text-align: center;
+    color: #999999;
+    font-size: 28px;
+}
+.process-region .icon-box.active{
+    color: #fdb813;
+}
+.process-region .icon-box i{
+    transform: translateY(-2.5px);
+}
+
+/*成功區域*/
+.result{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+}
+/*圖*/
+.result .img-box{
+    width: 280px;
+    margin-right: 50px;
+}
+.result .img-box img{
+    width: 100%;
+    height: auto;
+}
+/*文字區*/
+.result .text-region{
+    width: 280px;
+    text-align: center;
+}
+.result .text-region .text-box{
+    font-size: 24px;
+    color: #fdb813;
+    margin-bottom: 35px;
+}
+.result .text-region .sub-box{
+    font-size: 16px;
+    line-height: 32px;
+    margin-bottom: 35px;
+    color: #333333;
+}
+.result .button-region{
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    color: #333333;
+}
+.result .button-region button{
+    width: 180px;
+    height: 40px;
+}
+
+/*==============================失敗區域==============================*/
+.result.failed{
+    display: none;
+}
+
+
+/*==============================Media==============================*/
+
+@media (max-width: 991px) {}
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+@media (min-width: 1200px) and (max-width: 1400px) {}

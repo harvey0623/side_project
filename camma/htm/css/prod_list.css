@@ -1,0 +1,18 @@
+.titleRegion{
+	padding: 50px 0 40px;
+    border-bottom: none;
+}
+
+/*加入購物車按鈕*/
+.white-btn:hover{
+    border:1px solid #fd9713;
+    background-color: #fd9713;
+}
+
+/*==============================Media==============================*/
+
+@media (max-width: 991px) {}
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+@media (min-width: 1200px) and (max-width: 1400px) {}

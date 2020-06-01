@@ -1,0 +1,218 @@
+.titleRegion{
+	padding: 50px 0 40px;
+    border-bottom: none;
+}
+
+
+/*==============================================活動商品區塊==============================================*/
+
+/*==============================活動商品選取==============================*/
+.promotions_choose{
+	width: 100%;
+	margin-bottom: 30px;
+	border: 1px solid #fdb813;
+}
+.promotions_choose .promotions-bar{
+	padding: 20px 15px;
+	border-bottom: 1px solid #dddddd;
+	display: flex;
+	align-items: center;
+}
+/*條件區塊*/
+.promotions-bar .title-block{
+	width: calc(100% - 130px);
+	font-size: 16px;
+	margin-bottom: 0px;
+}
+.promotions-bar .title-block>div{
+	margin: 10px 0;
+}
+/*條件項*/
+.promotions-bar .title-block .require-box .result{
+	margin: 0 5px;
+	color: #ff5151;
+}
+/*結果項*/
+.promotions-bar .title-block .total-box .through{
+	color: #333333;
+	text-decoration: line-through;
+	margin-right: 10px;
+}
+.promotions-bar .title-block label{
+    margin: 0;
+    font-weight: inherit;
+}
+.promotions-bar .title-block .require-box .tip{
+    margin-left: 10px;
+    color:#ff5151;
+}
+.promotions-bar .title-block label.discount{
+	margin-left: 10px;
+	color:#ff5151;
+}
+.promotions-bar .title-block .total-box span{
+	margin-left: 5px;
+}
+/*按鈕區塊*/
+.promotions-bar .button-region{
+	width: 130px;
+}
+.promotions-bar .button-region button{
+	width: 100%;
+}
+
+
+/*==============================活動商品項==============================*/
+.promotions-item .wrap-item{
+    width: 100%;
+    font-size: 14px;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #eeeeee;
+    color: #333333;
+}
+.promotions-item .wrap-item .itemBox{
+    padding: 0 15px;
+    text-align: center;
+}
+.promotions-item .wrap-item .itemBox .text-box{
+    text-align: center;
+}
+.promotions-item .wrap-item a{
+    text-decoration: none;
+    color: #333333;
+}
+.promotions-item .wrap-item a:hover{
+    text-decoration: none;
+    color: #fdb813;
+}
+
+/*刪除icon按鈕*/
+.promotions-item .itemBox .iconBox>svg{
+    width: 100%;
+    height: auto;
+    max-width: 38px;
+    max-height: 38px;
+    color: #fdb813;
+}
+.promotions-item .itemBox .iconBox>svg:hover{
+    color: #fd9713;
+}
+
+/*select*/
+.promotions-item .select-style{
+    width: 100%;
+    height: 35px;
+    font-size: 14px;
+    padding: 0 12px;
+    color: #ababab;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+/*==============================================區塊／產品／Num1 (類別頁商品列表)==============================================*/
+
+/*單個商品區*/
+.section.product.num-1 .product-block{
+    width: calc(100% / 4);
+}
+/*商品圖片*/
+.section.product.num-1 .product-block>a>.imgBox{
+    height: 195px;
+}
+.section.product.num-1 .product-block .imgBox img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/*商品名稱*/
+.section.product.num-1 .product-block .descBox{
+    margin: 15px 0;
+    height: 48px;
+    line-height: 24px;
+}
+/*商品按鈕*/
+.section.product.num-1 .product-block .button-box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.section.product.num-1 .product-block .button-box button{
+    width: 100%;
+}
+/*商品售價列*/
+.section.product.num-1 .product-block .price-box{
+    justify-content: center;
+    margin: 15px 0;
+    height: 20px;
+}
+.section.product.num-1 .product-block .price-box span {
+    color: #999999;
+}
+.section.product.num-1 .product-block .price-box .price-sub{
+    text-decoration:none;
+}
+/*商品輔助*/
+.section.product.num-1 .product-block .sub-box{
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    word-wrap: break-word;
+    height: 48px;
+    margin: 15px 0;
+    padding: 0px 8px;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    color: #999999;
+}
+
+/*售完商品*/
+.section.product.num-1 .product-block.soldOut .label-box{
+    display: block;
+}
+
+
+
+/*==============================Media==============================*/
+
+@media (max-width: 991px) {}
+
+@media (max-width: 1199px) {
+
+/*==============================================區塊／產品／Num1 (類別頁商品列表)==============================================*/
+
+	/*單個商品區*/
+	.section.product.num-1 .product-block{
+    	padding: 15px;
+	}
+	/*商品圖片*/
+	.section.product.num-1 .product-block>a>.imgBox {
+	    height: 158.75px;
+	}
+	/*商品名稱*/
+	.section.product.num-1 .product-block .descBox {
+	    font-size: 14px;
+	    margin: 10px 0;
+	}
+	/*商品售價列*/
+	.section.product.num-1 .product-block .price-box{
+	    margin: 10px 0;		
+	}
+	/*商品輔助*/
+	.section.product.num-1 .product-block .sub-box{
+		font-size: 14px;
+		margin: 10px 0;
+	}
+	/*商品按鈕*/
+	.section.product.num-1 .product-block .button-box button{
+		min-height: 35px
+	}
+
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {}

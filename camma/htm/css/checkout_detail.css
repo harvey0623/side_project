@@ -1,0 +1,89 @@
+/*流程區域*/
+.process-region .container{
+    height: 40px;
+    font-size: 16px;
+    margin: 65px auto 20px;
+    color: #333333;
+    display: flex;
+    align-items: center;
+}
+.process-region .process-box{
+    width: calc((100% - 40px) / 3);
+    text-align: center;
+}
+.process-region .process-box.active{
+    color: #fdb813;
+}
+/*流程ICON*/
+.process-region .icon-box{
+    width: 20px;
+    text-align: center;
+    color: #999999;
+    font-size: 28px;
+}
+.process-region .icon-box.active{
+    color: #fdb813;
+}
+.process-region .icon-box i{
+    transform: translateY(-2.5px);
+}
+
+/*==============================訂購收件人資訊==============================*/
+.wrap-region .buyerInfo{
+	border: none;
+	margin-bottom: 50px;
+}
+.section.order.num-1 .title-region{
+	padding: 0 15px;
+}
+.section.order.num-1 .wrap-region .note-region ol>div{
+    line-height: 28px;
+    margin-bottom: 20px;
+    transform: translateX(-15px);
+}
+.section.order.num-1 .wrap-region .note-region ol a{
+    font-weight: bold;
+    color: #333333;
+    text-decoration: none;
+}
+
+/*地址外掛*/
+#twzipcode input{
+	display: none;
+}
+#twzipcode select{
+	width: calc(50% - 5px);
+	min-height: 40px;
+	font-size: 14px;
+	padding: 6px 8px;
+	margin-right: 10px;
+	color: #999999;
+	border: 1px solid #ccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+#twzipcode select:nth-child(2){
+	width: calc(50% - 5px);
+	margin-right: 0px;
+}
+
+/*按鈕區塊*/
+.section.order.num-1 .wrap-region .buttonRegion{
+	text-align: right;
+}
+.section.order.num-1 .wrap-region .buttonRegion button{
+	margin-left: 30px;
+}
+
+
+
+/*==============================Media==============================*/
+
+@media (max-width: 991px) {}
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+@media (min-width: 1200px) and (max-width: 1400px) {}

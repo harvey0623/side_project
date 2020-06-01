@@ -420,7 +420,11 @@
 		import DescController from './js/modules/descController.js';
 		import Calculate from './js/modules/calculate.js';
 		alert('aaaaa');
-		let { iType, period, formatArr, spec } = dataSchema;
+		try {
+			let { iType, period, formatArr, spec } = dataSchema;
+		} catch (err) {
+			alert(err);
+		}
 		alert(JSON.stringify(dataSchema))
 		let packageMaxNumber = dataSchema.vProductBuyTotal;
 		let description = dataSchema.info.vProductSummary;

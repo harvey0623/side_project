@@ -414,7 +414,6 @@
 	<script src="./js/groupByDetail.js"></script>
 	<script src="./js/modules/dataSchema.js"></script>
 	<script type="module">
-		console.log(dataSchema);
 		import FormatController from './js/modules/formatController.js';
 		import PeriodController from './js/modules/periodController.js';
 		import CountController from './js/modules/countController.js';
@@ -422,6 +421,7 @@
 		import Calculate from './js/modules/calculate.js';
 		alert(Calculate);
 		let { iType, period, formatArr, spec } = dataSchema;
+		alert(iType)
 		let packageMaxNumber = dataSchema.vProductBuyTotal;
 		let description = dataSchema.info.vProductSummary;
 		let specData = spec.reduce(( prev, current ) => {

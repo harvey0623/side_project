@@ -211,8 +211,14 @@
       });
 
       let init = async function() {
-         let companyData = await shiftAjax.getCompanyInfo().then(res => res.data);
-         searchPanel.renderCompany(companyData);
+         let init = async function() {
+         try {
+            let companyData = await shiftAjax.getCompanyInfo().then(res => res.data);
+               searchPanel.renderCompany(companyData);
+            } catch(err) {
+               alert('error');
+            }
+         }
       }
 
       $('.btnShift').on('click', function() {

@@ -111,12 +111,7 @@
 
    </div>
 
-   <script>
-      alert('aaaaa')
-   </script>
-
    <script type="module">
-      alert('abc');
       import ShiftAjax from './js/modules/ShiftAjax.js';
       import SearchPanel from './js/modules/shiftTable/SearchPanel.js';
       import DatePanel from './js/modules/shiftTable/DatePanel.js';
@@ -141,9 +136,9 @@
             target[key] = value;
             if (key === 'company') helper.resetField({ target, arr: ['period', 'keyword'] });
             if (key !== 'year') {
-               let shiftData = await shiftAjax.getShift(target).then(res => res);
-               shiftData = helper.convertShift(shiftData);
-               shiftCalendar.addEvent(shiftData);
+               // let shiftData = await shiftAjax.getShift(target).then(res => res);
+               // shiftData = helper.convertShift(shiftData);
+               // shiftCalendar.addEvent(shiftData);
             }
             return true;
          }
@@ -216,14 +211,45 @@
       });
 
       let init = async function() {
-         let init = async function() {
-         try {
-            let companyData = await shiftAjax.getCompanyInfo().then(res => res.data);
-               searchPanel.renderCompany(companyData);
-            } catch(err) {
-               alert('error');
+         // let companyData = await shiftAjax.getCompanyInfo().then(res => res.data);
+         let companyData = [
+            {
+               id: 'aaa',
+               name: 'a公司',
+               period: [
+                  {
+                     id: 'morning',
+                     title: '早班',
+                  },
+                  {
+                     id: 'aftermoon',
+                     title: '中班',
+                  },
+                  {
+                     id: 'night',
+                     title: '晚班',
+                  },
+               ],
+               labor: [
+                  {
+                     userId: '1',
+                     title: 'harvey',
+                     unit: '駐'
+                  },
+                  {
+                     userId: '2',
+                     title: 'tom',
+                     unit: '巡'
+                  },
+                  {
+                     userId: '3',
+                     title: 'merry',
+                     unit: '保'
+                  }
+               ]
             }
-         }
+         ];
+         searchPanel.renderCompany(companyData);
       }
 
       $('.btnShift').on('click', function() {

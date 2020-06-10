@@ -1,0 +1,206 @@
+.wrap {
+   padding: 20px;
+   max-width: 1000px;
+   margin: 0 auto;
+}
+
+/* searchBox */
+.searchBox {
+   display: flex;
+   align-items: center;
+   margin-bottom: 25px;
+}
+
+.searchRow {
+   flex: 1;
+   position: relative;
+   margin-right: 15px;
+}
+
+.searchRow:last-child {
+   margin-right: 0;
+}
+
+.searchRow select {
+   appearance: none;
+   -webkit-appearance: none;
+} 
+
+.searchRow .form-control {
+   height: 40px;
+   padding-right: 35px;
+   border-color: transparent;
+   border-bottom-color: #707070;
+   color: #646464;
+   border-radius: 0px;
+} 
+
+.searchRow .form-control:focus{
+   box-shadow: initial;
+}
+
+.searchRow input::placeholder {
+   color: #D6D6D8;
+}
+
+.searchRow > i {
+   position: absolute;
+   right: 10px;
+   top: 8px;
+   color: #646464;
+   font-size: 20px;
+}
+
+/* control bar style */
+.controlBar {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 8px 15px;
+   background-color: #F397AE;
+   border: 1px solid #F397AE;
+}
+
+.controlBar.view {
+   background-color: #F65D75;
+   border: 1px solid #F65D75;
+}
+
+.layout > .searchBox {
+   width: 350px;
+   margin-bottom: 0;
+}
+
+.layout .searchRow .form-control {
+   border-bottom-color: #fff;
+}
+
+.layout .searchRow > select {
+   background-color: rgba(255, 255, 255, 0.4);
+   color: #fff;
+}
+
+.layout .searchRow > select > option {
+   color: #707070;
+}
+
+.layout .searchRow > i {
+   color: #fff;
+}
+
+.groupBox {
+   display: flex;
+   align-items: center;
+}
+
+.groupBox > .arrowPrev {
+   margin-right: 15px;
+   margin-left: 15px;
+}
+
+.arrowBox {
+   width: 45px;
+   height: 30px;
+   line-height: 30px;
+   color: #646464;
+   background-color: #F2F2F2;
+   border-radius: 3px;
+   text-align: center;
+   font-size: 20px;
+   cursor: pointer;
+}
+
+.dateBox {
+   display: flex;
+   align-items: center;
+}
+
+.dateBox > p {
+   margin-bottom: 0;
+   margin-right: 10px;
+   color: #fff;
+   font-size: 22px;
+}
+
+.dateBox > p:last-child {
+   margin-right: 0;
+}
+
+/*=== calendar style ===*/
+.fc th {
+   border-right-color: transparent;
+}
+
+.fc-head {
+   background-color: #F2F2F2;
+   color: #646464;
+   font-weight: normal;
+}
+
+.fc-day-header {
+   padding: 8px !important;
+   font-weight: normal;
+}
+
+.fc-unthemed td {
+   border-color: #D6D6D8;
+}
+ 
+.fc-day-number {
+   color: #646464;
+   transform: translateX(-5px);
+}
+
+.fc-event {
+   border-color: #F65D75;
+   background-color: #F65D75;
+   cursor: pointer;
+}
+
+.fc-title {
+   display: flex !important;
+   align-items: center;
+   padding: 2px 5px;
+   color: #fff;
+}
+
+.fc-title .name {
+   font-size: 14px;
+}
+
+.fc-title .unit {
+   width: 15px;
+   height: 15px;
+   line-height: 15px;
+   margin-left: 5px;
+   transform: translateY(1px);
+   text-align: center;
+   color: #646464;
+   background-color: #fff;
+   font-size: 12px;
+}
+
+/* 拖曳部分 */
+.fc-dragging {
+   display: flex;
+   align-items: center;
+   padding: 5px 8px;
+   margin-bottom: 10px;
+   border-radius: 4px;
+   background-color: #F65D75;
+   cursor: move;
+}
+
+.fc-dragging .name {
+   color: #fff;
+}
+
+.fc-dragging .unit {
+   width: 20px;
+   height: 20px;
+   line-height: 20px;
+   font-size: 12px;
+   color: #646464;
+   background-color: #fff;
+   text-align: center;
+}

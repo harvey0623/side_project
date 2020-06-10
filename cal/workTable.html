@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>工作班表</title>
+   <link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+   <link rel="stylesheet" href="./lib/calendar/core/main.min.css">
+	<link rel="stylesheet" href="./lib/calendar/daygrid/main.min.css">
+   <link rel="stylesheet" href="./lib/bs4/bootstrap.min.css">
+   <link rel="stylesheet" href="./lib/toastr/toastr.min.css">
+   <link rel="stylesheet" href="./css/calendar.css">
+   <link rel="stylesheet" href="./css/workTable.css">
+   <script src="./lib/calendar/core/main.min.js"></script>
+   <script src="./lib/calendar/daygrid/main.min.js"></script>
+   <script src="./lib/calendar/interaction/interaction.js"></script>
+   <script src="./lib/axios/axios.min.js"></script>
+   <script src="./lib/jquery.3.4.1.min.js"></script>
+   <script src="./lib/toastr/toastr.min.js"></script>
+   <script src="./lib/bs4/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+   <div class="wrap">
+      <!-- 搜尋列 -->
+      <div class="searchBox">
+         <div class="searchRow">
+            <select class="form-control company"></select>
+            <i class="fas fa-sort-down"></i>
+         </div>
+         <div class="searchRow">
+            <select class="form-control period"></select>
+            <i class="fas fa-sort-down"></i>
+         </div>
+         <div class="searchRow">
+            <input 
+               type="text" 
+               class="form-control keyword" 
+               placeholder="關鍵字搜尋">
+            <i class="fal fa-search"></i>
+         </div>
+      </div>
+      
+      <!-- 排班 -->
+      <div class="shiftTable">
+         <div class="controlBar">
+            <div class="arrowBox arrowPrev">
+               <i class="far fa-chevron-left"></i>
+            </div>
+            <div class="dateBox">
+               <p class="yearText"></p>
+               <p>年</p>
+               <p class="monthText"></p>
+               <p>月</p>
+            </div>
+            <div class="arrowBox arrowNext">
+               <i class="far fa-chevron-right"></i>
+            </div>
+         </div>
+         <div id="calendar"></div>
+      </div>
+
+      <button class="btnShift">排班</button>
+
+      <!-- modal -->
+      <div class="modal fade" id="shiftModal">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h1 class="modal-title">班表設置</h1>
+               </div>
+               <div class="modal-body">
+                  <div class="formBox">
+                     <div class="formRow">
+                        <p class="formTitle">社區名稱</p>
+                        <input
+                           type="text" 
+                           class="form-control community"
+                           placeholder="輸入社區名稱"
+                           readonly>
+                     </div>
+                     <div class="formRow">
+                        <p class="formTitle">人員名稱</p>
+                        <select class="form-control labor"></select>
+                        <i class="fas fa-sort-down"></i>
+                     </div>
+                     <div class="formRow">
+                        <p class="formTitle">開始日期</p>
+                        <input type="date" class="form-control startDate">
+                        <i class="fal fa-calendar-alt"></i>
+                     </div>
+                     <div class="formRow">
+                        <p class="formTitle">結束日期</p>
+                        <input type="date" class="form-control endDate">
+                        <i class="fal fa-calendar-alt"></i>
+                     </div>
+                     <div class="formRow">
+                        <p class="formTitle">選擇班別</p>
+                        <select class="form-control shiftTime"></select>
+                        <i class="fas fa-sort-down"></i>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button class="btnAdd">新增班表</button>
+                  <button class="btnRemove">刪除活動</button>
+                  <button class="btnModify">修改</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+   </div>
+
+   <script type="module">
+      import ShiftAjax from './js/modules/ShiftAjax.js';
+      import SearchPanel from './js/modules/shiftTable/SearchPanel.js';
+      import DatePanel from './js/modules/shiftTable/DatePanel.js';
+      import ShiftCalendar from './js/modules/shiftTable/ShiftCalendar.js';
+      import EditModal from './js/modules/shiftTable/EditModal.js';
+      import Toastr from './js/modules/Toastr.js';
+      import helper from './js/modules/shiftTable/Helper.js';
+      let today = new Date();
+      let criteria = {
+         company: '',
+         period: '',
+         keyword: '',
+         year: today.getFullYear(),
+         month: today.getMonth() + 1
+      };
+
+      let criteriaProxy = new Proxy(criteria, {
+         get(target, key) {
+            return target[key];
+         },
+         async set(target, key, value) {
+            target[key] = value;
+            if (key === 'company') helper.resetField({ target, arr: ['period', 'keyword'] });
+            if (key !== 'year') {
+               let shiftData = await shiftAjax.getShift(target).then(res => res);
+               shiftData = helper.convertShift(shiftData);
+               shiftCalendar.addEvent(shiftData);
+            }
+            return true;
+         }
+      });
+
+      let myToastr = new Toastr({ toastrObj: toastr });
+
+      let shiftAjax = new ShiftAjax({
+         companyApi: 'http://localhost:3034/cal/companyInfo',
+         shiftApi: 'http://localhost:3034/cal/shift',
+         toastr: myToastr
+      });
+
+      let searchPanel = new SearchPanel({
+         companyEl: '.company',
+         periodEl: '.period',
+         keywordEl: '.keyword',
+         searchEvent({ key, value }) {
+            criteriaProxy[key] = value;
+         }
+      });
+
+      let datePanel = new DatePanel({
+			yearEl: '.yearText',
+			monthEl: '.monthText',
+			btnPrev: '.arrowPrev',
+         btnNext: '.arrowNext',
+         defaultDate: today,
+			prevHandler() {
+            shiftCalendar.prevMonth();
+				return shiftCalendar.getDate();
+			},
+			nextHandler() {
+            shiftCalendar.nextMonth();
+				return shiftCalendar.getDate();
+         },
+         changeHandler({ year, month }) {
+            criteriaProxy.year = year;
+            criteriaProxy.month = month;
+         }
+      });
+      
+      let editModal = new EditModal({
+         rootEl: '#shiftModal',
+         communityEl: '.community',
+         laborEl: '.labor',
+         startEl: '.startDate',
+         endEl: '.endDate',
+         periodEl: '.shiftTime'
+      });
+
+		let shiftCalendar = new ShiftCalendar({
+         el: '#calendar',
+			option: {
+            defaultDate: today,
+            eventRender(info) {
+               let { event } = info;
+               let template = `
+                  <div class="name">${event.extendedProps.name}</div>
+                  <div class="unit">${info.event.extendedProps.unit}</div>`;
+               info.el.querySelector('.fc-title').innerHTML = template;
+            },
+            eventClick(info) {
+					if (confirm('是否要刪除')) info.event.remove();
+            },
+            eventOverlap(stillEvent, movingEvent) {
+               
+            },
+			}
+      });
+
+      let init = async function() {
+         let companyData = await shiftAjax.getCompanyInfo().then(res => res.data);
+         searchPanel.renderCompany(companyData);
+      }
+
+      $('.btnShift').on('click', function() {
+         editModal.updateInfo({
+            type: 1,
+            incData: searchPanel.getInc,
+            laborId: '',
+            periodId: criteriaProxy.period,
+         });
+      });
+
+      init();
+
+      // $('#shiftModal').modal('show');
+
+   </script>
+</body>
+</html>

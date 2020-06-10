@@ -1,0 +1,147 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+ul {
+   list-style: none;
+   margin-bottom: 0;
+}
+
+button:focus {
+   outline: none;
+}
+
+.wrap {
+   max-width: 1000px;
+   margin: 0 auto;
+   padding: 20px;
+}
+
+/*=== edit modal ===*/
+#shiftModal .modal-content {
+   border-radius: 15px;
+}
+
+#shiftModal .modal-header {
+   padding: 15px;
+   justify-content: center;
+   border-bottom: none;
+}
+
+#shiftModal .modal-title {
+   font-size: 24px;
+   font-weight: bold;
+   color: #4F3B54;
+}
+
+#shiftModal .modal-footer {
+   justify-content: space-between;
+   padding: 15px;
+   border-top: none;
+}
+
+#shiftModal .modal-footer button {
+   flex: 0 0 48%;
+   height: 40px;
+   border: 1px solid #F397AE;
+   border-radius: 100px;
+}
+
+#shiftModal .modal-footer .btnAdd {
+   display: none;
+}
+
+#shiftModal .modal-footer.add button {
+   flex: 0 0 100%;
+}
+
+#shiftModal .modal-footer.add .btnAdd {
+   display: block;
+}
+
+#shiftModal .modal-footer.add .btnRemove,
+#shiftModal .modal-footer.add .btnModify {
+   display: none;
+}
+
+#shiftModal .modal-footer button:focus {
+   outline: none;
+}
+
+.btnRemove {
+   color: #F397AE;
+   background-color: #fff;
+}
+
+.btnAdd,
+.btnModify {
+   color: #fff;
+   background-color: #F397AE;
+}
+
+.formRow {
+   margin-bottom: 20px;
+   position: relative;
+}
+
+.formRow:last-child {
+   margin-bottom: 0;
+}
+
+.formTitle {
+   margin-bottom: 8px;
+   color: #646464;
+}
+
+.formRow .form-control {
+   height: 35px;
+   padding-left: 0;
+   color: #646464;
+   border-radius: 0;
+   border-color: transparent;
+   border-bottom-color: #C5C1C0;
+}
+
+.formRow .form-control:focus {
+   box-shadow: none;
+}
+
+.fa-calendar-alt {
+   position: absolute;
+   right: 0px;
+   bottom: 12px;
+   width: 20px;
+   height: 20px;
+   font-size: 22px;
+   color: #F65D75;
+   z-index: 1;
+}
+
+input::-webkit-calendar-picker-indicator {
+   position: absolute;
+   right: 0px;
+   bottom: 5px;
+   width: 25px;
+   height: 25px;
+   z-index: 2;
+   opacity: 0;
+}
+
+.formRow select {
+   appearance: none;
+   -webkit-appearance: none;
+} 
+
+.formRow .fa-sort-down {
+   position: absolute;
+   right: 0;
+   bottom: 12px;
+   font-size: 24px;
+   color: #646464;
+}
+
+.form-control[readonly] {
+   background-color: #fff;
+}

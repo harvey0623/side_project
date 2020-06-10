@@ -108,7 +108,7 @@
             </div>
          </div>
       </div>
-
+      <div class="test"></div>
    </div>
 
    <script type="module">
@@ -119,7 +119,6 @@
       import EditModal from './js/modules/shiftTable/EditModal.js';
       import Toastr from './js/modules/Toastr.js';
       import helper from './js/modules/shiftTable/Helper.js';
-      alert(DatePanel)
       let today = new Date();
       let criteria = {
          company: '',
@@ -263,7 +262,7 @@
       });
 
       init();
-
+      $('.test').text(JSON.stringify({bane: 'hell0'}))
       // $('#shiftModal').modal('show');
 
    </script>

@@ -262,8 +262,13 @@
       });
 
       init();
-      $('.test').text(JSON.stringify({bane: 'hell0'}))
-      // $('#shiftModal').modal('show');
+      
+      let aaa = async function() {
+         let result = await axios.get('https://randomuser.me/api/?results=10').then(res => res.data);
+         console.log(result)
+      }
+
+      aaa();
 
    </script>
 </body>

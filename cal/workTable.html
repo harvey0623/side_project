@@ -252,22 +252,18 @@
          searchPanel.renderCompany(companyData);
       }
 
-      $('.btnShift').on('click', function() {
+      let clickHandler = function() {
          editModal.updateInfo({
             type: 1,
             incData: searchPanel.getInc,
             laborId: '',
             periodId: criteriaProxy.period,
          });
-      });
+      }
+
+      $('.btnShift').on('click', clickHandler);
 
       init();
-      
-      let aaa = async function() {
-         let result = await axios.get('https://randomuser.me/api/?results=10').then(res => res.data);
-         $('.test').text(JSON.stringify(result))
-      }
-      aaa();
 
    </script>
 </body>

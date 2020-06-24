@@ -266,5 +266,15 @@
       init();
 
    </script>
+   <script type="module">
+      let clickHandler = function() {
+         console.log('aaaa');
+      }
+   </script>
+   <script>
+      $('.btnShift').on('click', function() {
+         console.log(clickHandler)
+      });
+   </script>
 </body>
 </html>

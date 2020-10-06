@@ -1,0 +1,7 @@
+{
+   "hello": "hello {name}",
+   "page": {
+      "home": "home",
+      "about": "about"
+   }
+}

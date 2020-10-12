@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <link rel="stylesheet" href="./css/zoom2.css" />
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+   </head>
+
+   <body>
+      <div class="wrap">
+         <div class="img-zoom-box">
+            <div class="sourceBox">
+               <div class="glass"></div>
+               <img id="sourceImg" src="" />
+            </div>
+            <div class="gallery" id="gallery"></div>
+         </div>
+         <div class="zoomBox"></div>
+      </div>
+
+      <script type="module">
+         import ImageZoom from "./js/classZoom2.js";
+
+         let images = [
+            { id: 1, url: "./image/nothon.jpg" },
+            { id: 2, url: "./image/g1.jpg" },
+            { id: 3, url: "./image/g2.jpg" },
+            { id: 4, url: "./image/g3.jpg" },
+            { id: 5, url: "./image/scence.jpg" },
+         ];
+
+         let imageZoom = new ImageZoom({
+            sourceBox: '.sourceBox',
+            gallery: '#gallery',
+            images,
+            glassSize: {
+               width: 100,
+               height: 100,
+            },
+            zoomSize: {
+               width: 400,
+               height: 300,
+            },
+         });
+      </script>
+   </body>
+</html>

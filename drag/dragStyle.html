@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>drag style</title>
+   <link rel="stylesheet" href="./css/dragStyle.css">
+</head>
+
+<body>
+
+   <h1>You can add or remove class while drag and drop</h1>
+   <div id="drag-drop-basic">
+      <div id="source-container" data-role="drag-drop-container">
+         <div id="drag-source" draggable="true"></div>
+      </div>
+      <div id="target-container" data-role="drag-drop-container"></div>
+   </div>
+
+   <script>
+      let sourceContainerId = '';
+      let dragSources = document.querySelectorAll('[draggable="true"]');
+      let dropTargets = document.querySelectorAll('[data-role="drag-drop-container"]');
+
+      function dragStart(e) {
+         this.classList.add("dragging");
+         e.dataTransfer.setData("text/plain", e.target.id);
+         sourceContainerId = this.parentElement.id;
+      }
+
+      function dragEnd(e) {
+         this.classList.remove("dragging");
+      }
+
+      function dropped(e) {
+         if (this.id !== sourceContainerId) {
+            cancelDefault(e);
+            let id = e.dataTransfer.getData("text/plain");
+            e.target.appendChild(document.querySelector("#" + id));
+         }
+         this.classList.remove("hover");
+      }
+
+      function dragOver(e) {
+         cancelDefault(e);
+         this.classList.add("hover");
+      }
+
+      function dragLeave(e) {
+         this.classList.remove("hover");
+      }
+
+      function cancelDefault(e) {
+         e.preventDefault();
+         e.stopPropagation();
+         return false;
+      }
+
+      function init() {
+         dragSources.forEach(dragSource => {
+            dragSource.addEventListener("dragstart", dragStart);
+            dragSource.addEventListener("dragend", dragEnd);
+         });
+         dropTargets.forEach(dropTarget => {
+            dropTarget.addEventListener("drop", dropped);
+            dropTarget.addEventListener("dragenter", cancelDefault);
+            dropTarget.addEventListener("dragover", dragOver);
+            dropTarget.addEventListener("dragleave", dragLeave);
+         });
+      }
+
+      init();
+
+   </script>
+</body>
+
+</html>

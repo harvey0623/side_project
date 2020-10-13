@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Document</title>
+   <link rel="stylesheet" href="./css/vue-drag.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js"></script>
+</head>
+
+<body>
+   <div id="app">
+      <div class="wrap">
+         <ul class="list">
+            <drag-list
+               v-for="(item,index) in dragList"
+               :key="item.id"
+               :title="item.title"
+               :content="item.content"
+               :orderindex="index"
+               :dragindex.sync="dragging_order"
+               @down="downHandler"
+               @record="recordHandler"
+               @updatelist="updateHandler"
+            ></drag-list>
+         </ul>
+         <div id="loading" v-show="isLoading">Loading...</div>
+      </div>
+   </div>
+
+   <script src="./vue-modules/vue-drag/index.js"></script>
+   <script>
+      //https://codepen.io/andy901867/pen/wvwbOXB
+      new Vue({
+         el: "#app",
+         data: {
+            dragging_order: 0,
+            isLoading: false,
+            oldIdText: '',
+            dragList: [
+               { id: 1, title: 'andy', content: 'hello world1' },
+               { id: 2, title: 'Ben', content: 'hello world2' },
+               { id: 3, title: 'Candy', content: 'hello world3' },
+               { id: 4, title: 'Dog', content: 'hello world4' }
+            ],
+         },
+         computed: {
+            currentIdText() {
+               return this.dragList.map(item => item.id).join(',');
+            }
+         },
+         methods: {
+            recordHandler() {
+               this.oldIdText = this.currentIdText;
+            },
+            downHandler(val) {
+               let obj = this.dragList.splice(this.dragging_order, 1)[0];
+               this.dragList.splice(val, 0, obj);
+               this.dragging_order = val;
+            },
+            updateHandler() {
+               if (this.oldIdText === this.currentIdText) return;
+               this.isLoading = true;
+               setTimeout(() => {
+                  this.isLoading = false;
+               },  1000);
+            }
+         }
+      });
+   </script>
+</body>
+
+</html>

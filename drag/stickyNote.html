@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+   <link rel="stylesheet" href="./css/stickyNote.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js"></script>
+</head>
+<body>
+   <div id="app">
+      <sticky-note
+         v-for="note in noteList"
+         :key="note.id"
+         :id="note.id"
+         :text="note.text"
+         :color="note.color"
+         :palettes="colorList"
+         @delete="removeNote"
+         @updatecolor="setNoteBgColor"
+      ></sticky-note>
+      <div class="control">
+         <div class="postBox">
+            <post-item
+               v-for="(note,index) in noteList"
+               :key="note.id"
+               :id="note.id"
+               :text.sync="note.text"
+               :order="index"
+               @delete="removeNote"
+            ></post-item>
+         </div>
+         <div class="add" @click="addNote">Add Note</div>
+      </div>
+   </div>
+
+   <script src="./vue-modules/StickyItem/index.js"></script>
+   <script src="./vue-modules/StickyItem/ColorBlock.js"></script>
+   <script src="./vue-modules/StickyItem/PostItem.js"></script>
+   <script>
+      // https://codepen.io/howard_oh_my_god/pen/zzXrNp
+      let vm = new Vue({
+         el: '#app',
+         data: () => ({
+            noteList: [
+               { id: 1, text: 'hello', color: '#A5D8D6' },
+            ],
+            colorList: [
+               { id: 'yellow', value: '#FFEB67' },
+               { id: 'blue', value: '#A5D8D6' },
+               { id: 'red', value: '#EF898C' },
+               { id: 'green', value: '#CBE196' }
+            ],
+         }),
+         methods: {
+            addNote() {
+               this.noteList.push({
+                  id: Date.now(),
+                  text: '',
+                  color: this.colorList[0].value
+               });
+            },
+            removeNote(id) {
+               let index = this.noteList.findIndex(note => note.id === id);
+               this.noteList.splice(index, 1);
+            },
+            setNoteBgColor({ id, color }) {
+               let targetNote = this.noteList.find(note => note.id === id);
+               targetNote.color = color;
+            }
+         }
+      });
+   </script>
+</body>
+</html>

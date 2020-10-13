@@ -1,0 +1,38 @@
+.box {
+   width: 500px;
+   height: 150px;
+   margin: 0 auto;
+   display: flex;
+   justify-content: center;
+}
+
+#element {
+   width: 125px;
+   height: 125px;
+   background-image: url(http://image.cilacila.com/uploads/20190108/10/1546914025-mnasXAkSVK.jpeg);
+   background-position: center center;
+   background-size: cover;
+   background-repeat: no-repeat;
+}
+
+.container {
+   width: 130px;
+   height: 130px;
+   border: 1px dashed gray;
+   margin: 20px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+/* .a1 #element {
+   background-image: url(http://image.cilacila.com/uploads/20190314/13/1552540163-ADbpmiolUr.jpeg);
+}
+
+.a2 #element {
+   background-image: url(http://image.cilacila.com/uploads/20190112/23/1547306964-oIZSGQjHCX.jpg);
+}
+
+.a3 #element {
+   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTliZ-tRt2dLQj5Luw03TPmp3_Q67kwv7r6-Ou3S2AutXmw7ifB&s);
+} */

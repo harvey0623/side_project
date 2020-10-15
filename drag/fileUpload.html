@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+   <link rel="stylesheet" href="./css/fileUpload.css">
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js'></script>
+</head>
+<body>
+   <div id="app" v-cloak>
+      <div class="tipBox">
+         <div class="basicRule">
+            <span>{{ quantity }}張 / {{ options.maxFiles }}張</span>
+            <span>|</span>
+            <span>單一檔案最大{{ options.maxSize }}MB</span>
+            <span>|</span>
+            <span>檔案格式 {{ options.extensions.join(',') }}</span>
+         </div>
+         <p class="error" v-show="hasUploadError">{{ errorMessage }}</p>
+      </div>
+      <file-upload
+         :options="options"
+         @invalid="invalidHandler"
+         @quantity="quantityHandler"
+      ></file-upload>
+   </div>
+   
+   <script src="./vue-component/FileUpload/index.js"></script>
+   <script src="./vue-component//FileUpload/Thumb.js"></script>
+   <script>
+      new Vue({
+         el: '#app',
+         data: {
+            options: {
+               maxFiles: 10,
+               maxSize: 3,
+               extensions: ['jpeg', 'jpg', 'png', 'pdf'],
+               error: {
+                  format: '檔案格式不正確',
+                  quantity: '檔案數量超過限制',
+                  size: '檔案過大'
+               }
+            },
+            quantity: 0,
+            hasUploadError: false,
+            errorMessage: ''
+         },
+         methods: {
+            invalidHandler({ status, message }) {
+               this.hasUploadError = !status;
+               this.errorMessage = message;
+            },
+            quantityHandler(count) {
+               this.quantity = count;
+            }
+         }
+      })
+   </script>
+</body>
+</html>

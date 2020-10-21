@@ -24,9 +24,16 @@ const translate = {
    isLangSupported(lang) {
       return translate.supportedLanguages.includes(lang);
    },
+   getUserLang () {
+      return navigator.language;
+   },
+   setLS({ key, value }) {
+      localStorage.setItem(key, value);
+   },
    async changeLanguage(lang) {
       lang = translate.isLangSupported(lang) ? lang : DEFAULT_LANGUAGE;
-      if (i18n.locale === lang) return Promise.resolve(lang);
+      translate.setLS({ key: 'lang', value: lang });
+      if (translate.currentLanguage === lang) return Promise.resolve(lang);
       let message = await translate.loadLanguageFile(lang).then(res => res);
       i18n.setLocaleMessage(lang, message.default);
       translate.resetLanguage(lang);
@@ -34,7 +41,7 @@ const translate = {
    },
    async routeMiddleware(to, from, next) {
       const lang = to.params.locale;
-      if (!translate.isLangSupported(lang)) return next(`/${DEFAULT_LANGUAGE}`);
+      if (!translate.isLangSupported(lang)) return next(`/${translate.getUserLang()}`);
       return await translate.changeLanguage(lang).then(() => next());
    },
    i18nRoute(to) {

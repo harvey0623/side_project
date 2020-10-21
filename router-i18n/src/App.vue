@@ -25,29 +25,34 @@ import translate from '@/plugins/i18n/translation.js';
 export default {
 	data: () => ({
 		langList: [],
-		isFirst: true
+		isFirst: true,
+		isButtonTrigger: false
 	}),
 	methods: {
 		async changeLocale(lang) {
 			if (this.$i18n.locale === lang) return;
 			const to = this.$router.resolve({ params: { locale: lang }});
-			await translate.changeLanguage(lang).then(res => res);
-			this.$router.push(to.location);
+			// await translate.changeLanguage(lang).then(res => res);
+			this.$router.push(to.location, () => {
+				this.isButtonTrigger = true;
+				localStorage.setItem('lang', lang);
+				location.reload();
+			});
 		}
 	},
    mounted() {
 		this.langList = SUPPORTED_LANGUAGES;
 	},
 	watch: {
-		$route(val, oldVal) {
-			console.log(val, oldVal)
-			if (!this.isFirst) {
-				if (val.params.locale !== oldVal.params.locale) {
-					location.reload();
-				}
-			}
-			this.isFirst = false;
-		}
+		// $route(val, oldVal) {
+		// 	if (this.$router.mode !== 'hash') return;
+		// 	if (!this.isFirst) {
+		// 		if (val.params.locale !== oldVal.params.locale && !this.isButtonTrigger) {
+		// 			location.reload();
+		// 		}
+		// 	}
+		// 	this.isFirst = false;
+		// }
 	}
 };
 </script>

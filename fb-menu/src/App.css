@@ -1,0 +1,200 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+ul {
+   list-style-type: none;
+}
+
+a {
+   text-decoration: none;
+}
+
+:root {
+   --basicHeight: 60px;
+   --basicRadius: 5px;
+   --primaryBgColor: #242526;
+   --primaryColor: #b0b3b8;
+   --h1Color: orange;
+   --menuWidth: 360px;
+   --moveTime: 200ms;
+}
+
+body {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+   background-color: #18191a;
+}
+
+.settingBox {
+   position: relative;
+   width: var(--menuWidth);
+   transform: translateY(-200px);
+}
+
+.triggerBox {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   height: var(--basicHeight);
+   padding: 10px 15px;
+   background-color: var(--primaryBgColor);
+   color: #fff;
+   border-radius: var(--basicRadius);
+   cursor: pointer;
+}
+
+.triggerBox > span {
+   font-size: 20px;
+}
+
+.triggerBox > i {
+   font-size: 25px;
+}
+
+.dropdownBox {
+   position: absolute;
+   left: 0;
+   top: calc(var(--basicHeight) + 15px);
+   width: 100%;
+   background-color: var(--primaryBgColor);
+   border-radius: var(--basicRadius);
+   overflow: hidden;
+   transition: height var(--moveTime);
+}
+
+.menuLayout {
+   padding: 8px;
+   background-color: var(--primaryBgColor);
+   border-radius: var(--basicRadius);
+   transition: transform var(--moveTime);
+}
+
+.menuLayout.active {
+   transform: translateX(-100%);
+}
+
+.menuLayout .menu-item {
+   padding: 8px;
+   border-radius: var(--basicRadius);
+   background-color: var(--primaryBgColor);
+   transition: background-color 100ms;
+   cursor: pointer;
+}
+
+.menuLayout .menu-item:hover {
+   background-color: #3a3b3c;
+}
+
+.menu-item > a {
+   display: flex;
+   align-items: center;
+}
+
+.menu-item > .profile > img {
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+}
+
+.profile-content {
+   margin-left: 15px;
+}
+
+.profile-content > .name {
+   font-weight: bold;
+   color: var(--primaryColor);
+}
+
+.profile-content > .watch {
+   color: #8a8c8f;
+}
+
+.menuLayout .divide {
+   height: 1px;
+   margin: 8px 0;
+   background-color: #3e4042;
+}
+
+.menu-item-setting {
+   display: flex;
+   align-items: center;
+   color: #fff;
+}
+
+.menu-item-setting > .circle {
+   width: 45px;
+   height: 45px;
+   line-height: 45px;
+   text-align: center;
+   border-radius: 50%;
+   background-color: #2e2f30;
+   font-size: 22px;
+}
+
+.menu-item .settingText {
+   margin-left: 12px;
+} 
+
+.menu-item-setting > .fa-angle-right {
+   font-size: 30px;
+   margin-left: auto;
+}
+
+#subMenu {
+   position: absolute;
+   left: 100%;
+   top: 0;
+   width: var(--menuWidth);
+}
+
+.backBlock {
+   display: flex;
+   align-items: center;
+   padding: 8px;
+   color: #fff;
+}
+
+.backBlock > .circle {
+   width: 40px;
+   height: 40px;
+   line-height: 45px;
+   text-align: center;
+   border-radius: 50%;
+   cursor: pointer;
+}
+
+.backBlock > .circle:hover {
+   background-color: #3a3b3c;
+}
+
+.backBlock > .circle > i {
+   font-size: 25px;
+}
+
+.backText {
+   font-size: 22px;
+   margin-left: 8px;
+}
+
+.menu-item .pageLink {
+   color: #fff;
+}
+
+.pageLink .circle {
+   width: 40px;
+   height: 40px;
+   line-height: 40px;
+   text-align: center;
+   border-radius: 50%;
+   background-color: #2e2f30;
+   font-size: 20px;
+}
+
+.test {
+   color: var(--h1Color);
+}

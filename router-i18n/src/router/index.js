@@ -11,7 +11,7 @@ const routes = [
    {
       path: '/:locale',
 		component: RouterView,
-		beforeEnter: translate.routeMiddleware,
+		beforeEnter: translate.routeMiddleware.bind(translate),
 		children: [
 			{
 				path: '',

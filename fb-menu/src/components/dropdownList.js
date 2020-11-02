@@ -75,20 +75,24 @@ export default [
          menuName: "顯示方式偏好設定",
          lists: {
             mode: {
+               modeId: 'mode-1',
                title: '夜間模式',
+               icon: 'fa fa-moon-o',
                value: false,
                modeList: [
-                  { id: 'close', title: '關閉' },
-                  { id: 'open', title: '開啟' }
+                  { id: 'close', title: '關閉', value: false },
+                  { id: 'open', title: '開啟', value: true }
                ]
             },
             simplify: {
+               modeId: 'mode-2',
                title: '精簡模式',
+               icon: 'fa fa-moon-o',
                value: false,
                modeList: [
-                  { id: 'off', title: '關閉' },
-                  { id: 'on', title: '開啟' }
-               ],
+                  { id: 'off', title: '關閉', value: false },
+                  { id: 'on', title: '開啟', value: true }
+               ]
             }
          }
       },

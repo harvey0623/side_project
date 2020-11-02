@@ -15,15 +15,15 @@ import DropdownBox from '@/components/DropdownBox.vue';
 export default {
 	name: 'App',
 	data: () => ({
-		openDropdown: true
+		openDropdown: false
 	}),
 	methods: {
 		openMenu(evt) {
 			evt.stopPropagation();
-			// this.openDropdown = !this.openDropdown;
+			this.openDropdown = !this.openDropdown;
 		},
 		docClick(evt) {
-			// this.openDropdown = false;
+			this.openDropdown = false;
 		}
 	},
 	mounted() {
@@ -38,4 +38,4 @@ export default {
 };
 </script>
 
-<style src="./App.css"></style>
+<style src="@/assets/css/App.css"></style>

@@ -43,6 +43,7 @@
             :is="layoutName"
             v-if="hasSetting"
             :settingInfo="settingInfo"
+            @modeC="changeMode"
          ></component>
       </div>
    </div>
@@ -62,10 +63,10 @@ export default {
    },
    data: () => ({
       dropdownList,
-      settingId: 'favor',
+      settingId: '',
       adjustHeight: '',
-      isSetting: true,
-      layoutName: 'ModeLayout'
+      isSetting: false,
+      layoutName: ''
    }),
    computed: {
       primaryList() {
@@ -118,6 +119,12 @@ export default {
       },
       captureClick(evt) {
          evt.stopPropagation();
+      },
+      changeMode({ modeId, modeValue }) { //改變偏好設定
+         console.log(modeValue)
+         let modeKey = modeId === 'mode-1' ? 'mode' : 'simplify';
+         let targetObj = this.dropdownList.find(item => item.id === 'favor');
+         targetObj.children.lists[modeKey].value = modeValue;
       }
    },
    watch: {

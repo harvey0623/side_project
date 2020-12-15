@@ -11,11 +11,13 @@
 <body>
    <button id="login">login</button>
    <button id="profile">get profile</button>
+   <button id="open">open window</button>
 
    <script>
       let login = document.querySelector('#login');
       let profile = document.querySelector('#profile');
-      
+      let open = document.querySelector('#open');
+
       let loginHandler = function() {
          if (liff.isLoggedIn()) return;
          liff.login({ redirectUri: "https://harvey0623.github.io/side_project/liff.html" });
@@ -26,9 +28,17 @@
          console.log(userInfo);
       }
 
+      let openHandler = function() {
+         liff.openWindow({
+            url: 'https://www.youtube.com/watch?v=Bc-MKRsHjTo',
+            external: false
+         })
+      }
+
       let init = async function() {
          login.addEventListener('click', loginHandler);
-         profile.addEventListener('click', getProfile)
+         profile.addEventListener('click', getProfile);
+         open.addEventListener('click', openHandler);
          await liff.init({ liffId: '1655380649-1GwY0XXg' })
          const idToken = liff.getDecodedIDToken();
          console.log(idToken)

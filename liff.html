@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
+
 <body>
-   
+   <button id="login">login</button>
+   <button id="profile">get profile</button>
 
    <script>
+      let login = document.querySelector('#login');
+      let profile = document.querySelector('#profile');
       
+      let loginHandler = function() {
+         if (liff.isLoggedIn()) return;
+         liff.login({ redirectUri: "https://harvey0623.github.io/side_project/liff.html" });
+      }
+
+      let getProfile = async function() {
+         let userInfo = await liff.getProfile().then(res => res);
+         console.log(userInfo);
+         var user = liff.getDecodedIDToken();
+         var email = user.email;
+         console.log(email);
+      }
+
+      let init = async function() {
+         login.addEventListener('click', loginHandler);
+         profile.addEventListener('click', getProfile)
+         await liff.init({ liffId: '1655380649-1GwY0XXg' })
+         
+      }
+
+      init();
    </script>
 </body>
+
 </html>

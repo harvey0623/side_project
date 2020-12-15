@@ -24,15 +24,14 @@
       let getProfile = async function() {
          let userInfo = await liff.getProfile().then(res => res);
          console.log(userInfo);
-         var user = liff.getDecodedIDToken();
-         var email = user.email;
-         console.log(email);
       }
 
       let init = async function() {
          login.addEventListener('click', loginHandler);
          profile.addEventListener('click', getProfile)
          await liff.init({ liffId: '1655380649-1GwY0XXg' })
+         const idToken = liff.getDecodedIDToken();
+         console.log(idToken)
          
       }
 

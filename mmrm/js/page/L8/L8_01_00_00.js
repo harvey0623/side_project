@@ -44,7 +44,11 @@ export default function({ apiUrl, pageUrl }) {
          let faqResult = await this.getFaq().then(res => res);
          if (faqResult.length === 0) return this.isLoading = false; 
          let linkObj = faqResult[0].link_block.links[0];
-         if (linkObj.type !== 'book') return location.href = linkObj.hyperlink_url;
+         if (linkObj.type !== 'book') {
+            location.href = linkObj.hyperlink_url;
+            liff.closeWindow();
+            return;
+         }
          this.book = await this.getBook(linkObj.book_id).then(res => res);
          if (this.isRedirect) {
             let pageId = this.book.chapters[0].pages[0].page_id;

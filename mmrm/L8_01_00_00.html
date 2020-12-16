@@ -45,21 +45,18 @@
 			let isError = false;
 			try {
 				await liff.init({ liffId: '1655380649-1GwY0XXg' });
-			} catch {
-				isError = true;
-				alert('liff error');
+				app({
+					apiUrl: {
+						faqList: 'https://boiling-fortress-97054.herokuapp.com/mmrm/faqList',
+						faqBook: 'https://boiling-fortress-97054.herokuapp.com/mmrm/faqBook',
+					},
+					pageUrl: {
+						content: 'https://harvey0623.github.io/side_project/mmrm/L8_01_00_01.html'
+					}
+				});
+			} catch(err) {
+				console.log(err);
 			}
-
-			if (isError) return;
-			app({
-				apiUrl: {
-					faqList: 'https://boiling-fortress-97054.herokuapp.com/mmrm/faqList',
-					faqBook: 'https://boiling-fortress-97054.herokuapp.com/mmrm/faqBook',
-				},
-				pageUrl: {
-					content: 'https://harvey0623.github.io/side_project/mmrm/L8_01_00_01.html'
-				}
-			});
 		}
 
 		init();

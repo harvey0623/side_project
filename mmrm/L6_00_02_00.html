@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>品牌資訊</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel='stylesheet' href='./lib/slick/slick.css'/>
+	<link rel='stylesheet' href='./lib/slick/slick-theme.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L6_00_02_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/slick/slick.js'></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" class="container-fluid">
+		<div id="pic" class="row">
+			<div><img src="http://dev.wishmobile.net/app_image/960x833.png"></div>
+			<div><img src="http://dev.wishmobile.net/app_image/960x833.png"></div>
+			<div><img src="http://dev.wishmobile.net/app_image/960x833.png"></div>
+		</div>
+		<div id="summary" class="row">
+			<div class="col-12 white_back padd-20-10">
+				<div class="brand_name"><b></b></div>
+				<div class="content">
+					
+				</div>
+			</div>
+		</div>
+		<div id="store" class="row">
+			<div class="col-10 padd-20-10">
+				
+			</div>
+		</div>
+		<div id="descript" class="row white_back">
+			<div class="col-12 padd-20-10">
+				
+			</div>
+		</div>
+		<div id="bottom">
+			<div class="bot_btn">
+				<!-- <div class="bot_block">
+					<div class="bot_block_img">
+						<img src="img/btn_brand_tabbar_store_n@3x.png">
+					</div>
+					<div class="bot_block_content">
+						門市據點
+					</div>
+				</div>
+				<div class="bot_block">
+					<div class="bot_block_img">
+						<img src="img/btn_store_tabbar_menu_n@3x.png">
+					</div>
+					<div class="bot_block_content">
+						查看菜單
+					</div>
+				</div>
+				<div id="connect" class="bot_block">
+					<div class="bot_block_img">
+						<img src="img/btn_store_tabbar_menu_n@3x.png">
+					</div>
+					<div class="bot_block_content">
+						其它連結
+					</div>
+				</div>
+				<div class="bot_block">
+					<div class="bot_block_img">
+						<img src="img/btn_store_tabbar_menu_n@3x.png">
+					</div>
+					<div class="bot_block_content">
+						品牌故事
+					</div>
+				</div>
+				<div class="bot_block">
+					<div class="bot_block_img">
+						<img src="img/btn_brand_tabbar_more_n@3x.png">
+					</div>
+					<div class="bot_block_content">
+						更多服務
+					</div>
+				</div> -->
+			</div>
+		</div>
+		<!-- 聯絡方式modal -->
+		<div class="modal pointModal" id="infoModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						請選擇聯絡方式
+					</div>
+					<div class="modal-body">
+						<ul class="contactList">
+							<!-- <li class="tel_link">
+								<div class="">撥打電話</div><a href="tel:1243433">02-54488566</a>
+							</li>
+							<li class="email_link">
+								<div class="">電子郵件</div>
+							</li>
+							<li class="map_link">
+								<div class="">地圖指引</div>
+							</li>
+							<li class="cancel">
+								<div class="cancel" data-dismiss="modal">取消</div>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 連結方式modal 1 -->
+		<div class="modal pointModal" id="connectModal_1" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						請選擇連絡方式
+					</div>
+					<div class="modal-body">
+						<ul class="contactList">
+							<!-- <li>
+								<div class="">官方網站</div>
+							</li>
+							<li>
+								<div class="">FACEBOOK</div>
+							</li>
+							<li>
+								<div class="">品牌由來</div>
+							</li>
+							<li>
+								<div class="cancel" data-dismiss="modal">取消</div>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 撥打電話modal -->
+		<div class="modal pointModal" id="phone" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<p>提示</p>
+					</div>
+					<div class="modal-body">
+						<p>是否撥打電話?</p>
+						<p>01-23456789</p>
+					</div>
+					<div class="modal-footer" >
+				        <button  class="btn_cancel" data-dismiss="modal">取消</button>
+				        <button class="btn_ok"><a href="">確定</a></button>
+				     </div>
+				</div>
+			</div>
+		</div>
+		<!-- 更多服務modal -->
+		<div class="modal otherModal" id="moreModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body row">
+						<!-- <div class="col-4 connect_block">
+							<div class="connect_img">
+								<img src="img/btn_brand_pop_official_n@3x.png">
+							</div>
+							<div class="connect_text">
+								兌換點數活動
+							</div>
+						</div>
+						<div class="col-4 connect_block">
+							<div class="connect_img">
+								<img src="img/btn_brand_pop_fb_n@3x.png">
+							</div>
+							<div class="connect_text">
+								兌換票券活動
+							</div>
+						</div> -->
+					</div>
+					<div class="modal-cancel" data-dismiss="modal">
+						<div class="modal-cancel-img">
+							<img src="img/btn_nav_close_lightbg_n@3x.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="js/modules/store/store.js"></script>
+	<script type="text/javascript">
+			
+			//所有服務
+			var brand_service = [
+				{
+					'name' : '其它連結',
+					'img' : 'img/btn_brand_pop_official_n@3x.png',
+					'trigger' : {
+						'list' :[
+							{
+								'title' : '撥打電話',
+								'phone' : '01-23456789',
+							},
+							{
+								'title' : '電子郵件',
+								'email' : 'admin@henghung.com',
+							},
+						]
+					}
+				},
+				{
+					'name' : '開啟導航',
+					'img' : 'img/btn_brand_tabbar_store_n@3x.png',
+					'link' : 'https://www.google.com'
+				},
+				{
+					'name' : '查看菜單',
+					'img' : 'img/btn_brand_pop_official_n@3x.png',
+					'link' : 'https://www.google.com'
+				},
+				
+				{
+					'name' : '門市故事',
+					'img' : 'img/btn_brand_pop_official_n@3x.png',
+					'link' : 'https://www.google.com'
+				}
+			];
+			service();
+
+			//詳情圖片
+			var brand_img = "http://dev.wishmobile.net/app_image/960x833.png";
+			// img();
+
+			//摘要
+			var brand_summary ={
+				'name' : 'GK Cafe',
+				'content' : '走在台北的街頭，<br>望著來來去去的旅人',
+			}
+			// summary();
+
+			//最近門市資訊
+			var brand_store ={
+				'display' : true,
+				'gps' :true, //沒找到是false
+				'distance' : '0.5 km',
+				'tel' : '02-1234567',
+				'addr' : '台北市民權東路一段54號',
+				'url' : 'https://www.google.com'
+			}
+			// store();
+
+			//html
+			var brand_html = {
+				'display' : true,
+				'content' :[
+					'第一行',
+					'第二行第二行',
+					'第三行第三行第三行',
+					'第四行第四行第四行第四行',
+					'第五行第五行第五行第五行第五行'
+				]
+			}
+			// html();
+
+			//品牌聯絡
+			var brand_contact ={
+				'display' : true,
+				'content' : {
+					'tel' : '0987654321',
+					'mail' : 'email1@gmail.com',
+					'addr' : '220新北市板橋區縣民大道二段7號'
+				}
+			}
+
+			function get_detail(){
+				var data = {"_token": "{{ csrf_token() }}"};
+				// data.id = brand_paramenter.show;
+				$.ajax({
+	                data : data,
+	                url : "dev-yfy.com/mmrm_data",
+	                type : "POST",
+	                async : false ,
+	                success : function(rtndata) {
+	                	console.log(rtndata);
+	                	brand_img = rtndata.brand_img ;
+	                	brand_summary = rtndata.brand_summary ;
+	                	brand_store = rtndata.brand_store ;
+	                	brand_html = rtndata.brand_html ;
+	                	brand_news = rtndata.brand_news ;
+	                	brand_ticket = rtndata.brand_ticket ;
+	                	brand_point = rtndata.brand_point ;
+	                    brand_contact = rtndata.brand_contact ;
+	                },
+	                error: function (jqXHR, textStatus, errorThrown) {
+	                    
+	                }
+	            });
+	            img();
+            	summary();
+            	store();
+            	html();
+                contact();
+			}
+
+			get_detail();
+
+	</script>
+
+</body>
+
+</html>

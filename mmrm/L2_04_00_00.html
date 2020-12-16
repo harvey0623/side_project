@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>消費紀錄</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L2_04_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/dayjs/dayjs.min.js"></script>
+	<script src="./lib/dayjs/isSameOrAfter.min.js"></script>
+	<script src="./lib/dayjs/isSameOrBefore.min.js"></script>
+	<script src="./lib/dayjs/isBetween.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<template v-if="shwoEmptyBlock">
+				<div class="emptyBlock">
+					<div class="emptyBg"></div>
+					<p>您目前還沒有消費紀錄哦！</p>
+				</div>
+			</template>
+			<template v-if="hasHistoryData">
+				<ul class="tradeList">
+					<trade-list
+						v-for="item in tradeList"
+						:key="item.timeStamp"
+						:trade="item"
+						:scrollhandler="scrollHandler"
+						:api="apiUrl.transaction_detail"
+					></trade-list>
+				</ul>
+				<p class="tipBox center">僅顯示最近 6 個月內紀錄</p>
+				<div v-show="pagLoading" class="pagTip">資料加載中...</div>
+				<div v-show="!hasNextPage" class="pagTip">已經到最底囉～</div>
+			</template>
+		</div>
+
+		<div class="toggleSidebar" @click="turnOn = !turnOn"></div>
+
+		<transition name="fade">
+			<div id="maskCover" v-if="turnOn" @click="turnOn = false"></div>
+		</transition>
+
+		<history-sidebar
+			:turnon="turnOn"
+			:startdate.sync="dateRange.start"
+			:enddate.sync="dateRange.end"
+			:tipmsg.sync="tipMsg"
+			@history="updateHandler"
+		></history-sidebar>
+
+		<!-- 錯誤提示 -->
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p v-html="tipMsg"></p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#failModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="loading" v-if="isLoading"></div>
+
+	</div>
+	
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/HistorySideBar/index.js"></script>
+	<script src="./js/vue-components/TradeList/TradeItem.js"></script>
+	<script src="./js/vue-components/TradeList/index.js"></script>
+	<script type="module">
+		import app from './js/page/L2/L2_04_00_00.js';
+		app({
+			apiUrl: {
+            transaction_history: 'http://localhost:3034/mmrmProd/transaction_history',
+            transaction_detail: 'http://localhost:3034/mmrmProd/transaction_detail',
+            brandInfo: 'http://localhost:3034/mmrmProd/brand_information'
+         }
+		});
+	</script>
+</body>
+
+</html>

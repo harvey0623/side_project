@@ -1,0 +1,144 @@
+.pointIntro, .expireBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.expireBox > .inner > .pointArrow, .noRecord > .pigBg,
+.noRecord > .searchBg {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.fixBox {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.pointIntro {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 140px;
+  padding: 20px;
+  color: #fff;
+  background-color: var(--variationMain);
+}
+
+.pointIntro > .pointName {
+  margin-bottom: 5px;
+}
+
+.pointIntro > .pointTotal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+}
+
+.pointIntro > .pointTotal > .count {
+  margin-right: 10px;
+  font-size: 30px;
+  line-height: initial;
+}
+
+.pointIntro > .pointPeriod {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.pointIntro > .pointPeriod > div {
+  margin-right: 5px;
+}
+
+.pointIntro > .pointPeriod > div:last-child {
+  margin-right: 0;
+}
+
+.contentBox {
+  padding-top: 140px;
+  padding-bottom: 45px;
+}
+
+.contentBox.big {
+  padding-top: 180px;
+}
+
+.expireBox {
+  height: 40px;
+  color: #fff;
+  background-color: var(--variationSub);
+  cursor: pointer;
+}
+
+.expireBox > .inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.expireBox > .inner > .expirePoint {
+  margin: 0 5px;
+}
+
+.expireBox > .inner > .pointArrow {
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+  background-image: url("../img/btn_point_indicatorright_n_n@2x.png");
+}
+
+.toggleSidebar {
+  bottom: 60px;
+}
+
+.noRecord {
+  padding: 50px 20px 0;
+}
+
+.noRecord > .pigBg,
+.noRecord > .searchBg {
+  margin: 0 auto 40px;
+}
+
+.noRecord > .pigBg {
+  width: 80px;
+  height: 90px;
+  background-image: url("../img/img_member_pointhistory_empty_n@2x.png");
+}
+
+.noRecord > .searchBg {
+  width: 90px;
+  height: 90px;
+  background-image: url("../img/img_common_search_empty_n@2x.png");
+}
+
+.noRecord > .tipBox {
+  margin-bottom: 0;
+}
+
+.pagTip {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+/*# sourceMappingURL=L2_03_01_00.css.map */

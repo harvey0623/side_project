@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>兌換票券點數列表</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/swiper/swiper.min.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L3.1_00_00_02.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/swiper/swiper.min.js"></script>
+	<script src="./lib/countdown/jquery.countdown.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="controlPanel">
+			<div class="layoutBox">
+				<span 
+					v-for="layout in layoutList"
+					:key="layout.id"
+					:class="['layout', layout.class, { active: layoutId === layout.id }]"
+					@click="layoutHandler(layout.id)"
+				></span>
+			</div>
+			<div class="text" @click="openHandler">篩選</div>
+		</div>
+
+		<div class="wrap">
+			<div class="emptyBlock" v-show="noActivity">
+				<div class="emptyBg"></div>
+				<p>目前沒有優惠活動呦！</p>
+			</div>
+			<ul class="activityList">
+				<activity-list
+					v-for="(item,index) in activityList"
+					:key="item.coupon_activity_id"
+					:detail="item"
+					:changelayout="changeLayout"
+					:brandlist="brandList"
+					:pageurl="pageUrl.activityDetail"
+					:systemtime="systemTime"
+					:projecttime="projectTime"
+					activitytype="point"
+					:multiplebrand="isMultipleBrand"
+					@exchange="readyExchange"
+				></activity-list>
+			</ul>
+			<div class="pagTip" v-show="pagLoading">資料加載中...</div>
+			<div class="pagTip" v-show="reachBottom">已經到最底囉～</div>
+		</div>
+
+		<activity-point-sidebar
+			ref="sidebar"
+			:turnon.sync="turnOn"
+			:apiurl="apiUrl"
+			:layoutid="layoutId"
+			@search="searchHandler"
+			@switchlayout="layoutHandler"
+		></activity-point-sidebar>
+		
+		<transition name="fade">
+			<div id="maskCover" v-if="turnOn"></div>
+		</transition>
+
+		<!-- loading畫面 -->
+		<div id="loading" v-show="searchLoading"></div>
+
+		<!-- 免費兌換modal -->
+		<div class="modal msgModal" id="freeModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>您確定要免費兌換「{{ modalTitle.free }}」嗎?</p>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#freeModal').modal('hide')">取消</div>
+						<div @click="gatherParams">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 兌換失敗modal -->
+		<div class="modal msgModal" id="errorModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ modalTitle.errMsg }}</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#errorModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 代碼兌換modal -->
+		<div class="modal inputModal" id="redeemModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">請輸入兌換碼</h1>
+					</div>
+					<validation-observer tag="div" class="modal-body" ref="form">
+						<validation-provider
+							tag="div" class="inputBox" 
+							rules="required"
+							v-slot="{ errors }">
+							<input
+								type="text"
+								class="form-control" 
+								placeholder="請輸入兌換碼"
+								v-model.trim="user.code">
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+					</validation-observer>
+					<div class="modal-footer">
+						<div onclick="$('#redeemModal').modal('hide')">取消</div>
+						<div @click="gatherParams">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 代碼兌換失敗modal -->
+		<div class="modal msgModal" id="redeemFailModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ modalTitle.errMsg  }}</p>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#redeemFailModal').modal('hide')">取消</div>
+						<div @click="reWriteHandler">重新輸入</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/ActivitySideBar/point.js"></script>
+	<script src="./js/vue-components/ActivityList/index.js"></script>
+	<script type="module">
+		import app from './js/page/L3/L3.2_00_00_02.js';
+		app({
+			projectTime: 15552000 * 1000, //剩餘倒數時間
+			apiUrl:{ 
+				brefPointType: 'http://localhost:3034/mmrmProd/brief_point_activity_type',
+            searchActivity: 'http://localhost:3034/mmrmProd/search_point_activity',
+				activityInfo: 'http://localhost:3034/mmrmProd/point_activity_information',
+				redeemPointActivity: 'http://localhost:3034/mmrmProd/redeem_point_activity',
+				searchBrand: 'http://localhost:3034/mmrmProd/search_brand',
+            brandInfo: 'http://localhost:3034/mmrmProd/brand_information',
+				multipleBrand: 'http://localhost:3034/mmrmProd/multiple_brand',
+			},
+			pageUrl: {
+				activityDetail: './L3.2_02_00_00.html',
+				exchangeOk: './L3.2_01_02_00.html'
+			}
+		});
+	</script>
+</body>
+
+</html>

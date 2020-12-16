@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>點數兌換成功頁面</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/swiper/swiper.min.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L3.1_01_02_02.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="okBlock">
+			<h3>兌換成功</h3>
+			<p>點數已存入我的點數中，記得來看看呦</p>
+		</div>
+		<ul class="okList">
+			<li v-for="(meta,index) in metaList" :key="index">
+				<div class="title">{{ meta.key }}</div>
+				<div class="colon">:</div>
+				<div class="content">{{ meta.value }}</div>
+			</li>
+		</ul>
+		<div class="couponPanel">
+			<div class="left">
+				<a href="javascript:;" class="linkBlock" @click="showPointMenu">
+					<div class="itemA point"></div>
+					<p>我的點數</p>
+				</a>
+			</div>
+			<div class="center">
+				<a :href="pageUrl.couponActivity" class="linkBlock">
+					<div class="itemB point"></div>
+					<p>立即使用</p>
+				</a>
+			</div>
+			<div class="right">
+				<a :href="pageUrl.exchangePoint" class="linkBlock">
+					<div class="itemC point"></div>
+					<p>繼續兌換</p>
+				</a>
+			</div>
+		</div>
+
+		<div id="loading" v-if="isLoading"></div>
+
+		<!-- 點數選單modal -->
+		<div class="modal optionModal" id="optionModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">已兌換點數清單</h1>
+					</div>
+					<div class="modal-body">
+						<div 
+							class="couponItem" 
+							v-for="item in pointMenu"
+							:key="item.point_id">
+							<a :href="item.href">{{ item.text }}</a>
+						</div>
+						<div class="couponItem">
+							<a href="javascript:;" onclick="$('#optionModal').modal('hide')">取消</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/systemLang.js"></script>
+	<script type="module">
+		import app from './js/page/L3/L3.2_01_02_00.js';
+		app({
+			apiUrl: {
+				pointInfo: 'http://localhost:3034/mmrmProd/point_information'
+			},
+			pageUrl: {
+				pointInfo: 'http://localhost:5500/L2_03_01_00.html',
+            couponActivity: 'http://localhost:5500/L3.1_00_00_02.html',
+            exchangePoint: 'http://localhost:5500/L3.2_00_00_02.html'
+			}
+		});
+	</script>
+</body>
+
+</html>

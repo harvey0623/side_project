@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>會員資料維護</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L2_05_01_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<validation-observer tag="div" class="dataOuter" ref="form">
+				<div class="dataBox">
+					<p class="dataTitle">基本資料</p>
+					<div class="dataBody">
+						<div class="dataRow">
+							<div class="block">
+								<a href="./L2_05_02_00.html">{{ user.mobile }}</a>
+							</div>
+							<p class="dataName">帳號</p>
+						</div>
+						<div class="dataRow">
+							<div class="block">
+								<a href="./L2_05_03_00.html" class="leftIcon"></a>
+							</div>
+							<p class="dataName">密碼</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required"
+							v-slot="{ errors }">
+							<input
+								type="text" 
+								class="form-control"
+								placeholder="請輸入您的姓名" 
+								v-model.trim="user.name">
+							<p class="dataName">姓名</p>
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider
+							tag="div"
+							class="dataRow"
+							rules="required"
+							v-slot="{ errors }">
+							<select class="form-control" v-model="user.gender">
+								<option 
+									v-for="item in genderList" 
+									:key="item.value"
+									:value="item.value"
+								>{{ item.title }}</option>
+							</select>
+							<p class="dataName">性別</p>
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+
+				<div class="dataBox">
+					<div class="dataBody">
+						<div class="dataRow">
+							<input
+								type="email" 
+								class="form-control"
+								placeholder="請輸入電子信箱"
+								v-model.trim="user.email">
+							<p class="dataName">電子信箱</p>
+						</div>
+						<div class="dataRow">
+							<div class="block">
+								<span @click="birthdayHandler">{{ user.birthday }}</span>
+							</div>
+							<p class="dataName">出生日期</p>
+						</div>
+						<div class="dataRow">
+							<select 
+								class="form-control"
+								:class="{selectDown: user.city === ''}"
+								v-model="user.city">
+								<option value=""></option>
+								<option 
+									v-for="city in cityList" :key="city"
+									:value="city"
+								>{{ city }}</option>
+							</select>
+							<p class="dataName">縣市</p>
+							<div class="downIcon" :class="{ hide: user.city !== '' }"></div>
+						</div>
+						<div class="dataRow">
+							<select 
+								class="form-control"
+								:class="{selectDown: user.district === ''}"
+								v-model="user.district">
+								<option value=""></option>
+								<option 
+									v-for="area in areaList" :key="area"
+									:value="area"
+								>{{ area }}</option>
+							</select>
+							<p class="dataName">地區</p>
+							<div class="downIcon" :class="{ hide: user.district !== '' }"></div>
+						</div>
+						<div class="dataRow">
+							<input
+								type="text" 
+								class="form-control"
+								placeholder="請輸入地址" 
+								v-model.trim="user.address">
+							<p class="dataName">詳細地址</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="dataBox">
+					<div class="dataBody">
+						<div class="dataRow">
+							<select 
+								class="form-control eigthInput"
+								v-model="user.security_question">
+								<option 
+									v-for="item in questionList"
+									:key="item.value"
+									:value="item.value"
+								>{{ item.title }}</option>
+							</select>
+							<p class="dataName">忘記密碼安全問題</p>
+						</div>
+						<validation-provider
+							tag="div"
+							class="dataRow"
+							rules="required"
+							v-slot="{ errors }">
+							<input
+								type="text" 
+								class="form-control sixInput"
+								placeholder="請輸入答案"
+								v-model.trim="user.security_answer">
+							<p class="dataName">安全問題答案</p>
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+
+				<div class="dataBox">
+					<div class="dataBody">
+						<div class="dataRow">
+							<div class="block bind">
+								<div class="leftIcon" @click="bindHandler"></div>
+								<div>{{ bindText }}</div>
+							</div>
+							<p class="dataName">FB 帳號綁定</p>
+						</div>
+					</div>
+				</div>
+			</validation-observer>
+
+			<div class="btnBox">
+				<button @click="submitHandler" class="variation">儲存</button>
+			</div>
+		</div>
+
+		<!-- 提示modal -->
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>出生日期無法修改唷！</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#failModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal msgModal" id="bindModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>是否要取消綁訂FB?</p>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#bindModal').modal('hide')">取消</div>
+						<div>確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/zipCode.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: () => ({
+				zipCodeData: zipCodeData,
+				user: {
+					mobile: '0912****678',
+					name: 'harvey',
+					gender: 'M',
+					email: 'test@gmail.com',
+					birthday: '2020/01/01',
+					city: '台北市',
+					district: '中山區',
+					address: '中央路',
+					security_question: 'sq01',
+					security_answer: '中正國小',
+				},
+				genderList: [
+					{ title: window.getSystemLang('membergender_male'), value: 'M' },
+					{ title: window.getSystemLang('membergender_female'), value: 'F' },
+					{ title: window.getSystemLang('membergender_secret'), value: 'S' },
+				],
+				questionList: [
+					{ title: window.getSystemLang('membersecurityquestion_sq01'), value: 'sq01' },
+					{ title: window.getSystemLang('membersecurityquestion_sq02'), value: 'sq02' },
+					{ title: window.getSystemLang('membersecurityquestion_sq03'), value: 'sq03' },
+					{ title: window.getSystemLang('membersecurityquestion_sq04'), value: 'sq04' },
+					{ title: window.getSystemLang('membersecurityquestion_sq05'), value: 'sq05' }
+				],
+				bindValue: '',
+				bindText: '未綁訂'
+			}),
+			computed: {
+				cityList() {
+					if (this.zipCodeData.length === 0) return [];
+					return this.zipCodeData.map(item => item.name);
+				},
+				areaList() {
+					let region = this.zipCodeData.find(item => item.name === this.user.city);
+					if (region !== undefined) return region['districts'];
+					else return [];
+				}
+			},
+			methods: {
+				birthdayHandler() {
+					$('#failModal').modal('show');
+				},
+				bindHandler() {
+					$('#bindModal').modal('show');
+				},
+				async submitHandler() {
+					let isValid = await this.$refs.form.validate().then(res => res);
+					if (!isValid) return;
+				},
+			},
+			mounted() {
+				
+			}
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>測試書本</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L4.3_00_02_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="header">
+				<div class="topBar detail">
+					<div class="listBtn m-auto text-white">章節列表 <i class="fas fa-caret-down"></i></div>
+				</div>
+			</div>
+
+
+						<div class="content" id="chapter-0">
+				<div class="title">測試章節</div>
+								<div class="card" page_id="134">
+					<div class="card-body">
+						<img src=" https://mmrm-file-uat.wisho2o.com/images/book_media20200506145428_5eb25f249ffe0_915_600.jpeg ">
+					</div>
+					<div class="card-footer">
+						<div class="title">測試頁面</div>
+						<div class="pageNumber">P.1</div>
+					</div>
+				</div>
+											</div>
+						<div class="content" id="chapter-1">
+				<div class="title">第二章</div>
+								<div class="card" page_id="135">
+					<div class="card-body">
+						<img src="./img/img_common_placeholder_pic_n@3x.png ">
+					</div>
+					<div class="card-footer">
+						<div class="title">第二章第一頁</div>
+						<div class="pageNumber">P.2</div>
+					</div>
+				</div>
+								<div class="card" page_id="136">
+					<div class="card-body">
+						<img src="./img/img_common_placeholder_pic_n@3x.png ">
+					</div>
+					<div class="card-footer">
+						<div class="title">2-2</div>
+						<div class="pageNumber">P.3</div>
+					</div>
+				</div>
+												<p class="tipBox my-4 center">已經到最底囉～</p>
+							</div>
+					</div>
+
+		<div id="maskCover" class=""></div>
+		<div id="sidebar" class="">
+			<div class="sidebarPanel">
+				<div class="empty btn-link">返回</div>
+				<div class="seekText">章節列表</div>
+				<div class="sureText"></div>
+			</div>
+			<ul class="sidebarFilter">
+								<li onclick="anchor('chapter-0')">
+					<div class="filterTitle">測試章節</div>
+					<div class="dateOuter">
+                                                P.1
+                        						<div class="arrowBox"></div>
+					</div>
+				</li>
+								<li onclick="anchor('chapter-1')">
+					<div class="filterTitle">第二章</div>
+					<div class="dateOuter">
+                                                P.2 - 3
+												<div class="arrowBox"></div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			$('.listBtn').on('click',function(){
+				sidebarShow('#sidebar',true);
+				$('#maskCover').fadeIn(200);
+			});
+
+			$('#maskCover').on('click',function(){
+				sidebarShow('#sidebar',false);
+				$('#maskCover').fadeOut(200);
+			});
+
+			$('.empty').on('click',function(){
+				sidebarShow('#sidebar',false);
+				$('#maskCover').fadeOut(200);
+			});
+
+			$('#maskCover').fadeOut(0);
+
+			$('.card').click(function(){
+				var page_id = $(this).attr('page_id');
+				window.location.href = "/news_page?page_id="+page_id+"&book_id=77" ;
+			});
+		});
+
+		function sidebarShow(str,boo){
+			if(boo){
+				$(str).addClass('show');
+			}else{
+				$(str).removeClass('show');
+			}
+		}
+
+		function anchor(chapter){
+			document.getElementById(chapter).scrollIntoView();
+			$('.empty').trigger('click');
+		}
+	</script>
+</body>
+
+</html>

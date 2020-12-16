@@ -1,0 +1,750 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>最新消息</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L4.3_00_01_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="header">
+				<div class="topBar">
+					<div class="listMode d-flex">
+						<div class="mode1Btn btn btn-sm active"><i class="fas fa-th-large"></i></div>
+						<div class="mode2Btn btn btn-sm"><i class="fas fa-th-list"></i></div>
+					</div>
+					<div class="btnGroup">
+						<div class="filterBtn btn btn-link">
+							篩選 <span class="badge badge-pill badge-primary"></span>
+						</div>
+					</div>
+				</div>
+				<div class="menuSlide">
+					<div class="btnGroup">
+						<div class="mBtn btn active" key_id="0">全部類別</div>
+						<div class="mBtn btn" key_id="34">會員專屬</div>
+						<div class="mBtn btn" key_id="45">新品推薦</div>
+						<div class="mBtn btn" key_id="110">app內頁功能</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="content mode1">
+				<div class="card">
+					<div class="card-body">
+					  <img src="https://fakeimg.pl/300x150/">
+					</div>
+					<div class="card-footer">
+					  <div class="date">2020/12/31</div>
+					  <div class="title">hello</div>
+					  <div class="serviceKind multiple">
+							<div class="icon">
+							  <img src="">
+							</div>
+						  <div class="name">hello world</div>
+					  </div>
+				  </div>
+				</div>
+				<div class="emptyBox"></div>
+				<p class="tipBox center">目前沒有最新消息呦！</p>
+			</div>
+		</div>
+
+		<div id="maskCover" class=""></div>
+		<div id="sidebar" class="">
+			<div class="sidebarPanel">
+				<div class="empty"></div>
+				<div class="seekText font-weight-bold">篩選</div>
+				<div class="sureText">確定</div>
+			</div>
+			<ul class="sidebarFilter">
+				<li class="chooseBrand" onclick="sidebarShow('.sidebarPage.sort',true);">
+					<div class="filterTitle">選擇品牌</div>
+					<div class="dateOuter dateOuter_sort"><span>全部</span>
+						<div class="arrowBox"></div>
+					</div>
+				</li>
+				<li onclick="sidebarShow('.sidebarPage.brand',true);">
+					<div class="filterTitle">選擇分類</div>
+					<div class="dateOuter dateOuter_brand"><span>全部</span>
+						<div class="arrowBox"></div>
+					</div>
+				</li>
+				<li>
+					<div class="filterTitle">瀏覽模式</div>
+					<div class="btnGroup d-flex">
+						<div class="mode1Btn btn btn-sm active"><i class="fas fa-th-large"></i></div>
+						<div class="mode2Btn btn btn-sm"><i class="fas fa-th-list"></i></div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="sidebarPage sort">
+			<div class="sidebarPanel">
+				<div class="empty btn-link">取消</div>
+				<div class="seekText font-weight-bold">篩選</div>
+				<div class="sureText">確定</div>
+			</div>
+			<ul class="sidebarFilter">
+				<li class="border-0">
+					<div class="btn btn-link p-0" onclick="allCheck('sort');">全部清除</div>
+					<div class="btn btn-link p-0" onclick="allCheckClear('sort');">全部勾選</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20190823162629_5d5fa335d4342_200_200.png" ></div>
+						<div class="name">威許移動</div>
+					</div>
+					<div class="checkCircle checked" key_id="2">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20190902175354_5d6ce6b22fb7a_200_200.png" ></div>
+						<div class="name">Dreamers Coffee Roasters</div>
+					</div>
+					<div class="checkCircle checked" key_id="5">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20190902172254_5d6cdf6e86c36_200_200.png" ></div>
+						<div class="name">HERBIVORE</div>
+					</div>
+					<div class="checkCircle checked" key_id="6">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20190902174724_5d6ce52ca0c67_200_200.png" ></div>
+						<div class="name">米堂</div>
+					</div>
+					<div class="checkCircle checked" key_id="7">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20190902174922_5d6ce5a26171b_200_200.png" ></div>
+						<div class="name">MiaCucina</div>
+					</div>
+					<div class="checkCircle checked" key_id="8">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20190902175112_5d6ce610e187c_200_200.png" ></div>
+						<div class="name">Miopane</div>
+					</div>
+					<div class="checkCircle checked" key_id="9">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20200611154856_5ee1e1e82d3c3_300_300.png" ></div>
+						<div class="name">石二鍋</div>
+					</div>
+					<div class="checkCircle checked" key_id="10">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20191114110801_5dccc511c64f0_50_50.png" ></div>
+						<div class="name">享鴨</div>
+					</div>
+					<div class="checkCircle checked" key_id="11">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20191114110940_5dccc5741e1c5_50_50.png" ></div>
+						<div class="name">青花驕</div>
+					</div>
+					<div class="checkCircle checked" key_id="12">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20191115104002_5dce100253ef5_50_50.png" ></div>
+						<div class="name">陶板屋</div>
+					</div>
+					<div class="checkCircle checked" key_id="13">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20191115104039_5dce102745ca5_50_50.png" ></div>
+						<div class="name">西堤</div>
+					</div>
+					<div class="checkCircle checked" key_id="14">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20200106155156_5e12e71c5dfcd_523_523.png" ></div>
+						<div class="name">瓦城</div>
+					</div>
+					<div class="checkCircle checked" key_id="17">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20191230164942_5e09ba2688141_960_960.jpeg" ></div>
+						<div class="name">時時香</div>
+					</div>
+					<div class="checkCircle checked" key_id="18">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20191230165134_5e09ba96b0615_1200_1200.jpeg" ></div>
+						<div class="name">1010 湘</div>
+					</div>
+					<div class="checkCircle checked" key_id="19">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="" ></div>
+						<div class="name">TECO</div>
+					</div>
+					<div class="checkCircle checked" key_id="21">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="" ></div>
+						<div class="name">齊民市集有機鍋物</div>
+					</div>
+					<div class="checkCircle checked" key_id="24">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20200831113446_5f4c6fd6491a0_50_50.png" ></div>
+						<div class="name">永豐餘生技</div>
+					</div>
+					<div class="checkCircle checked" key_id="22">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20200610114728_5ee057d0d76a9_130_130.jpeg" ></div>
+						<div class="name">銀座杏子日式豬排</div>
+					</div>
+					<div class="checkCircle checked" key_id="27">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20200610114622_5ee0578e93050_130_131.jpeg" ></div>
+						<div class="name">段純貞牛肉麵</div>
+					</div>
+					<div class="checkCircle checked" key_id="26">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20200610122910_5ee061962f981_90_79.png" ></div>
+						<div class="name">六角總公司</div>
+					</div>
+					<div class="checkCircle checked" key_id="28">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="icon"><img src="https://mmrm-file-uat.wisho2o.com/images/brand20190827161408_5d64e650e2094_200_200.png" ></div>
+						<div class="name">威威科技</div>
+					</div>
+					<div class="checkCircle checked" key_id="1">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+
+		<div class="sidebarPage brand">
+			<div class="sidebarPanel">
+				<div class="empty btn-link">取消</div>
+				<div class="seekText">篩選</div>
+				<div class="sureText">確定</div>
+			</div>
+			<ul class="sidebarFilter">
+				<li class="border-0">
+					<div class="btn btn-link p-0" onclick="allCheck('brand');">全部清除</div>
+					<div class="btn btn-link p-0" onclick="allCheckClear('brand');">全部勾選</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="name">會員專屬</div>
+					</div>
+					<div class="checkCircle checked" key_id="34">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="name">新品推薦</div>
+					</div>
+					<div class="checkCircle checked" key_id="45">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+								<li>
+					<div class="serviceKind">
+						<div class="name">app內頁功能</div>
+					</div>
+					<div class="checkCircle checked" key_id="110">
+						<div class="icon"><i class="fas fa-check-circle"></i></div>
+						<div class="bg"><i class="fal fa-plus-circle"></i></div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="modal fade" id="outlinkModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header justify-content-center">
+					<h5 class="modal-title text-secondary">請選擇欲前往的連結</h5>
+				</div>
+				<div class="modal-body px-0 py-2 text-center">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal"><h5>取消</h5></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header justify-content-center border-0">
+					<h5 class="modal-title text-secondary">提示</h5>
+				</div>
+				<div class="modal-body pt-0 text-center">
+					<h5 class="mb-3 text-secondary">即將開啟外部連結，<br />
+是否確定前往?</h5>
+				</div>
+				<div class="modal-footer">
+					<div class="btn-group w-100 m-0" role="group" aria-label="Button group with nested dropdown">
+						<button type="button" class="btn btn-link py-3" data-dismiss="modal"><h5>取消</h5></button>
+						<button type="button" class="btn btn-link py-3" data-toggle="modal"><h5>確定</h5></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="promptModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header justify-content-center border-0">
+					<h5 class="modal-title text-secondary">提示</h5>
+				</div>
+				<div class="modal-body pt-0 text-center">
+					<h5 class="mb-3 text-secondary">line_bot/wish_mmrm.g_profileauth </h5>
+					<input class="form-control form-control-sm" type="text" placeholder="">
+				</div>
+				<div class="modal-footer">
+					<div class="btn-group w-100 m-0" role="group" aria-label="Button group with nested dropdown">
+						<button type="button" class="btn btn-link py-3" data-dismiss="modal"><h5>取消</h5></button>
+						<button type="button" class="btn btn-link py-3"><h5>確定</h5></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="loading"></div>
+
+	<script>
+		$(document).ready(function() {
+			$('.mode1Btn').on('click',function(){
+				$('.mode2Btn').removeClass('active');
+				$('.mode1Btn').addClass('active');
+				$('.content').removeClass('mode2').addClass('mode1');
+			});
+
+			$('.mode2Btn').on('click',function(){
+				$('.mode1Btn').removeClass('active');
+				$('.mode2Btn').addClass('active');
+				$('.content').removeClass('mode1').addClass('mode2');
+			});
+
+			$('.menuSlide .btn').on('click',function(){
+				if(!$(this).hasClass('active')){
+					$('.menuSlide .btn').removeClass('active');
+					$(this).addClass('active');
+					cate_id = [$(this).attr('key_id')];
+					// brand_id = [0] ;
+					get_news(0);
+				}
+			});
+
+			$('.filterBtn').on('click',function(){
+				sidebarShow('#sidebar',true);
+				$('#maskCover').fadeIn(200);
+			});
+
+			$('#maskCover').on('click',function(){
+				sidebarShow('#sidebar',false);
+				sidebarShow('.sidebarPage',false);
+				$('#maskCover').fadeOut(200);
+			});
+
+			$('.sidebarPage .empty , .sidebarPage .sureText').on('click',function(){
+				sidebarShow('.sidebarPage',false);
+			});
+
+			$('.checkCircle').on('click',function(){
+				$(this).toggleClass('checked');
+			});
+
+			$('#maskCover').fadeOut(0);
+
+			$('#sidebar .sidebarPanel .sureText').click(function(){
+				$('#maskCover').trigger('click');
+				console.log('brand_id:'+brand_id,'cate_id:'+cate_id);
+				if($('.brand .checked').length == $('.brand .serviceKind').length){
+					get_news(0);
+				}else{
+					get_news(1);
+				}
+			});
+
+			$('.sort .sureText').click(function(){
+				brand_id = [];
+				var sum = 0 ;
+				for(i=0 ; i< $('.sort .checked').length ; i++){
+					brand_id.push($('.sort .checked').eq(i).attr('key_id'));
+					sum += 1;
+				}
+				$('.dateOuter_sort span').remove();
+				if(sum == $('.sort .checkCircle').length){
+					$('.dateOuter_sort').prepend(`<span>全部</span>`)
+				}else{
+					$('.dateOuter_sort').prepend('<span class="badge badge-pill badge-primary">'+sum+'</span>')
+				}
+			});
+
+			$('.sort .empty').click(function(){
+				for(i=0 ; i< $('.sort .checkCircle').length ; i++){
+					if(brand_id.indexOf($('.sort').find('.checkCircle').eq(i).attr('key_id')) == -1){
+						$('.sort').find('.checkCircle').eq(i).removeClass('checked');
+					}else{
+						$('.sort').find('.checkCircle').eq(i).addClass('checked');
+					}
+				}
+			});
+
+			$('.brand .sureText').click(function(){
+				cate_id = [];
+				var sum = 0;
+				for(i=0 ; i< $('.brand .checked').length ; i++){
+					cate_id.push($('.brand .checked').eq(i).attr('key_id'));
+					sum += 1;
+				}
+				$('.dateOuter_brand span').remove();
+				if(sum == $('.brand .checkCircle').length){
+					$('.dateOuter_brand').prepend("<span>全部</span>")
+				}else{
+					$('.dateOuter_brand').prepend('<span class="badge badge-pill badge-primary">'+sum+'</span>')
+				}
+			});
+
+			$('.brand .empty').click(function(){
+				for(i=0 ; i< $('.brand .checkCircle').length ; i++){
+					if(cate_id.indexOf($('.brand').find('.checkCircle').eq(i).attr('key_id')) == -1){
+						$('.brand').find('.checkCircle').eq(i).removeClass('checked');
+					}else{
+						$('.brand').find('.checkCircle').eq(i).addClass('checked');
+					}
+				}
+			});
+
+			var key1,key2;
+			$('.content').on('click','.card',function(){
+				var link_eq = $(this).attr('link_eq');
+				console.log(link_eq,link_data);
+				if(link_data[link_eq].length > 1){
+					var block;
+					$('#outlinkModal .modal-body').empty();
+					for(i=0 ; i<link_data[link_eq].length ; i++){
+						block = '<button type="button" class="btn btn-link m-auto" key1="'+link_eq+'" key2="'+i+'"><h5>'+link_data[link_eq][i].title+'</h5></button>';
+						if(i != link_data[link_eq].length - 1){
+							block += '<hr class="my-2">' ;
+						}
+						$('#outlinkModal .modal-body').append(block);
+					}
+					$('#loading').hide(); //避免自動觸發
+					$('#outlinkModal').modal();
+				}else{
+					key1 = link_eq;
+					key2 = 0;
+					web_judge();
+				}
+			});
+
+			$('#outlinkModal').on('click','button.m-auto', function(){
+				key1 = $(this).attr('key1');
+				key2 = $(this).attr('key2');
+				web_judge();
+			});
+
+			$('#confirmModal .modal-footer').find('button').eq(1).click(function(){
+				if(link_data[key1][key2].hyperlink_open_with_password){
+					$('#confirmModal').modal('hide');
+					$("#promptModal").modal();
+				}else{
+					window.location.href = link_data[key1][key2].hyperlink_url;
+				}
+
+			})
+
+			$('#promptModal .modal-footer').find('button').eq(1).click(function(){
+				window.location.href = link_data[key1][key2].hyperlink_url;
+			})
+
+			function web_judge(){
+				$('#outlinkModal').modal('hide');
+				if(link_data[key1][key2].type == 'hyperlink'){
+					if(link_data[key1][key2].hyperlink_alert == null){
+						if(link_data[key1][key2].hyperlink_open_with_password){
+							$("#promptModal").modal();
+						}else{
+							window.location.href = link_data[key1][key2].hyperlink_url;
+						}
+					}else{
+						$("#confirmModal").modal();
+					}
+				}else if(link_data[key1][key2].type == 'book'){
+					window.location.href = "https://dev.mmrm.com/news_chapter?book_id="+link_data[key1][key2].book_id;
+				}else{
+					window.location.href = link_data[key1][key2].hyperlink_url;
+				}
+			}
+
+			brand_id = [
+						"2"
+							,
+											"5"
+							,
+											"6"
+							,
+											"7"
+							,
+											"8"
+							,
+											"9"
+							,
+											"10"
+							,
+											"11"
+							,
+											"12"
+							,
+											"13"
+							,
+											"14"
+							,
+											"17"
+							,
+											"18"
+							,
+											"19"
+							,
+											"21"
+							,
+											"24"
+							,
+											"22"
+							,
+											"27"
+							,
+											"26"
+							,
+											"28"
+							,
+											"1"
+									];
+
+
+			cate_id = [
+									"34"
+										,
+														"45"
+										,
+														"110"
+												];
+
+			getMultipleBrand();
+			get_news(0,true)//第一次載入完要確認是否直接觸發
+		});
+
+		function sidebarShow(str,boo){
+			if(boo){
+				$(str).addClass('show');
+			}else{
+				$(str).removeClass('show');
+			}
+		}
+
+		function allCheck(str){
+			let root = $('.sidebarPage.' + str);
+			root.find('.checkCircle').removeClass('checked');
+		}
+
+		function allCheckClear(str){
+			let root = $('.sidebarPage.' + str);
+			root.find('.checkCircle').addClass('checked');
+		}
+
+		var link_data = [] ;
+		var cate_id = [] ;
+		var brand_id = [] ;
+
+		function getMultipleBrand () { //取得多品牌資料
+			$.ajax({
+				url: 'http://localhost:3034/mmrmProd/multiple_brand',
+				method: 'post',
+				data: {},
+				success(res) {
+					let isMultiple = res.multiple_brand === '1';
+					let method = isMultiple ? 'removeClass' : 'addClass';
+					$('.content')[method]('multiple');
+					$('.chooseBrand')[method]('multiple');
+				}
+			})
+		}
+
+		function get_news(filter,link_trigger = false){
+			$('.content').empty();
+			$('#loading').show();
+			var data ={
+				"brand_id" : brand_id,
+				"cate_id" : cate_id
+			};
+
+			$.ajax({
+				data : data,
+			    url : "/news_get",
+			    type : "get",
+			    success : function(rtndata){
+			    		console.log(rtndata,rtndata.length);
+			    		link_data = [];
+			    		if(filter){
+			    			$('.header .badge').text(rtndata.length);
+			    			$('.menuSlide').hide();
+			    		}
+			    		if(rtndata.length != 0){
+			    			var block;
+			    			for(i=0 ; i<rtndata.length ; i++){
+			    				link_data.push(rtndata[i].link.links);
+			    				block = '<div class="card" link_eq="'+i+'">'+
+				    						'<div class="card-body">'+
+												'<img src="'+rtndata[i].img+'">'+
+											'</div>'+
+											'<div class="card-footer">'+
+												'<div class="date">'+rtndata[i].date+'</div>'+
+												'<div class="title">'+rtndata[i].title+'</div>'+
+												'<div class="serviceKind">'+
+													'<div class="icon"><img src="'+rtndata[i].img_cycle+'"></div>'+
+													'<div class="name">'+rtndata[i].name+'</div>'+
+												'</div>'+
+											'</div>'+
+										'</div>';
+								$(".content").append(block);
+			    			}
+			    			$('.content').append(`<p class="tipBox my-4 center">已經到最底囉</p>`);
+			    		}else{
+			    			$('.content').append(
+			    					'<div class="emptyBox"></div>'+
+									`<p class="tipBox center">目前沒有最新消息呦！</p>`
+			    				);
+			    		}
+
+			    		var link_eq = -1;
+			    		if(link_trigger && link_eq != -1){
+			    			$('.content').find('.card').eq(link_eq).trigger('click');
+			    		}else{
+			    			$('.container').show();
+			    			$('#loading').hide();
+
+			    		}
+			    },
+			    error: function (jqXHR, textStatus, errorThrown){
+			    	$('.content').append(
+    					'<div class="emptyBox"></div>'+
+						`<p class="tipBox center">目前沒有最新消息呦！</p>`
+    				);
+    				$('.container').show();
+			    	$('#loading').hide();
+			    }
+			})
+		}
+	</script>
+</body>
+
+</html>

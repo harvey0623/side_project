@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>優惠券折價卡</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/swiper/swiper.min.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L2.1_02_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/swiper/swiper.min.js"></script>
+	<script src="./lib/qrcode/qrcode.min.js"></script>
+	<script src="./lib/jsBarcode/JsBarcode.all.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div class="mask">
+		<div id="loading"></div>
+		<div class="colorBlock"></div>
+		<div class="maskInner">
+			<div class="panel">
+				<div class="closeBg"></div>
+				<div class="codeText"></div>
+				<img src="" class="brandLogo" alt="">
+			</div>
+			<div class="cardBox">
+				<div class="cardHead">
+					<div class="name"></div>
+					<div class="duration"></div>
+				</div>
+				<div class="cardBody">
+					<div class="codeBox" id="qrcode"></div>
+					<div class="codeBox" id="barCodeBox"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 放大區塊 -->
+	<div class="enlargeBox">
+		<div class="largeInner">
+			<div class="cancelBox">
+				<div class="largeCancel"></div>
+			</div>
+			<div id="largeBody" class="largeBody"></div>
+		</div>
+	</div>
+
+	<script src="./js/src/systemLang.js"></script>
+	<script type="module">
+		import app from './js/page/L2/L2.1_02_00_00.js';
+		app({ 
+			appName: '',
+			apiUrl: {
+				memberProfile: 'https://boiling-fortress-97054.herokuapp.com/mmrm/member_profile',
+				memberCard: 'https://boiling-fortress-97054.herokuapp.com/mmrm/memberCard',
+				couponDetail: 'https://boiling-fortress-97054.herokuapp.com/mmrm/coupon_detail',
+				couponInfo: 'https://boiling-fortress-97054.herokuapp.com/mmrm/coupon_info',
+				brandInfo: 'https://boiling-fortress-97054.herokuapp.com/mmrm/brandInfo'
+			}
+		});
+	</script>
+</body>
+
+</html>

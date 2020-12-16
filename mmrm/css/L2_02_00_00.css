@@ -1,0 +1,69 @@
+.progressTop {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.levelBox {
+  margin-bottom: 25px;
+}
+
+.levelBox:last-child {
+  margin-bottom: 0;
+}
+
+.levelBox > .levelTitle {
+  padding-left: 15px;
+  margin-bottom: 20px;
+  color: #797979;
+}
+
+.levelBox > .levelBody {
+  min-height: 100px;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.progressBox {
+  margin-bottom: 25px;
+}
+
+.progressBox:last-child {
+  margin-bottom: 0;
+}
+
+.progressTop {
+  margin-bottom: 10px;
+  color: #797979;
+}
+
+.progressBar {
+  position: relative;
+  height: 7.5px;
+  background-color: #c9c9c9;
+  border-radius: 100px;
+}
+
+.run {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #797979;
+  border-radius: 100px;
+  -webkit-transition: width 1s;
+  transition: width 1s;
+}
+
+.run.complete {
+  background-color: var(--variationMain);
+}
+/*# sourceMappingURL=L2_02_00_00.css.map */

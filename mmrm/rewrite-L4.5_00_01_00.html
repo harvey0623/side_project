@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>線上型錄</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/rewrite-L4.5_00_01_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="catalogBar">
+			<div class="layoutIcon" :class="{active:isSwitch}" @click="switchHandler"></div>
+			<p>{{ catalogTitle }}</p>
+			<div class="filterIcon" @click="turnOn = true"></div>
+		</div>
+		<div class="bookCover">
+			<div class="typeA" v-show="!isSwitch">
+				<catalog-cover 
+					:cover-bg="pageCoverBg"
+					:current-page="currentPage"
+					@dir="changeDir"
+				></catalog-cover>
+				<div class="controlPanel">
+					<div 
+						class="dirBox left" 
+						:class="{disabled:isFirstPage}" 
+						@click="changeDir(-1)"
+					></div>
+					<div>{{ currentPage + 1 }} / {{ totalPage }}</div>
+					<div 
+						class="dirBox right" 
+						:class="{disabled:isLastPage}"
+						@click="changeDir(1)"
+					></div>
+				</div>
+				<a :href="pageDetailLink" class="pageDetailLink"></a>
+			</div>
+			<div class="typeB" v-show="isSwitch">
+				<div class="mycontainer">
+					<catalog-block
+						v-for="(chapter,index) in chapterList"
+						:key="index"
+						:chapter="chapter"
+						:pageurl="pageUrl.page"
+						:current-page="currentPage"
+					></catalog-block>
+				</div>
+			</div>
+		</div>
+		<chapter-sidebar
+			:turnon.sync="turnOn"
+			:chapterlist="chapterList"
+			:pageurl="pageUrl.page"
+			:current-page="currentPage"
+			:is-switch="isSwitch"
+			@showloading="isLoading = true"
+		></chapter-sidebar>
+		<transition name="fade">
+			<div id="maskCover" v-if="turnOn"></div>
+		</transition>
+
+		<div id="loading" v-if="isLoading"></div>
+	</div>
+
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/CatalogBlock/index.js"></script>
+	<script src="./js/vue-components/CatalogBlock/CatalogItem.js"></script>
+	<script src="./js/vue-components/CatalogBlock/CatalogCover.js"></script>
+	<script src="./js/vue-components/ChapterSidebar/index.js"></script>
+	<script type="module">
+		import app from './js/page/L4/rewrite-L4.5_00_01_00.js';
+		app({
+			apiUrl: {
+				book: 'http://localhost:3034/mmrmProd/cms_book',
+			},
+			pageUrl: {
+				page: './rewrite-L4.5_00_03_00.html'
+			}
+		});
+	</script>
+</body>
+
+</html>

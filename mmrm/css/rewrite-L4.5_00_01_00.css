@@ -1,0 +1,137 @@
+.catalogBar, .controlPanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.catalogBlock > .catalogOuter:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+#app {
+  padding-top: 45px;
+}
+
+.catalogBar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 45px;
+  padding: 0 15px;
+  background-color: #797979;
+  color: #fff;
+}
+
+.catalogBar > div {
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+}
+
+.catalogBar > p {
+  font-size: 18px;
+}
+
+.layoutIcon {
+  background-image: url("../img/btn_cms_picstyle_index_n@2x.png");
+}
+
+.layoutIcon.active {
+  background-image: url("../img/btn_nav_close_popup_n@2x.png");
+}
+
+.filterIcon {
+  background-image: url("../img/btn_cms_picstyle_chapter_n@2x.png");
+}
+
+.typeA {
+  position: relative;
+}
+
+.typeA > .pageDetailLink {
+  position: absolute;
+  right: 15px;
+  bottom: 60px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-image: url("../img/btn_cms_picstyle_more_n@2x.png");
+  background-size: contain;
+  background-position: center center;
+}
+
+.pageCoverBox {
+  height: calc(100vh - 90px);
+  background-color: #000;
+  background-image: url("../img/placeholder.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
+.controlPanel {
+  height: 45px;
+  padding: 0 5px;
+  color: #797979;
+}
+
+.controlPanel > .dirBox {
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+}
+
+.controlPanel > .dirBox.disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.controlPanel > .dirBox.left {
+  background-image: url("../img/btn_listcore_indicatorleft_std_n@2x.png");
+}
+
+.controlPanel > .dirBox.right {
+  background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+}
+
+.catalogBlock > .catalogTitle {
+  margin-bottom: 15px;
+  color: #797979;
+}
+
+.catalogBlock > .catalogOuter > .catalogItem {
+  float: left;
+  width: calc(50% - 12px);
+  margin-bottom: 20px;
+}
+
+.catalogBlock > .catalogOuter > .catalogItem:nth-child(odd) {
+  margin-right: 12px;
+}
+
+.catalogBlock > .catalogOuter > .catalogItem:nth-child(even) {
+  margin-left: 12px;
+}
+
+.catalogBlock > .catalogOuter > .catalogItem > .catalogBg {
+  padding-top: 140%;
+  background-image: url("../img/placeholder.jpg");
+  background-position: center center;
+  background-size: cover;
+}
+
+.catalogBlock > .catalogOuter > .catalogItem > .pageNumber {
+  padding-top: 5px;
+  color: #797979;
+  text-align: center;
+}
+/*# sourceMappingURL=rewrite-L4.5_00_01_00.css.map */

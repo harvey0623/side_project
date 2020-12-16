@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>點數說明</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L2_03_02_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="wrap" v-if="pointData !== null">
+			<div class="introBox">
+				<div class="topBlock">
+					<img :src="pointData.feature_image.url" alt="">
+					<p>{{ pointData.title }}</p>
+				</div>
+				<ul class="descList">
+					<li 
+						v-for="(item,index) in metaList"
+						:key="index">
+						<div>{{ item.key }}</div>
+						<div class="colon">:</div>
+						<div>{{ item.value }}</div>
+					</li>
+				</ul>
+			</div>
+			<div class="content" v-html="pointData.content"></div>
+		</div>
+
+		<div id="loading" v-if="isLoading"></div>
+	</div>
+
+	<script type="module">
+		import app from './js/page/L2/L2_03_02_00.js';
+		app({
+			apiUrl: {
+            pointInfo: 'http://localhost:3034/mmrmProd/point_information'
+         }
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>品牌資訊</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L5_02_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" class="container-fluid">
+		<div id="index" class="row">
+			<div id="index_right">
+				<img src="img/btn_listcore_indicatorright_std_n@3x.png">
+			</div>
+			<div id="index_left">
+				<img src="img/btn_listcore_indicatorleft_std_n@3x.png">
+			</div>
+			<div class="index_content">
+				<div class="index_content_body">
+					<!-- <div class="index_img">
+						<img src="img_test/gkcafe.jpg">
+					</div>
+					<div class="index_img">
+						<img src="img_test/gkcafe.jpg">
+					</div>
+					<div class="index_img index_img_show">
+						<img src="img_test/gkcafe.jpg">
+					</div>
+					<div class="index_img">
+						<img src="img_test/gkcafe.jpg">
+					</div>
+					<div class="index_img">
+						<img src="img_test/gkcafe.jpg">
+					</div>
+					<div class="index_img">
+						<img src="img_test/gkcafe.jpg">
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<div id="pic" class="row">
+			
+		</div>
+		<div id="summary" class="row">
+			<div class="col-12 white_back padd-20-10">
+				<div class="brand_name"><b></b></div>
+				<div class="content">
+					
+				</div>
+			</div>
+		</div>
+		<div id="store" class="row">
+			<div class="col-10 padd-20-10">
+				
+			</div>
+			<div class="col-2 indicator">
+				<img src="img/btn_listcore_indicatorright_std_n@3x.png">
+			</div>
+		</div>
+		<div id="descript" class="row white_back">
+			<div class="col-12 padd-20-10">
+				
+			</div>
+		</div>
+		<div id="news" class="row block_row">
+			<div class="col-12 col_panding block_title">
+				<b>最新消息</b>
+				<a href="" class="more">閱讀更多&nbsp;&nbsp;></a>
+			</div>
+			<!-- <div class="col-6 col_panding block_block">
+				<div class="white_back">
+					<img src="http://dev.wishmobile.net/app_image/300x270.png" width="100%">
+					<div class="padd-10">
+						<p class="one_line"><b>紅莓黑森林蛋糕紅，莓黑森林蛋糕</b></p>
+						<p>2020/06/04</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-6 col_panding block_block">
+				<div class="white_back">
+					<img src="http://dev.wishmobile.net/app_image/300x270.png" width="100%">
+					<div class="padd-10">
+						<p class="one_line"><b>紅莓黑森林蛋糕紅，莓黑森林蛋糕</b></p>
+						<p>2020/06/04</p>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div id="ticket" class="row block_row">
+			<div class="col-12 col_panding block_title">
+				<b>兌換票券活動</b>
+				<a href="" class="more">閱讀更多&nbsp;&nbsp;></a>
+			</div>
+			<!-- <div class="col-6 col_panding block_block">
+				<div class="white_back">
+					<img src="http://dev.wishmobile.net/app_image/300x270.png" width="100%">
+					<div class="padd-10">
+						<p class="one_line">GK 會員註冊禮</p>
+						<p>2020/06/04</p>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div id="point" class="row block_row">
+			<div class="col-12 col_panding block_title">
+				<b>兌換點數活動</b>
+				<a href="" class="more">閱讀更多&nbsp;&nbsp;></a>
+			</div>
+			<!-- <div class="col-6 col_panding block_block">
+				<div class="white_back">
+					<img src="http://dev.wishmobile.net/app_image/300x270.png" width="100%">
+					<div class="padd-10">
+						<p class="one_line"><b>紅莓黑森林蛋糕紅，莓黑森林蛋糕</b></p>
+						<p>2020/06/04</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-6 col_panding block_block">
+				<div class="white_back">
+					<img src="http://dev.wishmobile.net/app_image/300x270.png" width="100%">
+					<div class="padd-10">
+						<p class="one_line"><b>紅莓黑森林蛋糕紅，莓黑森林蛋糕</b></p>
+						<p>2020/06/04</p>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div id="info" class="row white_back padd-15-10">
+			<div class="col-10">
+				<p><b>品牌聯絡資訊</b></p>
+				<p id="tel"></p>
+				<p id="email"></p>
+				<p id="address"></p>
+			</div>
+			<div id="info_more" class="col-2 indicator" data-toggle="modal" data-target="#infoModal">
+				<img src="img/btn_listcore_indicatorright_std_n@3x.png">
+			</div>
+		</div>
+		<div id="bottom">
+			<div class="bot_indicator">
+				<img src="img/img_brand_more_n_n@3x.png">
+				<div id="distance"></div>
+			</div>
+			<div class="bot_btn">
+				<!-- <div class="bot_block">
+					<div class="bot_block_img">
+						<img src="img/btn_brand_tabbar_store_n@3x.png">
+					</div>
+					<div class="bot_block_content">
+						門市據點
+					</div>
+				</div>
+				<div class="bot_block">
+					<div class="bot_block_img">
+						<img src="img/btn_store_tabbar_menu_n@3x.png">
+					</div>
+					<div class="bot_block_content">
+						查看菜單
+					</div>
+				</div>
+				<div id="connect" class="bot_block">
+					<div class="bot_block_img">
+						<img src="img/btn_store_tabbar_menu_n@3x.png">
+					</div>
+					<div class="bot_block_content">
+						其它連結
+					</div>
+				</div>
+				<div class="bot_block">
+					<div class="bot_block_img">
+						<img src="img/btn_store_tabbar_menu_n@3x.png">
+					</div>
+					<div class="bot_block_content">
+						品牌故事
+					</div>
+				</div>
+				<div class="bot_block">
+					<div class="bot_block_img">
+						<img src="img/btn_brand_tabbar_more_n@3x.png">
+					</div>
+					<div class="bot_block_content">
+						更多服務
+					</div>
+				</div> -->
+			</div>
+		</div>
+		<!-- 聯絡方式modal -->
+		<div class="modal pointModal" id="infoModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						請選擇聯絡方式
+					</div>
+					<div class="modal-body">
+						<ul class="contactList">
+							<!-- <li class="tel_link">
+								<div class="">撥打電話</div><a href="tel:1243433">02-54488566</a>
+							</li>
+							<li class="email_link">
+								<div class="">電子郵件</div>
+							</li>
+							<li class="map_link">
+								<div class="">地圖指引</div>
+							</li>
+							<li class="cancel">
+								<div class="cancel" data-dismiss="modal">取消</div>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 連結方式modal 1 -->
+		<div class="modal pointModal" id="connectModal_1" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						請選擇連結
+					</div>
+					<div class="modal-body">
+						<ul class="contactList variationMainPoint">
+							<!-- <li>
+								<div class="">官方網站</div>
+							</li>
+							<li>
+								<div class="">FACEBOOK</div>
+							</li>
+							<li>
+								<div class="">品牌由來</div>
+							</li>
+							<li>
+								<div class="cancel" data-dismiss="modal">取消</div>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 連結方式modal 2 -->
+		<div class="modal otherModal" id="connectModal_2" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body row">
+						<!-- <div class="col-4 connect_block">
+							<div class="connect_img">
+								<img src="img/btn_brand_pop_official_n@3x.png">
+							</div>
+							<div class="connect_text">
+								官方網站
+							</div>
+						</div>
+						<div class="col-4 connect_block">
+							<div class="connect_img">
+								<img src="img/btn_brand_pop_fb_n@3x.png">
+							</div>
+							<div class="connect_text">
+								FACEBOOK
+							</div>
+						</div>
+						<div class="col-4 connect_block">
+							<div class="connect_img">
+								<img src="img/btn_brand_pop_story_n@3x.png">
+							</div>
+							<div class="connect_text">
+								品牌由來
+							</div>
+						</div> -->
+					</div>
+					<div class="modal-cancel" data-dismiss="modal">
+						<div class="modal-cancel-img">
+							<img src="img/btn_nav_close_lightbg_n@3x.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 更多服務modal -->
+		<div class="modal otherModal" id="moreModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body row">
+						<!-- <div class="col-4 connect_block">
+							<div class="connect_img">
+								<img src="img/btn_brand_pop_official_n@3x.png">
+							</div>
+							<div class="connect_text">
+								兌換點數活動
+							</div>
+						</div>
+						<div class="col-4 connect_block">
+							<div class="connect_img">
+								<img src="img/btn_brand_pop_fb_n@3x.png">
+							</div>
+							<div class="connect_text">
+								兌換票券活動
+							</div>
+						</div> -->
+					</div>
+					<div class="modal-cancel" data-dismiss="modal">
+						<div class="modal-cancel-img">
+							<img src="img/btn_nav_close_lightbg_n@3x.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 連結方式modal 3 -->
+	<div class="typeBox" id="connectModal_3">
+	    <div class="fixedArea">
+	        <div class="con_title">
+	        	<div class="con_title_img"><img src="img/btn_nav_close_popup_n@3x.png"></div>
+	            <div class="con_title_text">相關連結</div>
+	        </div>
+	        <!-- <div class="con_body_blk" link="https://www.google.com">
+	        	<div class="con_body_blk_img">
+	        		<img src="http://dev.wishmobile.net/app_image/300x285.png">
+	        	</div>
+	        	<div class="con_body_blk_content">
+	        		<div class="con_body_blk_content_title">
+	        			官方網站
+	        		</div>
+	        		<div class="con_body_blk_content_text">
+	        			GK Cafe，代表著一個新時代的誕生，我們站在原點看著這我們站在原點看著這我們站在原點看著這
+	        		</div>
+	        	</div>
+	        	<div class="con_link">
+	        		<img src="img/btn_listcore_indicatorright_std_n@3x.png">
+	        	</div>
+	        </div>
+	        <div class="con_body_blk">
+	        	<div class="con_body_blk_img">
+	        		<img src="http://dev.wishmobile.net/app_image/300x285.png">
+	        	</div>
+	        	<div class="con_body_blk_content">
+	        		<div class="con_body_blk_content_title">
+	        			官方網站
+	        		</div>
+	        		<div class="con_body_blk_content_text">
+	        			GK Cafe，代表著一個新時代的誕生，我們站在原點看著這
+	        		</div>
+	        	</div>
+	        	<div class="con_link">
+	        		<img src="img/btn_listcore_indicatorright_std_n@3x.png">
+	        	</div>
+	        </div>
+	        <div class="con_body_blk">
+	        	<div class="con_body_blk_img">
+	        		<img src="http://dev.wishmobile.net/app_image/300x285.png">
+	        	</div>
+	        	<div class="con_body_blk_content">
+	        		<div class="con_body_blk_content_title">
+	        			官方網站
+	        		</div>
+	        		<div class="con_body_blk_content_text">
+	        			GK Cafe，代表著一個新時代的誕生，我們站在原點看著這
+	        		</div>
+	        	</div>
+	        	<div class="con_link">
+	        		<img src="img/btn_listcore_indicatorright_std_n@3x.png">
+	        	</div>
+	        </div> -->
+	    </div>
+	</div>
+	<script type="text/javascript" src="js/modules/brand/index.js"></script>
+	<script type="text/javascript">
+			//所有品牌列表
+			var brand_paramenter ={
+				'show' : '1',//顯示品牌id
+				'list' :{//品牌列表(品牌id : 品牌圖片)
+					'1' : 'img_test/gkcafe.jpg',
+					'2' : 'img_test/gkcafe.jpg',
+					'3' : 'img_test/gkcafe.jpg',
+					'4' : 'img_test/gkcafe.jpg',
+					'5' : 'img_test/gkcafe.jpg',
+					'6' : 'img_test/gkcafe.jpg',
+					'7' : 'img_test/gkcafe.jpg',
+					'8' : 'img_test/gkcafe.jpg',
+				}
+			}
+			brand_all();
+
+			//所有服務
+			var brand_service = [
+				{
+					'name' : '門市據點',
+					'img' : 'img/btn_brand_tabbar_store_n@3x.png',
+					'link' : 'https://www.google.com'
+				},
+				{
+					'name' : '查看菜單',
+					'img' : 'img/btn_brand_pop_official_n@3x.png',
+					'link' : 'https://www.google.com'
+				},
+				{
+					'name' : '其它連結',
+					'img' : 'img/btn_brand_pop_official_n@3x.png',
+					'trigger' : {
+						'style' : 3 , //1 2 3 三版型
+						'list' :[
+							{
+								'title' : '官方網站',
+								'link' : 'https://www.google.com',
+								'img' : 'http://dev.wishmobile.net/app_image/300x285.png',
+								'text' : '內容內容內容內容內容內容內容內容內容內容內容內容內容內容'
+							},
+							{
+								'title' : 'FACEBOOK',
+								'link' : 'https://www.facebook.com',
+								'img' : 'http://dev.wishmobile.net/app_image/300x285.png',
+								'text' : '內容內容內容內容內容內容內容內容內容內容內容內容內容內容'
+							},
+							{
+								'title' : '品牌由來',
+								'link' : 'https://www.google.com',
+								'img' : 'http://dev.wishmobile.net/app_image/300x285.png',
+								'text' : '內容內容內容內容內容內容內容內容內容內容內容內容內容內容'
+							}
+						]
+					}
+				},
+				{
+					'name' : '品牌故事',
+					'img' : 'img/btn_brand_pop_official_n@3x.png',
+					'link' : 'https://www.google.com'
+				},
+				{
+					'name' : '兌換票券活動',
+					'img' : 'img/btn_brand_pop_official_n@3x.png',
+					'link' : 'https://www.google.com'
+				},
+				{
+					'name' : '兌換點數活動',
+					'img' : 'img/btn_brand_pop_official_n@3x.png',
+					'link' : 'https://www.google.com'
+				}
+			];
+			service();
+
+			//詳情圖片
+			var brand_img = "http://dev.wishmobile.net/app_image/960x833.png";
+			// img();
+
+			//摘要
+			var brand_summary ={
+				'name' : 'GK Cafe',
+				'content' : '走在台北的街頭，<br>望著來來去去的旅人',
+			}
+			// summary();
+
+			//最近門市資訊
+			var brand_store ={
+				'display' : true,
+				'gps' :true, //沒找到是false
+				'distance' : '0.5 km',
+				'tel' : '02-1234567',
+				'addr' : '台北市民權東路一段54號',
+				'url' : 'https://www.google.com'
+			}
+			// store();
+
+			//html
+			var brand_html = {
+				'display' : true,
+				'content' :[
+					'第一行',
+					'第二行第二行',
+					'第三行第三行第三行',
+					'第四行第四行第四行第四行',
+					'第五行第五行第五行第五行第五行'
+				]
+			}
+			// html();
+
+			//最新消息
+			var brand_news ={
+				'display' : true,
+				'url' : 'https://www.google.com',
+				'list' : [
+					{
+						'url' : 'https://tw.yahoo.com/',
+						'img' : 'http://dev.wishmobile.net/app_image/300x270.png' ,
+						'title' : '紅莓黑森林蛋糕紅，莓黑森林蛋糕' ,
+						'date' : '2020/06/04'
+					},
+					{
+						'url' : 'https://tw.yahoo.com/',
+						'img' : 'http://dev.wishmobile.net/app_image/300x270.png' ,
+						'title' : '黑森林蛋糕，莓黑森林蛋糕' ,
+						'date' : '2020/06/14'
+					}
+				]
+			}
+			// news();
+
+			//兌換票卷
+			var brand_ticket ={
+				'display' : true,
+				'url' : 'https://www.google.com',
+				'list' : [
+					{
+						'url' : 'https://www.url.com.tw/',
+						'img' : 'http://dev.wishmobile.net/app_image/300x270.png' ,
+						'title' : 'GK 會員註冊禮' ,
+						'date' : '免費兌換'
+					},
+					
+				]
+			}
+			// ticket();
+
+			//兌換點數
+			var brand_point ={
+				'display' : true,
+				'url' : 'https://www.google.com',
+				'list' : [
+					{
+						'url' : 'https://tw.yahoo.com/',
+						'img' : 'http://dev.wishmobile.net/app_image/300x270.png' ,
+						'title' : 'GK 每日點數好康送' ,
+						'date' : '免費兌換'
+					},
+					{
+						'url' : 'https://tw.yahoo.com/',
+						'img' : 'http://dev.wishmobile.net/app_image/300x270.png' ,
+						'title' : 'GK 每日點數好康送' ,
+						'date' : '免費兌換'
+					}
+				]
+			}
+			// point();
+
+			//品牌聯絡
+			var brand_contact ={
+				'display' : true,
+				'content' : {
+					'tel' : '0987654321',
+					'mail' : 'email1@gmail.com',
+					'addr' : '220新北市板橋區縣民大道二段7號'
+				}
+			}
+			// contact();
+
+			function getMultipleBrand () { //取得多品牌資料
+				$.ajax({
+					url: 'http://localhost:3034/mmrmProd/multiple_brand',
+					method: 'post',
+					data: {},
+					success(res) {
+						let isMultiple = res.multiple_brand === '1';
+						let method = isMultiple ? 'removeClass' : 'addClass';
+						$('#index')[method]('multiple');
+					}
+				})
+			}
+
+			function get_detail(){
+				var data = {"_token": "{{ csrf_token() }}"};
+				data.id = brand_paramenter.show;
+				$.ajax({
+	                data : data,
+	                url : "dev-yfy.com/mmrm_data",
+	                type : "POST",
+	                async : false ,
+	                success : function(rtndata) {
+	                	console.log(rtndata);
+	                	brand_img = rtndata.brand_img ;
+	                	brand_summary = rtndata.brand_summary ;
+	                	brand_store = rtndata.brand_store ;
+	                	brand_html = rtndata.brand_html ;
+	                	brand_news = rtndata.brand_news ;
+	                	brand_ticket = rtndata.brand_ticket ;
+	                	brand_point = rtndata.brand_point ;
+	                    brand_contact = rtndata.brand_contact ;
+	                },
+	                error: function (jqXHR, textStatus, errorThrown) {
+	                    
+	                }
+	            });
+	            img();
+            	summary();
+            	store();
+            	html();
+            	news();
+            	ticket();
+            	point();
+                contact();
+			}
+
+			getMultipleBrand();
+			get_detail();
+
+	</script>
+
+</body>
+
+</html>

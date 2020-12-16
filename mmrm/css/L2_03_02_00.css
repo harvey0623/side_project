@@ -1,0 +1,66 @@
+body {
+  background-color: #fff;
+}
+
+.introBox {
+  padding: 25px;
+  background-color: #f0f0f0;
+}
+
+.topBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 15px;
+}
+
+.topBlock > img {
+  width: 20px;
+  height: 20px;
+}
+
+.topBlock > p {
+  color: #292929;
+  margin-left: 10px;
+}
+
+.descList > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+  color: #797979;
+}
+
+.descList > li:last-child {
+  margin-bottom: 0;
+}
+
+.descList > li > .colon {
+  margin: 0 8px;
+}
+
+.content {
+  padding: 25px;
+  color: #292929;
+}
+
+.content > * {
+  margin-bottom: 15px;
+}
+
+.content ol, .content ul {
+  padding-left: 40px;
+  list-style: disc;
+}
+
+.content img {
+  max-width: 100%;
+}
+/*# sourceMappingURL=L2_03_02_00.css.map */

@@ -37,6 +37,10 @@ export default function({ apiUrl, pageUrl }) {
             }).then(res => {
                return res.data.results.book;
             }).catch(err => null)
+         },
+         checkIsHttps(url) { //檢查是否為https
+            let rule = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
+            return rule.test(url);
          }
       },
       async mounted() {
@@ -45,8 +49,9 @@ export default function({ apiUrl, pageUrl }) {
          if (faqResult.length === 0) return this.isLoading = false; 
          let linkObj = faqResult[0].link_block.links[0];
          if (linkObj.type !== 'book') {
-            location.href = linkObj.hyperlink_url;
-            liff.closeWindow();
+            let hyperlink_url = linkObj.hyperlink_url;
+            location.href = hyperlink_url;
+            if (!this.checkIsHttps(hyperlink_url)) liff.closeWindow();
             return;
          }
          this.book = await this.getBook(linkObj.book_id).then(res => res);

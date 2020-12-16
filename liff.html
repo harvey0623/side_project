@@ -18,7 +18,7 @@
       {{ text }}
       {{ greet }}
       {{ lsText }}
-      <button @click="redirectHandler">redirect</button>
+      <button @click="redirectHandler">redirect to google</button>
    </div>
 
    <script>
@@ -46,7 +46,7 @@
                return localStorage.getItem('test');
             },
             redirectHandler() {
-               location.href = 'https://harvey0623.github.io/side_project/liff.html?point_id=100';
+               location.href = 'https://www.google.com/';
             }
          },
          mounted() {

@@ -49,6 +49,7 @@ export default function({ apiUrl, pageUrl }) {
          if (faqResult.length === 0) return this.isLoading = false; 
          let linkObj = faqResult[0].link_block.links[0];
          if (linkObj.type !== 'book') {
+            alert('ok');
             let hyperlink_url = linkObj.hyperlink_url;
             this.isLoading = false;
             if (!this.checkIsHttps(hyperlink_url)) liff.closeWindow();

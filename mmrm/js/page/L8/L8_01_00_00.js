@@ -49,11 +49,11 @@ export default function({ apiUrl, pageUrl }) {
          if (faqResult.length === 0) return this.isLoading = false; 
          let linkObj = faqResult[0].link_block.links[0];
          if (linkObj.type !== 'book') {
-            alert('test');
+            alert('how are you');
             let hyperlink_url = linkObj.hyperlink_url;
             this.isLoading = false;
-            location.href = hyperlink_url;
             if (!this.checkIsHttps(hyperlink_url)) liff.closeWindow();
+            location.href = hyperlink_url;
             return;
          }
          this.book = await this.getBook(linkObj.book_id).then(res => res);

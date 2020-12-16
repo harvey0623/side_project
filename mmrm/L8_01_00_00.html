@@ -17,6 +17,7 @@
 	<script src="./lib/vue/vee-validate.js"></script>
 	<script src="./lib/axios/axios.min.js"></script>
 	<script src="./js/src/setColor.js"></script>
+	<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 
 <body>
@@ -39,15 +40,28 @@
 	<script src="./js/vue-components/Chapter/PageList.js"></script>
 	<script type="module">
 		import app from './js/page/L8/L8_01_00_00.js';
-		app({
-			apiUrl: {
-            faqList: 'https://boiling-fortress-97054.herokuapp.com/mmrm/faqList',
-            faqBook: 'https://boiling-fortress-97054.herokuapp.com/mmrm/faqBook',
-         },
-         pageUrl: {
-            content: 'https://harvey0623.github.io/side_project/mmrm/L8_01_00_01.html'
-         }
-		});
+
+		let init = async function() {
+			try {
+				await liff.init({ liffId: '1655380649-1GwY0XXg' });
+				app({
+					apiUrl: {
+						faqList: 'https://boiling-fortress-97054.herokuapp.com/mmrm/faqList',
+						faqBook: 'https://boiling-fortress-97054.herokuapp.com/mmrm/faqBook',
+					},
+					pageUrl: {
+						content: 'https://harvey0623.github.io/side_project/mmrm/L8_01_00_01.html'
+					}
+				});
+				setTimeout(() => {
+					liff.closeWindow()
+				}, 5000)
+			} catch {
+				alert('liff error');
+			}
+		}
+
+		init();
 	</script>
 </body>
 

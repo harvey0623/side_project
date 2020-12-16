@@ -6,6 +6,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
 </head>
 
 <body>
@@ -13,8 +14,38 @@
    <button id="profile">get profile</button>
    <button id="open">open window</button>
    <a href="https://www.google.com/" target="_blank">google</a>
+   <div id="app">
+      {{ text }}
+      {{ greet }}
+      {{ lsText }}
+   </div>
 
    <script>
+      new Vue({
+         el: '#app',
+         data: {
+            text: 'hello',
+            lsText: '',
+         },
+         computed: {
+            greet() {
+               return this.text + 'world';
+            }
+         },
+         methods: {
+            setLs() {
+               localStorage.setItem('test', 'test1');
+            },
+            getLs() {
+               return localStorage.getItem('test');
+            }
+         },
+         mounted() {
+            this.setLs();
+            this.lsText = this.getLs();
+         }
+      });
+
       let login = document.querySelector('#login');
       let profile = document.querySelector('#profile');
       let open = document.querySelector('#open');

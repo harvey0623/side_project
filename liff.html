@@ -34,6 +34,11 @@
             }
          },
          methods: {
+            getQuery(key) { //取得網址參數
+               let params = (new URL(document.location)).searchParams;
+               let value = params.get(key);
+               return value;
+            },
             setLs() {
                localStorage.setItem('test', 'test1');
             },
@@ -41,13 +46,14 @@
                return localStorage.getItem('test');
             },
             redirectHandler() {
-               location.href = 'https://www.google.com/';
+               location.href = 'https://harvey0623.github.io/side_project/liff.html?point_id=100';
             }
          },
          mounted() {
             this.setLs();
             this.lsText = this.getLs();
             alert(location.href);
+            alert(this.getQuery('point_id'));
          }
       });
 

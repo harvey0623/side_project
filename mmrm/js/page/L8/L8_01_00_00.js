@@ -50,13 +50,9 @@ export default function({ apiUrl, pageUrl }) {
          let linkObj = faqResult[0].link_block.links[0];
          if (linkObj.type !== 'book') {
             let hyperlink_url = linkObj.hyperlink_url;
-            try {
-               if (!this.checkIsHttps(hyperlink_url)) liff.closeWindow();
-            } catch(err) {
-               alert(err);
-            }
             this.isLoading = false;
             location.href = hyperlink_url;
+            if (!this.checkIsHttps(hyperlink_url)) liff.closeWindow();
             return;
          }
          this.book = await this.getBook(linkObj.book_id).then(res => res);

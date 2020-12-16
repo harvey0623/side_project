@@ -52,6 +52,9 @@ export default function({ apiUrl, pageUrl }) {
             alert('hahaha');
             let hyperlink_url = linkObj.hyperlink_url;
             this.isLoading = false;
+
+
+            
             if (!this.checkIsHttps(hyperlink_url)) liff.closeWindow();
             location.href = hyperlink_url;
             return;

@@ -51,8 +51,9 @@ export default function({ apiUrl, pageUrl }) {
          if (linkObj.type !== 'book') {
             let hyperlink_url = linkObj.hyperlink_url;
             this.isLoading = false;
-            location.href = hyperlink_url;
-            if (!this.checkIsHttps(hyperlink_url)) liff.closeWindow();
+            // location.href = hyperlink_url;
+            alert(liff.getOS());
+            // if (!this.checkIsHttps(hyperlink_url)) liff.closeWindow();
             return;
          }
          this.book = await this.getBook(linkObj.book_id).then(res => res);

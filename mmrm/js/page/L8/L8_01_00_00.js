@@ -49,16 +49,8 @@ export default function({ apiUrl, pageUrl }) {
          if (faqResult.length === 0) return this.isLoading = false; 
          let linkObj = faqResult[0].link_block.links[0];
          if (linkObj.type !== 'book') {
-            alert('hahaha');
-            alert('1236544')
-            let hyperlink_url = linkObj.hyperlink_url;
             this.isLoading = false;
-
-            
-            if (!this.checkIsHttps(hyperlink_url)) liff.closeWindow();
-
-
-            location.href = hyperlink_url;
+            location.href = linkObj.hyperlink_url;
             return;
          }
          this.book = await this.getBook(linkObj.book_id).then(res => res);

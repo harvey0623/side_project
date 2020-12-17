@@ -266,7 +266,7 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                   title: obj.title,
                   amount: current.amount,
                });
-               // prev.push({ id: 12, value: `野幣 : 249點`, title: obj.title, amount: 249 });
+               prev.push({ id: 12, value: `野幣 : 249點`, title: obj.title, amount: 249 });
                return prev;
             }, []);
          },

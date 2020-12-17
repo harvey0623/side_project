@@ -130,7 +130,7 @@ export default function ({ apiUrl, pageUrl }) {
                let pointId = current.point_id;
                let obj = pointData.find(item => item.point_id === pointId);
                prev.push({ id: pointId, title: obj.title, point: current.amount });
-               prev.push({ id: 12, title: '野幣', point: 249 });
+               // prev.push({ id: 12, title: '野幣', point: 249 });
                return prev;
             }, []);
          },

@@ -56,7 +56,7 @@ export default function({ apiUrl, pageUrl }) {
          this.book = await this.getBook(linkObj.book_id).then(res => res);
          if (this.isRedirect) {
             let pageId = this.book.chapters[0].pages[0].page_id;
-            return location.href = `${this.pageUrl.content}?page_id=${pageId}`;
+            location.href = `${this.pageUrl.content}?page_id=${pageId}`;
          }
          this.isLoading = false;
       }

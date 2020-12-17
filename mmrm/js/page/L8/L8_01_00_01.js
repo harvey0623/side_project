@@ -38,6 +38,7 @@ export default function({ apiUrl }) {
          this.isLoading = true;
          let pageId = this.getQuery('page_id');
          this.pageData = await this.getFaqPage(pageId).then(res => res);
+         alert('test');
          // document.querySelector('title').textContent = this.pageTitle;
          this.isLoading = false;
       }

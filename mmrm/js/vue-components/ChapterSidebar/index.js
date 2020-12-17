@@ -51,7 +51,6 @@ Vue.component('chapter-sidebar', {
       openPage({ book_id, page_id }) { //開啟章節頁面
          let url = `${this.pageurl}?book_id=${book_id}&page_id=${page_id}`;
          url = `${url}&currentPage=${this.currentPage}&isSwitch=${this.isSwitch}`;
-         this.$emit('showloading');
          setTimeout(() => {
             location.href = url;
          }, 1000);

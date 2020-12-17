@@ -29,6 +29,7 @@ export default function({ apiUrl, pageUrl }) {
          autoNavigate() { //自動導頁面
             let termId = this.termList[0].id;
             let url = `${this.pageUrl.content}?id=${termId}`;
+            this.isLoading = false;
             location.href = url;
          }
       },

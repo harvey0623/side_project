@@ -31,7 +31,6 @@
 			></chapter>
 		</div>
 
-		<button @click="triggerLink" ref="button" v-show="false"></button>
 		<div id="loading" v-if="isLoading"></div>
 	</div>
 
@@ -43,7 +42,7 @@
 		app({
 			apiUrl: {
 				faqList: 'https://boiling-fortress-97054.herokuapp.com/mmrm/faqList',
-				faqBook: 'https://boiling-fortress-97054.herokuapp.com/mmrm/faqBook',
+				faqBook: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/cms_book',
 			},
 			pageUrl: {
 				content: 'https://harvey0623.github.io/side_project/mmrm/L8_01_00_01.html'

@@ -38,10 +38,6 @@ export default function({ apiUrl, pageUrl }) {
             }).then(res => {
                return res.data.results.book;
             }).catch(err => null)
-         },
-         triggerLink() {
-            alert('aaa');
-            location.href = this.autoLink;
          }
       },
       async mounted() {
@@ -51,14 +47,13 @@ export default function({ apiUrl, pageUrl }) {
          let linkObj = faqResult[0].link_block.links[0];
          if (linkObj.type !== 'book') {
             this.isLoading = false;
-            this.autoLink = linkObj.hyperlink_url;
-            this.$refs.button.dispatchEvent(new Event('click'));
+            location.href = linkObj.hyperlink_url;
             return;
          }
          this.book = await this.getBook(linkObj.book_id).then(res => res);
          if (this.isRedirect) {
             let pageId = this.book.chapters[0].pages[0].page_id;
-            this.isLoading = false; 
+            this.isLoading = false;
             location.href = `${this.pageUrl.content}?page_id=${pageId}`;
             return;
          }

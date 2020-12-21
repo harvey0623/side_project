@@ -92,7 +92,7 @@ Vue.component('trade-item', {
                   </div>
                   <div class="payment">{{ amountText }}{{ dollarUnit }}</div>
                </div>
-               <ul class="invoiceInfo">
+               <ul class="invoiceInfo" :class="{hasMargin: isLoading}">
                   <li 
                      class="invoiceRow"
                      v-for="meta in metaList"
@@ -102,6 +102,7 @@ Vue.component('trade-item', {
                      <div class="value">{{ meta.value }}</div>
                   </li>
                </ul>
+               <div class="getDetail" v-show="isLoading">載入交易詳情中...</div>
             </div>
          </div>
          <div class="infoBox" v-show="isOpen">

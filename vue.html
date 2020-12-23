@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
+   <script src="https://unpkg.com/http-vue-loader"></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/vConsole/3.3.4/vconsole.min.js'></script>
+</head>
+<body>
+   <div id="app">
+      <home :msg="msg"></home>
+   </div>
+
+   <script type="module">
+      import Person from './vue-component/test.js';
+      window.Person = Person;
+      new VConsole();
+
+      new Vue({
+         el: '#app',
+         data: {
+            msg: 'home'
+         },
+         components: {
+            'home': httpVueLoader('./vue-component/test.vue'),
+         }
+      });
+   </script>
+</body>
+</html>

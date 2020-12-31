@@ -106,6 +106,7 @@ export default class ResizedTable {
    setTableWidth() {
       if (!this.changeTable) return;
       let currentTableWidth = this.tableEl.offsetWidth;
+      console.log(currentTableWidth)
       let newTableWidth = currentTableWidth + this.moveDsitance;
       let result = newTableWidth < this.tableWidth ? this.tableWidth : newTableWidth;
       this.tableEl.style.width = `${result}px`;

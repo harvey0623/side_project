@@ -27,17 +27,16 @@
    border-top: 1px solid #eeeeee;
    border-left: 1px solid #eeeeee;
    word-break: break-all;
-   font-size: 12px;
+   font-size: 16px;
 }
 .table-wrap table th {
    position: relative;
-   -webkit-user-select: none;
    user-select: none;
 }
 .table-wrap table th .resize-line {
    position: absolute;
    top: 0;
-   width: 10px;
+   width: 5px;
    right: -1px;
    cursor: col-resize;
    height: 100%;
@@ -48,4 +47,26 @@
    padding: 10px;
    border-right: 1px solid #eeeeee;
    border-bottom: 1px solid #eeeeee;
+   text-align: center;
+   position: relative;
+}
+
+.table-wrap table td {
+   padding-right: 25px;
+}
+
+.table-wrap table td i {
+   position: absolute;
+   right: 5px;
+   top: 32%;
+   font-size: 18px;
+}
+
+.fa-pencil-square-o {
+   color: blue;
+   cursor: pointer;
+}
+
+.fa-unlock-alt {
+   color: gray;
 }

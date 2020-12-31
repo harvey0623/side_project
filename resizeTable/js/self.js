@@ -1,10 +1,14 @@
 import TableHeader from './TableHeader.js';
+import TableCell from './TableCell.js';
 export default class ResizedTable {
    constructor(props) {
       this.tableEl = document.querySelector(props.el);
       this.tableLine = document.querySelector(props.tableLine);
       this.tableHeaderData = props.tableHeaderData;
+      this.tableCellData = props.tableCellData;
+      this.cellBlackList = props.cellBlackList;
       this.headerArr = []; //儲存tableHeader
+      this.cellArr = [];
       this.changeTable = true;
       this.startX = 0;
       this.minWidth = 100;
@@ -21,8 +25,10 @@ export default class ResizedTable {
       this.tableWidth = this.tableEl.offsetWidth;
       this.maxWidth = this.changeTable ? Infinity : 0;
       this.createTableHeader();
+      this.createTableCell();
    }
    createTableHeader() {
+      let tr = document.createElement('tr');
       this.tableHeaderData.forEach(item => {
          let instance = new TableHeader({
             source: item,
@@ -31,8 +37,24 @@ export default class ResizedTable {
             }
          });
          let dom = instance.createTemplate();
-         this.tableEl.querySelector('thead > tr').appendChild(dom);
+         tr.appendChild(dom);
          this.headerArr.push({ headerId: item.id, instance });
+      });
+      this.tableEl.querySelector('thead').appendChild(tr);
+   }
+   createTableCell() {
+      this.tableCellData.forEach(item => {
+         let tr = document.createElement('tr');
+         for (let key in item) {
+            if (this.cellBlackList.includes(key)) continue;
+            let instance = new TableCell({
+               uid: item.uid.value,
+               info: item[key]
+            });
+            let dom = instance.createTemplate();
+            tr.append(dom);
+         }
+         this.tableEl.querySelector('tbody').appendChild(tr);
       });
    }
    mouseDownHandler(payload) {

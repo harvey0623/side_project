@@ -6,96 +6,16 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
    <link rel="stylesheet" href="./css/test1.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-   <!-- <div class="table-wrap">
-      <div class="table-line"></div>
-      <table id="mytable">
-         <tbody>
-            <tr>
-               <th>用户编号<span class="resize-line"></span></th>
-               <th>试用时间<span class="resize-line"></span></th>
-               <th>转正时间<span class="resize-line"></span></th>
-               <th>性别<span class="resize-line"></span></th>
-               <th>姓名拼音<span class="resize-line"></span></th>
-               <th>生日时间<span class="resize-line"></span></th>
-               <th>民族<span class="resize-line"></span></th>
-               <th>身高<span class="resize-line"></span></th>
-            </tr>
-            <tr>
-               <td>2000001</td>
-               <td>1997-3-13</td>
-               <td>1997-3-13</td>
-               <td>1</td>
-               <td>WZJ</td>
-               <td>1965-3-13</td>
-               <td>汉</td>
-               <td>171</td>
-            </tr>
-            <tr>
-               <td>2000045</td>
-               <td>2001-2-15</td>
-               <td>2001-3-15</td>
-               <td>0</td>
-               <td>WY</td>
-               <td>1978-8-5</td>
-               <td>汉</td>
-               <td>162</td>
-            </tr>
-            <tr>
-               <td>2000046</td>
-               <td>2001-2-23</td>
-               <td>2001-3-23</td>
-               <td>0</td>
-               <td>LQ</td>
-               <td>2001-2-23</td>
-               <td>汉</td>
-               <td>171</td>
-            </tr>
-         </tbody>
-      </table>
-   </div> -->
-
    <div class="table-wrap">
       <div class="table-line"></div>
       <table id="mytable">
-         <thead>
-            <tr></tr>
-         </thead>
-         <tbody>
-            <tr>
-               <td>2000001</td>
-               <td>1997-3-13</td>
-               <td>1997-3-13</td>
-               <td>1</td>
-               <td>WZJ</td>
-               <td>1965-3-13</td>
-               <td>汉</td>
-               <td>171</td>
-            </tr>
-            <tr>
-               <td>2000045</td>
-               <td>2001-2-15</td>
-               <td>2001-3-15</td>
-               <td>0</td>
-               <td>WY</td>
-               <td>1978-8-5</td>
-               <td>汉</td>
-               <td>162</td>
-            </tr>
-            <tr>
-               <td>2000046</td>
-               <td>2001-2-23</td>
-               <td>2001-3-23</td>
-               <td>0</td>
-               <td>LQ</td>
-               <td>2001-2-23</td>
-               <td>汉</td>
-               <td>171</td>
-            </tr>
-         </tbody>
+         <thead></thead>
+         <tbody></tbody>
       </table>
    </div>
 
@@ -106,15 +26,62 @@
          el: '#mytable',
          tableLine: '.table-line',
          tableHeaderData: [
-            { id: 'a', title: '用户编号', },
-            { id: 'b', title: '试用时间' },
-            { id: 'c', title: '转正时间' },
-            { id: 'e', title: '性别' },
-            { id: 'f', title: '姓名拼音' },
-            { id: 'g', title: '生日时间' },
-            { id: 'h', title: '民族' },
-            { id: 'i', title: '身高' },
-         ]
+            { id: 'a', title: '姓名', type: 'name' },
+            { id: 'b', title: '性別', type: 'gender' },
+            { id: 'c', title: '年齡', type: 'age' },
+            { id: 'e', title: '生日', type: 'birthday' },
+         ],
+         tableCellData: [
+            { 
+               uid: {
+                  value: 'aaa',
+                  editable: false,
+               },
+               name: {
+                  value: 'Merry',
+                  editable: false,
+                  type: 'text'
+               },
+               gender: {
+                  value: 'female',
+                  editable: true,
+                  type: 'select'
+               },
+               age: {
+                  value: 20,
+                  editable: true,
+                  type: 'number'
+               },
+               birthday: {
+                  value: '2000/10/20',
+                  editable: true,
+                  type: 'date'
+               }
+            },
+            {
+               uid: {
+                  value: 'bbb',
+                  editable: false,
+               },
+               name: {
+                  value: 'Sharon',
+                  editable: true,
+               },
+               gender: {
+                  value: 'female',
+                  editable: true,
+               },
+               age: {
+                  value: 28,
+                  editable: true,
+               },
+               birthday: {
+                  value: '2000/10/20',
+                  editable: true,
+               }
+            },
+         ],
+         cellBlackList: ['uid']
       });
    </script>
 </body>

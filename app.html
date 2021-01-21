@@ -9,17 +9,38 @@
 </head>
 
 <body>
-   <button>click</button>
-
+   <a href="javascript:;">啟動 Line</a>
 
    <script>
-      $('button').on('click', function () {
-         var now = new Date().valueOf();
-         setTimeout(function () {
-            if (new Date().valueOf() - now > 100) return;
-            window.location = "https://www.codegrepper.com/code-examples/delphi/detect+if+app+is+installed+javascript";
-         }, 25);
-         window.location = "imazu://whatever";
+      function openClient(scheme_url, download_url, timeout = 600) {
+         var startTime = Date.now();
+         var ifr = document.createElement('iframe');
+
+         ifr.src = scheme_url;
+         ifr.style.display = 'none';
+         document.body.appendChild(ifr);
+
+         var t = setTimeout(function () {
+            var endTime = Date.now();
+
+            if (!startTime || endTime - startTime < timeout + 200) {
+               //App is not installed
+               if (confirm("Application is not installed, go to the download?")) {
+                  window.open(download_url, "_blank");
+               }
+            }
+         }, timeout);
+
+         window.onblur = function () {
+            clearTimeout(t);
+            window.addEventListener("DOMContentLoaded", function () {
+               document.body.removeChild(ifr);
+            }, false);
+         }
+      }
+
+      $('a').on('click', function() {
+         openClient('line://', 'https://line.me/', '600');
       });
 
    </script>

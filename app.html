@@ -4,12 +4,17 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 </head>
 <body>
-   
+   <button>click</button>
+
+
    <script>
-      setTimeout(function () { window.location = "http://eason-cross-app.blogspot.com/2017/04/webview-app.html"; }, 25);
-      window.location = "imazu://whatever";
+      $('button').on('click', function() {
+         setTimeout(function () { window.location = "http://eason-cross-app.blogspot.com/2017/04/webview-app.html"; }, 25);
+         window.location = "imazu://whatever";
+      });
    </script>
 </body>
 </html>

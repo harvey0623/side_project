@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 </head>
+
 <body>
    <button>click</button>
 
 
    <script>
-      $('button').on('click', function() {
-         try {
-            alert('ok');
-            window.location = "imazu://whatever";
-         } catch(err) {
-            alert('error');
-         }
+      $('button').on('click', function () {
+         var now = new Date().valueOf();
+         setTimeout(function () {
+            if (new Date().valueOf() - now > 100) return;
+            window.location = "https://www.codegrepper.com/code-examples/delphi/detect+if+app+is+installed+javascript";
+         }, 25);
+         window.location = "imazu://whatever";
       });
+
    </script>
 </body>
+
 </html>

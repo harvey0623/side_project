@@ -9,13 +9,13 @@
 </head>
 
 <body>
-   <button>啟動 Line</button>
+   <button>啟動 Line(fix)</button>
 
    <script>
       function openClient() {
          var now = new Date().valueOf();
          setTimeout(function () {
-            if (new Date().valueOf() - now > 100) return;
+            if (new Date().valueOf() - now > 1000) return;
             window.location = "https://line.me/zh-hant/";
          }, 25);
          window.location = "https://line.me/R/";

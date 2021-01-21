@@ -12,8 +12,12 @@
 
    <script>
       $('button').on('click', function() {
-         setTimeout(function () { window.location = "http://eason-cross-app.blogspot.com/2017/04/webview-app.html"; }, 25);
-         window.location = "imazu://whatever";
+         try {
+            alert('ok');
+            window.location = "imazu://whatever";
+         } catch(err) {
+            alert('error');
+         }
       });
    </script>
 </body>

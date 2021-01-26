@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="./css/basic1.css">
+</head>
+
+<body>
+   <div class="stage">
+      
+   </div>
+
+   <script type="module">
+      import ResizeItem from './modules/ResizeItem/index.js';
+      const stage = document.querySelector('.stage');
+      let resizeItem = new ResizeItem({
+         limitW: stage.offsetWidth,
+         limitH: stage.offsetHeight,
+      });
+      let dom = resizeItem.renderHtml();
+      stage.appendChild(dom);
+   </script>
+</body>
+
+</html>

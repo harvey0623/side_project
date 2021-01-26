@@ -31,3 +31,35 @@ body {
    user-select: none;
    cursor: move;
 }
+
+/* resizable */
+.resizable {
+   position: absolute;
+   left: 100px;
+   top: 100px;
+   width: 200px;
+   height: 200px;
+   border: 1px solid orange;
+}
+.resizer {
+   position: absolute;
+   /* background-color: red; */
+}
+
+/* Placed at the right side */
+.resizer-r {
+   cursor: e-resize;
+   height: 100%;
+   right: 0;
+   top: 0;
+   width: 5px;
+}
+
+/* Placed at the bottom side */
+.resizer-b {
+   bottom: 0;
+   cursor: ns-resize;
+   height: 5px;
+   left: 0;
+   width: 100%;
+}

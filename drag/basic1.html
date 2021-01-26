@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="./css/basic1.css">
+</head>
+<body>
+   <div class="panel">
+      <button class="addBtn">add item</button>
+   </div>
+   <div class="stage">
+      
+   </div>
+
+   <script type="module">
+      import DragItem from './modules/DragItem/index.js';
+      const stage = document.querySelector('.stage');
+      const addBtn = document.querySelector('.addBtn');
+      const removeBtn = document.querySelector('.removeBtn');
+
+
+      addBtn.addEventListener('click', function() {
+         let dragItem = new DragItem({
+            limitW: stage.offsetWidth,
+            limitH: stage.offsetHeight
+         });
+         let dom = dragItem.renderHtml();
+         stage.appendChild(dom);
+      });
+   </script>
+</body>
+</html>

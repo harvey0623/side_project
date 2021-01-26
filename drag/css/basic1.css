@@ -1,0 +1,33 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   padding-top: 20px;
+}
+
+.panel {
+   width: 800px;
+   margin: 0 auto 20px;
+}
+
+.stage {
+   position: relative;
+   width: 800px;
+   height: 800px;
+   margin: 0 auto;
+   border: 1px solid #000;
+}
+
+.dragItem {
+   position: absolute;
+   left: 10px;
+   top: 10px;
+   width: 100px;
+   height: 100px;
+   border: 1px solid red;
+   user-select: none;
+   cursor: move;
+}

@@ -1,0 +1,157 @@
+@import './utility/index';
+$inputColor: map-get($fontColor, input);
+$formTitleColor: map-get($fontColor, formTitle);
+
+%blockPadding {
+   padding: 25px;
+}
+
+body {
+   background-color: #fff;
+   padding-bottom: map-get($heightObj, basic);
+}
+
+.banner {
+   position: relative;
+   height: 240px;
+   overflow: hidden;
+   >.inner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      @include size(100%);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: #000;
+      background-image: url("../img/placeholder.jpg");
+      @media (min-width: 730px) {
+         background-size: contain;
+         background-position: center top;
+      }
+   }
+   @media (max-width: 380px) {
+      height: 200px;
+   }
+}
+
+.wrap {
+   background-color: map-get($elBgColor, body);
+}
+
+.activityIntro {
+   position: relative;
+   @extend %blockPadding;
+   &.hasBg {
+      margin-bottom: 20px;
+      background-color: #fff;
+   }
+   >.activityName {
+      margin-bottom: 10px;
+      color: $formTitleColor;
+      font-size: 20px;
+   }  
+   >.intorList {
+      color: $inputColor;
+      margin-bottom: 0px;
+      >li {
+         display: flex;
+         @include elGutter(margin-bottom, 10px);
+         >.title {
+            flex: 0 0 65px;
+         }
+         >.colon {
+            margin-left: 5px;
+            margin-right: 10px;
+         }
+         >.content {
+            flex: 1;
+         }
+      }
+   }
+   >.line {
+      height: 1px;
+      margin-top: 25px;
+      margin-bottom: 0;
+      background-color: map-get($elBgColor, placeholder);
+   }
+   >.brandLogo {
+      position: absolute;
+      right: 25px;
+      top: -30px;
+      @include size(60px);
+      background-image: url("../img/placeholder.jpg");
+      background-size: cover;
+      background-position: center center;
+   }
+}
+
+.pointIntro {
+   margin-bottom: 25px;
+   @extend %blockPadding;
+   background-color: #fff;
+   >.title {
+      color: $formTitleColor;
+      margin-bottom: 15px;
+   }
+}
+
+.conditionList {
+   >li {
+      color: $inputColor; 
+      display: flex;
+      align-items: center;
+      @include elGutter(margin-bottom, 10px);
+      >.content {
+         margin-left: auto;
+         color: var(--variationMain);
+         >span {
+            margin-left: 10px;
+            color: $inputColor; 
+         }
+      }
+   }
+}
+
+.couponIntro {
+   padding-bottom: 20px;
+   >.title {
+      padding-left: 25px;
+      margin-bottom: map-get($gutter, basic);
+      color: $inputColor;
+   }
+   >.content {
+      padding: 0 15px;
+   }
+}
+
+.activityDesc {
+   @extend %blockPadding;
+   color: $inputColor;
+   background-color: #fff;
+   ol, ul {
+      padding-left: 40px;
+      list-style: disc;
+   }
+   img,
+   iframe {
+      max-width: 100%;
+   }
+}
+
+.fixBlock {
+   >div {
+      height: 100%;
+      &.termActiveButton {
+         color: #fff;
+         background-color: var(--variationMain);
+      }
+      &.hide {
+         opacity: 0;
+      }
+   }
+}
+
+.usedBlock {
+   background-color: map-get($elBgColor, placeholder);
+   color: $inputColor;
+}

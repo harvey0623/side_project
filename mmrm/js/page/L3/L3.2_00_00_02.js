@@ -120,7 +120,9 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                }
             }).then(res => {
                return res.data;
-            }).catch(err => null);
+            }).catch(err => {
+               return err.response.data;
+            });
          },
          async getActivityInfo() { //取得票券活動列表
             return await axios({
@@ -145,8 +147,9 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
 
             let activityResult = await this.getActivityList().then(res => res);
             this.currentPage = activityResult.next;
-            this.systemTime = activityResult.results.system_datetime;
-            this.pointActivityId = activityResult.results.point_activity_ids;
+            this.systemTime = activityResult.results.system_datetime || '';
+            let pointActivityIds = activityResult.results.point_activity_ids;
+            this.pointActivityId = pointActivityIds !== undefined ? pointActivityIds : [];
             if (!this.hasActivity) {
                this.pagLoading = false;
                this.activityList = [];

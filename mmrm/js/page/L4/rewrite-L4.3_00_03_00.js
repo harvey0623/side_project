@@ -1,5 +1,4 @@
 window.app = function({ openLink ,apiUrl, pageUrl }) {
-   let mySwiper = null;
    new Vue({
       el: '#app',
       mixins: [openLink],
@@ -58,7 +57,10 @@ window.app = function({ openLink ,apiUrl, pageUrl }) {
          linkBlocks() {
             if (this.pageData === null) return [];
             if (this.pageData.link_blocks === null) [];
-            return this.pageData.link_blocks;
+            return this.pageData.link_blocks || [];
+         },
+         hasLinkBlocks() {
+            return this.linkBlocks.length !== 0;
          }
       },
       methods: {
@@ -126,7 +128,7 @@ window.app = function({ openLink ,apiUrl, pageUrl }) {
                }
             }
             if (!isThanOne) delete option.pagination;
-            mySwiper = new Swiper('.swiper-container', option);
+            new Swiper('.swiper-container', option);
          },
          addPadding(val) { //增加app padding
             this.hasControl = val;

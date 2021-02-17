@@ -1,0 +1,27 @@
+%webkitLimitRow {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   padding: 0;
+   height: auto;
+}
+
+@mixin setWebkitLimitRow($lines:1) {
+   @extend %webkitLimitRow;
+   -webkit-line-clamp: $lines;
+}
+
+//====自己算
+%limitRow {
+   word-break: break-all;
+   overflow: hidden;
+   padding: 0;
+}
+
+@mixin setLimitRow($size, $lineHeight, $lines:1) {
+   @extend %limitRow;
+   font-size: #{$size}px;
+   line-height: $lineHeight;
+   max-height: #{($size * $lineHeight * $lines)}px;
+}

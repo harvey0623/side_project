@@ -81,25 +81,17 @@ export default function ({ apiUrl, pageUrl }) {
             if (imgUrl !== null) return { backgroundImage: `url(${imgUrl})` };
             else return {};
          },
-         pickerList() { //點數選單列表
-            return this.pointList.reduce((prev, current) => {
-               let { id, point, title } = current;
-               let value = `${title} : ${point}點`;
-               prev.push({ id, title, point, value });
-               return prev;
-            }, []);
-         },
-         pickerListThanOne() { //點數選單數量是否大於1
-            return this.pickerList.length > 1;
+         pointListThanOne() { //點數選單數量是否大於1
+            return this.pointList.length > 1;
          },
          pointTipText() { //點數使用提示
-            if (this.pickerList.length === 1) {
-               let { title, point } = this.pickerList[0];
-               return vsprintf(this.pointMsg, [title, point, this.activityTitle]);
+            if (this.pointList.length === 1) {
+               let { title, amount } = this.pointList[0];
+               return vsprintf(this.pointMsg, [title, amount, this.activityTitle]);
             }
             if (this.usePoint === null) return '';
-            let { title, point } = this.usePoint;
-            return vsprintf(this.pointMsg, [title, point, this.activityTitle]);
+            let { title, amount } = this.usePoint;
+            return vsprintf(this.pointMsg, [title, amount, this.activityTitle]);
          }
       },
       methods: {
@@ -122,18 +114,6 @@ export default function ({ apiUrl, pageUrl }) {
             let paramsValue = params.get(key) || 0;
             return paramsValue;
          },
-         gatherPointId(data) { //蒐集點數id
-            return data.map(item => item.point_id);
-         },
-         mergeAboutPoint(condition, pointData) { //合併點數相關資料
-            return condition.reduce((prev, current) => {
-               let pointId = current.point_id;
-               let obj = pointData.find(item => item.point_id === pointId);
-               prev.push({ id: pointId, title: obj.title, point: current.amount });
-               // prev.push({ id: 12, title: '野幣', point: 249 });
-               return prev;
-            }, []);
-         },
          getBrandArr(data) { //組成brand id陣列
             let result = data.reduce((prev, current) => {
                prev = prev.concat(current.brand_ids);
@@ -148,17 +128,6 @@ export default function ({ apiUrl, pageUrl }) {
                prev.push({ ...current, storeList: obj || null });
                return prev;
             }, []);
-         },
-         exchangeHandler() {  //兌換處理
-            let type = this.activityInfo.redeem_type;
-            if (type !== 'point') {
-               let obj = { free: '#freeModal', redeem_code: '#redeemModal' };
-               $(obj[type]).modal('show');
-            } else if (type === 'point' && this.pickerListThanOne) {
-               this.mobileSelect.show();
-            } else {
-               $('#pointModal').modal('show');
-            }
          },
          reWriteHandler() { //重新填寫代碼
             $('#redeemModal').modal('show');
@@ -185,12 +154,24 @@ export default function ({ apiUrl, pageUrl }) {
                return res.data.results.coupon_activity_information;
             }).catch(err => null);
          },
-         async getPointInfo(idArr) { //取得點數詳情
+         async getPointInfo(pointIdArr) { //取得一般點數詳情
             return await axios({
                url: this.apiUrl.pointInfo,
                method: 'post',
                data: {
-                  point_id: idArr,
+                  point_id: pointIdArr,
+                  full_info: false
+               }
+            }).then(res => {
+               return res.data.results.point_information;
+            }).catch(err => null);
+         },
+         async getExternalPointInfo(pointIdArr) { //取得額外點數詳情
+            return await axios({
+               url: this.apiUrl.externalPoint,
+               method: 'post',
+               data: {
+                  point_id: pointIdArr,
                   full_info: false
                }
             }).then(res => {
@@ -232,6 +213,95 @@ export default function ({ apiUrl, pageUrl }) {
                return res.data.results.search_coupon_available_store_results;
             }).catch(err => null);
          },
+         gatherPointId(data) { //蒐集點數id
+            return data.map(item => item.point_id);
+         },
+         async getPointCategoryInfo(key) { //取得點數分類資訊
+            if (this.activityInfo[key] === undefined) return [];
+            let pointIdArr = this.gatherPointId(this.activityInfo[key]);
+            let method = key === 'point_condition' ? 'getPointInfo' : 'getExternalPointInfo';
+            let result = await this[method](pointIdArr);
+            result.forEach(item => item.category = key);
+            return result;
+         },
+         createPickList(pointInfo) { //產生點數下拉清單
+            let categoryArr = ['point_condition', 'external_point_condition'];
+            let result = [];
+            categoryArr.forEach(category => {
+               if (this.activityInfo[category] === undefined) return false;
+               let conditionArr = this.activityInfo[category].reduce((prev, current) => {
+                  let pointId = current.point_id;
+                  let obj = pointInfo.find(item => {
+                     return item.point_id === pointId && item.category === category;
+                  });
+                  prev.push({
+                     id: pointId,
+                     title: obj.title,
+                     value: `${obj.title} : ${current.amount}點`,
+                     amount: current.amount,
+                     category
+                  });
+                  return prev;
+               }, []);
+               result = result.concat(conditionArr);
+            });
+            // result.push({
+            //    id: 999,
+            //    title: '外部點數',
+            //    value: '外部點數3點',
+            //    amount: 3,
+            //    category: 'external_point_condition'
+            // });
+            return result;
+         },
+         initIosPicker() { //初使iso picker
+            this.mobileSelect = new MobileSelect({
+               trigger: '#iosPicker',
+               title: this.redeemPointTitle,
+               ensureBtnText: this.sureText,
+               cancelBtnText: this.cancelText,
+               ensureBtnColor: '#288efb',
+               titleColor: '#292929',
+               textColor: '#292929',
+               triggerDisplayData: false,
+               wheels: [{ data: this.pointList }],
+               callback: (index, data) => {
+                  this.usePoint = data[0];
+                  $('#pointModal').modal('show');
+               }
+            });
+         },
+         exchangeHandler() {  //兌換處理
+            let type = this.activityInfo.redeem_type;
+            if (type !== 'point') {
+               let obj = { free: '#freeModal', redeem_code: '#redeemModal' };
+               $(obj[type]).modal('show');
+            } else if (type === 'point' && this.pointListThanOne) {
+               this.mobileSelect.show();
+            } else if (type === 'point' && !this.pointListThanOne) {
+               $('#pointModal').modal('show');
+            }
+         },
+         async freeExchange() { //免費兌換
+            $('#freeModal').modal('hide');
+            let result = await this.confirmExchange({}).then(res => res);
+            if (!result.status) $('#errorModal').modal('show');
+         },
+         async redeemExchange() { //代碼兌換
+            let isValid = await this.$refs.form.validate().then(res => res);
+            if (!isValid) return;
+            let payload = { redeem_code: this.user.code };
+            $('#redeemModal').modal('hide');
+            let result = await this.confirmExchange(payload).then(res => res);
+            if (!result.status) $('#redeemFailModal').modal('show');
+         },
+         async pointExchange() { //點數兌換
+            let targetObj = this.pointListThanOne ? this.usePoint : this.pointList[0];
+            let key = targetObj.category === 'point_condition' ? 'point_id' : 'external_point_id';
+            $('#pointModal').modal('hide');
+            let result = await this.confirmExchange({ [key]: targetObj.id }).then(res => res);
+            if (!result.status) $('#errorModal').modal('show');
+         },
          async confirmExchange(payload) { //確認兌換
             this.isLoading = true;
             let data = { coupon_activity_id: this.activityId, ...payload };
@@ -251,50 +321,19 @@ export default function ({ apiUrl, pageUrl }) {
                this.isLoading = false;
             });
          },
-         async freeExchange() { //免費兌換
-            $('#freeModal').modal('hide');
-            let result = await this.confirmExchange({}).then(res => res);
-            if (!result.status) $('#errorModal').modal('show');
-         },
-         async redeemExchange() { //代碼兌換
-            let isValid = await this.$refs.form.validate().then(res => res);
-            if (!isValid) return;
-            let payload = { redeem_code: this.user.code };
-            $('#redeemModal').modal('hide');
-            let result = await this.confirmExchange(payload).then(res => res);
-            if (!result.status) $('#redeemFailModal').modal('show');
-         },
-         async pointExchange() { //點數兌換
-            let point_id = this.pickerListThanOne ? this.usePoint.id : this.pointList[0].id;
-            let payload = { point_id };
-            $('#pointModal').modal('hide');
-            let result = await this.confirmExchange(payload).then(res => res);
-            if (!result.status) $('#errorModal').modal('show');
-         },
          async autoExchange() { //自動兌換
             let payload = {};
             let type = this.getQuery('type');
-            if (type === 'point') payload.point_id = parseInt(this.getQuery('point_id'));
+            if (type === 'point') {
+               let category = this.getQuery('category');
+               let queryArr = ['point_id', 'external_point_id'];
+               let isInclude = queryArr.includes(category);
+               if (!isInclude) return;
+               payload[category] = parseInt(this.getQuery('point_id'));
+            }
             let autoResult = await this.confirmExchange(payload).then(res => res);
             if (!autoResult.status) $('#errorModal').modal('show');
          },
-         initIosPicker() { //初使iso picker
-            this.mobileSelect = new MobileSelect({
-               trigger: '#iosPicker',
-               title: this.redeemPointTitle,
-               ensureBtnText: this.sureText,
-               cancelBtnText: this.cancelText,
-               ensureBtnColor: '#288efb',
-               titleColor: '#292929',
-               textColor: '#292929',
-               triggerDisplayData: false,
-               wheels: [{ data: this.pickerList }],
-               callback: (index, data) => {
-                  this.usePoint = data[0];
-                  $('#pointModal').modal('show');
-               }
-            });
-         }
       },
       async mounted() {
          this.bindModalEvent();
@@ -313,11 +352,11 @@ export default function ({ apiUrl, pageUrl }) {
          this.couponBlock = this.mergeCouponAndStore(couponInfoData, storeData);
 
          if (this.showPointIntro) {
-            let { point_condition } = this.activityInfo;
-            let pointIdArr = this.gatherPointId(point_condition);
-            let pointResult = await this.getPointInfo(pointIdArr).then(res => res);
-            this.pointList = this.mergeAboutPoint(point_condition, pointResult);
-            if (this.pickerListThanOne) this.initIosPicker();
+            let normalPoint = await this.getPointCategoryInfo('point_condition');
+            let externalPoint = await this.getPointCategoryInfo('external_point_condition');
+            let pointInfo = normalPoint.concat(externalPoint);
+            this.pointList = this.createPickList(pointInfo);
+            if (this.pointListThanOne) this.initIosPicker();
          }
 
          this.isLoading = false;
@@ -327,7 +366,7 @@ export default function ({ apiUrl, pageUrl }) {
             if (this.isOpening) $('#redeemModal').modal('show');
          }
          
-         //===自動兌換 ?coupon_activity_id=1&auto=true&type=point&point_id=1
+         //===自動兌換 ?coupon_activity_id=1&auto=true&type=point&point_id=1&category=point_id
          if (this.getQuery('auto') === 'true') {
             if (this.isOpening) await this.autoExchange();
          }

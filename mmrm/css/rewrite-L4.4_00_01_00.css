@@ -1,0 +1,61 @@
+.msgBox:after {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+#app {
+  padding-top: 45px;
+}
+
+.wrap {
+  padding: 20px 15px;
+}
+
+.emptyBlock > .emptyBg {
+  background-image: url("../img/img_member_messageinbox_empty_n@2x.png");
+}
+
+.msgBox {
+  position: relative;
+  padding: 20px 15px;
+  padding-right: 25px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.msgBox:last-child {
+  margin-bottom: 0;
+}
+
+.msgBox > * {
+  margin-bottom: 5px;
+}
+
+.msgBox > *:last-child {
+  margin-bottom: 0;
+}
+
+.msgBox > .date {
+  color: #797979;
+  font-size: 14px;
+}
+
+.msgBox > .title,
+.msgBox > .summary {
+  color: #292929;
+}
+
+.msgBox:after {
+  content: '';
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+/*# sourceMappingURL=rewrite-L4.4_00_01_00.css.map */

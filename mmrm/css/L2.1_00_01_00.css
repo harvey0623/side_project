@@ -18,7 +18,7 @@
           transform: translate(-50%, -50%);
 }
 
-.usageBox > div > .arrow:after {
+.couponIntro > .brandLogo, .usageBox > div > .arrow:after {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -80,14 +80,8 @@ body {
   top: -30px;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
-}
-
-.couponIntro > .brandLogo > img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  background-image: url("../img/placeholder.jpg");
+  background-size: cover;
 }
 
 .intorList {
@@ -185,7 +179,8 @@ body {
   list-style: disc;
 }
 
-.couponDesc img {
+.couponDesc img,
+.couponDesc iframe {
   max-width: 100%;
 }
 

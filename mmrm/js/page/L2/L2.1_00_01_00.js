@@ -34,8 +34,10 @@ export default function ({ apiUrl, pageUrl }) {
             return this.brandInfo.title;
          },
          brandLogo() {  //品牌logo
-            if (this.brandInfo === null) return '';
-            return this.brandInfo.feature_image_small.url;
+            if (this.brandInfo === null) return {};
+            let imgUrl = this.brandInfo.feature_image_small.url;
+            if (!imgUrl) return {};
+            else return { backgroundImage: `url(${imgUrl})` };
          },
          couponDesc() { //票券說明
             if (this.couponInfo === null) return '';
@@ -91,8 +93,8 @@ export default function ({ apiUrl, pageUrl }) {
       methods: {
          getQuery(key) { //取得網址參數
             let params = (new URL(document.location)).searchParams;
-            let value = params.get(key) || 0;
-            return parseInt(value);
+            let value = params.get(key);
+            return value;
          },
          bindModalEvent() {
             $('#transferModal').on('shown.bs.modal', function () {
@@ -198,8 +200,7 @@ export default function ({ apiUrl, pageUrl }) {
             location.href = `${url}?my_coupon_id=${this.myCouponId}`;
          },
          autoTransfer() { //自動轉贈
-            let params = (new URL(document.location)).searchParams;
-            let isAuto = params.get('auto') === 'true';
+            let isAuto = this.getQuery('auto') === 'true';
             if (isAuto && this.canTransfer && this.checkCouponStatus) {
                $('#transferModal').modal('show');
             }
@@ -214,7 +215,7 @@ export default function ({ apiUrl, pageUrl }) {
          window.addEventListener('scroll', this.scrollHandler);
 
          this.isLoading = true;
-         this.myCouponId = this.getQuery('my_coupon_id');
+         this.myCouponId = parseInt(this.getQuery('my_coupon_id'));
          this.isMultipleBrand = await this.getMultipleBrand().then(res => res);
          this.couponDetail = await this.getCouponDetail().then(res => res);
          this.couponInfo = await this.getCouponInfo().then(res => res[0]);

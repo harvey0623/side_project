@@ -45,9 +45,7 @@
 					<div class="content">{{ transferStatus }}</div>
 				</li>
 			</ul>
-			<div class="brandLogo" v-show="isMultipleBrand">
-				<img :src="brandLogo" alt="">
-			</div>
+			<div class="brandLogo" v-show="isMultipleBrand" :style="brandLogo"></div>
 		</div>
 
 		<div class="usageBox" v-if="couponInfo !== null">
@@ -84,10 +82,10 @@
 		import app from './js/page/L3/L3.1_02_00_04.js';
 		app({
 			apiUrl: {
-            couponInfo: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/coupon_information',
-            brandInfo: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/brand_information',
-            storeList: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/search_coupon_available_store',
-            multipleBrand: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/multiple_brand'
+            couponInfo: 'http://localhost:3034/mmrmProd/coupon_information',
+            brandInfo: 'http://localhost:3034/mmrmProd/brand_information',
+            storeList: 'http://localhost:3034/mmrmProd/search_coupon_available_store',
+            multipleBrand: 'http://localhost:3034/mmrmProd/multiple_brand'
          },
          pageUrl: {
             store: ''

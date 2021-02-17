@@ -1,0 +1,113 @@
+@import './utility/index';
+
+$basicHeight: 45px;
+$inputColor: map-get($fontColor, input);
+
+#app {
+   padding-top: $basicHeight;
+}
+
+.catalogBar {
+   position: fixed;
+   left: 0;
+   top: 0;
+   @include size(100%, $basicHeight);
+   @extend %bwtFlex;
+   padding: 0 15px;
+   background-color: map-get($elBgColor, input);
+   color: #fff;
+   >div {
+      @include size(25px);
+      background-size: contain;
+   }
+   >p {
+      font-size: 18px;
+   }
+}
+
+.layoutIcon {
+   background-image: url("../img/btn_cms_picstyle_index_n@2x.png");
+   &.active {
+      background-image: url("../img/btn_nav_close_popup_n@2x.png");
+   }
+}
+
+.filterIcon {
+   background-image: url("../img/btn_cms_picstyle_chapter_n@2x.png");
+}
+
+.typeA {
+   position: relative;
+   >.pageDetailLink {
+      position: absolute;
+      right: 15px;
+      bottom: $basicHeight + 15px;
+      @include size(40px);
+      border-radius: 50%;
+      background-image: url("../img/btn_cms_picstyle_more_n@2x.png");
+      background-size: contain;
+      background-position: center center;
+   }
+}
+
+.pageCoverBox {
+   height: calc(100vh - #{$basicHeight * 2});
+   background-color: #000;
+   background-image: url("../img/placeholder.jpg");
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-size: contain;
+}
+
+.controlPanel {
+   height: $basicHeight;
+   padding: 0 5px;
+   @extend %bwtFlex;
+   color: $inputColor;
+   >.dirBox {
+      @include size(25px);
+      background-size: contain;
+      &.disabled {
+         opacity: 0;
+         pointer-events: none;
+      }
+      &.left {
+         background-image: url("../img/btn_listcore_indicatorleft_std_n@2x.png");
+      }
+      &.right {
+         background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+      }
+   }
+}
+
+.catalogBlock {
+   >.catalogTitle {
+      margin-bottom: 15px;
+      color: $inputColor;
+   }
+   >.catalogOuter {
+      @extend %clearFix;
+      >.catalogItem {
+         float: left;
+         width: calc(50% - 12px);
+         margin-bottom: map-get($gutter, basic);
+         &:nth-child(odd) {
+            margin-right: 12px;
+         }
+         &:nth-child(even) {
+            margin-left: 12px;
+         }
+         >.catalogBg {
+            padding-top: 140%;
+            background-image: url("../img/placeholder.jpg");
+            background-position: center center;
+            background-size: cover;
+         }
+         >.pageNumber {
+            padding-top: 5px;
+            color: $inputColor;
+            text-align: center;
+         }
+      }
+   }
+}

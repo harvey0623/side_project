@@ -98,14 +98,9 @@ Vue.component('activity-list', {
       pointIntro() { //組合點數介紹的字串
          let redeemType = this.detail.redeem_type;
          if (redeemType !== 'point') return this.redeemStatus[redeemType];
-         let pointCondition = this.detail.point_condition;
-         let pointInfo = this.detail.pointInfo;
-         let result = pointCondition.reduce((prev, current) => {
-            let obj = pointInfo.find(item => item.point_id === current.point_id);
-            prev.push(`${obj.title}${current.amount}${this.pointUnit}`);
-            return prev;
-         }, []);
-         return result.join(' / ');
+         let normalArr = this.getPointInfoText('point_condition');
+         let externalArr = this.getPointInfoText('external_point_condition');
+         return normalArr.concat(externalArr).join(' / ');
       }
    },
    methods: {
@@ -128,6 +123,16 @@ Vue.component('activity-list', {
             type: this.detail.redeem_type,
             status: this.detail.status
          });
+      },
+      getPointInfoText(key) { //取得點數資訊字串
+         if (this.detail[key] === undefined) return [];
+         return this.detail[key].reduce((prev, current) => {
+            let obj = this.detail.pointInfo.find(item => {
+               return item.point_id === current.point_id && item.category === key;
+            });
+            prev.push(`${obj.title}${current.amount}${this.pointUnit}`);
+            return prev;
+         }, []);
       }
    },
    mounted() {

@@ -6,10 +6,6 @@ Vue.component('page-control', {
       page_info: {
          required: true
       },
-      pageurl: {
-         type: String,
-         required: true
-      },
       book_id: {
          type: Number,
          required: true  
@@ -20,6 +16,10 @@ Vue.component('page-control', {
       },
       currentPage: {
          type: Number,
+         default: 0
+      },
+      pageurl: {
+         type: String,
          required: true
       }
    },

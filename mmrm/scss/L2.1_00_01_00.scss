@@ -1,0 +1,167 @@
+@import './utility/index';
+$inputColor: map-get($fontColor, input);
+
+%blockPadding {
+   padding: 25px;
+}
+
+body {
+   background-color: #fff;
+   padding-bottom: map-get($heightObj, basic);
+}
+
+.banner {
+   position: relative;
+   height: 240px;
+   overflow: hidden;
+   >.inner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      @include size(100%);
+      background-image: url("../img/placeholder.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: #000;
+      @media (min-width: 730px) {
+         background-size: contain;
+         background-position: center top;
+      }
+   }
+   @media (max-width: 380px) {
+      height: 200px;
+   }
+}
+
+.couponIntro {
+   position: relative;
+   @extend %blockPadding;
+   >.couponName {
+      margin-bottom: 10px;
+      color: map-get($fontColor, formTitle);
+      font-size: 17px;
+   }
+   >.brandLogo {
+      position: absolute;
+      right: 25px;
+      top: -30px;
+      @include size(60px);
+      background-image: url("../img/placeholder.jpg");
+      @extend %bgImgCenter;
+      background-size: cover;
+   }
+}
+
+.intorList {
+   margin-bottom: 0;
+   color: $inputColor;
+   >li {
+      display: flex;
+      align-items: flex-start;
+      @include elGutter(margin-bottom, 10px);
+      >.title {
+         flex: 0 0 65px;
+      }
+      >.colon {
+         margin-left: 5px;
+         margin-right: 10px;
+      }
+      >.content {
+         flex: 1;
+      }
+   }
+}
+
+.usageBox {
+   display: flex;
+   align-items: center;
+   @extend %blockPadding;
+   background-color: map-get($elBgColor, body);
+   position: relative;
+   >div {
+      flex: 1;
+      text-align: center;
+      >.title {
+         color: $inputColor;
+         margin-bottom: 10px;
+      }
+      >.arrow {
+         &:after {
+            content: '';
+            display: inline-block;
+            @include size(15px);
+            background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+            @extend %bgImgCenter;
+            transform: translate(5px, 2px);
+         }
+      }
+      >.content {
+         @extend %centerFlex;
+         >.number {
+            margin-right: 5px;
+            font-size: 20px;
+            color: var(--variationMain);
+         }
+         >.unit {
+            color: $inputColor;
+         }
+      }
+   }
+   &:after {
+      content: '';
+      @extend %posCenter;
+      @include size(0.5px, 30px);
+      background-color: #c0c0c0;
+   }
+}
+
+.couponDesc {
+   @extend %blockPadding;
+   color: $inputColor;
+   ol, ul {
+      padding-left: 40px;
+      list-style: disc;
+   }
+   img,
+   iframe {
+      max-width: 100%;
+   }
+}
+
+.fixBlock {
+   >div {
+      height: 100%;
+      &.hide {
+         opacity: 0;
+      }
+   }
+}
+
+.normalBlock {
+   display: flex;
+   line-height: initial;
+   background-color: var(--variationMain);
+   >div {
+      position: relative;
+      flex: 1;
+      line-height: map-get($heightObj, basic);
+      &:after {
+         content: '';
+         position: absolute;
+         left: 100%;
+         top: 30%;
+         @include size(1px, 20px);
+         background-color: #fff;
+      }
+      &:last-child {
+         &:after {
+            display: none;
+         }
+      }
+   }
+}
+
+.usedBlock {
+   background-color: map-get($elBgColor, placeholder);
+   color: $inputColor;
+}

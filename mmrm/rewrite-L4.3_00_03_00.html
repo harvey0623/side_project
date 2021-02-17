@@ -54,7 +54,7 @@
 		<div class="hrBlock" v-show="!hasPageContent">
 			<hr>
 		</div>
-		<ul class="block menuBox">
+		<ul class="block menuBox" v-show="hasLinkBlocks">
 			<link-block
 				v-for="(link,index) in linkBlocks"
 				:key="index"
@@ -67,9 +67,9 @@
 		<page-control
 			:book_info="bookData"
 			:page_info="pageData"
-			:pageurl="pageUrl.page"
 			:book_id="bookId"
 			:page_id="pageId"
+			:pageurl="pageUrl.page"
 			@padding="addPadding"
 			@popup="showPopup"
 		></page-control>

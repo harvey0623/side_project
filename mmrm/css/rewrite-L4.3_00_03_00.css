@@ -55,6 +55,7 @@
   background-color: #797979;
   color: #fff;
   font-size: 18px;
+  z-index: 1;
 }
 
 .insidePageBlock > .backIcon,
@@ -109,17 +110,21 @@
   padding: 20px;
 }
 
-.block.editor {
-  background-color: #fff;
+.block.pageInfo {
+  padding-top: 30px;
 }
 
-.block.editor img, .block.editor iframe {
-  max-width: 100%;
+.block.editor {
+  background-color: #fff;
 }
 
 .block.editor ol, .block.editor ul {
   padding-left: 40px;
   list-style: disc;
+}
+
+.block.editor img, .block.editor iframe {
+  max-width: 100%;
 }
 
 .brandLogo {
@@ -131,6 +136,7 @@
   background-image: url("../img/placeholder.jpg");
   background-size: contain;
   background-position: center center;
+  background-repeat: no-repeat;
   z-index: 10;
 }
 

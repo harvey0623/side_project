@@ -1,0 +1,92 @@
+.sliderBox, .swiper-slide {
+  height: 240px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.sliderBox {
+  background-image: url("../img/placeholder.jpg");
+}
+
+.swiper-slide {
+  background-image: url("../img/placeholder.jpg");
+  background-color: #000;
+}
+
+.content > .block {
+  padding: 25px 20px;
+}
+
+.introBox {
+  position: relative;
+  background-color: #fff;
+}
+
+.introBox.line:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 95%;
+  height: 1px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: #c9c9c9;
+}
+
+.introBox > .title {
+  margin-bottom: 15px;
+  color: #292929;
+}
+
+.introBox > .summary {
+  color: #797979;
+}
+
+.introBox > .price {
+  margin-top: 15px;
+  color: var(--variationMain);
+  text-align: right;
+  font-size: 17px;
+}
+
+.metaList > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  color: #797979;
+  margin-bottom: 15px;
+}
+
+.metaList > li:last-child {
+  margin-bottom: 0;
+}
+
+.metaList > li > .colon {
+  margin: 0 8px;
+}
+
+.metaList > li > .content {
+  width: calc(100% - 50px);
+  word-break: break-all;
+}
+
+.editBox {
+  color: #292929;
+  background-color: #fff;
+}
+
+.editBox ol, .editBox ul {
+  padding-left: 40px;
+  list-style: disc;
+}
+
+.editBox img,
+.editBox iframe {
+  max-width: 100%;
+}
+/*# sourceMappingURL=L7_00_03_00.css.map */

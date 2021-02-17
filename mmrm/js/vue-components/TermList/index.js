@@ -15,8 +15,8 @@ Vue.component('term-list', {
       }
    },
    template: `
-      <li>
+      <a :href="link">
          <div class="title">{{ term.title }}</div>
-         <a :href="link" class="arrowBox"></a>
-      </li>`
+         <div class="arrowBox"></div>
+      </a>`
 });

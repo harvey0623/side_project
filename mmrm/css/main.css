@@ -74,6 +74,18 @@ a:focus {
   outline: none;
 }
 
+.menuBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .sidebarFilter > li, .criteriaList > li, .sidebarPanel, .subMenu > .clearAll.between, .criteriaList > li > label, .pointContent > .summaryBox, .pointModal .otherBox {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -92,7 +104,7 @@ a:focus {
   overflow: hidden;
 }
 
-[type=date], .hookCheckbox, .formLayout > .formRow > .formContent select, .dataBox > .dataBody > .dataRow select, .sidebarFilter > li > .dateOuter > input {
+[type=date], .hookCheckbox, .formLayout > .formRow > .formContent select, .dataBox > .dataBody > .dataRow select, .sidebarFilter > li > .dateOuter > input, .selectBlock > .selectRow > .selectOuter > select {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -104,7 +116,7 @@ a:focus {
   clear: both;
 }
 
-.hookCheckbox, .popupHeader > .popupClose, .toggleSidebar, .emptyBlock > .emptyBg, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .sidebarFilter > li > .dateOuter > .arrowBox, .filterItem > .arrowBox, .filterItem > .layout, .pointModal .closeBg {
+.hookCheckbox, .popupHeader > .popupClose, .toggleSidebar, .emptyBlock > .emptyBg, .layoutBox > .layout, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .sidebarFilter > li > .dateOuter > .arrowBox, .filterItem > .arrowBox, .filterItem > .layout, .menuBlock .iconBg, .pointModal .closeBg, .selectBlock > .selectRow > .selectOuter > .downIcon {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -132,6 +144,10 @@ input:focus {
 
 select {
   background-color: #fff;
+}
+
+select:focus {
+  outline: none;
 }
 
 textarea {
@@ -389,6 +405,34 @@ body.hide {
   margin-top: 20px;
   color: #797979;
   text-align: center;
+}
+
+.layoutBox {
+  -webkit-transform: translateY(3px);
+          transform: translateY(3px);
+}
+
+.layoutBox > .layout {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.layoutBox > .layoutA {
+  background-image: url("../img/btn_filter_view_big_n@2x.png");
+  margin-right: 10px;
+}
+
+.layoutBox > .layoutA.active {
+  background-image: url("../img/btn_filter_view_big_h@2x.png");
+}
+
+.layoutBox > .layoutB {
+  background-image: url("../img/btn_filter_view_list_n@2x.png");
+}
+
+.layoutBox > .layoutB.active {
+  background-image: url("../img/btn_filter_view_list_h@2x.png");
 }
 
 .formLayout {
@@ -880,6 +924,45 @@ body.hide {
   word-break: break-all;
 }
 
+.tabList {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 10;
+}
+
+.tabList > li {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  position: relative;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  color: #292929;
+  cursor: pointer;
+}
+
+.tabList > li > .line {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.tabList > li > .line.variationMain {
+  background-color: var(--variationMain);
+}
+
 .couponBlock {
   display: block;
   height: 120px;
@@ -1052,14 +1135,14 @@ body.hide {
 
 .pointCard > .pointDesc > .pointTitle {
   color: #292929;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .pointCard > .pointDesc > .pointAmount {
   color: #292929;
 }
 
-.pointCard > .pointDesc > .pointAmount .variationMainPoint {
+.pointCard > .pointDesc > .pointAmount > .number {
   margin-right: 5px;
   font-size: 30px;
   color: var(--variationMain);
@@ -1067,6 +1150,24 @@ body.hide {
 
 .pointCard > .pointDesc > .expireTime {
   color: #797979;
+}
+
+.menuBlock {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 45px;
+  background-color: #797979;
+  color: #fff;
+}
+
+.menuBlock .iconBg {
+  width: 9px;
+  height: 9px;
+  margin-left: 2px;
+  margin-top: 2.5px;
+  background-image: url("../img/btn_filter_category_darkbg_n@2x.png");
 }
 
 .fade-enter,
@@ -1384,6 +1485,99 @@ body.hide {
 
 .optionModal .modal-body > .couponItem > a {
   color: #288efb;
+}
+
+.selectModal .modal-content {
+  background-color: #e7e7e7;
+  color: #292929;
+}
+
+.selectModal .modal-header {
+  padding: 15px 15px;
+  border-bottom: none;
+}
+
+.selectModal .modal-header .modal-title {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  font-size: 18px;
+}
+
+.selectModal .modal-body {
+  padding: 0px 15px 15px;
+}
+
+.selectModal .modal-footer {
+  padding: 12px 15px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-top-color: #C9C9C9;
+}
+
+.selectModal .modal-footer > p,
+.selectModal .modal-footer > a {
+  min-width: 20%;
+  margin: 0;
+  color: #288efb;
+  text-align: center;
+  cursor: pointer;
+}
+
+.selectModal .modal-footer.split {
+  padding: 0;
+}
+
+.selectModal .modal-footer.split > div {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 0;
+  height: 45px;
+  line-height: 45px;
+  color: #288efb;
+  text-align: center;
+  cursor: pointer;
+}
+
+.selectModal .modal-footer.split > div:first-child {
+  border-right: 1px solid #C9C9C9;
+}
+
+.selectBlock > .selectRow {
+  margin-bottom: 15px;
+}
+
+.selectBlock > .selectRow:last-child {
+  margin-bottom: 0;
+}
+
+.selectBlock > .selectRow > p {
+  margin-bottom: 5px;
+}
+
+.selectBlock > .selectRow > .selectOuter {
+  position: relative;
+}
+
+.selectBlock > .selectRow > .selectOuter > select {
+  width: 100%;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 22px;
+  border-radius: 5px;
+  border: 1px solid #C9C9C9;
+}
+
+.selectBlock > .selectRow > .selectOuter > .downIcon {
+  position: absolute;
+  right: 5px;
+  top: 13px;
+  width: 15px;
+  height: 15px;
+  background-image: url("../img/btn_listcore_indicatordown_std_n@2x.png");
 }
 
 .swiper-slide > img {

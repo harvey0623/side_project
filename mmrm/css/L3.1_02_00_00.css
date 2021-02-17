@@ -162,16 +162,13 @@ body {
   background-color: #fff;
 }
 
-.activityDesc > * {
-  margin-bottom: 15px;
-}
-
 .activityDesc ol, .activityDesc ul {
   padding-left: 40px;
   list-style: disc;
 }
 
-.activityDesc img {
+.activityDesc img,
+.activityDesc iframe {
   max-width: 100%;
 }
 

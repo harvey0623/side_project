@@ -24,12 +24,11 @@ export default function({ apiUrl, pageUrl }) {
                let termInfo = res.data.results.term_information;
                if (termInfo.length === 0) return [];
                else return termInfo[0].terms;
-            }).catch(err => [])
+            }).catch(err => []);
          },
          autoNavigate() { //自動導頁面
             let termId = this.termList[0].id;
             let url = `${this.pageUrl.content}?id=${termId}`;
-            this.isLoading = false;
             location.href = url;
          }
       },

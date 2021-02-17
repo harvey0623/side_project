@@ -42,7 +42,7 @@ Vue.component('point-card', {
          <div class="pointDesc">
             <p class="pointTitle">{{ title }}</p>
             <div class="pointAmount">
-               <span class="variationMainPoint">{{ point }}</span>
+               <span class="number">{{ point }}</span>
                <span>{{ pointUnit }}</span>
             </div>
             <div class="expireTime">{{ deadline }}</div>

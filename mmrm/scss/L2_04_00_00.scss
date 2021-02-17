@@ -1,0 +1,115 @@
+@import './utility/index';
+
+$inputColor: map-get($fontColor, input);
+$formTitleColor: map-get($fontColor, formTitle);
+$basicGutter: map-get($gutter,basic);
+
+.emptyBlock {
+   >.emptyBg {
+      background-image: url("../img/img_member_txnhistory_empty_n@2x.png");
+   }
+}
+
+.tradeList {
+   >li {
+      @include elGutter(margin-bottom, 25px);
+      .title {
+         padding-left: 15px;
+         margin-bottom: 10px;
+         color: $inputColor;
+      }
+      .content {
+         padding: 25px;
+         background-color: #fff;
+         border-radius: map-get($radius, basic);
+      }
+   }
+}
+
+.tradeItem {
+   @include elGutter(margin-bottom, $basicGutter);
+   >.typeBox {
+      cursor: pointer;
+   }
+}
+
+.storeInfo {
+   @extend %bwtFlex;
+   margin-bottom: $basicGutter;
+   color: $formTitleColor;
+   >.logoBox {
+      display: flex;
+      align-items: center;
+      >img {
+         @include size(20px);
+      }
+      >span {
+         margin-left: 7.5px;
+      }
+   }
+}
+
+.invoiceInfo {
+   &.hasMargin {
+      margin-bottom: $basicGutter;
+   }
+   >.invoiceRow {
+      display: flex;
+      align-items: flex-start;
+      color: $inputColor;
+      @include elGutter(margin-bottom, 7.5px);
+      >.colon {
+         margin-left: 15px;
+         margin-right: 10px;
+      }
+      >.value {
+         flex: 1;
+         word-break: break-all;
+      }
+   }
+}
+
+.getDetail {
+   text-align: center;
+   color: $inputColor;
+}
+
+.infoBox {
+   margin-top: 25px;
+}
+
+.itemList {
+   margin-bottom: 25px;
+   >li {
+      padding-bottom: 25px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid map-get($borderColor, placeholder);
+      &:last-child {
+         margin-bottom: 0;
+      }
+      >.itemName {
+         margin-bottom: 15px;
+         color: $formTitleColor;
+      }
+      >.itemInfo {
+         @extend %bwtFlex;
+         color: $inputColor;
+      }
+   }
+}
+
+.summaryList {
+   >li {
+      @extend %bwtFlex;
+      @include elGutter(margin-bottom, 7.5px);
+      color: $formTitleColor;
+      &.total {
+         color: #e60012;
+      }
+   }
+}
+
+.tipBox {
+   margin-top: 40px;
+   margin-bottom: 0;
+}

@@ -27,7 +27,7 @@
 					<img :src="pointData.feature_image.url" alt="">
 					<p>{{ pointData.title }}</p>
 				</div>
-				<ul class="descList">
+				<ul class="descList" v-if="metaList.length !== 0">
 					<li 
 						v-for="(item,index) in metaList"
 						:key="index">
@@ -47,7 +47,7 @@
 		import app from './js/page/L2/L2_03_02_00.js';
 		app({
 			apiUrl: {
-            pointInfo: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/point_information'
+            pointInfo: 'http://localhost:3034/mmrmProd/point_information'
          }
 		});
 	</script>

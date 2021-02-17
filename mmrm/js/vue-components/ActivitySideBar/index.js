@@ -87,9 +87,21 @@ Vue.component('activity-sidebar', {
             return res.data.results.redeem_types;
          }).catch(err => null);
       },
-      async getPointInfo(pointIdArr) { //取得點數詳情
+      async getPointInfo(pointIdArr) { //取得一般點數詳情
          return await axios({
             url: this.apiurl.pointInfo,
+            method: 'post',
+            data: {
+               point_id: pointIdArr,
+               full_info: false
+            }
+         }).then(res => {
+            return res.data.results.point_information;
+         }).catch(err => null);
+      },
+      async getExternalPointInfo(pointIdArr) { //取得額外點數詳情
+         return await axios({
+            url: this.apiurl.externalPoint,
             method: 'post',
             data: {
                point_id: pointIdArr,
@@ -137,86 +149,123 @@ Vue.component('activity-sidebar', {
       clearAllBrand() { //清除全部品牌
          this.brandList.forEach(item => item.checked = false);
       },
-      tidyPoint(brefResult, pointInfo) { //整理點數資料
-         let nonePoint = brefResult.filter(item => item.redeem_type !== 'point');
-         let tempB = [];
-         let tempA = nonePoint.reduce((prev, current) => {
-            let currentType = current.redeem_type;
-            prev.push({
-               id: currentType, 
-               title: this.redeemType[currentType], 
-               type: currentType,
-               checked: true
-            });
-            return prev;
-         }, []);
-         if (pointInfo !== null) {
-            tempB = pointInfo.reduce((prev, current) => {
-               prev.push({
-                  id: current.point_id, 
-                  title: vsprintf(this.categoryPoint, [current.title]),
-                  type: 'point', 
-                  checked: true
-               });
-               return prev;
-            }, []);
-         }
-         return tempA.concat(tempB);
-      },
-      pointChange(evt) { //改變點數勾選狀態
-         let el = evt.target;
-         let pointId = el.value;
-         let checked = el.checked;
-         let obj = this.pointList.find(item => {
-            let id = item.id;
-            id = typeof id === 'number' ? id.toString() : id;
-            return id === pointId;
-         });
-         obj.checked = checked;
-      },
-      clearAllPoint() { //清除全部點數
-         this.pointList.forEach(item => item.checked = false);
-      },
       async getAboutBrand() { //取品牌選項列表
          let brandIdArr = await this.getAllBrand().then(res => res);
          let brandInfo = await this.getBrandInfo(brandIdArr).then(res => res);
          this.brandList = this.tidyBrand(brandInfo);
          return;
       },
+      pointChange(category, evt) { //改變點數勾選狀態
+         let el = evt.target;
+         let pointId = el.value;
+         let checked = el.checked;
+         let obj = this.pointList.find(item => {
+            let id = item.id;
+            id = typeof id === 'number' ? id.toString() : id;
+            return id === pointId && item.category === category;
+         });
+         obj.checked = checked;
+      },
+      clearAllPoint() { //清除全部點數
+         this.pointList.forEach(item => item.checked = false);
+      },
+      tidyPoint(brefResult, pointInfo) { //整理點數資料
+         let existedPointArr = [];
+         let exceptPoint = brefResult.filter(item => item.redeem_type !== 'point');
+         let nonePointArr = exceptPoint.reduce((prev, current) => {
+            let currentType = current.redeem_type;
+            prev.push({
+               id: currentType, 
+               title: this.redeemType[currentType], 
+               type: currentType,
+               category: 'basic',
+               checked: true
+            });
+            return prev;
+         }, []);
+         if (pointInfo !== null) {
+            let includePoint = brefResult.filter(item => item.redeem_type === 'point')[0];
+            let categoryPoint = {};
+            for (let key in includePoint) {
+               if (key !== 'redeem_type') categoryPoint[key] = includePoint[key];
+            }
+            existedPointArr = pointInfo.reduce((prev, current) => {
+               let categoryName = '';
+               for (let key in categoryPoint) {
+                  let isIdInclude = categoryPoint[key].includes(current.point_id);
+                  let isSameCategory = current.category === key;
+                  if (isIdInclude && isSameCategory) {
+                     categoryName = key;
+                     break;
+                  }
+               }
+               prev.push({
+                  id: current.point_id,
+                  title: vsprintf(this.categoryPoint, [current.title]),
+                  type: 'point',
+                  category: categoryName,
+                  checked: true
+               });
+               return prev;
+            }, []);
+         }
+         return nonePointArr.concat(existedPointArr);
+      },
+      async gatherBrefPoint(data) { //如果是內部點數直接取詳情,外部點數先收集id再取詳情
+         let normalPointInfo = [];
+         let externalPointInfo = [];
+         let externalPointId = [];
+         for (let key in data) {
+            if (key === 'redeem_type') continue;
+            if (key === 'point_ids') {
+               let pointInfoData = await this.getPointInfo(data[key]);
+               normalPointInfo = normalPointInfo.concat(pointInfoData);
+               normalPointInfo.forEach(item => item.category = 'point_ids');
+            } else {
+               externalPointId = externalPointId.concat(data[key]);
+            }
+         }
+         if (externalPointId.length !== 0) {
+            externalPointInfo = await this.getExternalPointInfo(externalPointId);
+            externalPointInfo.forEach(item => item.category = 'external_point_ids');
+         }
+         return normalPointInfo.concat(externalPointInfo);
+      },
       async getAboutPoint() { //取得點數選項列表
          let brefResult = await this.getBrefType().then(res => res);
          let pointInfo = null;
          let obj = brefResult.find(item => item.redeem_type === 'point');
          if (obj !== undefined) {
-            pointInfo = await this.getPointInfo(obj.point_ids).then(res => res);
+            pointInfo = await this.gatherBrefPoint(obj);
          }
          this.pointList = this.tidyPoint(brefResult, pointInfo);
          return;
       },
-      createParams() { //產生搜尋參數(如果都沒選就是全部選取得意思)
-         let pointIds = [];
+      createParams() { //產生搜尋參數(如果兌換類型都沒選就是全部選得意思)
          let brandIds = this.brandList.filter(item => item.checked).map(item => item.id);
-         brandIds = brandIds.length !== 0 ? brandIds : this.brandList.map(item => item.id);
-         let typeGroup = this.pointList.filter(item => item.checked).map(item => item.type);
-         let redeemTypes = typeGroup.length !== 0 ? typeGroup : this.pointList.map(item => item.type);
+         let redeemTypes = this.pointList.filter(item => item.checked).map(item => item.type);
+         redeemTypes = redeemTypes.length !== 0 ? redeemTypes : this.pointList.map(item => item.type);
          redeemTypes = Array.from(new Set(redeemTypes));
+         let pointCategory = {};
          if (redeemTypes.includes('point')) {
-            this.pointList.forEach(item => {
-               let typeIsPoint = item.type === 'point';
-               if (typeGroup.length !== 0) {
-                  if (item.checked && typeIsPoint) pointIds.push(item.id);
-               } else {
-                  if (typeIsPoint) pointIds.push(item.id);
+            pointCategory = this.pointList.reduce((prev, current) => {
+               if (current.checked && current.type === 'point') {
+                  let categoryName = current.category;
+                  let pointId = current.id;
+                  if (prev[categoryName] === undefined) {
+                     prev[categoryName] = [pointId];
+                  } else {
+                     prev[categoryName].push(pointId);
+                  }
                }
-            });
+               return prev;
+            }, {});
          }
-         let result = {
+         return {
             brand_ids: brandIds,
             redeem_types: redeemTypes,
-            point_ids: pointIds
+            ...pointCategory
          };
-         if (pointIds.length === 0) delete result.point_ids;
-         return result;
       },
       confirmHandler() { //搜尋確認
          let paramsData = this.createParams();
@@ -294,7 +343,7 @@ Vue.component('activity-sidebar', {
                <span @click="clearAllPoint">{{ clearText }}</span>
             </div>
             <ul class="criteriaList">
-               <li v-for="point in pointList" :key="point.id">
+               <li v-for="(point,index) in pointList" :key="index">
                   <label>
                      <div class="criteriaTitle">
                         <span>{{ point.title }}</span>
@@ -302,7 +351,7 @@ Vue.component('activity-sidebar', {
                      <input 
                         type="checkbox" class="hookCheckbox" 
                         :value="point.id" :checked="point.checked"
-                        @change="pointChange">
+                        @change="pointChange(point.category, $event)">
                   </label>
                </li>
             </ul>

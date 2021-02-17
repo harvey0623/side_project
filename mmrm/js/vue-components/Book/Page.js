@@ -4,10 +4,6 @@ Vue.component('page', {
          type: Object,
          required: true
       },
-      pageurl: {
-         type: String,
-         required: true
-      },
       order: {
          type: Number,
          required: true
@@ -19,7 +15,11 @@ Vue.component('page', {
       bookId: {
          type: Number,
          required: true
-      }
+      },
+      pageurl: {
+         type: String,
+         required: true
+      },
    },
    computed: {
       pageLink() {
@@ -28,7 +28,7 @@ Vue.component('page', {
       },
       pageBg() {
          let imgUrl = this.page.feature_image.url;
-         if (imgUrl === null) return {};
+         if (!imgUrl) return {};
          else return { backgroundImage: `url(${imgUrl})` };
       },
       pageNumber() {

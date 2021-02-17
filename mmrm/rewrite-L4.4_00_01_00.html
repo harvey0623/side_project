@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>票券列表</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/swiper/swiper.min.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L2.1_00_00_03.css">
+	<link rel="stylesheet" href="./css/rewrite-L4.4_00_01_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<ul class="tabList">
+			<li v-for="tab in tabList" :key="tab.id" v-show="tab.isOpen" @click="changeTab(tab.id)">
+				<p>{{ tab.title }}</p>
+				<span class="line":class="{variationMain: tab.id === currentType}"></span>
+			</li>
+		</ul>
+
+		<div class="wrap">
+			<div class="tabContent" v-show="currentType === 'public'">
+				<div class="msgGroup">
+					<msg-box
+						v-for="msg in messageData.public.data"
+						:key="msg.messageId"
+						msg-type="public"
+						:msg-info="msg"
+						@popup="showPopup"
+					></msg-box>
+				</div>
+				<div class="emptyBlock" v-show="hasEmptyPublic">
+					<div class="emptyBg"></div>
+					<p>您目前沒有訊息記錄喔 !</p>
+				</div>
+				<div class="pagTip" v-show="messageData.public.loading">資料加載中...</div>
+				<div class="pagTip" v-show="noNextPublic">已經到最底囉～</div>
+			</div>
+
+			<div class="tabContent" v-show="currentType === 'member'">
+				<div class="msgGroup">
+					<msg-box
+						v-for="msg in messageData.member.data"
+						:key="msg.messageId"
+						msg-type="member"
+						:msg-info="msg"
+						@popup="showPopup"
+					></msg-box>
+				</div>
+				<div class="emptyBlock" v-show="hasEmptyMember">
+					<div class="emptyBg"></div>
+					<p>您目前沒有訊息記錄喔 !</p>
+				</div>
+				<div class="pagTip" v-show="messageData.member.loading">資料加載中...</div>
+				<div class="pagTip" v-show="noNextMember">已經到最底囉～</div>
+			</div>
+
+			<div class="tabContent" v-show="currentType === 'notify'">
+				<div class="msgGroup">
+					<msg-box
+						v-for="msg in messageData.notify.data"
+						:key="msg.messageId"
+						msg-type="notify"
+						:msg-info="msg"
+						@popup="showPopup"
+					></msg-box>
+				</div>
+				<div class="emptyBlock" v-show="hasEmptyNotify">
+					<div class="emptyBg"></div>
+					<p>您目前沒有訊息記錄喔 !</p>
+				</div>
+				<div class="pagTip" v-show="messageData.notify.loading">資料加載中...</div>
+				<div class="pagTip" v-show="noNextNotify">已經到最底囉～</div>
+			</div>
+		</div>
+
+		<div id="loading" v-if="searchLoading"></div>
+
+		<!-- 外部連結提示modal -->
+		<div class="modal msgModal" id="hyperModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ modalTitle.hyperlink }}</p>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#hyperModal').modal('hide')">取消</div>
+						<div @click="confirmHyper">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 密碼驗證modal -->
+		<div class="modal inputModal" id="checkPw" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<validation-observer tag="div" class="modal-body" ref="form">
+						<div class="tipText">本連結需使用到您的個人資料，請先輸入會員密碼</div>
+						<validation-provider
+							tag="div" class="inputBox" 
+							rules="required|password"
+							v-slot="{ errors }">
+							<input 
+								type="password" 
+								class="form-control" 
+								placeholder="請輸入會員密碼"
+								maxLength="12"
+								v-model.trim="user.password">
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+					</validation-observer>
+					<div class="modal-footer">
+						<div onclick="$('#checkPw').modal('hide')">取消</div>
+						<div @click="confirmPassword">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 錯誤提示 -->
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ modalTitle.error }}</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#failModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- link 選單modal -->
+		<div class="modal optionModal" id="optionModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">{{ modalTitle.popup }}</h1>
+					</div>
+					<div class="modal-body">
+						<div
+							class="couponItem cancelColor"
+							v-for="(option,index) in optionList"
+							:key="index"
+							@click="optionClick(option)">
+							{{ option.title }}
+						</div>
+						<div class="couponItem">
+							<p onclick="$('#optionModal').modal('hide')">取消</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/src/globalEncrypt.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/src/vue-mixin/openLink.js"></script>
+	<script src="./js/vue-components/MsgBox/index.js"></script>
+	<script type="module">
+		import app from './js/page/L4/rewrite-L4.4_00_01_00.js';
+		app({
+			openLink: window.openLink,
+			apiUrl: {
+				publicMessage: 'http://localhost:3034/mmrm/public_message_inbox',
+				memberMessage: 'http://localhost:3034/mmrm/member_message_inbox',
+				notifyMessage: 'http://localhost:3034/mmrm/member_notification_inbox',
+				verifyPassword: 'http://localhost:3034/mmrmProd/verify_password'
+         },
+         pageUrl: {
+				book: ''
+         }
+		});
+	</script>
+</body>
+
+</html>

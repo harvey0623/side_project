@@ -22,12 +22,12 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          redeemPointTitle: window.getSystemLang('couponactivityredeem_redeempointtitle'),
          sureText: window.getSystemLang('g_ok'),
          cancelText: window.getSystemLang('g_cancel'),
-         apiUrl,
-         pageUrl,
          user: { code: '' },
          mobileSelect: null,
          modalTitle: { free: '', point: '', errMsg: '' },
-         tempParams: { id: '', type: '', pointId: '' },
+         tempParams: { activityId: '', type: '', pointId: '', pointCategory: '' },
+         apiUrl,
+         pageUrl,
       }),
       computed: {
          changeLayout() { //板型切換
@@ -68,9 +68,6 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          },
          hideOwn() { //隱藏點數詳情
             $('#ownPointModal').modal('hide');
-         },
-         gatherPointId(data) { //取得點數id
-            return data.map(item => item.point_id);
          },
          gatherBrandId(data) { //取得牌數id
             return data.map(item => item.brand_id);
@@ -127,9 +124,21 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                return res.data.results.point_summary.current_point;
             }).catch(err => null);
          },
-         async getPointInfo(pointIdArr) { //取得點數詳情
+         async getPointInfo(pointIdArr) { //取得內部數詳情
             return await axios({
                url: this.apiUrl.pointInfo,
+               method: 'post',
+               data: {
+                  point_id: pointIdArr,
+                  full_info: false
+               }
+            }).then(res => {
+               return res.data.results.point_information;
+            }).catch(err => null);
+         },
+         async getExternalPointInfo(pointIdArr) { //取得額外點數詳情
+            return await axios({
+               url: this.apiUrl.externalPoint,
                method: 'post',
                data: {
                   point_id: pointIdArr,
@@ -161,7 +170,9 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                }
             }).then(res => {
                return res.data;
-            }).catch(err => null);
+            }).catch(err => {
+               return err.response.data;
+            });
          },
          async getActivityInfo() { //取得票券活動列表
             return await axios({
@@ -189,14 +200,29 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                speed: 1000,
             });
          },
+         gatherPointId(data) { //取得點數id
+            return data.map(item => item.point_id);
+         },
+         async getPointCategoryInfo({ data, key }) { //取得點數分類資訊
+            if (data[key] === undefined) return [];
+            let pointIdArr = this.gatherPointId(data[key]);
+            let method = key === 'point_condition' ? 'getPointInfo' : 'getExternalPointInfo';
+            let result = await this[method](pointIdArr);
+            result.forEach(item => item.category = key);
+            return result;
+         },
          async mergeActivityAndPoint(data) { //合併活動和點數資訊
             let result = [];
             for (let i = 0; i < data.length; i++) {
                let obj = data[i];
                if (obj.redeem_type === 'point') {
-                  let pointIdArr = this.gatherPointId(obj.point_condition);
-                  let pointInfo = await this.getPointInfo(pointIdArr).then(res => res);
-                  result.push({ ...obj, pointInfo });
+                  let normalCategory = await this.getPointCategoryInfo({
+                     data: obj, key: 'point_condition' 
+                  });
+                  let externalCategory = await this.getPointCategoryInfo({
+                     data: obj, key: 'external_point_condition' 
+                  });
+                  result.push({ ...obj, pointInfo: [...normalCategory, ...externalCategory] });
                } else {
                   result.push({ ...obj, pointInfo: null });
                }
@@ -214,8 +240,9 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
 
             let activityResult = await this.getActivityList().then(res => res);
             this.currentPage = activityResult.next;
-            this.systemTime = activityResult.results.system_datetime;
-            this.couponActivityId = activityResult.results.coupon_activity_ids;
+            this.systemTime = activityResult.results.system_datetime || '';
+            let couponActivityIds = activityResult.results.coupon_activity_ids;
+            this.couponActivityId = couponActivityIds !== undefined ? couponActivityIds : [];
             if (!this.hasActivity) {
                this.pagLoading = false;
                this.activityList = [];
@@ -257,24 +284,33 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
             }, 50);
          },
          createPickList(data) { //產生點數下拉清單
-            return data.point_condition.reduce((prev, current) => {
-               let pointId = current.point_id;
-               let obj = data.pointInfo.find(item => item.point_id === pointId);
-               prev.push({
-                  id: pointId,
-                  value: `${obj.title} : ${current.amount}點`,
-                  title: obj.title,
-                  amount: current.amount,
-               });
-               // prev.push({ id: 12, value: `野幣 : 249點`, title: obj.title, amount: 249 });
-               return prev;
-            }, []);
+            let categoryArr = ['point_condition', 'external_point_condition'];
+            let result = [];
+            categoryArr.forEach(category => {
+               if (data[category] === undefined) return false;
+               let conditionArr = data[category].reduce((prev, current) => {
+                  let pointId = current.point_id;
+                  let obj = data.pointInfo.find(item => {
+                     return item.point_id === pointId && item.category === category;
+                  });
+                  prev.push({
+                     id: pointId,
+                     title: obj.title,
+                     value: `${obj.title} : ${current.amount}點`,
+                     amount: current.amount,
+                     category
+                  });
+                  return prev;
+               }, []);
+               result = result.concat(conditionArr);
+            });
+            return result;
          },
          readyExchange(payload) { //準備兌換
-            let { id, type, status } = payload;
+            let { id:activityId, type, status } = payload;
             if (status !== 'opening') return;
-            let targetObj = this.activityList.find(item => item.coupon_activity_id === id);
-            this.tempParams.id = id;
+            let targetObj = this.activityList.find(item => item.coupon_activity_id === activityId);
+            this.tempParams.activityId = activityId;
             this.tempParams.type = type;
             if (type === 'free') {
                this.modalTitle[type] = targetObj.title;
@@ -284,11 +320,12 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
             } else if (type === 'point') {
                let pickList = this.createPickList(targetObj);
                if (pickList.length === 1) {
-                  let { id: pointId, title, amount } = pickList[0];
+                  let { id: pointId, title, amount, category } = pickList[0];
                   let templateText = window.getSystemLang('couponactivityredeem_pointmsg');
                   let parseText = vsprintf(templateText, [title, amount, targetObj.title]);
                   this.modalTitle.point = parseText;
                   this.tempParams.pointId = pointId;
+                  this.tempParams.pointCategory = category;
                   $('#pointModal').modal('show');
                } else {
                   this.mobileSelect.updateWheel(0, pickList);
@@ -300,7 +337,7 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          async gatherParams() { //蒐集參數
             let params = {};
             let exchangeType = this.tempParams.type;
-            params.coupon_activity_id = this.tempParams.id;
+            params.coupon_activity_id = this.tempParams.activityId;
             if (exchangeType === 'free') {
                $('#freeModal').modal('hide');
             } else if (exchangeType === 'redeem_code') {
@@ -309,7 +346,9 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                params.redeem_code = this.user.code;
                $('#redeemModal').modal('hide');
             } else if (exchangeType === 'point') {
-               params.point_id = this.tempParams.pointId;
+               let { pointCategory } = this.tempParams;
+               let key = pointCategory === 'point_condition' ? 'point_id' : 'external_point_id';
+               params[key] = this.tempParams.pointId;
                $('#pointModal').modal('hide');
             }
             let result = await this.confirmExchange(params).then(res => res);
@@ -353,6 +392,7 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                }],
                callback: (index, data) => {
                   this.tempParams.pointId = data[0].id;
+                  this.tempParams.pointCategory = data[0].category;
                   this.gatherParams();
                }
             });

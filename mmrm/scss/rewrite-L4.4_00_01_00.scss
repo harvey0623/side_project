@@ -1,0 +1,45 @@
+@import './utility/index';
+
+#app {
+   padding-top: map-get($heightObj, basic);
+}
+
+.wrap {
+   padding: 20px 15px;
+}
+
+.emptyBlock {
+   >.emptyBg {
+      background-image: url("../img/img_member_messageinbox_empty_n@2x.png");
+   }
+}
+
+.msgBox {
+   position: relative;
+   padding: 20px 15px;
+   padding-right: 25px;
+   @include elGutter(margin-bottom, map-get($gutter, basic));
+   background-color: #fff;
+   border-radius: 10px;
+   >* {
+      @include elGutter(margin-bottom, 5px);
+   }
+   >.date {
+      color: map-get($fontColor, input);
+      font-size: 14px;
+   }
+   >.title,
+   >.summary {
+      color: map-get($fontColor, formTitle);
+   }
+   &:after {
+      content: '';
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      @include size(18px);
+      background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+      @extend %bgImgCenter;
+      transform: translateY(-50%);
+   }
+}

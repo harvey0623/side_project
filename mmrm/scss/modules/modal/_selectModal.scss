@@ -1,0 +1,75 @@
+.selectModal {
+   .modal-content {
+      background-color: map-get($elBgColor, modal);
+      color: map-get($fontColor, formTitle);
+   }
+   .modal-header {
+      padding: 15px 15px;
+      border-bottom: none;
+      .modal-title {
+         flex: 1;
+         text-align: center;
+         font-size: 18px;
+      } 
+   } 
+   .modal-body {
+      padding: 0px 15px 15px;
+      
+   }
+   .modal-footer {
+      padding: 12px 15px;
+      justify-content: center;
+      border-top-color: map-get($borderColor, placeholder);
+      >p,
+      >a {
+         min-width: 20%;
+         margin: 0;
+         color: map-get($fontColor, modalCancel);
+         text-align: center;
+         cursor: pointer;
+      }
+      &.split {
+         padding: 0;
+         >div {
+            flex: 1;
+            margin: 0;
+            height: map-get($heightObj, basic);
+            line-height: map-get($heightObj, basic);
+            color: map-get($fontColor, modalCancel);
+            text-align: center;
+            cursor: pointer;
+            &:first-child {
+               border-right: 1px solid map-get($borderColor, placeholder);
+            }
+         }
+      }
+   }
+}
+
+.selectBlock {
+   >.selectRow {
+      @include elGutter(margin-bottom, 15px);
+      >p {
+         margin-bottom: 5px;
+      }
+      >.selectOuter {
+         position: relative;
+         >select {
+            @extend %resetForm;
+            @include size(100%, 40px);
+            padding-left: 10px;
+            padding-right: 22px;
+            border-radius: 5px;
+            border: 1px solid map-get($borderColor, placeholder);
+         }
+         >.downIcon {
+            position: absolute;
+            right: 5px;
+            top: 13px;
+            @include size(15px);
+            background-image: url("../img/btn_listcore_indicatordown_std_n@2x.png");
+            @extend %bgImgCenter;
+         }
+      }
+   }
+}

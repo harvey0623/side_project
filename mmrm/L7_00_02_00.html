@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>查看菜單</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L7_00_02_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" :class="{tall: isMultipleBrand}" v-cloak>
+		<div class="fixedBlock">
+			<div class="menuBlock" v-show="isMultipleBrand">
+				<div class="inner" @click="chooseBrand">
+					<span>選擇品牌菜單</span>
+					<span class="iconBg"></span>
+				</div>
+			</div>
+			<div class="controlPanel">
+				<div class="layoutBox">
+					<span 
+						v-for="layout in layoutList"
+						:key="layout.id"
+						:class="['layout', layout.class, { active: layoutId === layout.id }]"
+						@click="layoutHandler(layout.id)"
+					></span>
+				</div>
+				<div class="filterTree" @click="chooseCategory">
+					<ul>
+						<li>{{ filterDesc }}</li>
+					</ul>
+					<div class="iconBox"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mycontainer">
+			<div class="menuInfo">{{ menuDesc }}</div>
+			<div class="menuItemWrap">
+				<prod-menu-block
+					v-for="menu in menuItemList"
+					:key="menu.category_id"
+					:menu="menu"
+					:is-other-layout="isOtherLayout"
+					:pageurl="pageUrl.menuItemInfo"
+				></prod-menu-block>
+			</div>
+		</div>
+
+		<!-- 品牌菜單modal -->
+		<div class="modal selectModal" id="menuModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">選擇品牌菜單</h1>
+					</div>
+					<div class="modal-body">
+						<div class="selectBlock">
+							<div class="selectRow">
+								<p>品牌</p>
+								<div class="selectOuter">
+									<div class="downIcon"></div>
+									<select v-model.number="menuIds.brand">
+										<option 
+											v-for="brand in brandSelect" 
+											:key="brand.brand_id"
+											:value="brand.brand_id">
+											{{ brand.brandTitle }}
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="selectRow">
+								<p>菜單</p>
+								<div class="selectOuter">
+									<select v-model.number="menuIds.menu">
+										<option 
+											v-for="menu in menuSelect"
+											:key="menu.menu_id"
+											:value="menu.menu_id">
+											{{ menu.title }}
+										</option>
+									</select>
+									<div class="downIcon"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer split">
+						<div @click="closeMenuModal">取消</div>
+						<div @click="changeMenu">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 分類modal -->
+		<div class="modal selectModal" id="categoryModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">選擇商品類別</h1>
+					</div>
+					<div class="modal-body">
+						<div class="selectBlock">
+							<div class="selectRow">
+								<p>總類</p>
+								<div class="selectOuter">
+									<div class="downIcon"></div>
+									<select v-model.number="categoryIds.main">
+										<option value="-1">全部</option>
+										<option 
+											v-for="main in mainCategoryList" 
+											:key="main.category_id"
+											:value="main.category_id">
+											{{ main.title }}
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="selectRow">
+								<p>商品</p>
+								<div class="selectOuter">
+									<select v-model.number="categoryIds.sub">
+										<option value="-1">全部</option>
+										<option
+											v-for="sub in subCategoryList"
+											:key="sub.category_id"
+											:value="sub.category_id">
+											{{ sub.title }}
+										</option>
+									</select>
+									<div class="downIcon"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer split">
+						<div @click="closeCategoryModal">取消</div>
+						<div @click="categoryModalClick">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="loading" v-if="isLoading"></div>
+	</div>
+
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/ProdMenuBlock/index.js"></script>
+	<script src="./js/vue-components/ProdMenuBlock/ProdItem.js"></script>
+	<script type="module">
+		import app from './js/page/L7/L7_00_02_00.js';
+		app({
+			apiUrl: {
+				searchBrand: 'http://localhost:3034/mmrmProd/search_brand',
+				brandInfo: 'http://localhost:3034/mmrmProd/brand_information',
+				menuList: 'http://localhost:3034/mmrmProd//brief_menu_list',
+				menuCategory: 'http://localhost:3034/mmrmProd/brief_menu_item_category',
+				menuInfo: 'http://localhost:3034/mmrmProd/menu_item_information',
+				multipleBrand: 'http://localhost:3034/mmrmProd/multiple_brand',
+			},
+			pageUrl: {
+				menuItemInfo: './L7_00_03_00.html'
+			}
+		});
+	</script>
+</body>
+
+</html>

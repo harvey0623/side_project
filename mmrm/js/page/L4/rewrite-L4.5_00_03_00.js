@@ -35,7 +35,7 @@ export default function({ openLink, apiUrl, pageUrl }) {
          },
          linkBlocks() {
             if (this.pageData === null) return [];
-            if (this.pageData.link_blocks === null) [];
+            if (this.pageData.link_blocks === null) return [];
             return this.pageData.link_blocks;
          }
       },

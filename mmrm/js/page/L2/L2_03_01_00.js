@@ -115,8 +115,8 @@ export default function ({ apiUrl, pageUrl }) {
          },
          getQuery(key) { //取得網址參數
             let params = (new URL(document.location)).searchParams;
-            let pointId = params.get(key) || 1;
-            return parseInt(pointId);
+            let value = params.get(key) || 1;
+            return value;
          },
          async getMemberSummary() { //取得會員簡介
             return await axios({
@@ -202,7 +202,7 @@ export default function ({ apiUrl, pageUrl }) {
             location.href = url;
          },
          async initHandler() {
-            this.pointId = this.getQuery('point_id');
+            this.pointId = parseInt(this.getQuery('point_id'));
             this.pointInfo = await this.getPointInfo().then(res => res);
             this.currentPoint = await this.getPointAmount().then(res => res);
             this.expireList = await this.getExpirePoint().then(res => res);

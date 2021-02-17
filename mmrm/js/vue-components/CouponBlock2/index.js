@@ -23,7 +23,7 @@ Vue.component('coupon-block', {
    },
    data: () => ({
       redeemCouponInfoAll: window.getSystemLang('couponactivitydetail_redeemcouponinfoallbrands'),
-      redeemcouponinfo: window.getSystemLang('couponactivitydetail_redeemcouponinfoallbrands'),
+      redeemcouponinfo: window.getSystemLang('couponactivitydetail_redeemcouponinfo'),
       durationText: window.getSystemLang('couponactivitydetail_redeemcouponduration')
    }),
    computed: {

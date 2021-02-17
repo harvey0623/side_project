@@ -1,0 +1,97 @@
+$pointFormTitleColor: map-get($fontColor, formTitle);
+$pointInputColor: map-get($fontColor, input);
+$pointBasicGutter: map-get($gutter, basic);
+
+.pointModal {
+   .modal-content {
+      border: none;
+      border-radius: map-get($radius, basic);
+      overflow: hidden;
+   }
+   .modal-header,
+   .modal-body,
+   .modal-footer {
+      padding: 20px 40px;
+   }
+   .modal-footer {
+      justify-content: space-between;
+      color: $pointFormTitleColor;
+      border-top-color: map-get($borderColor, placeholder);
+      >* {
+         margin: 0;
+      }
+   }
+   .expireTitle {
+      margin-bottom: 25px;
+      color: $pointFormTitleColor;
+   }
+   .otherBox {
+      display: none; //目前api沒有此欄位
+      @extend %bwtFlex;
+      color: $pointFormTitleColor;
+   }
+   .pointNumber {
+      margin-right: 10px;
+   }
+   .closeBg {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      @include size(30px);
+      background-image: url("../img/btn_nav_close_popup_n@2x.png");
+      @extend %bgImgCenter;
+      cursor: pointer;
+   }
+}
+
+.modal-point-header {
+   border-bottom: none;
+   color: #fff;
+   background-color: var(--variationMain);
+}
+
+.expireList {
+   >li {
+      display: flex;
+      align-items: center;
+      @include elGutter(margin-bottom, $pointBasicGutter);
+      color: $pointInputColor;
+      >.textBlock {
+         margin-left: $pointBasicGutter;
+      }
+      >.pointBlock {
+         margin-left: auto;
+         >.pointNumber {
+            color: var(--variationMain);
+         }
+      }
+   }
+}
+
+.historyList {
+   >li {
+      display: flex;
+      align-items: flex-start;
+      color: $pointInputColor;
+      @include elGutter(margin-bottom, 15px);
+      >.title {
+         flex: 0 0 80px;
+      }
+      >.colon {
+         margin-right: 15px;
+         margin-left: 10px;
+      }
+      >.content {
+         flex: 1;
+         word-break: break-all;
+      }
+   }
+}
+
+//===其他到期點數htm
+// <div class="otherBox">
+//    <div>其他到期點數</div>
+//    <div>
+//       <span class="pointNumber">1000</span>點
+//    </div>
+// </div>

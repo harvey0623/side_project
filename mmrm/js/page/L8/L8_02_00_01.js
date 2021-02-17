@@ -3,6 +3,7 @@ export default function({ apiUrl }) {
       el: '#app',
       data: () => ({
          termList: [],
+         termId: '',
          isLoading: false,
          apiUrl
       }),
@@ -12,8 +13,7 @@ export default function({ apiUrl }) {
          },
          targetTerm() {
             if (!this.hasTerm) return null;
-            let termId = parseInt(this.getQuery('id'));
-            let obj = this.termList.find(item => item.id === termId);
+            let obj = this.termList.find(item => item.id === this.termId);
             if (obj !== undefined) return obj;
             else return null;
          },
@@ -48,10 +48,8 @@ export default function({ apiUrl }) {
       },
       async mounted() {
          this.isLoading = true;
+         this.termId = parseInt(this.getQuery('id'));
          this.termList = await this.getTerm().then(res => res);
-         if (this.hasTerm) {
-            document.querySelector('title').textContent = this.termTitle;
-         }
          this.isLoading = false;
       }
    });

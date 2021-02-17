@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>菜單詳情</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/swiper/swiper.min.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L7_00_03_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/swiper/swiper.min.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="sliderBox">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div
+						v-for="img in slideImage"
+						class="swiper-slide"
+						:style="setSlideBg(img.url)">
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+		  </div>
+		</div>
+		<div class="content">
+			<div class="block introBox" :class="{line:hasLine}">
+				<div class="title">{{ title }}</div>
+				<div class="summary">{{ summary }}</div>
+				<div class="price">{{ price }}</div>
+			</div>
+			<div class="block metaBox" v-show="hasMeta">
+				<ul class="metaList">
+					<li v-for="(meta,index) in metaList" :key="index">
+						<div class="title">{{ meta.key }}</div>
+						<div class="colon">:</div>
+						<div class="content">{{ meta.value }}</div>
+					</li>
+				</ul>
+			</div>
+			<div class="block editBox" v-show="hasContent" v-html="itemContent"></div>
+		</div>
+
+		<div id="loading" v-if="isLoading"></div>
+	</div>
+
+
+	<script type="module">
+		import app from './js/page/L7/L7_00_03_00.js';
+		app({
+			apiUrl: {
+				menuInfo: 'http://localhost:3034/mmrmProd/menu_item_information',
+			}
+		});
+	</script>
+</body>
+
+</html>

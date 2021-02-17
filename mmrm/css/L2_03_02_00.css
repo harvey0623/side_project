@@ -7,6 +7,14 @@ body {
   background-color: #f0f0f0;
 }
 
+.introBox > * {
+  margin-bottom: 15px;
+}
+
+.introBox > *:last-child {
+  margin-bottom: 0;
+}
+
 .topBlock {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -14,7 +22,6 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 15px;
 }
 
 .topBlock > img {
@@ -60,7 +67,8 @@ body {
   list-style: disc;
 }
 
-.content img {
+.content img,
+.content iframe {
   max-width: 100%;
 }
 /*# sourceMappingURL=L2_03_02_00.css.map */

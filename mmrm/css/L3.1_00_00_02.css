@@ -28,7 +28,7 @@
   overflow: hidden;
 }
 
-.layoutBox > .layout, .pointDesc .pointArrow {
+.pointDesc .pointArrow {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -63,34 +63,6 @@
   color: #528fff;
   text-align: right;
   cursor: pointer;
-}
-
-.layoutBox {
-  -webkit-transform: translateY(3px);
-          transform: translateY(3px);
-}
-
-.layoutBox > .layout {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.layoutBox > .layoutA {
-  background-image: url("../img/btn_filter_view_big_n@2x.png");
-  margin-right: 10px;
-}
-
-.layoutBox > .layoutA.active {
-  background-image: url("../img/btn_filter_view_big_h@2x.png");
-}
-
-.layoutBox > .layoutB {
-  background-image: url("../img/btn_filter_view_list_n@2x.png");
-}
-
-.layoutBox > .layoutB.active {
-  background-image: url("../img/btn_filter_view_list_h@2x.png");
 }
 
 .pointDesc {

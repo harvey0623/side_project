@@ -33,8 +33,10 @@ export default function({ apiUrl, pageUrl }) {
             return this.brandInfo.title;
          },
          brandLogo() {  //品牌logo
-            if (this.brandInfo === null) return '';
-            return this.brandInfo.feature_image_small.url;
+            if (this.brandInfo === null) return {};
+            let imgUrl = this.brandInfo.feature_image_small.url;
+            if (!imgUrl) return {};
+            else return { backgroundImage: `url(${imgUrl})` };
          },
          allAvailable() { //門市是否全不適用
             if (this.storeData === null) return false;

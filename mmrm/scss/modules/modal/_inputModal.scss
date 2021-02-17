@@ -1,0 +1,53 @@
+$inputBorderColor: map-get($borderColor, placeholder);
+$inputHeight: map-get($heightObj, basic);
+
+.inputModal {
+   .modal-content {
+      background-color: map-get($elBgColor, modal);
+      color: map-get($fontColor, formTitle);
+   }
+   .modal-header {
+      padding: 15px 15px;
+      border-width: 0px; 
+      .modal-title {
+         flex: 1;
+         text-align: center;
+         font-size: 18px;
+      } 
+   } 
+   .modal-body {
+      padding: 0px 15px 20px;
+      >.tipText {
+         text-align: center;
+      }
+      >* {
+         @include elGutter(margin-bottom, map-get($gutter, basic));
+      }
+      .form-control {
+         height: $inputHeight;
+         border-color: $inputBorderColor;
+         border-radius: 0px;
+         &:focus {
+            border-color: $inputBorderColor;
+         }
+      }
+   }
+   .modal-footer {
+      padding: 0px 15px;
+      justify-content: center;
+      border-color: $inputBorderColor;
+      >div {
+         flex: 1;
+         margin: 0;
+         height: $inputHeight;
+         line-height: $inputHeight;
+         color: map-get($fontColor, modalCancel);
+         text-align: center;
+         cursor: pointer;
+         border-right: 1px solid $inputBorderColor;
+         &:last-child {
+            border-right: none;
+         }
+      }
+   }
+}

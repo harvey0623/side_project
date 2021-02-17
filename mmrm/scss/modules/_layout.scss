@@ -1,0 +1,203 @@
+$basicHeight: map-get($heightObj, basic);
+$basicGutter: map-get($gutter, basic);
+$doubleGutter: map-get($gutter, double);
+
+body {
+   background-color: map-get($elBgColor, body);
+   &.hide {
+      overflow: hidden;
+   }
+}
+
+//===vue use
+[v-cloak] { 
+   display: none;
+}
+
+//===置中區塊
+.mycontainer {
+   max-width: 576px;
+   margin: 0 auto;
+   padding: 20px 20px 20px 20px;
+   @media (min-width: 750px) {
+      max-width: 100%;
+   }
+}
+
+//===logobox
+#logoBox {
+   >img {
+      display: block;
+      @include size(100%, 150px);
+      object-fit: contain;
+   }
+}
+
+//===processBox
+#processBox {
+   height: 270px;
+   margin-bottom: 10px;
+   background-size: 1125px 270px;
+   background-position: center top;
+   background-repeat: no-repeat;
+   &.step1 {
+      background-image: url("../img/img_register_step_01_n@3x.png");
+   }
+   &.step2 {
+      background-image: url("../img/img_register_step_02_n@3x.png");
+   }
+   &.step3 {
+      background-image: url("../img/img_register_step_03_n@3x.png");
+   }
+   @media (max-width: 900px) {
+      height: 135px;
+      background-size: 100% 100%;
+   }
+   @media (max-width: 576px) {
+      height: 90px;
+      background-size: contain;
+   }
+}
+
+//===validate error
+.errMsg {
+   margin-top: 2px;
+   color: red;
+}
+
+//===fixLink
+.fixBlock {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   @include size(100%, $basicHeight);
+   line-height: $basicHeight;
+   text-align: center;
+   color: #fff;
+   background-color: var(--variationMain);
+   cursor: pointer;
+   z-index: 8;
+}
+
+//===提示說明文字
+.tipBox {
+   padding: 0 30px;
+   margin-bottom: $doubleGutter;
+   color: map-get($fontColor, input);
+   font-size: 14px;
+   line-height: 22px;
+   text-align: justify;
+   &.center {
+      text-align: center;
+   }
+}
+
+//===popupHeader
+.popupHeader {
+   position: relative;
+   height: $basicHeight;
+   line-height: $basicHeight;
+   background-color: map-get($elBgColor, input);
+   color: #fff;
+   text-align: center;
+   >span {
+      font-size: 18px;
+   }
+   >.popupClose {
+      position: absolute;
+      left: 15px;
+      top: 7px;
+      @include size(30px);
+      background-image: url("../img/btn_nav_close_darkbg_n@2x.png");
+      @extend %bgImgCenter;
+      cursor: pointer;
+   }
+}
+
+//===sidebar啟動按鈕
+.toggleSidebar {
+   position: fixed;
+   right: 20px;
+   bottom: 20px;
+   @include size(50px);
+   border-radius: 50%;
+   background-image: url("../img/btn_member_search_n_n@2x.png");
+   @extend %bgImgCenter;
+   cursor: pointer;
+   z-index: 1;
+}
+
+//===遮色片
+#maskCover {
+   position: fixed;
+   left: 0;
+   top: 0;
+   @include size(100%, 100vh);
+   background-color: rgba(#000, 0.7);
+   z-index: 98;
+}
+
+//===按鈕外層
+.btnBox {
+   padding-left: 20px;
+   padding-right: 20px;
+   >button,
+   >a {
+      @include basicSize(100%, $basicHeight);
+      @include elGutter(margin-bottom, $basicGutter);
+      border-radius: map-get($radius, basic);
+      text-align: center;
+   }
+   >a {
+      line-height: $basicHeight;
+   }
+   >.variation {
+      color: #fff;
+      border: none;
+      background-color: var(--variationMain);
+   }
+}
+
+//===無資料顯示
+.emptyBlock {
+   padding-top: 50px;
+   >.emptyBg {
+      @include size(90px);
+      margin: 0 auto 46px;
+      @extend %bgImgCenter;
+   }
+   >p {
+      color: map-get($fontColor, input);
+      text-align: center;
+   }
+}
+
+//===分頁提示
+.pagTip {
+   margin-top: map-get($gutter, basic);
+   color: map-get($fontColor, input);
+   text-align: center;
+}
+
+//===版型切換
+.layoutBox {
+   transform: translateY(3px);
+   >.layout {
+      @extend %bgImgCenter;
+      @include size(18px);
+      cursor: pointer;
+      &A {
+         background-image: url("../img/btn_filter_view_big_n@2x.png");
+         margin-right: 10px;
+         &.active {
+            background-image: url("../img/btn_filter_view_big_h@2x.png");
+         }
+      }
+      &B {
+         background-image: url("../img/btn_filter_view_list_n@2x.png");  
+         &.active {
+            background-image: url("../img/btn_filter_view_list_h@2x.png");
+         }
+      }
+   }
+}

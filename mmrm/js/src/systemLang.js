@@ -136,6 +136,11 @@ window.systemLang = {
    pointactivitydetail_b_closed: '無法兌換，活動已結束',
    pointactivitydetail_duration: '%s 到期',
 
+   //===Message Inbox
+   messagelist_public: '公眾訊息',
+   messagelist_member: '個人訊息',
+   messagelist_notification: '通知訊息',
+
    //===Mission
    missiontaskreward_couponusageduration: '使用期限：%s'
 

@@ -1,0 +1,115 @@
+@import './utility/index';
+$fixedHeight: 80px;
+
+body {
+   padding-bottom: $fixedHeight;
+}
+
+.okBlock {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   height: 160px;
+   padding: 25px;
+   background-image: url("../img/img_result_area_top_n@3x.png");  
+   background-size: contain;
+   color: #fff;
+   @media (max-width: 330px) {
+      background-repeat: no-repeat;
+   }
+   >h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+   }
+}
+
+.okList {
+   padding: 25px;
+   color: map-get($fontColor, input);
+   >li {
+      display: flex;
+      align-items: flex-start;
+      @include elGutter(margin-bottom, 10px);
+      >.title {
+         flex: 0 0 65px;
+      }
+      >.colon {
+         margin-left: 5px;
+         margin-right: 10px;
+      }
+      >.content {
+         flex: 1;
+      }
+   }
+}
+
+.couponPanel {
+   display: flex;
+   align-items: center;
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   @include size(100%, $fixedHeight);
+   >div {
+      flex: 1;
+      @extend %centerFlex;
+      height: 100%;
+      color: #fff;
+      &.left {
+         background-image: url("../img/btn_result_tabbar_left_n@3x.png");
+         background-size: contain;
+      }
+      &.center {
+         background-image: url("../img/btn_result_tabbar_mid_n@3x.png");
+         background-size: 100% 100%;
+      }
+      &.right {
+         background-image: url("../img/btn_result_tabbar_right_n@3x.png");
+         background-size: contain;
+      }
+      &.left,
+      &.right {
+         @media (max-width: 400px) {
+            background-size: cover;
+         }
+      }
+   }
+}
+
+.linkBlock {
+   @extend %centerFlex;
+   flex-direction: column;
+   transform: translateY(10px);
+   color: #fff;
+   &:focus {
+      color: #fff;
+   }
+   >div {
+      @include size(25px);
+      background-size: contain;
+      &.itemA {
+         margin-bottom: 2px;
+         background-image: url("../img/btn_activity_tabbar_mycoupon_n@3x.png");
+         &.point {
+            background-image: url("../img/btn-activity-tabbar-pointhistory-n@3x.png");
+         }
+      }
+      &.itemB {
+         margin-bottom: 3px;
+         background-image: url("../img/btn_activity_tabbar_usecoupon_n@3x.png");
+         &.point {
+            background-image: url("../img/btn-activity-tabbar-usepoint-n@3x.png");
+         }
+      }
+      &.itemC {
+         margin-bottom: -1px;
+         background-image: url("../img/btn_activity_tabbar_returncoupon_n@3x.png");
+         &.point {
+            background-image: url("../img/btn-activity-tabbar-returnpoint-n@3x.png");
+         }
+      }
+   }
+   >p {
+      font-size: 12px;
+   }
+}

@@ -1,16 +1,4 @@
-.chapterBlock {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.chapterBlock .iconBg, .filterItem > .arrowBg {
+.filterItem > .arrowBg {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -27,24 +15,6 @@
 
 #app {
   padding-top: 45px;
-}
-
-.chapterBlock {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 45px;
-  background-color: #797979;
-  color: #fff;
-}
-
-.chapterBlock .iconBg {
-  width: 9px;
-  height: 9px;
-  margin-left: 2px;
-  margin-top: 2.5px;
-  background-image: url("../img/btn_filter_category_darkbg_n@2x.png");
 }
 
 .chapterList {

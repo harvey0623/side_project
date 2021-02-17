@@ -1,0 +1,20 @@
+@import './utility/index';
+
+.tipBox {
+   text-align: center;
+}
+
+.nonFix {
+   margin-bottom: 20vh;
+   @media (max-width: 380px) {
+      margin-bottom: 10vh;
+   }
+   @media (max-width: 330px) {
+      margin-bottom: 20px;
+   }
+}
+
+.skip {
+   margin-bottom: map-get($gutter, basic);
+   cursor: pointer;
+}

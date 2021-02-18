@@ -226,7 +226,11 @@
 			};
 
 			history.pushState('a');
-			history.pushState('b');
+
+			setTimeout(() => {
+				alert('12302')
+				history.pushState('b');
+			}, 1000)
 
 			window.addEventListener('popstate', function (event) {
 				alert('push change');

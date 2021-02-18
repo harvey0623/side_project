@@ -226,11 +226,11 @@
 			};
 
 			history.pushState('a');
-
+			
 			setTimeout(() => {
 				alert('12302')
 				history.pushState('b');
-			}, 1000)
+			}, 0);
 
 			window.addEventListener('popstate', function (event) {
 				alert('push change');

@@ -155,9 +155,9 @@
 	<script src="./js/src/zipCode.js"></script>
 	<script src="./js/modules/StepController/index.js"></script>
 	<script>
-		let stepController = new StepController({
-			duration: 60 * 60 * 1000
-		});
+		// let stepController = new StepController({
+		// 	duration: 60 * 60 * 1000
+		// });
 		let vm = new Vue({
 			el: '#app',
 			data: () => ({
@@ -191,6 +191,8 @@
 				async submitHandler() {
 					let isValid = await this.$refs.form.validate().then(res => res);
 					if (!isValid) return;
+					alert('test');
+					return;
 					if (!stepController.checkIsExpire()) {
 						stepController.setStep2(this.user);
 						location.href = 'http://localhost:5500/L1_02_02_00.html';

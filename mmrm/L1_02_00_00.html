@@ -292,12 +292,12 @@
 				convertTerms(data) { //條款資料轉換
 					if (data.length === 0) return [];
 					let termData = stepController.getTerm();
-					alert('aaa')
-					$('body').css({ orverflow: 'hidden' })
+					alert('bbb')
+					$('body').css({ orverflow: 'hidden', height: '100vh' })
 					return data.reduce((prev, current, index) => {
 						prev.push({ 
 							...current, 
-							show: false, 
+							show: index === 1 ? true : false,
 							checked: termData !== null ? termData[index].checked : false
 						});
 						return prev;

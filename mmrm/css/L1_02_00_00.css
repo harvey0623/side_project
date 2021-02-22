@@ -91,28 +91,24 @@
   height: calc(100vh - 45px);
   padding: 20px 20px 55px;
   background-color: #f0f0f0;
+  overflow: auto;
 }
 
 .termBody > .termContent {
-  height: 100%;
-  overflow: auto;
-  background-color: #fff;
-  border-radius: 10px;
-}
-
-.termBody > .termContent > .inner {
   padding: 15px;
   line-height: 1.8;
+  background-color: #fff;
+  border-radius: 10px;
   color: #292929;
   text-align: justify;
 }
 
-.termBody > .termContent > .inner ol, .termBody > .termContent > .inner ul {
+.termBody > .termContent ol, .termBody > .termContent ul {
   padding-left: 40px;
   list-style: disc;
 }
 
-.termBody > .termContent > .inner img {
+.termBody > .termContent img {
   max-width: 100%;
 }
 

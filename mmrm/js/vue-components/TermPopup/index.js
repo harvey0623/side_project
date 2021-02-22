@@ -38,9 +38,13 @@ Vue.component('term-popup', {
          });
       },
       getDistance() {
-         let termContentH = this.$refs.termContent.clientHeight;
-         let innerH = this.$refs.inner.scrollHeight;
-         return innerH - termContentH;
+         let $termBody = $(this.$refs.termBody);
+         let paddingT = parseInt($termBody.css('paddingTop'));
+			let paddingB = parseInt($termBody.css('paddingBottom'));
+         let totalPadding = paddingT + paddingB;
+         let termBodyH = this.$refs.termBody.clientHeight - totalPadding;
+			let termContentH = this.$refs.termContent.scrollHeight;
+         return termContentH - termBodyH;
       },
       scrollHandler(evt) {
          let diff = this.getDistance();
@@ -49,7 +53,7 @@ Vue.component('term-popup', {
       }
    },
    mounted() {
-      this.$refs.termContent.addEventListener('scroll', this.scrollHandler);
+      this.$refs.termBody.addEventListener('scroll', this.scrollHandler);
    },
    watch: {
       showpopup() {
@@ -65,9 +69,7 @@ Vue.component('term-popup', {
             <span>{{ title }}</span>
          </div>
          <div class="termBody" ref="termBody">
-            <div class="termContent" ref="termContent">
-               <div class="inner" ref="inner" v-html="content"></div>
-            </div>
+            <div class="termContent" ref="termContent" v-html="content"></div>
          </div>
          <div
             class="termFooter" 

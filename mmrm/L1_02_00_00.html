@@ -292,6 +292,7 @@
 				convertTerms(data) { //條款資料轉換
 					if (data.length === 0) return [];
 					let termData = stepController.getTerm();
+					alert('aaa')
 					$('body').css({ orverflow: 'hidden' })
 					return data.reduce((prev, current, index) => {
 						prev.push({ 

@@ -35,13 +35,13 @@ export default class ScanPopup {
       }
    }
    initScanner() {
-      alert('update start')
+      alert('start')
       this.scanner = new QrScanner(this.camera, function() {
          alert(result);
          //this.scanEvent(code);
          // this.scanner.stop();
       });
-      this.scanner.setInversionMode('both');
       this.scanner.start();
+      this.scanner.setInversionMode('both');
    }
 }

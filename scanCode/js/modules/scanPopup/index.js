@@ -8,7 +8,7 @@ export default class ScanPopup {
       this.scanner = null;
       this.isFirstOpen = true;
       this.scanEvent = props.scanEvent;
-      this.bindEvent()
+      this.bindEvent();
    }
    bindEvent() {
       this.closeItem.addEventListener('click', () => {
@@ -35,8 +35,8 @@ export default class ScanPopup {
       }
    }
    initScanner() {
-      alert('start')
-      this.scanner = new QrScanner(this.camera, (result) => {
+      alert('update start')
+      this.scanner = new QrScanner(this.camera, function() {
          alert(result);
          //this.scanEvent(code);
          // this.scanner.stop();

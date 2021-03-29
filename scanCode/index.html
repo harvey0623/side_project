@@ -22,10 +22,11 @@
 		</div>
 	</div>
 
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vConsole/3.4.0/vconsole.min.js"></script>
 	<script type="module">
 		import ScanPopup from './js/modules/scanPopup/index.js';
 		let btnScan = document.querySelector('#btnScan');
+		let vConsole = new VConsole();
 		
 		let scanPopup = new ScanPopup({
 			el: '#scanPopup',

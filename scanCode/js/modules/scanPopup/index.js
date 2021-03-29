@@ -52,9 +52,10 @@ export default class ScanPopup {
             this.drawLine(bottomRightCorner, bottomLeftCorner);
             this.drawLine(bottomLeftCorner, topLeftCorner);
             alert(code.data);
-            this.video.pause();
             cancelAnimationFrame(this.animateFrame);
+            this.video.pause();
             this.scanEvent(code.data);
+            this.display(false);
          }
       }
       if (!this.isScan) {

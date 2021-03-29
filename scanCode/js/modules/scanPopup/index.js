@@ -21,6 +21,7 @@ export default class ScanPopup {
          this.isFirstOpen = false;
          // let hasCamera = await QrScanner.hasCamera();
          QrScanner.hasCamera().then(hasCamera => {
+            alert(hasCamera);
             if (hasCamera) this.initScan();
          })
          // if (hasCamera) this.initScanner();

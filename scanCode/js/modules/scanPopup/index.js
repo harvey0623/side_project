@@ -21,6 +21,7 @@ export default class ScanPopup {
          this.isFirstOpen = false;
          let hasCamera = await QrScanner.hasCamera();
          if (hasCamera) this.initScanner();
+         return;
       }
       let hasScanner = this.scanner !== null;
       if (isOpen) {
@@ -31,9 +32,9 @@ export default class ScanPopup {
    }
    initScanner() {
       alert('start')
-      this.scanner = new QrScanner(this.camera, (code) => {
-         alert(code);
-         this.scanEvent(code);
+      this.scanner = new QrScanner(this.camera, (result) => {
+         alert(result);
+         //this.scanEvent(code);
          // this.scanner.stop();
       });
       this.scanner.setInversionMode('both');

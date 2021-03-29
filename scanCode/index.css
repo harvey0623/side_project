@@ -10,8 +10,13 @@
    top: 0;
    width: 100%;
    height: 100vh;
+   transform: translateY(100%);
    background-color: #000;
-   display: none;
+}
+
+#scanPopup.active {
+   transform: translateY(0%);
+   transition: transform 0.25s ease;
 }
 
 #scanPopup .videoBox {

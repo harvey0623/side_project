@@ -18,7 +18,7 @@ export default class ScanPopup {
    }
    async display(isOpen) {
       this.isOpen = isOpen;
-      this.el.style.display = isOpen ? 'block' : 'none';
+      this.el.classList[isOpen ? 'add' : 'remove']('active');
       if (isOpen) {
          this.getMedia();
       } else {
@@ -74,7 +74,7 @@ export default class ScanPopup {
             this.tick();
          });
       } catch (err) {
-         alert('您未開起相機功能')
+         // alert('您未開起相機功能');
       }
    }
 }

@@ -19,5 +19,6 @@
    width: 300px;
    height: 300px;
    margin: 0 auto;
-   background-color: #fff;  
+   background-color: #fff;
+   object-fit: cover;
 }

@@ -7,7 +7,7 @@ export default class ScanPopup {
       this.closeItem = this.el.querySelector('.closeItem');
       this.animateFrame = null;
       this.isScan = false;
-      this.isFirstOpen = true;
+      this.isOpen = false;
       this.scanEvent = props.scanEvent;
       this.bindEvent();
    }
@@ -17,6 +17,7 @@ export default class ScanPopup {
       });
    }
    async display(isOpen) {
+      this.isOpen = isOpen;
       this.el.style.display = isOpen ? 'block' : 'none';
       if (isOpen) {
          this.getMedia();
@@ -56,8 +57,7 @@ export default class ScanPopup {
             this.display(false);
          }
       }
-      console.log(this.isScan);
-      if (!this.isScan) {
+      if (!this.isScan && !this.isOpen) {
          this.animateFrame = requestAnimationFrame(() => {
             this.tick();
          });

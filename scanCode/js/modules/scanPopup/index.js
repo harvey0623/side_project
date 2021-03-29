@@ -57,7 +57,7 @@ export default class ScanPopup {
             this.display(false);
          }
       }
-      if (!this.isScan && !this.isOpen) {
+      if (!this.isScan && this.isOpen) {
          this.animateFrame = requestAnimationFrame(() => {
             this.tick();
          });

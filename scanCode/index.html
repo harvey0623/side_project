@@ -7,22 +7,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css'/>
 	<link rel="stylesheet" href="./index.css">
+	<link rel="stylesheet" href="./qr.css">
+	<script src="./lib/jsQR.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vConsole/3.4.0/vconsole.min.js"></script>
 </head>
 
 <body>
 	<div>
-		<button id="btnScan">toggle popup</button>
+		<button id="btnScan">toggle popup jsQr</button>
 		<div id="scanPopup">
 			<div class="closeItem">
 				<i class="fas fa-times"></i>
 			</div>
 			<div class="videoBox">
-				<video id="qr-video" playsinline></video>
+				<canvas id="canvas" class="notActive"></canvas>
+				<video id="video" playsinline></video>
 			</div>
 		</div>
 	</div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vConsole/3.4.0/vconsole.min.js"></script>
 	<script type="module">
 		import ScanPopup from './js/modules/scanPopup/index.js';
 		let btnScan = document.querySelector('#btnScan');

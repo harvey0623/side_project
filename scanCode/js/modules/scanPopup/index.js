@@ -42,6 +42,7 @@ export default class ScanPopup {
          let code = jsQR(data, width, height, {
             inversionAttempts: 'dontInvert',
          });
+         console.log(code);
          if (code) {
             this.isScan = true;
             let { topLeftCorner, topRightCorner, bottomRightCorner, bottomLeftCorner } = code.location;
@@ -53,17 +54,13 @@ export default class ScanPopup {
             cancelAnimationFrame(this.animateFrame);
             this.video.pause();
             this.scanEvent(code.data);
-         } else {
+         }
+         if (!this.isScan) {
             this.animateFrame = requestAnimationFrame(() => {
                this.tick();
             });
          }
       }
-      // if (!this.isScan) {
-      //    this.animateFrame = requestAnimationFrame(() => {
-      //       this.tick();
-      //    });
-      // }
    }
    async getMedia() {
       try {

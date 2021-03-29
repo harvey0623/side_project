@@ -30,10 +30,11 @@ export default class ScanPopup {
       }
    }
    initScanner() {
+      alert('start')
       this.scanner = new QrScanner(this.camera, (code) => {
          alert(code);
          this.scanEvent(code);
-         this.scanner.stop();
+         // this.scanner.stop();
       });
       this.scanner.setInversionMode('both');
       this.scanner.start();

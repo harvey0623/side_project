@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>QR Scanner Demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css'/>
+	<link rel="stylesheet" href="./test.css">
+</head>
+
+<body>
+	<div class="mycontainer">
+		<div class="videoBox">
+			<video  id="camera" playsinline></video>
+			<div class="corner corner1"></div>
+			<div class="corner corner2"></div>
+			<div class="corner corner3"></div>
+			<div class="corner corner4"></div>
+		</div>
+		<p class="tipText">請掃描 QR code 以存入禮物卡</p>
+	</div>
+
+
+	<script type="module">
+		import QrScanner from "./lib/qr-scanner.min.js";
+		QrScanner.WORKER_PATH = './lib/qr-scanner-worker.min.js';
+		let camera = document.querySelector('#camera');
+		let scanner = null;
+
+		function initScan() {
+			scanner = new QrScanner(camera, function(result) {
+				alert(result)
+			});
+			scanner.setInversionMode('both');
+			scanner.start();
+		}
+
+		QrScanner.hasCamera().then(hasCamera => {
+			if (hasCamera) initScan();
+		});
+   </script>
+
+</body>
+
+</html>

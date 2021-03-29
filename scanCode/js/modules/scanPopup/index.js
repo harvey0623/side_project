@@ -5,7 +5,6 @@ export default class ScanPopup {
       this.ctx = this.canvas.getContext('2d');
       this.video = this.el.querySelector('#video');
       this.closeItem = this.el.querySelector('.closeItem');
-      this.scanner = null;
 		this.animateFrame = null;
 		this.isScan = false;
       this.isFirstOpen = true;
@@ -54,13 +53,17 @@ export default class ScanPopup {
             cancelAnimationFrame(this.animateFrame);
             this.video.pause();
             this.scanEvent(code.data);
+         } else {
+            this.animateFrame = requestAnimationFrame(() => {
+               this.tick();
+            });
          }
       }
-      if (!this.isScan) {
-         this.animateFrame = requestAnimationFrame(() => {
-            this.tick();
-         });
-      }
+      // if (!this.isScan) {
+      //    this.animateFrame = requestAnimationFrame(() => {
+      //       this.tick();
+      //    });
+      // }
    }
    async getMedia() {
       try {

@@ -50,10 +50,10 @@ export default class ScanPopup {
             this.drawLine(topRightCorner, bottomRightCorner);
             this.drawLine(bottomRightCorner, bottomLeftCorner);
             this.drawLine(bottomLeftCorner, topLeftCorner);
-            console.log(code.data);
             this.scanEvent(code.data);
             this.video.pause();
             cancelAnimationFrame(this.animateFrame);
+            this.display(false);
          }
       }
       if (!this.isScan) {

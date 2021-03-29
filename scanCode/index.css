@@ -14,11 +14,27 @@
    display: none;
 }
 
-#scanPopup video {
-   display: block;
+#scanPopup .videoBox {
+   position: relative;
+   top: 100px;
    width: 300px;
    height: 300px;
    margin: 0 auto;
    background-color: #fff;
+   border-radius: 10px;
+}
+
+#scanPopup video {
+   width: 100%;
+   height: 100%;
+   border-radius: 10px;
    object-fit: cover;
+}
+
+.closeItem {
+   position: absolute;
+   left: 15px;
+   top: 15px;
+   font-size: 30px;
+   color: #fff;
 }

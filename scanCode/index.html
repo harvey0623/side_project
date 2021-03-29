@@ -5,15 +5,20 @@
 	<meta charset="UTF-8">
 	<title>QR Scanner Demo</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css'/>
 	<link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
 	<div>
 		<button id="btnScan">toggle popup</button>
-
 		<div id="scanPopup">
-			<video id="qr-video" playsinline></video>
+			<div class="closeItem">
+				<i class="fas fa-times"></i>
+			</div>
+			<div class="videoBox">
+				<video id="qr-video" playsinline></video>
+			</div>
 		</div>
 	</div>
 
@@ -25,7 +30,7 @@
 		let scanPopup = new ScanPopup({
 			el: '#scanPopup',
 			scanEvent(payload) {
-				console.log(payload);
+				alert(payload)
 			}
 		});
 

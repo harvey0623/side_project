@@ -4,9 +4,16 @@ export default class ScanPopup {
    constructor(props) {
       this.el = document.querySelector(props.el);
       this.camera = this.el.querySelector('#qr-video');
+      this.closeItem = this.el.querySelector('.closeItem');
       this.scanner = null;
       this.isFirstOpen = true;
       this.scanEvent = props.scanEvent;
+      this.bindEvent()
+   }
+   bindEvent() {
+      this.closeItem.addEventListener('click', () => {
+         this.display(false);
+      });
    }
    async display(isOpen) {
       this.el.style.display = isOpen ? 'block' : 'none';

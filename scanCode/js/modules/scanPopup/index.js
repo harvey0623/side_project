@@ -38,7 +38,6 @@ export default class ScanPopup {
    tick() {
       if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
          let size = { w: 300, h: 300 };
-         this.canvas.classList.remove('notActive');
          this.ctx.drawImage(this.video, 0, 0, size.w, size.h);
          let { data, width, height } = this.ctx.getImageData(0, 0, size.w, size.h);
          let code = jsQR(data, width, height, {

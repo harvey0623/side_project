@@ -9,36 +9,29 @@
 </head>
 
 <body>
-	<div class="mycontainer">
-		<div class="videoBox">
-			<video  id="camera" playsinline></video>
-			<div class="corner corner1"></div>
-			<div class="corner corner2"></div>
-			<div class="corner corner3"></div>
-			<div class="corner corner4"></div>
+	<div>
+		<button id="btnScan">toggle popup</button>
+
+		<div id="scanPopup">
+			<video id="qr-video" playsinline></video>
 		</div>
-		<p class="tipText">請掃描 QR code 以存入禮物卡</p>
 	</div>
 
 
 	<script type="module">
-		import QrScanner from "./lib/qr-scanner.min.js";
-		QrScanner.WORKER_PATH = './lib/qr-scanner-worker.min.js';
-		let camera = document.querySelector('#camera');
-		let scanner = null;
-
-		function initScan() {
-			scanner = new QrScanner(camera, function(result) {
-				alert(result)
-			});
-			scanner.setInversionMode('both');
-			scanner.start();
-		}
-
-		QrScanner.hasCamera().then(hasCamera => {
-			if (hasCamera) initScan();
+		import ScanPopup from './js/modules/scanPopup/index.js';
+		let btnScan = document.querySelector('#btnScan');
+		
+		let scanPopup = new ScanPopup({
+			el: '#scanPopup',
+			scanEvent(payload) {
+				console.log(payload);
+			}
 		});
 
+		btnScan.addEventListener('click', function() {
+			scanPopup.display(true);
+		});
 
 	</script>
 </body>

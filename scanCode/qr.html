@@ -51,6 +51,7 @@
 						inversionAttempts: 'dontInvert',
 					});
 					if (code) {
+						alert(code);
 						this.isScan = true;
 						let { topLeftCorner, topRightCorner, bottomRightCorner, bottomLeftCorner } = code.location;
 						this.drawLine(topLeftCorner, topRightCorner);

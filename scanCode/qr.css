@@ -20,10 +20,6 @@ body {
    background-color: transparent;
 }
 
-#canvas.notActive {
-   background-color: #fff;
-}
-
 .corner {
    position: absolute;
    width: 40px;

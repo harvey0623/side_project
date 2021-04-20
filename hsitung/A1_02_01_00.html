@@ -208,7 +208,7 @@
 							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
 						</validation-provider>
 						<div class="dataRow" @click="showBranchPopup">
-							<select class="form-control" disabled></select>
+							<div class="branchName"></div>
 							<p class="dataName">推薦門市</p>
 							<div class="downIcon"></div>
 						</div>
@@ -390,7 +390,7 @@
 	<script src="./js/vue-components/BranchPopup/index.js"></script>
 	<script src="./js/vue-components/BranchItem/index.js"></script>
 	<script type="module">
-		 var vConsole = new VConsole();
+		//  var vConsole = new VConsole();
 		import app from './js/page/A1_02_01_00.js';
 		app({
 			apiUrl: {

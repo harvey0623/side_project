@@ -16,6 +16,10 @@
   margin-bottom: 0;
 }
 
+.branchName {
+  height: 45px;
+}
+
 .communication {
   height: 45px;
 }

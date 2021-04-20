@@ -122,6 +122,7 @@
   background-color: var(--variationMain);
   border-radius: 50%;
   display: none;
+  border: none;
 }
 
 .emptyBg {

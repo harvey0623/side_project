@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>登入</title>
+	<title>忘記密碼</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
 	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
 	<link rel="stylesheet" href="./css/main.css">
-	<link rel="stylesheet" href="./css/A1_01_00_00.css">
 	<script src='./lib/jquery/jquery.min.js'></script>
 	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
 	<script src='./lib/vue/vue.js'></script>
@@ -20,17 +19,13 @@
 
 <body>
 	<div id="app" v-cloak>
-		<div class="termBar" @click="openPopup">
-			<p>登入說明</p>
-			<span class="arrowIcon"></span>
-		</div>
 		<div class="mycontainer">
 			<div id="logoBox">
 				<img src="./img/img_common_form_logo_n@3x.png">
 			</div>
 			<validation-observer tag="div" class="formLayout" ref="form">
 				<div class="formRow">
-					<p class="formTitle">帳號</p>
+					<p class="formTitle">手機號碼</p>
 					<validation-provider 
 						tag="div" 
 						class="formContent" 
@@ -39,53 +34,29 @@
 						<input
 							type="text" 
 							class="form-control" 
-							placeholder="為您的手機號碼"
+							placeholder="共 10 碼"
 							maxlength="10"
 							inputmode="tel"
-							v-model.trim="user.account">
-						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
-					</validation-provider>
-				</div>
-				<div class="formRow">
-					<p class="formTitle">密碼</p>
-					<validation-provider 
-						tag="div" 
-						class="formContent" 
-						rules="required|password"
-						v-slot="{ errors, failed }">
-						<input 
-							type="password"
-							class="form-control pwInput"
-							placeholder="6 - 12 碼英數字"
-							maxLength="12"
-							ref="pwInput"
-							v-model.trim="user.password">
-						<div 
-							class="visibleBox" @click="seeHandler"
-							:class="{ show: visible, hide: !visible }"
-						></div>
+							v-model.trim="user.mobile">
 						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
 					</validation-provider>
 				</div>
 			</validation-observer>
-			<div class="btnBox login">
-				<button @click="submitHandler" class="variation">登入</button>
+			<div class="tipBox">
+				請輸入您註冊時的手機號碼，系統會自動傳送密碼至您的手機。五分鐘內未收到簡訊請重新發送
+				，24小時內限發送3次。
 			</div>
-			<div class="linkBox">
-				<p><a href="./A1_02_00_00.html">會員註冊</a></p>
-				<p><a href="./A1_03_00_00.html">忘記密碼</a></p>
+			<div class="btnBox">
+				<button @click="submitHandler" class="variation">確定</button>
 			</div>
 		</div>
 
-		<term-popup
-			:is-open.sync="popupInfo.isOpen"
-			:content="popupInfo.content"
-		></term-popup>
+		<div id="loading" v-show="isLoading"></div>
 
 		<!-- 提示modal -->
 		<div class="modal msgModal" id="failModal" data-backdrop="static">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
+				  <div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title">提示</h1>
 					</div>
@@ -99,21 +70,19 @@
 			</div>
 		</div>
 
-		<div id="loading" v-show="isLoading"></div>
-
 	</div>
 
 	<script src="./js/vue-components/veevalidate.js"></script>
-	<script src="./js/vue-components/TermPopup/index.js"></script>
 	<script type="module">
-		import app from './js/page/A1_01_00_00.js';
+		import app from './js/page/A1_03_00_00.js';
 		app({
 			apiUrl: {
-				term: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/term/brief_term',
-				login: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/login',
-				login_with_external_member: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/login_with_external_member'
+				forget: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/forget'
+			},
+			pageUrl: { 
+				login: './A1_01_00_00/html'
 			}
-		})
+		});
 	</script>
 </body>
 

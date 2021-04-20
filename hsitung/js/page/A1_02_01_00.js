@@ -272,8 +272,10 @@ export default function({ apiUrl, pageUrl }) {
             this.isLoading = false;
          },
          nextHandler() {
-            if (this.sendStatus) location.href = pageUrl.register_step3;
-            else $('#codeModal').modal('hide');
+            $('#codeModal').modal('hide');
+            if (this.sendStatus) {
+               location.href = pageUrl.register_step3;
+            }
          },
       },
       mounted() {

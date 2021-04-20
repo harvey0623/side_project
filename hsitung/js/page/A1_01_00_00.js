@@ -1,4 +1,4 @@
-export default function({ apiUrl }) {
+export default function ({ apiUrl }) {
    new Vue({
       el: '#app',
       data: () => ({
@@ -53,7 +53,7 @@ export default function({ apiUrl }) {
                }
             }).then(res => res.data);
          },
-         async loginWithExternalMember(data) {
+         loginWithExternalMember(data) {
             return axios({
                url: apiUrl.login_with_external_member,
                method: 'post',
@@ -67,13 +67,13 @@ export default function({ apiUrl }) {
             let loginResult = await this.login();
             this.tempStatus = loginResult.results.data.payload.Code === '0';
             this.tipMessage = loginResult.results.data.payload.Message || '成功';
-            if(this.tempStatus){
+            if (this.tempStatus) {
                let loginWithExternalMemberResult = await this.loginWithExternalMember({
                   Q1: loginResult.results.data.payload.Data.C_NO
                });
                this.tempStatus = loginWithExternalMemberResult.rcrm.RC === 'C01';
                this.tipMessage = loginWithExternalMemberResult.rcrm.RM || '成功';
-					if (this.tempStatus === 1) this.accessToken = loginWithExternalMemberResult.results.member_access_token;
+               if (this.tempStatus) this.accessToken = loginWithExternalMemberResult.results.member_access_token;
             }
             $('#failModal').modal('show');
             this.isLoading = false;

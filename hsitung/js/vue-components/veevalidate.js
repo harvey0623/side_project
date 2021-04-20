@@ -30,9 +30,10 @@ VeeValidate.extend('confirmEmail', {
 });
 
 VeeValidate.extend('password', {
-   message: '密碼長度或格式不符：英數字混合 6~12碼',
+   message: '密碼長度或格式不符: 6 - 12碼英數字',
    validate(value) {
-      let rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/
+      // let rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/
+      let rule = /^.{6,12}$/g;
       return rule.test(value);
    }
 });
@@ -46,16 +47,9 @@ VeeValidate.extend('confirmPw', {
 });
 
 VeeValidate.extend('phone', {
-   message: '手機長度不正確',
+   message: '手機格式不正確',
    validate(value) {
       return /^09\d{8}$/.test(value);
-   }
-});
-
-VeeValidate.extend('term', {
-   message: '請同意條款',
-   validate(value) {
-      return value;
    }
 });
 

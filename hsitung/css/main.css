@@ -283,7 +283,7 @@ body.hide {
   padding: 0 30px;
   margin-bottom: 40px;
   color: #fff;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 22px;
   text-align: justify;
 }
@@ -969,6 +969,10 @@ body.hide {
 }
 
 .branchPopup > .popupFooter {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   height: 45px;
   padding: 10px 0;
   background-color: var(--variationMain);

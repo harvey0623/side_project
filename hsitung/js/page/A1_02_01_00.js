@@ -81,7 +81,7 @@ export default function({ apiUrl, pageUrl }) {
             let lockedMethod = isLock ? 'disableBodyScroll' : 'enableBodyScroll';
             bodyScrollLock[lockedMethod](body, {
                allowTouchMove(el) {
-                  alert(el);
+                  console.log(el)
                }
             });
          },

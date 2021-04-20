@@ -109,7 +109,11 @@
   border-radius: 50%;
   -webkit-transform: translateY(3px);
           transform: translateY(3px);
-          background-color: #fff;
+
+}
+
+.branch-item > .right > input:checked {
+  background-color: #fff;
 }
 
 .branch-item > .right > input:checked:after {

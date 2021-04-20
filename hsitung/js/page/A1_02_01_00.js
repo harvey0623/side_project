@@ -106,6 +106,7 @@ export default function({ apiUrl, pageUrl }) {
          },
          getUserLocation() { //取得使用位置
             gpsObj.getLocation().then(res => {
+               console.log(res);
                this.gpsInfo.isOpen = res.status;
                this.gpsInfo.latitude = res.status ? res.latitude : '';
                this.gpsInfo.longitude = res.status ? res.longitude : '';

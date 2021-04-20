@@ -16,6 +16,7 @@
 	<script src='./lib/vue/vue.js'></script>
 	<script src="./lib/vue/vee-validate.js"></script>
 	<script src="./lib/axios/axios.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/vConsole/3.4.1/vconsole.min.js' integrity='sha512-c+KbbiPQeY22GNThFfW4imH273TsyOmh9r4PhSQCOkBsHL+Ax1EpunDGfZ3YUx6aSPvdXutoarvcCc/V1Nvjpg==' crossorigin='anonymous'></script>
 </head>
 
 <body>
@@ -107,6 +108,7 @@
 	<script src="./js/vue-components/TermPopup/index.js"></script>
 	<script type="module">
 		import app from './js/page/A1_01_00_00.js';
+		new VConsole();
 		app({
 			apiUrl: {
 				term: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/term/brief_term',

@@ -79,7 +79,11 @@ export default function({ apiUrl, pageUrl }) {
             await this.$nextTick();
             let body = document.body;
             let lockedMethod = isLock ? 'disableBodyScroll' : 'enableBodyScroll';
-            bodyScrollLock[lockedMethod](body);
+            bodyScrollLock[lockedMethod](body, {
+               allowTouchMove(el) {
+                  alert(el);
+               }
+            });
          },
          checkHasSignUpInfo() {
             let signUpInfo = storageObj.getItem('signUpInfo');

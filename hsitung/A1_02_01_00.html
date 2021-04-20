@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>會員註冊(2)</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A1_02_01_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/lockBody/bodyScrollLock.min.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<div id="processBox" class="step2"></div>
+			<validation-observer tag="div" class="dataOuter" ref="form">
+				<div class="dataBox">
+					<p class="dataTitle">選填資料</p>
+					<div class="dataBody">
+						<div class="dataRow communication">
+							<p class="dataName">通訊地址</p>
+						</div>
+						<validation-provider 
+							tag="div"
+							class="dataRow"
+							rules=""
+							v-slot="{ errors, failed }">
+							<select 
+								class="form-control"
+								:class="{selectDown: user.city === ''}"
+								v-model="user.city">
+								<option value=""></option>
+								<option 
+									v-for="city in cityList" :key="city"
+									:value="city"
+								>{{ city }}</option>
+							</select>
+							<p class="dataName">縣市</p>
+							<div class="downIcon" :class="{ hide: user.city !== '' }"></div>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules=""
+							v-slot="{ errors, failed }">
+							<select 
+								class="form-control"
+								:class="{selectDown: user.district === ''}"
+								v-model="user.district">
+								<option value=""></option>
+								<option 
+									v-for="area in areaList" :key="area"
+									:value="area"
+								>{{ area }}</option>
+							</select>
+							<p class="dataName">地區</p>
+							<div class="downIcon" :class="{ hide: user.district !== '' }"></div>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow"
+							rules=""
+							v-slot="{ errors, failed }">
+							<input
+								type="text"
+								class="form-control"
+								placeholder="請輸入地址" 
+								v-model.trim="user.location">
+							<p class="dataName">詳細地址</p>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules=""
+							v-slot="{ errors, failed }">
+							<input
+								type="text"
+								class="form-control"
+								placeholder="請填寫區碼"
+								inputmode="tel"
+								v-model.trim="user.Telephone_Area">
+							<p class="dataName">聯絡電話</p>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider
+							tag="div"
+							class="dataRow"
+							rules=""
+							v-slot="{ errors, failed }">
+							<input
+								type="text"
+								class="form-control"
+								placeholder="請填寫電話號碼"
+								inputmode="tel"
+								v-model.trim="user.Telephone">
+							<p class="dataName"></p>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div"
+							class="dataRow"
+							rules=""
+							v-slot="{ errors, failed }">
+							<input
+								type="text"
+								class="form-control"
+								placeholder="請填寫分機號碼" 
+								inputmode="tel"
+								v-model.trim="user.Telephone_Sep">
+							<p class="dataName"></p>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="email"
+							v-slot="{ errors, failed }">
+							<input
+								type="email" 
+								class="form-control"
+								placeholder="請輸入電子信箱" 
+								v-model.trim="user.Email">
+							<p class="dataName">電子信箱</p>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules=""
+							v-slot="{ errors, failed }">
+							<select 
+								class="form-control"
+								:class="{selectDown: user.Educate === ''}"
+								v-model="user.Educate">
+								<option value=""></option>
+								<option 
+									v-for="educate in educateList" 
+									:key="educate.id"
+									:value="educate.id"
+								>{{ educate.title }}</option>
+							</select>
+							<p class="dataName">學歷</p>
+							<div class="downIcon" :class="{ hide: user.Educate !== '' }"></div>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules=""
+							v-slot="{ errors, failed }">
+							<select 
+								class="form-control"
+								:class="{selectDown: user.Profession === ''}"
+								v-model="user.Profession">
+								<option value=""></option>
+								<option 
+									v-for="work in workList" 
+									:key="work.id"
+									:value="work.id"
+								>{{ work.title }}</option>
+							</select>
+							<p class="dataName">行業別</p>
+							<div class="downIcon" :class="{ hide: user.Profession !== '' }"></div>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules=""
+							v-slot="{ errors, failed }">
+							<select
+								class="form-control sixInput"
+								:class="{selectDown: user.Define4 === ''}"
+								v-model="user.Define4">
+								<option value=""></option>
+								<option
+									v-for="apply in applyList" 
+									:key="apply.id"
+									:value="apply.id"
+								>{{ apply.title }}</option>
+							</select>
+							<p class="dataName">如何得知申辦</p>
+							<div class="downIcon" :class="{ hide: user.Define4 !== '' }"></div>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<div class="dataRow" @click="showBranchPopup">
+							<select class="form-control" disabled></select>
+							<p class="dataName">推薦門市</p>
+							<div class="downIcon"></div>
+						</div>
+					</div>
+				</div>
+			</validation-observer>
+		</div>
+
+		<section>
+			<div class="multipleBlock">
+				<p class="multipleTitle">優惠訊息接收方式 ( 可複選 )</p>
+				<div class="multipleBody">
+					<choose-item
+						v-for="item in receiveList"
+						:key="item.id"
+						:receive-id="item.id"
+						:receive-title="item.title"
+						:receive-status="item.status"
+						type="msg"
+						@update-choose="updateChoose"
+					></choose-item>
+				</div>
+			</div>
+			<div class="multipleBlock">
+				<p class="multipleTitle">感興趣的活動 ( 可複選 )</p>
+				<div class="multipleBody">
+					<choose-item
+						v-for="item in favorList"
+						:key="item.id"
+						:receive-id="item.id"
+						:receive-title="item.title"
+						:receive-status="item.status"
+						type="favor"
+						@update-choose="updateChoose"
+					></choose-item>
+				</div>
+			</div>
+		</section>
+
+		<div class="mycontainer">
+			<div class="btnBox">
+				<button @click="submitHandler" class="variation">下一步</button>
+			</div>
+		</div>
+
+		<div id="loading" v-show="isLoading"></div>
+
+		<!-- 分店popup -->
+		<branch-popup 
+			:is-open="branchPopup.isOpen"
+			:has-branch="hasStoreBranch"
+			:city="branchPopup.city"
+			:area="branchPopup.area"
+			@close-popup="closeBranchPopup"
+			@open-address="openStoreSiteModal"
+			@choose-store="chooseStore"
+			@remove-branch="removeBranch">
+			<template v-slot:default>
+				<div class="emptyBlock" v-show="!hasStoreBranch">
+					<div class="emptyBg"></div>
+					<p>我們找不到任何門市，</p>
+					<p>請嘗試變更您的搜尋條件。</p>
+				</div>
+				<div v-show="hasStoreBranch">
+					<branch-item
+						v-for="branch in branchList"
+						:key="branch.code"
+						:title="branch.title"
+						:address="branch.address"
+						:code="branch.code"
+						:distance="branch.distance"
+						:is-checked="branch.isChecked"
+						@change-branch-input="changeBranchInput"
+					></branch-item>
+				</div>
+			</template>
+		</branch-popup>
+
+		<!-- 分店縣市區域 -->
+		<div class="modal selectModal" id="storeSiteModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">選擇縣市區域</h1>
+					</div>
+					<div class="modal-body">
+						<div class="selectBlock">
+							<div class="selectRow">
+								<p>縣市</p>
+								<div class="selectOuter">
+									<div class="downIcon"></div>
+									<select v-model="storeSite.city">
+										<option 
+											v-for="city in storeCityList"
+											:key="city"
+											:value="city"
+										>{{ city }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="selectRow">
+								<p>區域</p>
+								<div class="selectOuter">
+									<select v-model="storeSite.area">
+										<option 
+											v-for="area in storeAreaList"
+											:key="area"
+											:value="area"
+										>{{ area }}</option>
+									</select>
+									<div class="downIcon"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#storeSiteModal').modal('hide')">取消</div>
+						<div @click="searchStore">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 重新填寫modal -->
+		<div class="modal msgModal" id="redirectModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>請重新註冊</p>
+					</div>
+					<div class="modal-footer">
+						<a :href="pageUrl.register_step1">確認</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 註冊失敗modal -->
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ tipMessage }}</p>
+					</div>
+					<div class="modal-footer">
+						<p @click="confirmHandler">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 簡訊modal -->
+		<div class="modal msgModal" id="codeModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ sendMsg }}</p>
+					</div>
+					<div class="modal-footer">
+						<p @click="nextHandler">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/ChooseItem/index.js"></script>
+	<script src="./js/vue-components/BranchPopup/index.js"></script>
+	<script src="./js/vue-components/BranchItem/index.js"></script>
+	<script type="module">
+		import app from './js/page/A1_02_01_00.js';
+		app({
+			apiUrl: {
+				checkEmail: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/checkEmail',
+				verifyMobile: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/verifyMobile',
+				searchStore: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/search_store',
+				storeInformation: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/store_information'
+			},
+			pageUrl: {
+				register_step1: './A1_02_00_00.html',
+				register_step3: './A1_02_02_00.html'
+			}
+		});
+	</script>
+</body>
+
+</html>

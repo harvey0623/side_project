@@ -1,0 +1,988 @@
+:root {
+  --variationMain: #bca487;
+  --variationSub: #4a4a4a;
+  --variationAdorn: #f49f0a;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Microsoft JhengHei", "sans-serif";
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a,
+span {
+  display: inline-block;
+}
+
+button {
+  border-width: 1px;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+a,
+a:hover,
+a:focus {
+  color: black;
+  text-decoration: none;
+  outline: none;
+}
+
+.branchPopup > .popupFooter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+[type=date], .hookCheckbox, .formLayout > .formRow > .formContent select, .dataBox > .dataBody > .dataRow select, .selectBlock > .selectRow > .selectOuter > select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.hookCheckbox, .popupHeader > .popupClose, .emptyBlock > .emptyBg, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .selectBlock > .selectRow > .selectOuter > .downIcon {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.btnAgain {
+  width: auto;
+  height: auto;
+  line-height: initial;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btnAgain {
+  border: none;
+  color: #797979;
+  background-color: #C9C9C9;
+}
+
+input:focus {
+  outline: none;
+}
+
+select {
+  background-color: #fff;
+}
+
+select:focus {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+.form-control {
+  height: 45px;
+  color: #797979;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #c9c9c9;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #c9c9c9;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #c9c9c9;
+}
+
+.form-control::placeholder {
+  color: #c9c9c9;
+}
+
+.form-control:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: #fff;
+}
+
+[type=date] {
+  text-align-last: right;
+}
+
+[type=date]::-webkit-calendar-picker-indicator {
+  background-color: gray;
+}
+
+@media (max-width: 768px) {
+  [type=date]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+}
+
+.hookCheckbox {
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #C9C9C9;
+  background-image: url("../img/btn_filter_check_n_n@3x.png");
+  border: none;
+}
+
+.hookCheckbox:checked {
+  background-image: url("../img/btn_filter_check_n_h@3x.png");
+}
+
+body {
+  background-color: #891c21;
+}
+
+body.hide {
+  overflow: hidden;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.mycontainer {
+  max-width: 576px;
+  margin: 0 auto;
+  padding: 20px 20px 20px 20px;
+}
+
+@media (min-width: 750px) {
+  .mycontainer {
+    max-width: 100%;
+  }
+}
+
+#logoBox > img {
+  display: block;
+  width: 100%;
+  height: 150px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+#processBox {
+  height: 270px;
+  margin-bottom: 10px;
+  background-size: 1125px 270px;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+#processBox.step1 {
+  background-image: url("../img/img_register_step_01_n@3x.png");
+}
+
+#processBox.step2 {
+  background-image: url("../img/img_register_step_02_n@3x.png");
+}
+
+#processBox.step3 {
+  background-image: url("../img/img_register_step_03_n@3x.png");
+}
+
+@media (max-width: 900px) {
+  #processBox {
+    height: 135px;
+    background-size: 100% 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  #processBox {
+    height: 90px;
+    background-size: contain;
+  }
+}
+
+.errMsg {
+  margin-top: 2px;
+  color: #fff;
+}
+
+.errMsg.danger {
+  color: red;
+}
+
+.fixBlock {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  color: #fff;
+  background-color: var(--variationMain);
+  cursor: pointer;
+  z-index: 8;
+}
+
+.tipBox {
+  padding: 0 30px;
+  margin-bottom: 40px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: justify;
+}
+
+.tipBox.center {
+  text-align: center;
+}
+
+.popupHeader {
+  position: relative;
+  height: 45px;
+  line-height: 45px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
+
+.popupHeader > .popupClose {
+  position: absolute;
+  left: 15px;
+  top: 7px;
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/btn_nav_close_darkbg_n@2x.png");
+  cursor: pointer;
+}
+
+.btnBox {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.btnBox > button,
+.btnBox > a {
+  min-width: 100%;
+  min-height: 45px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btnBox > button:last-child,
+.btnBox > a:last-child {
+  margin-bottom: 0;
+}
+
+.btnBox > a {
+  line-height: 45px;
+}
+
+.btnBox > .variation {
+  color: #fff;
+  border: none;
+  background-color: var(--variationMain);
+}
+
+.emptyBlock {
+  padding-top: 25px;
+}
+
+.emptyBlock > .emptyBg {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 45px;
+}
+
+.emptyBlock > p {
+  color: #fff;
+  text-align: center;
+}
+
+.formLayout {
+  margin-bottom: 40px;
+}
+
+.formLayout > .formRow {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.formLayout > .formRow:last-child {
+  margin-bottom: 0;
+}
+
+.formLayout > .formRow > .formTitle {
+  position: absolute;
+  left: 15px;
+  top: 12px;
+  color: #292929;
+  z-index: 2;
+}
+
+.formLayout > .formRow > .formContent {
+  position: relative;
+  z-index: 1;
+}
+
+.formLayout > .formRow > .formContent .form-control {
+  position: relative;
+  padding-left: 85px;
+  border: none;
+  text-align: right;
+}
+
+.formLayout > .formRow > .formContent .pwInput {
+  padding-right: 45px;
+}
+
+.formLayout > .formRow > .formContent .fiveInput {
+  padding-left: 100px;
+}
+
+.formLayout > .formRow > .formContent .sixInput {
+  padding-left: 115px;
+}
+
+.formLayout > .formRow > .formContent .eigthInput {
+  padding-left: 150px;
+}
+
+.formLayout > .formRow > .formContent .errMsg {
+  padding-right: 10px;
+  text-align: right;
+}
+
+.formLayout > .formRow > .formContent select {
+  text-align: right;
+  direction: rtl;
+}
+
+.formLayout > .formRow > .formContent select.selectDown {
+  padding-right: 30px;
+}
+
+.formLayout .visibleBox {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 25px;
+  height: 25px;
+}
+
+.formLayout .visibleBox.show {
+  background-image: url("../img/btn_common_password_visible_n@2x.png");
+}
+
+.formLayout .visibleBox.hide {
+  background-image: url("../img/btn_common_password_visible_h@2x.png");
+}
+
+.formLayout .downIcon {
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  width: 15px;
+  height: 15px;
+  background-image: url("../img/btn_listcore_indicatordown_std_n@2x.png");
+}
+
+.formLayout .downIcon.hide {
+  z-index: -1;
+}
+
+.dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown {
+  position: absolute;
+  top: 16px;
+  right: 15px;
+  width: 15px;
+  height: 15px;
+  background-image: url("../img/btn_listcore_indicatordown_std_n@2x.png");
+}
+
+.dataBox > .dataBody .hide.downIcon, .dataBox > .dataBody .hide.dateDown {
+  z-index: -1;
+}
+
+.dataOuter {
+  margin-bottom: 40px;
+}
+
+.dataBox {
+  margin-bottom: 20px;
+}
+
+.dataBox:last-child {
+  margin-bottom: 0;
+}
+
+.dataBox > .dataTitle {
+  padding-left: 15px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.dataBox > .dataBody {
+  padding: 0px 0px 0 15px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.dataBox > .dataBody > .dataRow {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid #C9C9C9;
+}
+
+.dataBox > .dataBody > .dataRow:last-child {
+  border-bottom: none;
+}
+
+.dataBox > .dataBody > .dataRow > .dataName {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  color: #292929;
+}
+
+.dataBox > .dataBody > .dataRow > .form-control {
+  position: relative;
+  padding: 0px 15px 0px 70px;
+  border: none;
+  text-align: right;
+}
+
+.dataBox > .dataBody > .dataRow > .errMsg {
+  padding-right: 15px;
+  padding-bottom: 5px;
+  text-align: right;
+}
+
+.dataBox > .dataBody > .dataRow .pwInput {
+  padding-right: 45px;
+}
+
+.dataBox > .dataBody > .dataRow .dateInput {
+  position: relative;
+  left: 25px;
+  padding-right: 35px;
+  padding-top: 13px;
+}
+
+.dataBox > .dataBody > .dataRow .dateInput.hide {
+  padding-right: 15px;
+}
+
+@media (min-width: 1280px) {
+  .dataBox > .dataBody > .dataRow .dateInput {
+    padding-right: 55px;
+    padding-top: 0;
+  }
+}
+
+.dataBox > .dataBody > .dataRow .sixInput {
+  padding-left: 100px;
+}
+
+.dataBox > .dataBody > .dataRow .eigthInput {
+  padding-left: 130px;
+}
+
+.dataBox > .dataBody > .dataRow select {
+  text-align: right;
+  direction: rtl;
+}
+
+.dataBox > .dataBody > .dataRow select.selectDown {
+  padding-right: 35px;
+}
+
+.dataBox > .dataBody .visibleBox {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 25px;
+  height: 25px;
+}
+
+.dataBox > .dataBody .visibleBox.show {
+  background-image: url("../img/btn_common_password_visible_n@2x.png");
+}
+
+.dataBox > .dataBody .visibleBox.hide {
+  background-image: url("../img/btn_common_password_visible_h@2x.png");
+}
+
+@media (min-width: 576px) {
+  .modal .modal-dialog {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal .modal-dialog {
+    max-width: 85%;
+    margin: 0 auto;
+  }
+}
+
+.msgModal .modal-content {
+  background-color: #e7e7e7;
+  color: #292929;
+}
+
+.msgModal .modal-header {
+  padding: 15px 15px;
+  border-bottom: none;
+}
+
+.msgModal .modal-header .modal-title {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  font-size: 18px;
+}
+
+.msgModal .modal-body {
+  padding: 0px 15px 15px;
+  text-align: center;
+}
+
+.msgModal .modal-body > * {
+  margin-bottom: 10px;
+}
+
+.msgModal .modal-body > *:last-child {
+  margin-bottom: 0;
+}
+
+.msgModal .modal-footer {
+  padding: 12px 15px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-top-color: #C9C9C9;
+}
+
+.msgModal .modal-footer > p,
+.msgModal .modal-footer > a {
+  min-width: 20%;
+  margin: 0;
+  color: #288efb;
+  text-align: center;
+  cursor: pointer;
+}
+
+.msgModal .modal-footer.split {
+  padding: 0;
+}
+
+.msgModal .modal-footer.split > div {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 0;
+  height: 45px;
+  line-height: 45px;
+  color: #288efb;
+  text-align: center;
+  cursor: pointer;
+}
+
+.msgModal .modal-footer.split > div:first-child {
+  border-right: 1px solid #C9C9C9;
+}
+
+.inputModal .modal-content {
+  background-color: #e7e7e7;
+  color: #292929;
+}
+
+.inputModal .modal-header {
+  padding: 15px 15px;
+  border-width: 0px;
+}
+
+.inputModal .modal-header .modal-title {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  font-size: 18px;
+}
+
+.inputModal .modal-body {
+  padding: 0px 15px 20px;
+}
+
+.inputModal .modal-body > .tipText {
+  text-align: center;
+}
+
+.inputModal .modal-body > * {
+  margin-bottom: 20px;
+}
+
+.inputModal .modal-body > *:last-child {
+  margin-bottom: 0;
+}
+
+.inputModal .modal-body .form-control {
+  height: 45px;
+  border-color: #C9C9C9;
+  border-radius: 0px;
+}
+
+.inputModal .modal-body .form-control:focus {
+  border-color: #C9C9C9;
+}
+
+.inputModal .modal-footer {
+  padding: 0px 15px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-color: #C9C9C9;
+}
+
+.inputModal .modal-footer > div {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 0;
+  height: 45px;
+  line-height: 45px;
+  color: #288efb;
+  text-align: center;
+  cursor: pointer;
+  border-right: 1px solid #C9C9C9;
+}
+
+.inputModal .modal-footer > div:last-child {
+  border-right: none;
+}
+
+.selectModal .modal-content {
+  background-color: #e7e7e7;
+  color: #292929;
+}
+
+.selectModal .modal-header {
+  padding: 15px 15px;
+  border-bottom: none;
+}
+
+.selectModal .modal-header .modal-title {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  font-size: 18px;
+}
+
+.selectModal .modal-body {
+  padding: 0px 15px 15px;
+}
+
+.selectModal .modal-footer {
+  padding: 12px 15px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-top-color: #C9C9C9;
+}
+
+.selectModal .modal-footer > p,
+.selectModal .modal-footer > a {
+  min-width: 20%;
+  margin: 0;
+  color: #288efb;
+  text-align: center;
+  cursor: pointer;
+}
+
+.selectModal .modal-footer.split {
+  padding: 0;
+}
+
+.selectModal .modal-footer.split > div {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 0;
+  height: 45px;
+  line-height: 45px;
+  color: #288efb;
+  text-align: center;
+  cursor: pointer;
+}
+
+.selectModal .modal-footer.split > div:first-child {
+  border-right: 1px solid #C9C9C9;
+}
+
+.selectBlock > .selectRow {
+  margin-bottom: 15px;
+}
+
+.selectBlock > .selectRow:last-child {
+  margin-bottom: 0;
+}
+
+.selectBlock > .selectRow > p {
+  margin-bottom: 5px;
+}
+
+.selectBlock > .selectRow > .selectOuter {
+  position: relative;
+}
+
+.selectBlock > .selectRow > .selectOuter > select {
+  width: 100%;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 22px;
+  border-radius: 5px;
+  border: 1px solid #C9C9C9;
+}
+
+.selectBlock > .selectRow > .selectOuter > .downIcon {
+  position: absolute;
+  right: 5px;
+  top: 13px;
+  width: 15px;
+  height: 15px;
+  background-image: url("../img/btn_listcore_indicatordown_std_n@2x.png");
+}
+
+#loading {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1200;
+}
+
+#loading:after {
+  content: '';
+  display: block;
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  border: 5px solid var(--variationMain);
+  border-top-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: rotate 1s linear infinite;
+          animation: rotate 1s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.termPopup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  display: none;
+  z-index: 10;
+}
+
+.termPopup.show {
+  opacity: 1;
+  display: block;
+}
+
+.termBody {
+  height: calc(100vh - 45px);
+  padding: 20px;
+  background-color: #fff;
+  overflow: auto;
+}
+
+.termBody > .termContent {
+  padding: 15px;
+  line-height: 1.8;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  color: #292929;
+  text-align: justify;
+}
+
+.termBody > .termContent ol, .termBody > .termContent ul {
+  padding-left: 40px;
+  list-style: disc;
+}
+
+.termBody > .termContent img {
+  max-width: 100%;
+}
+
+.termFooter {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  background-color: #c9c9c9;
+  color: #797979;
+  text-align: center;
+  cursor: pointer;
+}
+
+.termFooter.termActiveButton {
+  background-color: var(--variationMain);
+  color: #fff;
+}
+
+.branchPopup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  display: none;
+}
+
+.branchPopup.active {
+  display: block;
+}
+
+.branchPopup > .siteTrigger {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 10px 15px;
+  height: 45px;
+  color: #292929;
+}
+
+.branchPopup > .siteTrigger .downIcon {
+  width: 12px;
+  height: 10px;
+  background-image: url("../img/btn_filter_category_lightbg_n@2x.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.branchPopup > .popupBody {
+  height: calc(100vh - (45px * 3));
+  padding: 15px;
+  background-color: #891c21;
+  overflow: auto;
+}
+
+.branchPopup > .popupBody.none {
+  height: calc(100vh - (45px * 2));
+}
+
+.branchPopup > .popupFooter {
+  height: 45px;
+  padding: 10px 0;
+  background-color: var(--variationMain);
+}
+
+.branchPopup > .popupFooter > div {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  color: #fff;
+}
+
+.branchPopup > .popupFooter > div:first-child {
+  border-right: 1px solid #fff;
+}
+/*# sourceMappingURL=main.css.map */

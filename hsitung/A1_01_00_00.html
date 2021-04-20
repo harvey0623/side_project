@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>登入</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A1_01_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="termBar" @click="openPopup">
+			<p>登入說明</p>
+			<span class="arrowIcon"></span>
+		</div>
+		<div class="mycontainer">
+			<div id="logoBox">
+				<img src="./img/img_common_form_logo_n@3x.png">
+			</div>
+			<validation-observer tag="div" class="formLayout" ref="form">
+				<div class="formRow">
+					<p class="formTitle">帳號</p>
+					<validation-provider 
+						tag="div" 
+						class="formContent" 
+						rules="required|phone"
+						v-slot="{ errors, failed }">
+						<input
+							type="number" 
+							class="form-control" 
+							placeholder="為您的手機號碼"
+							maxlength="10"
+							v-model.trim="user.account">
+						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+					</validation-provider>
+				</div>
+				<div class="formRow">
+					<p class="formTitle">密碼</p>
+					<validation-provider 
+						tag="div" 
+						class="formContent" 
+						rules="required|password"
+						v-slot="{ errors, failed }">
+						<input 
+							type="password"
+							class="form-control pwInput"
+							placeholder="6 - 12 碼英數字"
+							maxLength="12"
+							ref="pwInput"
+							v-model.trim="user.password">
+						<div 
+							class="visibleBox" @click="seeHandler"
+							:class="{ show: visible, hide: !visible }"
+						></div>
+						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+					</validation-provider>
+				</div>
+			</validation-observer>
+			<div class="btnBox login">
+				<button @click="submitHandler" class="variation">登入</button>
+			</div>
+			<div class="linkBox">
+				<p><a href="./A1_02_00_00.html">會員註冊</a></p>
+				<p><a href="javascript:;">忘記密碼</a></p>
+			</div>
+		</div>
+
+		<term-popup
+			:is-open.sync="popupInfo.isOpen"
+			:content="popupInfo.content"
+		></term-popup>
+
+		<!-- 提示modal -->
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ tipMessage }}</p>
+					</div>
+					<div class="modal-footer">
+						<p @click="confirmHandler">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="loading" v-show="isLoading"></div>
+
+	</div>
+
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/TermPopup/index.js"></script>
+	<script type="module">
+		import app from './js/page/A1_01_00_00.js';
+		app({
+			apiUrl: {
+				term: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/term/brief_term',
+				login: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/login',
+				login_with_external_member: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/login_with_external_member'
+			}
+		})
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+.orBox > span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.fbLink > .fbIcon {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.mycontainer {
+  padding-top: 0px;
+}
+
+.btnBox.login {
+  margin-bottom: 40px;
+}
+
+.linkBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.linkBox > p {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  border-right: 1px solid #979797;
+}
+
+.linkBox > p:last-child {
+  border-right: none;
+}
+
+.linkBox > p > a {
+  color: #797979;
+}
+
+.fastBox {
+  margin-top: 60px;
+  display: none;
+}
+
+.orBox {
+  position: relative;
+  padding: 0 20px;
+  margin-bottom: 27px;
+}
+
+.orBox > span {
+  padding: 0 25px;
+  background-color: #891c21;
+  color: #797979;
+  -webkit-transform: translate(-50%, -60%);
+          transform: translate(-50%, -60%);
+}
+
+.orBox:after {
+  content: '';
+  display: block;
+  border-top: 1px solid #979797;
+}
+
+.fbLink {
+  position: relative;
+  background-color: #3c5a9a;
+  color: #fff;
+}
+
+.fbLink:focus, .fbLink:hover {
+  color: #fff;
+}
+
+.fbLink > .fbIcon {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  width: 25px;
+  height: 25px;
+  background-image: url("../img/img-memberportal-fb-n-n.png");
+}
+/*# sourceMappingURL=L1_01_00_00.css.map */

@@ -1,0 +1,48 @@
+.mycontainer {
+  padding-top: 0px;
+}
+
+.termBar {
+  position: relative;
+  padding: 10px 0;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
+
+.termBar > .arrowIcon {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/btn_point_indicatorright_n_n@2x.png");
+  background-size: contain;
+}
+
+.btnBox.login {
+  margin-bottom: 40px;
+}
+
+.linkBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.linkBox > p {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  border-right: 1px solid #fff;
+}
+
+.linkBox > p:last-child {
+  border-right: none;
+}
+
+.linkBox > p > a {
+  color: #fff;
+}
+/*# sourceMappingURL=A1_01_00_00.css.map */

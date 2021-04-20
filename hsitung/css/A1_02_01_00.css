@@ -1,0 +1,126 @@
+.branch-item > .right > input:after {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.branch-item > .right > input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.dataOuter {
+  margin-bottom: 0;
+}
+
+.communication {
+  height: 45px;
+}
+
+.multipleBlock {
+  padding: 15px 34px 0;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+
+.multipleBlock:last-child {
+  margin-bottom: 0;
+}
+
+.multipleBlock > .multipleTitle {
+  margin-bottom: 10px;
+  color: #292929;
+}
+
+.multipleBlock > .multipleBody {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.multipleBlock > .multipleBody > .chooesItem {
+  min-width: 102px;
+  padding: 8px 22px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #C9C9C9;
+  color: #292929;
+  font-size: 14px;
+  text-align: center;
+}
+
+.multipleBlock > .multipleBody > .chooesItem.active {
+  background-color: var(--variationMain);
+  color: #fff;
+}
+
+.branch-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 12px;
+  padding: 15px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.branch-item:last-child {
+  margin-bottom: 0;
+}
+
+.branch-item > .left {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  color: #292929;
+}
+
+.branch-item > .left .distance,
+.branch-item > .left .address {
+  color: #c9c9c9;
+  font-size: 15px;
+}
+
+.branch-item > .right {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 30px;
+          flex: 0 0 30px;
+  text-align: right;
+}
+
+.branch-item > .right > input {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--variationMain);
+  border-radius: 50%;
+  -webkit-transform: translateY(3px);
+          transform: translateY(3px);
+}
+
+.branch-item > .right > input:checked:after {
+  display: block;
+}
+
+.branch-item > .right > input:after {
+  content: '';
+  width: 15px;
+  height: 15px;
+  background-color: var(--variationMain);
+  border-radius: 50%;
+  display: none;
+}
+
+.emptyBg {
+  background-image: url("../img/img_store_empty_n_n@3x.png");
+}
+/*# sourceMappingURL=A1_02_01_00.css.map */

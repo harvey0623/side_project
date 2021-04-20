@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>會員註冊(1)</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L1_02_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<div id="processBox" class="step1"></div>
+			<validation-observer tag="div" class="dataOuter" ref="form">
+				<div class="dataBox">
+					<p class="dataTitle">必填資料</p>
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required|phone"
+							v-slot="{ errors, failed }">
+							<input
+								type="text" 
+								class="form-control"
+								placeholder="為您的帳號，共 10 碼"
+								inputmode="tel"
+								v-model.trim="user.mobile">
+							<p class="dataName">手機號碼</p>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required|password"
+							vid="a"
+							v-slot="{ errors, failed }">
+							<input
+								type="password" 
+								class="form-control pwInput"
+								placeholder="6 - 12 碼英數字"
+								ref="pwInput"
+								v-model.trim="user.password">
+							<p class="dataName">密碼</p>
+							<div 
+								class="visibleBox" @click="see1Handler"
+								:class="{ show: visible1, hide: !visible1 }"
+							></div>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required|confirmPw:@a"
+							v-slot="{ errors, failed }">
+							<input
+								type="password" 
+								class="form-control pwInput"
+								placeholder="6 - 12 碼英數字"
+								ref="confirmInput"
+								v-model.trim="user.confirmedPw">
+							<p class="dataName">密碼確認</p>
+							<div 
+								class="visibleBox" @click="see2Handler"
+								:class="{ show: visible2, hide: !visible2 }"
+							></div>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required"
+							v-slot="{ errors, failed }">
+							<select 
+								class="form-control"
+								:class="{selectDown: user.gender === ''}"
+								v-model="user.gender">
+								<option value="" disabled></option>
+								<option value="M">男</option>
+								<option value="F">女</option>
+							</select>
+							<p class="dataName">性別</p>
+							<div class="downIcon" :class="{ hide: user.gender !== '' }"></div>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required"
+							v-slot="{ errors, failed }">
+							<input
+								type="text" 
+								class="form-control"
+								placeholder="請輸入您的姓名" 
+								v-model.trim="user.name">
+							<p class="dataName">姓名</p>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider
+							tag="div" 
+							class="dataRow"
+							rules="required|birthday"
+							v-slot="{ errors, failed }">
+							<input
+								type="date"
+								class="form-control dateInput"
+								:class="{ hide: user.birthday !== '' }"
+								v-model.trim="user.birthday">
+							<p class="dataName">出生日期</p>
+							<div class="dateDown" :class="{ hide: user.birthday !== '' }"></div>
+							<p class="errMsg danger" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+			</validation-observer>
+
+			<div class="btnBox">
+				<button @click="submitHandler" class="variation">下一步</button>
+			</div>
+		</div>
+
+		<div id="loading" v-show="isLoading"></div>
+
+		<div class="modal msgModal" id="signUpModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ tipMessage }}</p>
+					</div>
+					<div class="modal-footer">
+						<p @click="confirmHandler">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script type="module">
+		import app from './js/page/A1_02_00_00.js';
+		app({
+			apiUrl: {
+            checkMobile: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/checkMobile',
+         },
+         pageUrl: {
+            register_step2: './A1_02_01_00.html',
+         },
+		});
+	</script>
+</body>
+
+</html>

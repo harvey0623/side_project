@@ -1,0 +1,50 @@
+.msgModal {
+   .modal-content {
+      background-color: map-get($elBgColor, modal);
+      color: map-get($fontColor, formTitle);
+   }
+   .modal-header {
+      padding: 15px 15px;
+      border-bottom: none;
+      .modal-title {
+         flex: 1;
+         text-align: center;
+         font-size: 18px;
+      } 
+   } 
+   .modal-body {
+      padding: 0px 15px 15px;
+      text-align: center;
+      >* {
+         @include elGutter(margin-bottom, 10px);
+      }
+   }
+   .modal-footer {
+      padding: 12px 15px;
+      justify-content: center;
+      border-top-color: map-get($borderColor, placeholder);
+      >p,
+      >a {
+         min-width: 20%;
+         margin: 0;
+         color: map-get($fontColor, modalCancel);
+         text-align: center;
+         cursor: pointer;
+      }
+      &.split {
+         padding: 0;
+         >div {
+            flex: 1;
+            margin: 0;
+            height: map-get($heightObj, basic);
+            line-height: map-get($heightObj, basic);
+            color: map-get($fontColor, modalCancel);
+            text-align: center;
+            cursor: pointer;
+            &:first-child {
+               border-right: 1px solid map-get($borderColor, placeholder);
+            }
+         }
+      }
+   }
+}

@@ -2,7 +2,7 @@ import { storageObj } from '../src/storage.js';
 import { zipCodeData } from '../src/zipCode.js';
 import { educateList, workList, applyList, receiveList, favorList } from '../src/criteriaInfo.js';
 import { gpsObj } from '../src/gps.js';
-export default function({ apiUrl, pageUrl }) {
+export default function ({ apiUrl, pageUrl }) {
    new Vue({
       el: '#app',
       data: () => ({
@@ -38,7 +38,7 @@ export default function({ apiUrl, pageUrl }) {
          gpsInfo: {
             isOpen: false,
             latitude: '',
-            longitude: '' 
+            longitude: ''
          },
          user: {
             Email: '',
@@ -75,15 +75,11 @@ export default function({ apiUrl, pageUrl }) {
          }
       },
       methods: {
-         async losckScroll(isLock) {
+         async lockScroll(isLock) {
             await this.$nextTick();
             let body = document.body;
             let lockedMethod = isLock ? 'disableBodyScroll' : 'enableBodyScroll';
-            bodyScrollLock[lockedMethod](body, {
-               allowTouchMove(el) {
-                  console.log(el)
-               }
-            });
+            bodyScrollLock[lockedMethod](body);
          },
          checkHasSignUpInfo() {
             let signUpInfo = storageObj.getItem('signUpInfo');
@@ -106,7 +102,6 @@ export default function({ apiUrl, pageUrl }) {
          },
          getUserLocation() { //取得使用位置
             gpsObj.getLocation().then(res => {
-               console.log(res);
                this.gpsInfo.isOpen = res.status;
                this.gpsInfo.latitude = res.status ? res.latitude : '';
                this.gpsInfo.longitude = res.status ? res.longitude : '';
@@ -125,7 +120,7 @@ export default function({ apiUrl, pageUrl }) {
          verifyMobile(mobile) {
             return axios({
                url: apiUrl.verifyMobile,
-               method:'post',
+               method: 'post',
                data: { Q1: mobile }
             }).then(res => res.data);
          },
@@ -135,7 +130,7 @@ export default function({ apiUrl, pageUrl }) {
                method: 'post',
                data: {
                   city: this.storeSite.city,
-   	            district: this.storeSite.area
+                  district: this.storeSite.area
                }
             }).then(res => res.data.results.store_ids).catch(err => []);
          },
@@ -153,7 +148,7 @@ export default function({ apiUrl, pageUrl }) {
             if (this.user.RES_S_NO !== '') {
                this.tempBranch = JSON.parse(JSON.stringify(this.backupBranch));
                this.branchList = this.createStoreSchema(this.backupBranch);
-               this.changeBranchInput({ code: this.user.RES_S_NO, checked: true });
+               this.changeBranchInput({ code: this.user.RES_S_NO, isChecked: true });
                this.branchPopup.city = this.backupAddr.city;
                this.branchPopup.area = this.backupAddr.area;
                this.storeSite.city = this.backupAddr.city;
@@ -161,35 +156,35 @@ export default function({ apiUrl, pageUrl }) {
                this.storeSite.area = this.backupAddr.area;
             }
             this.branchPopup.isOpen = true;
-            this.losckScroll(true);
+            this.lockScroll(true);
          },
-         closeBranchPopup() {
+         closeBranchPopup() { //點叉叉關閉branchPopup
             this.tempBranch = [];
             this.branchList = [];
             this.branchPopup.city = '';
             this.branchPopup.area = '';
             this.branchPopup.isOpen = false;
-            this.losckScroll(false);
+            this.lockScroll(false);
          },
-         changeBranchInput({ code, checked }) { //改變分店選項
+         changeBranchInput({ code, isChecked }) { //改變分店選項
             this.branchList.forEach(branch => {
-               if (branch.code === code) branch.isChecked = checked;
+               if (branch.code === code) branch.isChecked = isChecked;
                else branch.isChecked = false;
             });
          },
          createStoreSchema(storeInfo) { //產生分店資料結構
             if (storeInfo.length === 0) return [];
-            let result = storeInfo.reduce((prev, current, index) => {
+            let result = storeInfo.reduce((prev, current) => {
                let { title, address, code, location } = current;
-               let distance = this.gpsInfo.isOpen ? 
+               let distance = this.gpsInfo.isOpen ?
                   gpsObj.getDistance(
-                     { lat1: this.gpsInfo.latitude, lon1: this.gpsInfo.longitude }, 
-                     { lat2: parseFloat(location.latitude), lon2: parseFloat(location.longitude)}, 'K') : '--';
+                     { lat1: this.gpsInfo.latitude, lon1: this.gpsInfo.longitude },
+                     { lat2: parseFloat(location.latitude), lon2: parseFloat(location.longitude) }, 'K') : '--';
                prev.push({ title, address, code, distance, isChecked: false });
                return prev;
             }, []);
             result.sort((a, b) => a.distance - b.distance);
-            result.forEach((item,index) => {
+            result.forEach((item, index) => {
                if (index === 0) item.isChecked = true;
             });
             return result;
@@ -205,7 +200,7 @@ export default function({ apiUrl, pageUrl }) {
                this.removeBranch();
             }
             this.branchPopup.isOpen = false;
-            this.losckScroll(false);
+            this.lockScroll(false);
          },
          removeBranch() { //刪除分店
             this.user.RES_S_NO = '';
@@ -218,7 +213,7 @@ export default function({ apiUrl, pageUrl }) {
             this.backupAddr.city = '';
             this.backupAddr.area = '';
             this.branchPopup.isOpen = false;
-            this.losckScroll(false);
+            this.lockScroll(false);
          },
          async searchStore() {
             this.isLoading = true;
@@ -268,8 +263,8 @@ export default function({ apiUrl, pageUrl }) {
          },
          async confirmHandler() {
             if (!this.tempStatus) return $('#failModal').modal('hide');
-            let userMobile = this.keepSignUpInfo();
             this.isLoading = true;
+            let userMobile = this.keepSignUpInfo();
             let verifyResult = await this.verifyMobile(userMobile);
             this.sendStatus = verifyResult.results.data.payload.Code === '0';
             this.sendMsg = this.sendStatus ? '驗證碼簡訊發送成功' : verifyResult.results.data.payload.Message;

@@ -1,0 +1,72 @@
+.formLayout {
+   margin-bottom: map-get($gutter, double);
+   >.formRow {
+      position: relative;
+      @include elGutter(margin-bottom, map-get($gutter, basic));
+      >.formTitle {
+         position: absolute;
+         left: 15px;
+         top: 12px;
+         color: map-get($fontColor, formTitle);
+         z-index: 2;
+      }
+      >.formContent {
+         position: relative;
+         z-index: 1;
+         .form-control {
+            position: relative;
+            padding-left: 85px;
+            border: none;
+            text-align: right;
+         }
+         .pwInput {
+            padding-right: 45px;
+         }
+         .fiveInput {
+            padding-left: 100px;
+         }
+         .sixInput {
+            padding-left: 115px;
+         }
+         .eigthInput {
+            padding-left: 150px;
+         }
+         .errMsg {
+            padding-right: 10px;
+            text-align: right;
+         }
+         select {
+            @extend %resetForm;
+            text-align: right;
+            direction: rtl;
+            &.selectDown {
+               padding-right: 30px;
+            }
+         }
+      }
+   }
+   .visibleBox {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      @include size(25px);
+      @extend %bgImgCenter;
+      &.show {
+         background-image: url("../img/btn_common_password_visible_n@2x.png");
+      }
+      &.hide {
+         background-image: url("../img/btn_common_password_visible_h@2x.png");
+      }
+   }
+   .downIcon {
+      position: absolute;
+      right: 10px;
+      top: 16px;
+      @include size(15px);
+      background-image: url("../img/btn_listcore_indicatordown_std_n@2x.png");
+      @extend %bgImgCenter;
+      &.hide {
+         z-index: -1;
+      }
+   }
+}

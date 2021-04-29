@@ -1,0 +1,150 @@
+$basicHeight: map-get($heightObj, basic);
+$basicGutter: map-get($gutter, basic);
+$doubleGutter: map-get($gutter, double);
+
+body {
+   background-color: map-get($elBgColor, body);
+   &.hide {
+      overflow: hidden;
+   }
+}
+
+//===vue use
+[v-cloak] { 
+   display: none;
+}
+
+//===置中區塊
+.mycontainer {
+   max-width: 576px;
+   margin: 0 auto;
+   padding: 20px 20px 20px 20px;
+   @media (min-width: 750px) {
+      max-width: 100%;
+   }
+}
+
+//===logobox
+#logoBox {
+   >img {
+      display: block;
+      @include size(100%, 150px);
+      object-fit: contain;
+   }
+}
+
+//===processBox
+#processBox {
+   height: 270px;
+   margin-bottom: 10px;
+   background-size: 1125px 270px;
+   background-position: center top;
+   background-repeat: no-repeat;
+   &.step1 {
+      background-image: url("../img/img_register_step_01_n@3x.png");
+   }
+   &.step2 {
+      background-image: url("../img/img_register_step_02_n@3x.png");
+   }
+   &.step3 {
+      background-image: url("../img/img_register_step_03_n@3x.png");
+   }
+   @media (max-width: 900px) {
+      height: 135px;
+      background-size: 100% 100%;
+   }
+   @media (max-width: 576px) {
+      height: 90px;
+      background-size: contain;
+   }
+}
+
+//===validate error
+.errMsg {
+   margin-top: 2px;
+   color: #fff;
+   &.danger {
+      color: red;
+   }
+}
+
+//===fixLink
+.fixBlock {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   @include size(100%, $basicHeight);
+   line-height: $basicHeight;
+   text-align: center;
+   color: #fff;
+   background-color: var(--variationMain);
+   cursor: pointer;
+   z-index: 8;
+}
+
+//===提示說明文字
+.tipBox {
+   padding: 0 30px;
+   margin-bottom: $doubleGutter;
+   color: #fff;
+   font-size: 15px;
+   line-height: 22px;
+   text-align: justify;
+   &.center {
+      text-align: center;
+   }
+}
+
+//===popupHeader
+.popupHeader {
+   position: relative;
+   height: $basicHeight;
+   line-height: $basicHeight;
+   background-color: #000;
+   color: #fff;
+   text-align: center;
+   >.popupClose {
+      position: absolute;
+      left: 15px;
+      top: 7px;
+      @include size(30px);
+      background-image: url("../img/btn_nav_close_darkbg_n@2x.png");
+      @extend %bgImgCenter;
+      cursor: pointer;
+   }
+}
+
+//===按鈕外層
+.btnBox {
+   padding-left: 20px;
+   padding-right: 20px;
+   >button,
+   >a {
+      @include basicSize(100%, $basicHeight);
+      @include elGutter(margin-bottom, $basicGutter);
+      border-radius: map-get($radius, basic);
+      text-align: center;
+   }
+   >a {
+      line-height: $basicHeight;
+   }
+   >.variation {
+      color: #fff;
+      border: none;
+      background-color: var(--variationMain);
+   }
+}
+
+//===無資料顯示
+.emptyBlock {
+   padding-top: 25px;
+   >.emptyBg {
+      @include size(120px);
+      margin: 0 auto 45px;
+      @extend %bgImgCenter;
+   }
+   >p {
+      color: #fff;
+      text-align: center;
+   }
+}

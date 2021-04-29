@@ -1,0 +1,54 @@
+$basicHeight: map-get($heightObj, basic);
+
+.branchPopup {
+   position: fixed;
+   left: 0;
+   top: 0;
+   @include size(100%, 100vh);
+   background-color: #fff;
+   display: none;
+   &.active {
+      display: block;
+   }
+   >.siteTrigger {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 10px 15px;
+      height: $basicHeight;
+      color: map-get($fontColor, formTitle);
+      .downIcon {
+         @include size(12px, 10px);
+         background-image: url("../img/btn_filter_category_lightbg_n@2x.png");
+         background-size: contain;
+         background-repeat: no-repeat;
+         background-position: center center
+      }
+   }
+   >.popupBody {
+      height: calc(100vh - (#{$basicHeight} * 3));
+      padding: 15px 15px $basicHeight;
+      background-color: map-get($elBgColor, body);
+      overflow: auto;
+      &.none {
+         height: calc(100vh - (#{$basicHeight} * 2));
+      }
+   }
+   >.popupFooter {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      @include size(100%, $basicHeight);
+      @extend %centerFlex;
+      padding: 10px 0;
+      background-color: var(--variationMain);
+      >div {
+         flex: 1;
+         text-align: center;
+         color: #fff;
+         &:first-child {
+            border-right: 1px solid #fff;
+         }
+      }
+   }
+}

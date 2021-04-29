@@ -43,13 +43,16 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
 
 .multipleBlock > .multipleBody > .chooesItem {
   min-width: 102px;
-  padding: 8px 22px;
+  padding: 9px 22px;
   margin-right: 10px;
   margin-bottom: 15px;
   border-radius: 5px;

@@ -30,7 +30,7 @@ Vue.component('branch-item', {
       changeHandler(evt) {
          this.$emit('change-branch-input', {
             code: this.code,
-            checked: evt.currentTarget.checked
+            isChecked: evt.currentTarget.checked
          });
       }
    },

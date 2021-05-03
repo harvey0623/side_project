@@ -1,4 +1,4 @@
-export default function ({ apiUrl }) {
+export default function ({ apiUrl, pageUrl }) {
    new Vue({
       el: '#app',
       data: () => ({
@@ -14,7 +14,8 @@ export default function ({ apiUrl }) {
             isOpen: false,
             content: ''
          },
-         accessToken: ''
+         accessToken: '',
+         pageUrl
       }),
       methods: {
          getQuery(key) { //取得網址參數

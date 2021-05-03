@@ -75,12 +75,6 @@ export default function ({ apiUrl, pageUrl }) {
          }
       },
       methods: {
-         async lockScroll(isLock) {
-            await this.$nextTick();
-            let body = document.body;
-            let lockedMethod = isLock ? 'disableBodyScroll' : 'enableBodyScroll';
-            bodyScrollLock[lockedMethod](body);
-         },
          checkHasSignUpInfo() {
             let signUpInfo = storageObj.getItem('signUpInfo');
             let hasSignUpInfo = signUpInfo !== null;
@@ -156,7 +150,6 @@ export default function ({ apiUrl, pageUrl }) {
                this.storeSite.area = this.backupAddr.area;
             }
             this.branchPopup.isOpen = true;
-            // this.lockScroll(true);
          },
          closeBranchPopup() { //點叉叉關閉branchPopup
             this.tempBranch = [];
@@ -164,7 +157,6 @@ export default function ({ apiUrl, pageUrl }) {
             this.branchPopup.city = '';
             this.branchPopup.area = '';
             this.branchPopup.isOpen = false;
-            // this.lockScroll(false);
          },
          changeBranchInput({ code, isChecked }) { //改變分店選項
             this.branchList.forEach(branch => {
@@ -200,7 +192,6 @@ export default function ({ apiUrl, pageUrl }) {
                this.removeBranch();
             }
             this.branchPopup.isOpen = false;
-            // this.lockScroll(false);
          },
          removeBranch() { //刪除分店
             this.user.RES_S_NO = '';
@@ -213,7 +204,6 @@ export default function ({ apiUrl, pageUrl }) {
             this.backupAddr.city = '';
             this.backupAddr.area = '';
             this.branchPopup.isOpen = false;
-            // this.lockScroll(false);
          },
          async searchStore() {
             this.isLoading = true;

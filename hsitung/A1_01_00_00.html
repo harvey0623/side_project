@@ -72,8 +72,8 @@
 				<button @click="submitHandler" class="variation">登入</button>
 			</div>
 			<div class="linkBox">
-				<p><a href="./A1_02_00_00.html">會員註冊</a></p>
-				<p><a href="./A1_03_00_00.html">忘記密碼</a></p>
+				<p><a :href="pageUrl.register_step1">會員註冊</a></p>
+				<p><a :href="pageUrl.forget">忘記密碼</a></p>
 			</div>
 		</div>
 
@@ -112,6 +112,10 @@
 				term: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/term/brief_term',
 				login: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/login',
 				login_with_external_member: 'https://boiling-fortress-97054.herokuapp.com/hsinTung/login_with_external_member'
+			},
+			pageUrl: {
+				register_step1: './A1_02_00_00.html',
+				forget: './A1_03_00_00.html'
 			}
 		})
 	</script>

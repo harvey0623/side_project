@@ -52,12 +52,12 @@
 
 .multipleBlock > .multipleBody > .chooesItem {
   min-width: 102px;
-  padding: 9px 22px;
+  padding: 8px 5px;
   margin-right: 10px;
   margin-bottom: 15px;
-  border-radius: 5px;
   border: 1px solid #C9C9C9;
   color: #292929;
+  border-radius: 5px;
   font-size: 14px;
   text-align: center;
 }
@@ -65,6 +65,13 @@
 .multipleBlock > .multipleBody > .chooesItem.active {
   background-color: var(--variationMain);
   color: #fff;
+}
+
+@media (max-width: 400px) {
+  .multipleBlock > .multipleBody > .chooesItem {
+    min-width: 85px;
+    margin-right: 5px;
+  }
 }
 
 .branch-item {
@@ -108,7 +115,7 @@
   position: relative;
   width: 20px;
   height: 20px;
-  border: 1px solid var(--variationMain);
+  border: 1px solid #979797;
   border-radius: 50%;
   -webkit-transform: translateY(3px);
           transform: translateY(3px);
@@ -123,12 +130,12 @@
 }
 
 .branch-item > .right > input:after {
+  display: none;
   content: '';
   width: 15px;
   height: 15px;
   background-color: var(--variationMain);
   border-radius: 50%;
-  display: none;
 }
 
 .emptyBg {

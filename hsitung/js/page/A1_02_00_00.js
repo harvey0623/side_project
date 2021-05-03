@@ -58,8 +58,7 @@ export default function({ apiUrl, pageUrl }) {
             if (hasStorageData) storageData.step1 = this.user;
             else signUpInfo.step1 = this.user;
             storageObj.setItem('signUpInfo', hasStorageData ? storageData : signUpInfo);
-            // $('#signUpModal').modal('hide');
-            alert('update');
+            $('#signUpModal').modal('hide');
             location.href = pageUrl.register_step2;
          },
       },

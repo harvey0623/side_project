@@ -23,7 +23,7 @@ Vue.component('drag-list', {
    computed: {
       dragClass() {
          return {
-            dragging: this.isDrag && this.orderindex === this.dragindex
+            dragging: this.isDrag && this.dragindex === this.orderindex
          }
       }
    },
@@ -35,7 +35,7 @@ Vue.component('drag-list', {
       },
       dragenter(evt) {
          this.cancelDefault(evt);
-         this.$emit('down', this.orderindex);
+         this.$emit('enter', this.orderindex);
       },
       dragover(evt) {
          this.cancelDefault(evt);
@@ -47,7 +47,6 @@ Vue.component('drag-list', {
       },
       cancelDefault(evt) {
          evt.preventDefault();
-         return;
       }
    },
    template: `

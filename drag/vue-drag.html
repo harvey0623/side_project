@@ -20,7 +20,7 @@
                :content="item.content"
                :orderindex="index"
                :dragindex.sync="dragging_order"
-               @down="downHandler"
+               @enter="enterHandler"
                @record="recordHandler"
                @updatelist="updateHandler"
             ></drag-list>
@@ -29,7 +29,7 @@
       </div>
    </div>
 
-   <script src="./vue-modules/vue-drag/index.js"></script>
+   <script src="./vue-component/vue-drag/index.js"></script>
    <script>
       //https://codepen.io/andy901867/pen/wvwbOXB
       new Vue({
@@ -54,7 +54,7 @@
             recordHandler() {
                this.oldIdText = this.currentIdText;
             },
-            downHandler(val) {
+            enterHandler(val) {
                let obj = this.dragList.splice(this.dragging_order, 1)[0];
                this.dragList.splice(val, 0, obj);
                this.dragging_order = val;

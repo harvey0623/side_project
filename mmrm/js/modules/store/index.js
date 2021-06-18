@@ -82,7 +82,7 @@ $(document).ready(function(){
 
 	$("#list").on('click','.list_block',function(){
 			var id =  $(this).attr('store_id');
-			window.location.href = '/store/'+id;
+			window.location.href = '/line_bot_portal/store?store_id='+id;
 			// window.open("{{url('store')}}/"+id);
 		})
 
@@ -174,7 +174,7 @@ function store_data(){
 				'<div class="list_content">'+
 					'<p class="list_content_store">'+store_list[i].name+'</p>'+
 					'<p class="list_content_addr">'+store_list[i].addr+'</p>'+
-					'<p class="list_content_other"><span class="list_content_tel">'+store_list[i].tel+'</span>&nbsp;<span class="list_content_distance">'+store_list[i].distance+'</span></p>'+
+					'<p class="list_content_other"><span class="list_content_tel">'+store_list[i].tel+'</span>&nbsp;<span class="list_content_distance">'+(store_list[i].distance !== null ? store_list[i].distance+' Km' : '--m')+'</span></p>'+
 				'</div>'+
 			'</div>' ;
 			$("#list").append(list_block);
@@ -319,7 +319,7 @@ function do_ajax(){
 
 function getMultipleBrand() { //取得多品牌資料
 	$.ajax({
-		url: 'http://localhost:3034/mmrmProd/multiple_brand',
+		url: '/line_bot_portal_api/v1/doConfig',
 		method: 'post',
 		data: {},
 		success(res) {

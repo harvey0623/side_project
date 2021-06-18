@@ -1,7 +1,0 @@
-@function count($val) {
-   @return $val / 16;
-}
-
-@mixin pxToRem($val) {
-   font-size: #{count($val)}rem;
-}

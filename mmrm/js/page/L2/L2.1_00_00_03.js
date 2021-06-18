@@ -36,7 +36,6 @@ export default function ({ apiUrl, pageUrl }) {
          currentType: 'valid',
          brandList: [],
          isLoading: false,
-         isMultipleBrand: true,
          apiUrl,
          pageUrl
       }),
@@ -146,15 +145,6 @@ export default function ({ apiUrl, pageUrl }) {
                this.isLoading = false;
             });
          },
-         async getMultipleBrand() { //取多品牌資訊
-            return axios({
-               url: this.apiUrl.multipleBrand,
-               method: 'post',
-               data: {}
-            }).then(res => {
-               return parseInt(res.data.multiple_brand) === 1;
-            }).catch(err => true);
-         },
          getQuery(key) { //取得網址參數
             let params = (new URL(document.location)).searchParams;
             let value = params.get(key);
@@ -209,10 +199,13 @@ export default function ({ apiUrl, pageUrl }) {
             let combinedData = [];
             let couponListData = await this.getCouponList().then(res => res);
             if (couponListData.results.my_coupon_list.length !== 0) {
+               let brandResult = [];
                let couponIdArr = this.getCouponIdArr(couponListData);
                let couponInfoData = await this.getCpouponInfo(couponIdArr).then(res => res);
                let brandIdArr = this.getBrandArr(couponInfoData);
-               let brandResult = await this.getBrandInfo(brandIdArr).then(res => res);
+               if (brandIdArr.length !== 0) {
+                  brandResult = await this.getBrandInfo(brandIdArr).then(res => res);
+               }
                let storeData = await this.getStoreList(couponIdArr).then(res => res);
                this.brandList = this.removeRepeatBrand(brandResult);
                combinedData = this.mergeData(couponListData, couponInfoData, storeData);
@@ -241,9 +234,6 @@ export default function ({ apiUrl, pageUrl }) {
       },
       async mounted() {
          window.addEventListener('scroll', this.scrollHandler);
-         this.getMultipleBrand().then(res => {
-            this.isMultipleBrand = res;
-         });
          await this.getPagination();
       }
    });

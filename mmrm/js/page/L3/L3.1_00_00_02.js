@@ -18,7 +18,6 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          systemTime: '',
          projectTime,
          activityParams: null,
-         isMultipleBrand: true,
          redeemPointTitle: window.getSystemLang('couponactivityredeem_redeempointtitle'),
          sureText: window.getSystemLang('g_ok'),
          cancelText: window.getSystemLang('g_cancel'),
@@ -105,15 +104,6 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                return prev;
             }, []);
             return result;
-         },
-         async getMultipleBrand() { //取多品牌資訊
-            return axios({
-               url: this.apiUrl.multipleBrand,
-               method: 'post',
-               data: {}
-            }).then(res => {
-               return parseInt(res.data.multiple_brand) === 1;
-            }).catch(err => true);
          },
          async getMemberSummary() { //取得會員摘要
             return await axios({
@@ -402,7 +392,6 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          this.bindModalEvent();
          this.initIosPicker();
          this.searchLoading = true;
-         this.isMultipleBrand = await this.getMultipleBrand().then(res => res);
          await this.doPointSlider();
       },
    });

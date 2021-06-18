@@ -23,7 +23,8 @@ Vue.component('term-popup', {
    },
    data() {
       return {
-         isReach: this.checked,
+         // isReach: this.checked,
+         isReach: true,
          agreeText: window.getSystemLang('memberregisterprivacy_b_agree')
       }
    },
@@ -33,7 +34,7 @@ Vue.component('term-popup', {
       },
       agreeHandler() {
          if (!this.isReach) return;
-         this.$emit('changechecked', { 
+         this.$emit('changechecked', {
             id: this.id,
          });
       },

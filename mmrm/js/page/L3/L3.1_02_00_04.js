@@ -7,16 +7,16 @@ export default function({ apiUrl, pageUrl }) {
          brandInfo: null,
          storeData: null,
          isLoading: false,
-         isMultipleBrand: true,
          apiUrl,
          pageUrl
       }),
       computed: {
-         bgImg() { //背景圖
-            if (this.couponInfo === null) return {};
-            let bgUrl = this.couponInfo.feature_image.url || '';
-            if (bgUrl !== '') return { backgroundImage: `url(${bgUrl})` };
-            else return {};
+         couponImg() { //背景圖
+            if (this.couponInfo === null) return '';
+            else return this.couponInfo.feature_image.url || '';
+         },
+         hasCouponImg() { //是否有背景圖
+            return this.couponImg !== '';
          },
          couponDesc() { //票券說明
             if (this.couponInfo === null) return '';
@@ -27,6 +27,10 @@ export default function({ apiUrl, pageUrl }) {
             let canText = window.getSystemLang('mycoupondetail_transferable');
             let noneText = window.getSystemLang('mycoupondetail_nontransferable');
             return this.couponInfo.can_transfer ? canText : noneText;
+         },
+         isAllBrand() { //是否為全品牌
+            if (this.couponInfo === null) return true;
+            return this.couponInfo.brand_ids.length === 0;
          },
          brandTitle() { //品牌名稱
             if (this.brandInfo === null) return '';
@@ -52,20 +56,6 @@ export default function({ apiUrl, pageUrl }) {
             let params = (new URL(document.location)).searchParams;
             let paramsValue = params.get(key) || 0;
             return parseInt(paramsValue);
-         },
-         scrollHandler() {
-            let el = this.$refs.inner;
-            let scrollPos = window.pageYOffset * 0.5;
-            el.style.transform = `translateY(${scrollPos}px)`;
-         },
-         async getMultipleBrand() { //取多品牌資訊
-            return axios({
-               url: this.apiUrl.multipleBrand,
-               method: 'post',
-               data: {}
-            }).then(res => {
-               return parseInt(res.data.multiple_brand) === 1;
-            }).catch(err => true);
          },
          async getCouponInfo() { //取得票券資料
             return await axios({
@@ -107,12 +97,12 @@ export default function({ apiUrl, pageUrl }) {
          }
        },
       async mounted() {
-         window.addEventListener('scroll', this.scrollHandler);
          this.couponId = this.getQuery('coupon_id');
          this.isLoading = true;
-         this.isMultipleBrand = await this.getMultipleBrand().then(res => res);
          this.couponInfo = await this.getCouponInfo().then(res => res[0]);
-         this.brandInfo = await this.getBrandInfo().then(res => res[0]);
+         if (!this.isAllBrand) {
+            this.brandInfo = await this.getBrandInfo().then(res => res[0]);
+         }
          this.storeData = await this.getAvailableStore().then(res => res[0]);
          this.isLoading = false;
       }

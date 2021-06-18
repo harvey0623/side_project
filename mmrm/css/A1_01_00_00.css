@@ -1,0 +1,40 @@
+.mycontainer {
+  padding-top: 0px;
+  padding-bottom: 85px;
+}
+
+.linkBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.linkBox > p {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  border-right: 1px solid #979797;
+}
+
+.linkBox > p:last-child {
+  border-right: none;
+}
+
+.linkBox > p > a {
+  color: #797979;
+}
+
+.btnBox.login {
+  margin-bottom: 40px;
+}
+
+.btnBox.levelUp {
+  position: fixed;
+  left: 0;
+  bottom: 20px;
+  width: 100%;
+  padding: 0 40px;
+  z-index: 10;
+}
+/*# sourceMappingURL=A1_01_00_00.css.map */

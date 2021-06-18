@@ -16,10 +16,6 @@ Vue.component('coupon-block', {
          type: Boolean,
          default: false
       },
-      multiplebrand: {
-         type: Boolean,
-         default: true
-      }
    },
    data: () => ({
       redeemCouponInfoAll: window.getSystemLang('couponactivitydetail_redeemcouponinfoallbrands'),
@@ -38,6 +34,9 @@ Vue.component('coupon-block', {
          if (bgUrl !== '') return { backgroundImage: `url(${bgUrl})` };
          else return {};
       },
+      isAllBrand() { //是否為全品牌
+         return this.info.brand_ids.length === 0;
+      },
       brandId() {
          return this.info.brand_ids[0];
       },
@@ -46,7 +45,7 @@ Vue.component('coupon-block', {
          return obj || null;
       },
       brandImage() {
-         if (this.brandDetail === null) return '';
+         if (this.brandDetail === null) return {};
          let imgUrl = this.brandDetail.feature_image_small.url;
          if (imgUrl !== null) return { backgroundImage: `url(${imgUrl})` };
          else return {};
@@ -76,7 +75,7 @@ Vue.component('coupon-block', {
          :href="pageLink" 
          class="couponBlock" :class="{reverse: reverse}">
          <div class="couponBlockL">
-            <div class="brandInfo" :class="{multiple:!multiplebrand}">
+            <div class="brandInfo" :class="{allBrand: isAllBrand}">
                <div class="brandLogo" :style="brandImage"></div>
                <span>{{ brandTitle }}</span>
             </div>

@@ -1,0 +1,45 @@
+.importantDay {
+  padding: 0 15px;
+}
+
+.friendBlock {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.friendBlock > * {
+  margin-bottom: 20px;
+}
+
+.friendBlock > *:last-child {
+  margin-bottom: 0;
+}
+
+.friendBlock > img {
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.friendBlock > .tipBox {
+  padding: 0 15px;
+}
+
+.friendBlock > .inputBlock {
+  position: relative;
+}
+
+.friendBlock > .inputBlock > p {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #292929;
+}
+
+.friendBlock > .inputBlock > input {
+  text-align: right;
+  padding-left: 90px;
+}
+/*# sourceMappingURL=A1_02_01_00.css.map */

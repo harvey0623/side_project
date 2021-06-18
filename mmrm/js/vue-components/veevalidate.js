@@ -65,6 +65,7 @@ VeeValidate.extend('birthday', {
       let today = new Date();
       today = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
       let birthday = new Date(value).getTime();
-      return birthday < today;
+      let minDate = new Date(1902, 0, 1);
+      return birthday >= minDate && birthday < today;
    }
 });

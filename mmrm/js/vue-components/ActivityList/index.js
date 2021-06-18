@@ -28,10 +28,6 @@ Vue.component('activity-list', {
          type: String,
          default: 'coupon'
       },
-      multiplebrand: {
-         type: Boolean,
-         default: true
-      }
    },
    data: () => ({
       isFinish: false,
@@ -161,7 +157,7 @@ Vue.component('activity-list', {
                </div>   
             </div>
             <div class="desc">
-               <div class="intro" :class="{multiple:!multiplebrand}">
+               <div class="intro">
                   <div class="brandBg" :style="brandImgUrl"></div>
                   <span class="brandTitle">{{ brandTitle }}</span>
                </div>

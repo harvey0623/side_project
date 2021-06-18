@@ -1,6 +1,6 @@
 :root {
-  --variationMain: #0088bb;
-  --variationSub: #4a4a4a;
+  --variationMain: #c5160f;
+  --variationSub: #292929;
   --variationAdorn: #f49f0a;
 }
 
@@ -74,7 +74,7 @@ a:focus {
   outline: none;
 }
 
-.menuBlock {
+#normalHeader, .menuBlock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -86,7 +86,7 @@ a:focus {
           align-items: center;
 }
 
-.sidebarFilter > li, .criteriaList > li, .sidebarPanel, .subMenu > .clearAll.between, .criteriaList > li > label, .pointContent > .summaryBox, .pointModal .otherBox {
+#memberHeader, .sidebarFilter > li, .criteriaList > li, .sidebarPanel, .subMenu > .clearAll.between, .criteriaList > li > label, .pointContent > .summaryBox, .pointModal .otherBox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -116,7 +116,8 @@ a:focus {
   clear: both;
 }
 
-.hookCheckbox, .popupHeader > .popupClose, .toggleSidebar, .emptyBlock > .emptyBg, .layoutBox > .layout, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .sidebarFilter > li > .dateOuter > .arrowBox, .filterItem > .arrowBox, .filterItem > .layout, .menuBlock .iconBg, .pointModal .closeBg, .selectBlock > .selectRow > .selectOuter > .downIcon {
+.hookCheckbox, .popupHeader > .popupClose, .toggleSidebar,
+.backHome, .emptyBlock > .emptyBg, .layoutBox > .layout, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .sidebarFilter > li > .dateOuter > .arrowBox, .filterItem > .arrowBox, .filterItem > .layout, .menuBlock .iconBg, .pointModal .closeBg, .selectBlock > .selectRow > .selectOuter > .downIcon {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -128,7 +129,7 @@ a:focus {
   line-height: initial;
   padding-left: 10px;
   padding-right: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
 }
 
@@ -157,7 +158,7 @@ textarea {
 .form-control {
   height: 45px;
   color: #797979;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #fff;
 }
 
@@ -212,6 +213,46 @@ textarea {
 
 .hookCheckbox:checked {
   background-image: url("../img/btn_filter_check_n_h@3x.png");
+}
+
+#normalHeader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 45px;
+  background-color: var(--variationSub);
+  z-index: 10;
+}
+
+#normalHeader > .logoBg {
+  width: 100px;
+  height: 30px;
+  background-image: url("../img/placeholder.jpg");
+}
+
+#memberHeader {
+  padding: 0 15px;
+  height: 45px;
+  background-color: var(--variationSub);
+}
+
+#memberHeader > .logout {
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/placeholder.jpg");
+}
+
+#memberHeader > .logoBg {
+  width: 100px;
+  height: 30px;
+  background-image: url("../img/placeholder.jpg");
+}
+
+#memberHeader > .memberBarcode {
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/placeholder.jpg");
 }
 
 body {
@@ -335,7 +376,8 @@ body.hide {
   cursor: pointer;
 }
 
-.toggleSidebar {
+.toggleSidebar,
+.backHome {
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -344,7 +386,11 @@ body.hide {
   border-radius: 50%;
   background-image: url("../img/btn_member_search_n_n@2x.png");
   cursor: pointer;
-  z-index: 1;
+  z-index: 9;
+}
+
+.backHome {
+  background-image: url("../img/btn_brand_pop_official_n@2x.png");
 }
 
 #maskCover {
@@ -367,7 +413,7 @@ body.hide {
   min-width: 100%;
   min-height: 45px;
   margin-bottom: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
 }
 
@@ -384,6 +430,12 @@ body.hide {
   color: #fff;
   border: none;
   background-color: var(--variationMain);
+}
+
+.btnBox > .variationSub {
+  color: #fff;
+  border: none;
+  background-color: var(--variationSub);
 }
 
 .emptyBlock {
@@ -561,7 +613,7 @@ body.hide {
 .dataBox > .dataBody {
   padding: 0px 0px 0 15px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .dataBox > .dataBody > .dataRow {
@@ -618,6 +670,10 @@ body.hide {
 
 .dataBox > .dataBody > .dataRow .sixInput {
   padding-left: 100px;
+}
+
+.dataBox > .dataBody > .dataRow .sevenInput {
+  padding-left: 110px;
 }
 
 .dataBox > .dataBody > .dataRow .eigthInput {
@@ -884,7 +940,7 @@ body.hide {
   margin-bottom: 20px;
   padding: 25px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -1010,6 +1066,11 @@ body.hide {
   opacity: 0;
 }
 
+.couponBlockL > .brandInfo.allBrand {
+  margin-bottom: 0;
+  opacity: 0;
+}
+
 .couponBlockL > .brandInfo > .brandLogo {
   width: 18px;
   height: 18px;
@@ -1100,7 +1161,7 @@ body.hide {
           align-items: center;
   margin-bottom: 20px;
   padding: 25px;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #fff;
 }
 
@@ -1123,6 +1184,10 @@ body.hide {
       -ms-flex: 1;
           flex: 1;
   padding-left: 20px;
+}
+
+.pointCard > .pointDesc.noPadding {
+  padding-left: 0;
 }
 
 .pointCard > .pointDesc > * {
@@ -1333,7 +1398,7 @@ body.hide {
 
 .pointModal .modal-content {
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   overflow: hidden;
 }
 

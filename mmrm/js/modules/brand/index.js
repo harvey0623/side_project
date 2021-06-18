@@ -129,7 +129,8 @@ function right_function(){
 	let block_width = $('#index').width() / 5 * 2;
 	$('.index_content').animate({scrollLeft:block_width},100,function(){
 		brand_paramenter.show = brand_paramenter.next;
-		brand(brand_paramenter);
+        brand(brand_paramenter);
+        $('#bottom .bot_btn').empty();
 		get_detail();
 	});
 	
@@ -141,7 +142,8 @@ function left_function(){
 	$('.index_content').css('overflow','hidden');
 	$('.index_content').animate({scrollLeft:0},100,function(){
 		brand_paramenter.show = brand_paramenter.pre;
-		brand(brand_paramenter);
+        brand(brand_paramenter);
+        $('#bottom .bot_btn').empty();
 		get_detail();
 	});
 }
@@ -292,16 +294,16 @@ function contact(){
 
 function service(){
 	for(i=0 ; i<brand_service.length ; i++){
-		let brand_service_func = '' ;
-		if(brand_service[i].trigger){
-			if(brand_service[i].trigger.style == 1){
+        let brand_service_func = '' ;
+		if(brand_service[i].key === 'link' && brand_link.display){
+			if(brand_service[i].style == 1){
+                $('#connectModal_1 .contactList').empty();
 				brand_service_func = 'data-toggle="modal" data-target="#connectModal_1"' ;
-				$('#connectModal_1 .contactList').empty();
-				for(j=0 ; j<brand_service[i].trigger.list.length ; j++ ){
+				for(j=0 ; j<brand_link.link_block.links.length; j++ ){
 					let other_link = 
 						'<li>' +
-							'<a href="'+brand_service[i].trigger.list[j].link+'">' +
-								'<div>'+brand_service[i].trigger.list[j].title+'</div>' +
+							'<a href="'+brand_link.link_block.links[j].hyperlink_url+'">' +
+								'<div>'+brand_link.link_block.links[j].title+'</div>' +
 							'</a>' +
 						'</li>' ;
 						
@@ -309,18 +311,18 @@ function service(){
 				}
 				let other_link = '<li><div class="cancel" data-dismiss="modal">取消</div></li>'
 				$('#connectModal_1 .contactList').append(other_link);
-			}else if(brand_service[i].trigger.style == 2){
+			}else if(brand_service[i].style == 2){
+                $('#connectModal_2 .contactList').empty();
 				brand_service_func = 'data-toggle="modal" data-target="#connectModal_2"' ;
-				$('#connectModal_2 .modal-body').empty();
-				for(j=0 ; j<brand_service[i].trigger.list.length ; j++ ){
+				for(j=0 ; j<brand_link.link_block.links.length; j++ ){
 					let other_link = 
 						'<div class="col-4 connect_block">' +
-							'<a href="'+brand_service[i].trigger.list[j].link+'">' +
+							'<a href="'+brand_link.link_block.links[j].hyperlink_url+'">' +
 								'<div class="connect_img">' +
-									'<img src="'+brand_service[i].trigger.list[j].img+'">' +
+									'<img src="'+brand_link.link_block.links[j].feature_image.url+'">' +
 								'</div>' +
 								'<div class="connect_text">' +
-									brand_service[i].trigger.list[j].title +
+                                brand_link.link_block.links[j].title +
 								'</div>' +
 							'</a>' +
 						'</div>' ;
@@ -328,20 +330,20 @@ function service(){
 					$('#connectModal_2 .modal-body').append(other_link);
 				}
 			}else{
-				// $('#connectModal_3 .con_body_blk').remove();
+				$('#connectModal_3 .con_body_blk').remove();
 				brand_service_func = 'data-toggle="connectModal_3"' ;
-				for(j=0 ; j<brand_service[i].trigger.list.length ; j++ ){
+				for(j=0 ; j<brand_link.link_block.links.length; j++ ){
 					let other_link = 
-					'<div class="con_body_blk" link="'+brand_service[i].trigger.list[j].link+'">' +
+					'<div class="con_body_blk" link="'+brand_link.link_block.links[j].hyperlink_url+'">' +
 			        	'<div class="con_body_blk_img">' +
-			        		'<img src="'+brand_service[i].trigger.list[j].img+'">' +
+			        		'<img src="'+brand_link.link_block.links[j].feature_image.url+'">' +
 			        	'</div>' +
 			        	'<div class="con_body_blk_content">' +
 			        		'<div class="con_body_blk_content_title">' +
-			        			brand_service[i].trigger.list[j].title +
+                            brand_link.link_block.links[j].title +
 			        		'</div>' +
 			        		'<div class="con_body_blk_content_text">' +
-			        			brand_service[i].trigger.list[j].text +
+                            brand_link.link_block.links[j].sub_title +
 			        		'</div>' +
 			        	'</div>' +
 			        	'<div class="con_link">' +
@@ -353,81 +355,105 @@ function service(){
 				}
 			}
 		}else if(brand_service[i].link){
-			brand_service_func = 'link="'+brand_service[i].link+'"' ;
-		}
+            if(brand_service[i]['key'] === 'store'){
+                brand_service_func = 'link="'+brand_service[i].link+'?ids='+brand_paramenter.show+'"';
+            }
+            else if(brand_service[i]['key'] === 'story' && brand_story.display){
+                brand_service_func = 'link="'+brand_service[i].link+'?book_id='+brand_story.brand_book_id+'"';
+            }
+            else{
+                brand_service_func = 'link="'+brand_service[i].link+'"' ;
+            }
+        }
 
-		if(i<4){
-			let brand_service_content = 
-				'<div class="bot_block bot_btn_blk"'+brand_service_func+'>' +
-					'<div class="bot_block_img">' +
-						'<img src="'+brand_service[i].img+'">' +
-					'</div>' +
-					'<div class="bot_block_content">' +
-						brand_service[i].name +
-					'</div>' +
-				'</div>';
-			$('#bottom .bot_btn').append(brand_service_content);
-		}else if(i == 4){
-			let brand_service_content = '' ;
-			if(brand_service.length > 5){
-				brand_service_content = 
-				'<div class="bot_block" data-toggle="modal" data-target="#moreModal">' +
-					'<div class="bot_block_img">' +
-						'<img src="/portal_assets/img/btn_brand_tabbar_more_n@3x.png">' +
-					'</div>' +
-					'<div class="bot_block_content">' +
-						'更多服務' +
-					'</div>' +
-				'</div>' ;
-				$('#bottom .bot_btn').append(brand_service_content);
-				brand_service_content = 
-					'<div class="col-4 connect_block bot_btn_blk" '+brand_service_func+'>' +
-						'<div class="connect_img">' +
-							'<img src="'+brand_service[i].img+'">' +
-						'</div>' +
-						'<div class="connect_text">' +
-							brand_service[i].name+
-						'</div>' +
-					'</div>';
-				$("#moreModal .modal-body").append(brand_service_content);
+        switch (brand_service[i].key) {
+            case 'link':
+                if(!brand_link.display){
+                    continue;
+                }
+                break;
+            case 'menu':
+                if(!brand_menu.display){
+                    continue;
+                }
+                break;
+            case 'story':
+                if(!brand_story.display){
+                    continue;
+                }
+                break;
+        }
+        console.log(brand_service[i]);
+        
+        if(brand_service[i]){
+            if(i<4){
+                let brand_service_content = 
+                    '<div class="bot_block bot_btn_blk"'+brand_service_func+'>' +
+                        '<div class="bot_block_img">' +
+                            '<img src="'+brand_service[i].img+'">' +
+                        '</div>' +
+                        '<div class="bot_block_content">' +
+                            brand_service[i].name +
+                        '</div>' +
+                    '</div>';
+                $('#bottom .bot_btn').append(brand_service_content);
+            }else if(i == 4){
+                let brand_service_content = '' ;
+                if(brand_service.length > 5){
+                    brand_service_content = 
+                    '<div class="bot_block" data-toggle="modal" data-target="#moreModal">' +
+                        '<div class="bot_block_img">' +
+                            '<img src="/portal_assets/img/btn_brand_tabbar_more_n@3x.png">' +
+                        '</div>' +
+                        '<div class="bot_block_content">' +
+                            '更多服務' +
+                        '</div>' +
+                    '</div>' ;
+                    $('#bottom .bot_btn').append(brand_service_content);
+                    brand_service_content = 
+                        '<div class="col-4 connect_block bot_btn_blk" '+brand_service_func+'>' +
+                            '<div class="connect_img">' +
+                                '<img src="'+brand_service[i].img+'">' +
+                            '</div>' +
+                            '<div class="connect_text">' +
+                                brand_service[i].name+
+                            '</div>' +
+                        '</div>';
+                    $("#moreModal .modal-body").append(brand_service_content);
+    
+                }else{
+                    brand_service_content = 
+                    '<div class="bot_block bot_btn_blk" '+brand_service_func+'>' +
+                        '<div class="bot_block_img">' +
+                            '<img src="'+brand_service[i].img+'">' +
+                        '</div>' +
+                        '<div class="bot_block_content">' +
+                            brand_service[i].name+
+                        '</div>' +
+                    '</div>';
+                    $('#bottom .bot_btn').append(brand_service_content);
+                }
+            }else{
+                let brand_service_content = 
+                    '<div class="col-4 connect_block bot_btn_blk" '+brand_service_func+'>' +
+                        '<div class="connect_img">' +
+                            '<img src="'+brand_service[i].img+'">' +
+                        '</div>' +
+                        '<div class="connect_text">' +
+                            brand_service[i].name+
+                        '</div>' +
+                    '</div>';
+                $("#moreModal .modal-body").append(brand_service_content);
+            }
+        }
 
-			}else{
-				brand_service_content = 
-				'<div class="bot_block bot_btn_blk" '+brand_service_func+'>' +
-					'<div class="bot_block_img">' +
-						'<img src="'+brand_service[i].img+'">' +
-					'</div>' +
-					'<div class="bot_block_content">' +
-						brand_service[i].name+
-					'</div>' +
-				'</div>';
-				$('#bottom .bot_btn').append(brand_service_content);
-			}
-		}else{
-			let brand_service_content = 
-				'<div class="col-4 connect_block bot_btn_blk" '+brand_service_func+'>' +
-					'<div class="connect_img">' +
-						'<img src="'+brand_service[i].img+'">' +
-					'</div>' +
-					'<div class="connect_text">' +
-						brand_service[i].name+
-					'</div>' +
-				'</div>';
-			$("#moreModal .modal-body").append(brand_service_content);
-		}
 	}
 	let window_width = $('body').width();
-
-	if(brand_service.length > 5){
-		$('.bot_block').width((window_width)/5);
-	}else{
-		$('.bot_block').width((window_width)/brand_service.length);
-	}
 
 	$('#bottom').on('click','.bot_btn_blk',function(){
 		let link = $(this).attr('link');
 		if(link){
-			window.location.href = link+brand_paramenter.show;
+			window.location.href = link;
 		}
 		
 	});
@@ -480,11 +506,14 @@ function do_ajax(){
 	    type : "get",
 	    async : true ,
 	    success : function(rtndata) {
-	    	console.log("rtndata",rtndata);
+            console.log("rtndata",rtndata);
 	    	brand_img = rtndata.brand_img ;
 	    	brand_summary = rtndata.brand_summary ;
+            brand_menu = rtndata.brand_menu ;
+            brand_link = rtndata.brand_link;
 	    	brand_store = rtndata.brand_store ;
-	    	brand_html = rtndata.brand_html ;
+            brand_html = rtndata.brand_html ;
+            brand_story = rtndata.brand_story ;
 	    	brand_news = rtndata.brand_news ;
 	    	brand_ticket = rtndata.brand_ticket ;
 	    	brand_point = rtndata.brand_point ;
@@ -492,7 +521,8 @@ function do_ajax(){
 	        img();
 	    	summary();
 	    	store();
-	    	html();
+            html();
+            service();
 	    	news();
 	    	ticket();
 	    	point();

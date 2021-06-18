@@ -15,10 +15,6 @@ Vue.component('coupon-block', {
       reverse: {
          type: Boolean,
          default: false
-      },
-      multiplebrand: {
-         type: Boolean,
-         default: true
       }
    },
    data() {
@@ -72,12 +68,16 @@ Vue.component('coupon-block', {
          if (this.couponInfo === null) return '';
          return this.couponInfo.brand_ids[0];
       },
+      isAllBrand() { //是否為全品牌
+         if (this.couponInfo === null) return true;
+         return this.couponInfo.brand_ids.length === 0;
+      },
       brandDetail() {
          let obj = this.brandlist.find(item => item.brand_id === this.brandId);
          return obj || null;
       },
       brandImage() {
-         if (this.brandDetail === null) return '';
+         if (this.brandDetail === null) return {};
          let imgUrl = this.brandDetail.feature_image_small.url;
          if (imgUrl !== null) return { backgroundImage: `url(${imgUrl})` };
          else return {};
@@ -127,7 +127,7 @@ Vue.component('coupon-block', {
          :href="pageLink" 
          class="couponBlock" :class="{reverse: reverse}">
          <div class="couponBlockL">
-            <div class="brandInfo" :class="{multiple:!multiplebrand}">
+            <div class="brandInfo" :class="{allBrand:isAllBrand}">
                <div class="brandLogo" :style="brandImage"></div>
                <span>{{ brandTitle }}</span>
             </div>

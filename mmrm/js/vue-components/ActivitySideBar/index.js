@@ -8,10 +8,6 @@ Vue.component('activity-sidebar', {
          type: Object,
          required: true
       },
-      multiplebrand: {
-         type: Boolean,
-         default: true
-      },
       layoutid: {
          type: String,
          default: true
@@ -287,7 +283,7 @@ Vue.component('activity-sidebar', {
             <div class="sureText" @click="confirmHandler">{{ sureText }}</div>
          </div>
          <ul class="sidebarFilter">
-            <li v-show="multiplebrand">
+            <li>
                <div class="filterTitle">{{ chooseBrand }}</div>
                <div class="filterItem" @click="showSubMenu('sub1')">
                   <span v-show="fullBrand">{{ allBrand }}</span>

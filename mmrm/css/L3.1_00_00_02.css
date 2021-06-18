@@ -35,13 +35,13 @@
 }
 
 .topBlock > .bgBlock, .topBlock > .bgBlock > .statusCover {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .topBlock.other > .bgBlock, .topBlock.other > .bgBlock > .statusCover, .topBlock.other > .bgBlock > .countdownBlock {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 #app {
@@ -103,7 +103,7 @@
 
 .activityList > li {
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-bottom: 20px;
 }
 

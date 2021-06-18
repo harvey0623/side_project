@@ -7,7 +7,6 @@ export default function ({ apiUrl, pageUrl }) {
          pointList: [],
          brandInfo: null,
          isLoading: false,
-         isMultipleBrand: true,
          user: { code: '' },
          errMsg: '',
          redeemType: {
@@ -81,11 +80,6 @@ export default function ({ apiUrl, pageUrl }) {
                this.$refs.form.reset();
                this.user.code = '';
             });
-         },
-         parallaxHandler() {
-            let el = this.$refs.inner;
-            let scrollPos = window.pageYOffset * 0.5;
-            el.style.transform = `translateY(${scrollPos}px)`;
          },
          getQuery(key) { //取得網址參數
             let params = (new URL(document.location)).searchParams;
@@ -203,10 +197,8 @@ export default function ({ apiUrl, pageUrl }) {
       },
       async mounted() {
          this.bindModalEvent();
-         window.addEventListener('scroll', this.parallaxHandler);
          this.isLoading = true;
 
-         this.isMultipleBrand = await this.getMultipleBrand().then(res => res);
          this.activityId = parseInt(this.getQuery('point_activity_id'));
          this.activityInfo = await this.getActivityInfo().then(res => res[0]);
          let { brand_id, obtain_points } = this.activityInfo;

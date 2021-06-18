@@ -7,13 +7,14 @@ Vue.component('point-item', {
    },
    data: () => ({
       transactionNumber: window.getSystemLang('point_txnid'),
-      pointTrading: window.getSystemLang('point_txndatetime')
+      pointTrading: window.getSystemLang('point_txndatetime'),
    }),
    computed: {
       amountText() {
+         let unit = window.getSystemLang('point_negativeamount');
          let amount = this.detail.amount;
-         if (amount.includes('-')) return amount;
-         else return '+' + amount;
+         amount = amount.includes('-') ? amount : `+${amount}`;
+         return vsprintf(unit, [amount]);
       }
    },
    methods: {
@@ -25,7 +26,7 @@ Vue.component('point-item', {
       <div class="pointContent" @click="clickHandler">
          <div class="summaryBox">
             <div class="typeText">{{ detail.transaction_type }}</div>
-            <div class="payment">{{ amountText }} 元</div>
+            <div class="payment">{{ amountText }}</div>
          </div>
          <ul class="invoiceInfo">
             <li class="invoiceRow">

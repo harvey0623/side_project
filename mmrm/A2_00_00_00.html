@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>會員專區</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="">
+	<meta name="login_url" content="">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/mobileSelect/index.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_00_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="./lib/mobileSelect/index.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<header id="memberHeader">
+			<div class="logout"></div>
+			<a href="javascript:;" class="logoBg"></a>
+			<a :href="pageUrl.memberBarcode" class="memberBarcode"></a>
+		</header>
+		<div class="profileBlock">
+			<div class="avatarBox" @click="takePicture">
+				<input type="file" ref="file" accept="image/*" hidden>
+			</div>
+			<div class="nameBox">
+				<p>{{ 'harvey' }}</p>
+				<a :href="pageUrl.maintain">會員資料維護</a>
+			</div>
+		</div>
+		<div class="linkBlock">
+			<a :href="pageUrl.transaction" class="linkItem">
+				<div class="icon"></div>
+				<p class="title">消費紀錄</p>
+			</a>
+			<a :href="pageUrl.point" class="linkItem">
+				<div class="icon"></div>
+				<p class="title">我的點數</p>
+				<span class="count">1000 點</span>
+			</a>
+			<a :href="pageUrl.coupon" class="linkItem">
+				<div class="icon"></div>
+				<p class="title">我的票券</p>
+				<span class="count">3 點</span>
+			</a>
+			<a :href="pageUrl.friend" class="linkItem">
+				<div class="icon"></div>
+				<p class="title">好友推薦</p>
+			</a>
+		</div>
+
+		<div id="iosPicker"></div>
+
+		<div id="loading" v-show="isLoading"></div>
+
+		<a :href="pageUrl.home" class="backHome"></a>
+
+	</div>
+
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+	<script type="module">
+		import app from './js/page/L2/A2_00_00_00.js';
+		app({
+			apiUrl: {
+				memberSummary: '',
+				couponList: ''
+			},
+			pageUrl: {
+				home: './A0_00_00_00.html',
+				memberBarcode: '',
+				maintain: '',
+				transaction: '',
+				point: '',
+				coupon: '',
+				friend: '',
+			}
+		});
+	</script>
+</body>
+
+</html>

@@ -38,8 +38,8 @@ Vue.component('point-card', {
    },
    template: `
       <div class="pointCard">
-         <div class="pointBg" :style="pointBg"></div>
-         <div class="pointDesc">
+         <div class="pointBg" :style="pointBg" v-show="imgurl"></div>
+         <div class="pointDesc" :class="{noPadding: imgurl === null}">
             <p class="pointTitle">{{ title }}</p>
             <div class="pointAmount">
                <span class="number">{{ point }}</span>

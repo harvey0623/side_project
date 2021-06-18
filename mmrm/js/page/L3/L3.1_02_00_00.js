@@ -12,7 +12,6 @@ export default function ({ apiUrl, pageUrl }) {
          isLoading: false,
          mobileSelect: null,
          usePoint: null,
-         isMultipleBrand: true,
          user: { code: '' },
          errMsg: '',
          apiUrl,
@@ -33,11 +32,12 @@ export default function ({ apiUrl, pageUrl }) {
          pointMsg: window.getSystemLang('couponactivityredeem_pointmsg')
       }),
       computed: {
-         bgImg() { //背景圖
-            if (this.activityInfo === null) return {};
-            let bgUrl = this.activityInfo.feature_image.url || '';
-            if (bgUrl !== '') return { backgroundImage: `url(${bgUrl})` };
-            else return {};
+         couponImg() { //活動票券背景圖
+            if (this.activityInfo === null) return '';
+            else return this.activityInfo.feature_image.url;
+         },
+         hasCouponImg() { //是否有活動票券背景圖
+            return this.couponImg !== '';
          },
          activityTitle() {
             if (this.activityInfo === null) return '';
@@ -104,11 +104,6 @@ export default function ({ apiUrl, pageUrl }) {
                this.user.code = '';
             });
          },
-         scrollHandler() {
-            let el = this.$refs.inner;
-            let scrollPos = window.pageYOffset * 0.5;
-            el.style.transform = `translateY(${scrollPos}px)`;
-         },
          getQuery(key) { //取得網址參數
             let params = (new URL(document.location)).searchParams;
             let paramsValue = params.get(key) || 0;
@@ -132,15 +127,6 @@ export default function ({ apiUrl, pageUrl }) {
          reWriteHandler() { //重新填寫代碼
             $('#redeemModal').modal('show');
             $('#redeemFailModal').modal('hide');
-         },
-         async getMultipleBrand() { //取多品牌資訊
-            return axios({
-               url: this.apiUrl.multipleBrand,
-               method: 'post',
-               data: {}
-            }).then(res => {
-               return parseInt(res.data.multiple_brand) === 1;
-            }).catch(err => true);
          },
          async getActivityInfo() { //取得票券活動列表
             return await axios({
@@ -245,13 +231,6 @@ export default function ({ apiUrl, pageUrl }) {
                }, []);
                result = result.concat(conditionArr);
             });
-            // result.push({
-            //    id: 999,
-            //    title: '外部點數',
-            //    value: '外部點數3點',
-            //    amount: 3,
-            //    category: 'external_point_condition'
-            // });
             return result;
          },
          initIosPicker() { //初使iso picker
@@ -337,17 +316,17 @@ export default function ({ apiUrl, pageUrl }) {
       },
       async mounted() {
          this.bindModalEvent();
-         window.addEventListener('scroll', this.scrollHandler);
          this.isLoading = true;
 
-         this.isMultipleBrand = await this.getMultipleBrand().then(res => res);
          this.activityId = parseInt(this.getQuery('coupon_activity_id'));
          this.activityInfo = await this.getActivityInfo().then(res => res[0]);
          let { brand_id, coupon_ids } = this.activityInfo;
          this.brandInfo = await this.getBrandInfo([brand_id]).then(res => res[0]);
          let couponInfoData = await this.getCouponInfo(coupon_ids).then(res => res);
          let brandIdArr = this.getBrandArr(couponInfoData);
-         this.brandList = await this.getBrandInfo(brandIdArr).then(res => res);
+         if (brandIdArr.length !== 0) {
+            this.brandList = await this.getBrandInfo(brandIdArr).then(res => res);
+         }
          let storeData = await this.getAvailableStore(coupon_ids).then(res => res);
          this.couponBlock = this.mergeCouponAndStore(couponInfoData, storeData);
 

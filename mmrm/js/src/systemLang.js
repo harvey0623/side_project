@@ -18,7 +18,7 @@ window.systemLang = {
    g_enddatethanstartdate: '結束日期需比開始日期晚',
    g_datebetween: '查詢日期需介在<br>%s~%s',
    g_search: '搜尋',
-   g_birthday: '生日日期不能大於今天',
+   g_birthday: '出生日期範圍錯誤，請重新輸入',
 
    //===privacy
    memberregisterprivacy_b_agree: '我已閱讀完並同意條款',
@@ -54,6 +54,7 @@ window.systemLang = {
    point_txndatetime: '點數交易',
    mypointdetail_searchstartdatetime: '查詢開始日期',
    mypointdetail_searchenddatetime: '查詢結束日期',
+   point_negativeamount: '%s 點',
    
    //===transaction
    txnrecord_entriestitle: '消費品項',

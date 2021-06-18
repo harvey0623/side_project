@@ -1,0 +1,104 @@
+.utilityBlock > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profileBlock > .greetBox, .utilityItem > .inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+#app {
+  padding-top: 45px;
+}
+
+.profileBlock {
+  position: relative;
+  min-height: 250px;
+  background-color: gray;
+}
+
+.profileBlock > .greetBox {
+  color: #fff;
+  text-align: center;
+}
+
+.profileBlock > .greetBox > .avatar {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+  border-radius: 50%;
+  background-image: url("../img/logo@2x.png");
+  background-size: contain;
+}
+
+.utilityBlock {
+  padding: 15px;
+}
+
+.utilityItem {
+  position: relative;
+  width: 31%;
+  padding-top: 31%;
+  border-radius: 5px;
+  border: 1px solid #C9C9C9;
+}
+
+.utilityItem > .inner {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.topMember {
+  margin-bottom: 10px;
+}
+
+.topMember .title {
+  margin-bottom: 5px;
+  color: #292929;
+  font-size: 16px;
+}
+
+.topMember .itemName {
+  color: var(--variationMain);
+  font-size: 15px;
+}
+
+.topMember .itemName > .count {
+  font-size: 24px;
+  line-height: initial;
+}
+
+.bottomMember .iconBox {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 7px;
+  background-size: contain;
+}
+
+.bottomMember .iconBox.gift {
+  background-image: url("../img/logo@2x.png");
+}
+
+.bottomMember .iconBox.point {
+  background-image: url("../img/logo@2x.png");
+}
+
+.bottomMember .iconBox.member {
+  background-image: url("../img/logo@2x.png");
+}
+
+.bottomMember .itemName {
+  color: #292929;
+}
+/*# sourceMappingURL=A0_00_00_00.css.map */

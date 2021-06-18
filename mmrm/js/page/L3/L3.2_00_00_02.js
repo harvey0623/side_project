@@ -18,7 +18,6 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          systemTime: '',
          projectTime,
          activityParams: null,
-         isMultipleBrand: true,
          user: { code: '' },
 			modalTitle: { free: '', point: '', errMsg: '' },
          tempParams: { id: '', type: '', pointId: '' },
@@ -244,7 +243,6 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
       async mounted() {
          this.searchLoading = true;
          this.bindModalEvent();
-         this.isMultipleBrand = await this.getMultipleBrand().then(res => res);
       }
    });
 }

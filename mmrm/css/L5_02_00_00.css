@@ -188,6 +188,8 @@ window{
   width:100%;
 }
 .bot_btn{
+  display: flex;
+  justify-content: space-around;
   background-color: var(--variationMain);
   padding-top:6px;
   padding-bottom:2px;
@@ -195,7 +197,6 @@ window{
 .bot_block{
   text-align: center;
   color:#fff;
-  display:inline-block;
 }
 .bot_block_img{
   width:50%;

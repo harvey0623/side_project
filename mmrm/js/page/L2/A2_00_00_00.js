@@ -29,12 +29,16 @@ export default function ({ apiUrl, pageUrl }) {
                }],
                callback: (index, data) => {
                   let info = data[0];
-                  
+                  console.log('aaa')
+                  this.$refs.file.click();
                }
             });
          },
          takePicture() {
             mobileSelect.show();
+         },
+         changeHandler() {
+           
          }
       },
       async mounted() {

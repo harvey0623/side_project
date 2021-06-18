@@ -37,7 +37,7 @@
 		</header>
 		<div class="profileBlock">
 			<div class="avatarBox" @click="takePicture">
-				<input type="file" ref="file" accept="image/*" hidden>
+				<input type="file" ref="file" accept="image/*" capture hidden @change="changeHandler">
 			</div>
 			<div class="nameBox">
 				<p>{{ 'harvey' }}</p>

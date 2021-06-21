@@ -79,8 +79,9 @@
 					this.isCopy = true;
 					this.$refs.copyInput.select();
 					document.execCommand('copy');
-					window.getSelection().removeAllRanges();
+					alert('copy')
 					setTimeout(() => {
+						window.getSelection().removeAllRanges();
 						this.isCopy = false;
 					}, 2000);
 				},

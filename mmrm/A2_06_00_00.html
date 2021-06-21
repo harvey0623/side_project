@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>好友推薦</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="">
+	<meta name="login_url" content="">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_06_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<div id="logoBox">
+				<img src="./img/img_common_form_logo_n@3x.png">
+			</div>
+			<validation-observer tag="div" class="formLayout" ref="form">
+				<div class="formRow">
+					<p class="formTitle">我的邀請碼</p>
+					<validation-provider 
+						tag="div" 
+						class="formContent" 
+						rules="required"
+						v-slot="{ errors, failed }">
+						<input 
+							type="text"
+							class="form-control pwInput fiveInput"
+							placeholder="輸入邀請碼"
+							ref="copyInput"
+							v-model.trim="user.code">
+						<div class="visibleBox" @click="copyHandler"></div>
+						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+					</validation-provider>
+				</div>
+			</validation-observer>
+			<div class="tipBox">邀請好友下載 APP 加入會員並輸入您的邀請碼。</div>
+			<div class="btnBox inviteBox">
+				<button @click="shareHandler" class="variation">分享邀請碼</button>
+			</div>
+		</div>
+
+		<transition mode="out-in" name="fade">
+			<div class="copyTip" v-show="isCopy">已複製邀請碼</div>
+		</transition>
+
+	</div>
+
+	<script type="module">
+		new Vue({
+			el: '#app',
+			data: () => ({
+				isCopy: false,
+				user: {
+					code: ''
+				},
+			}),
+			methods: {
+				async copyHandler() {
+					let isValid = await this.$refs.form.validate();
+					if (!isValid) return;
+					if (this.isCopy) return;
+					this.isCopy = true;
+					this.$refs.copyInput.select();
+					document.execCommand('copy');
+					window.getSelection().removeAllRanges();
+					setTimeout(() => {
+						this.isCopy = false;
+					}, 2000);
+				},
+				async shareHandler() {
+					let isValid = await this.$refs.form.validate();
+					if (!isValid) return;
+					let text = `Hi !好朋友 \n下載王品瘋美食APP\n[wwww.wowfoods.cc/mgm]\n輸入我的好友推薦碼\n[${this.user.code}]，跟我一起享受美食吧`;
+					let url = `line://msg/text/${encodeURIComponent(text)}`;
+					location.href = url;
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

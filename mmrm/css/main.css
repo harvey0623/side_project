@@ -953,6 +953,18 @@ body.hide {
   color: #292929;
 }
 
+.pointContent > .summaryBox > .payment:after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  background-image: url("../img/logo@2x.png");
+  background-size: contain;
+  -webkit-transform: translateY(4px);
+          transform: translateY(4px);
+}
+
 .pointContent > .invoiceInfo > .invoiceRow {
   display: -webkit-box;
   display: -ms-flexbox;

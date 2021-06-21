@@ -1,0 +1,150 @@
+.pointIntro {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.expireBox > .inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.expireBox > .inner .pointArrow, .noRecord > .pigBg,
+.noRecord > .searchBg {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.fixBox {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: var(--variationSub);
+  color: #fff;
+  z-index: 3;
+}
+
+.pointIntro {
+  height: 90px;
+}
+
+.pointIntro > .pointTotal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.pointIntro > .pointTotal > .icon {
+  width: 25px;
+  height: 25px;
+  background-image: url("../img/logo@2x.png");
+  background-size: contain;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.pointIntro > .pointTotal > .count {
+  margin-left: 10px;
+  margin-right: 5px;
+  font-size: 30px;
+}
+
+.expireBox {
+  height: 45px;
+  padding: 0 20px;
+}
+
+.expireBox > .inner {
+  height: 100%;
+  border-top: 1px solid #979797;
+}
+
+.expireBox > .inner .pointArrow {
+  width: 15px;
+  height: 15px;
+  background-image: url("../img/btn_point_indicatorright_n_n@2x.png");
+  -webkit-transform: translateY(2.5px);
+          transform: translateY(2.5px);
+}
+
+.pointTab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.pointTab > div {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 2px solid #fff;
+  color: #292929;
+}
+
+.pointTab > div.active {
+  border-bottom-color: var(--variationMain);
+  color: var(--variationMain);
+}
+
+.contentBox {
+  padding-top: 180px;
+  padding-bottom: 45px;
+}
+
+.toggleSidebar {
+  bottom: 60px;
+}
+
+.noRecord {
+  padding: 50px 20px 0;
+}
+
+.noRecord > .pigBg,
+.noRecord > .searchBg {
+  margin: 0 auto 40px;
+}
+
+.noRecord > .pigBg {
+  width: 80px;
+  height: 90px;
+  background-image: url("../img/img_member_pointhistory_empty_n@2x.png");
+}
+
+.noRecord > .searchBg {
+  width: 90px;
+  height: 90px;
+  background-image: url("../img/img_common_search_empty_n@2x.png");
+}
+
+.noRecord > .tipBox {
+  margin-bottom: 0;
+}
+
+.pagTip {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+/*# sourceMappingURL=A2_01_01_00.css.map */

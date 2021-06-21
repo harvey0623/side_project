@@ -1,0 +1,48 @@
+#app {
+  padding-top: 45px;
+}
+
+.mycontainer {
+  padding-top: 0px;
+  padding-bottom: 85px;
+}
+
+.formLayout {
+  margin-bottom: 20px;
+}
+
+.inviteBox {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  width: 100%;
+  height: 45px;
+}
+
+.inviteBox > button {
+  border-radius: 0;
+}
+
+.visibleBox {
+  background-image: url("../img/btn_common_password_visible_h.png");
+  background-size: contain;
+}
+
+.tipBox {
+  padding-left: 15px;
+  padding-right: 10px;
+}
+
+.copyTip {
+  position: fixed;
+  left: 50%;
+  bottom: 70px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  padding: 4px 15px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #494949;
+}
+/*# sourceMappingURL=A2_06_00_00.css.map */

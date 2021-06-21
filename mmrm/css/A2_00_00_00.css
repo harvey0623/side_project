@@ -47,12 +47,12 @@
   line-height: initial;
 }
 
-.nameBox > a {
+.nameBox > div {
   color: #fff;
   display: inline-block;
 }
 
-.nameBox > a:after {
+.nameBox > div:after {
   content: '';
   display: inline-block;
   width: 18px;

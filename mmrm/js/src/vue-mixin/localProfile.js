@@ -18,7 +18,11 @@ window.localProfile = {
          let sotrage = localStorage.getItem('member_profile');
          let profile = sotrage !== null ? JSON.parse(storage) : null;
          this.profile.name = profile !== null ? profile.name : '';
-         this.profile.avatar = profile !== null ?  profile.photo.url : '';
+         if (profile === null || profile.photo === undefined) {
+            this.profile.avatar = '';
+         } else {
+            this.profile.avatar = profile.photo.url;
+         }
       }
    }
 } 

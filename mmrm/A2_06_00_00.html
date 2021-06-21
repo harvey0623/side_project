@@ -23,6 +23,7 @@
 	<script src="./js/vue-components/veevalidate.js"></script>
 	<script src="./js/src/wm_aes.js"></script>
 	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 </head>
 
 <body>
@@ -50,7 +51,7 @@
 				</div>
 			</validation-observer>
 			<input type="text" ref="copyInput" v-model.tirm="user.code" disabled>
-			<button @click="copyHandler">copy</button>
+			<button id="test">copy</button>
 			<div class="tipBox">邀請好友下載 APP 加入會員並輸入您的邀請碼。</div>
 			<div class="btnBox inviteBox">
 				<button @click="shareHandler" class="variation">分享邀請碼</button>
@@ -92,6 +93,13 @@
 					let url = `line://msg/text/${encodeURIComponent(text)}`;
 					location.href = url;
 				}
+			},
+			mounted() {
+				new ClipboardJS('#test', {
+					text: (trigger) => {
+						return this.user.code
+					}
+				});
 			}
 		});
 	</script>

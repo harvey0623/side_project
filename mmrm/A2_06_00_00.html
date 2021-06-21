@@ -44,12 +44,13 @@
 							class="form-control pwInput fiveInput"
 							placeholder="輸入邀請碼"
 							v-model.trim="user.code">
-						<div class="visibleBox" @click="copyHandler"></div>
+						<div class="visibleBox"></div>
 						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
 					</validation-provider>
 				</div>
 			</validation-observer>
-			<input type="text" ref="copyInput" v-model="user.code" disabled>
+			<input type="text" ref="copyInput" v-model.tirm="user.code" disabled>
+			<button @click="copyHandler">copy</button>
 			<div class="tipBox">邀請好友下載 APP 加入會員並輸入您的邀請碼。</div>
 			<div class="btnBox inviteBox">
 				<button @click="shareHandler" class="variation">分享邀請碼</button>

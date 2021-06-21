@@ -95,7 +95,7 @@
 				}
 			},
 			mounted() {
-				new ClipboardJS('#test', {
+				new ClipboardJS('.visibleBox', {
 					text: (trigger) => {
 						return this.user.code
 					}

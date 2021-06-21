@@ -43,13 +43,13 @@
 							type="text"
 							class="form-control pwInput fiveInput"
 							placeholder="輸入邀請碼"
-							ref="copyInput"
 							v-model.trim="user.code">
 						<div class="visibleBox" @click="copyHandler"></div>
 						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
 					</validation-provider>
 				</div>
 			</validation-observer>
+			<input type="text" ref="copyInput" v-model="user.code" disabled>
 			<div class="tipBox">邀請好友下載 APP 加入會員並輸入您的邀請碼。</div>
 			<div class="btnBox inviteBox">
 				<button @click="shareHandler" class="variation">分享邀請碼</button>
@@ -79,7 +79,6 @@
 					this.isCopy = true;
 					this.$refs.copyInput.select();
 					document.execCommand('copy');
-					alert('copy')
 					setTimeout(() => {
 						window.getSelection().removeAllRanges();
 						this.isCopy = false;
@@ -88,7 +87,7 @@
 				async shareHandler() {
 					let isValid = await this.$refs.form.validate();
 					if (!isValid) return;
-					let text = `Hi !好朋友 \n下載王品瘋美食APP\n[wwww.wowfoods.cc/mgm]\n輸入我的好友推薦碼\n[${this.user.code}]，跟我一起享受美食吧`;
+					let text = `Hi ! 好朋友 \n下載王品瘋美食APP\n[wwww.wowfoods.cc/mgm]\n輸入我的好友推薦碼\n[${this.user.code}]，跟我一起享受美食吧`;
 					let url = `line://msg/text/${encodeURIComponent(text)}`;
 					location.href = url;
 				}

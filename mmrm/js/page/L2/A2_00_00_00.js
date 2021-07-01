@@ -117,9 +117,10 @@ export default function ({ apiUrl, pageUrl }) {
                this.resetInput();
                return 
             }
-            this.isLoading = true;
-            fileReader.readAsDataURL(file);
-            this.resetInput();
+            console.log('upload');
+            // this.isLoading = true;
+            // fileReader.readAsDataURL(file);
+            // this.resetInput();
          },
          async getBase64(evt) {
             let base64 = evt.target.result;

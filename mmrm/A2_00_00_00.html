@@ -26,6 +26,7 @@
 	<script src="./js/src/wm_aes.js"></script>
 	<script src="./js/src/mmrmAxios.js"></script>
 	<script src="./lib/mobileSelect/index.js"></script>
+	<script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script>
 </head>
 
 <body>
@@ -139,6 +140,7 @@
 	<script src="./js/src/vue-mixin/localProfile.js"></script>
 	<script type="module">
 		import app from './js/page/L2/A2_00_00_00.js';
+		var vConsole = new window.VConsole();
 		app({
 			apiUrl: {
 				logout: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/logout',

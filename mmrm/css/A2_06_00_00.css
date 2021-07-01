@@ -25,6 +25,7 @@
       -ms-flex-align: center;
           align-items: center;
   padding: 0 10px;
+  margin-bottom: 0;
   background-color: #fff;
   border-radius: 5px;
 }
@@ -47,8 +48,8 @@
 }
 
 .formLayout > .formRow > .copyBox {
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   background-image: url("../img/btn_common_password_visible_h.png");
 }
 

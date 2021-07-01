@@ -41,15 +41,14 @@
 							type="text"
 							class="form-control"
 							placeholder="輸入邀請碼"
-							@keyup="checkHandler"
+							@input="checkHandler"
 							@blur="checkHandler"
 							v-model.trim="user.code">
 						</div>
-					<div class="copyBox" id="copyBox" @click="clickHandler"></div>
+					<div class="copyBox" id="copyBox" @click="copyHandler"></div>
 				</div>
 				<p class="errMsg" v-show="isEmpty">必填</p>
 			</div>
-			<button id="btn">copy</button>
 			<div class="tipBox">邀請好友下載 APP 加入會員並輸入您的邀請碼。</div>
 			<div class="btnBox inviteBox">
 				<button @click="shareHandler" class="variation">分享邀請碼</button>

@@ -22,11 +22,11 @@ export default function ({ apiUrl, pageUrl }) {
                }, 2000);
             });
          },
+         copyHandler() {
+            
+         },
          checkHandler() {
             this.isEmpty = this.user.code === '';
-         },
-         clickHandler() {
-            console.log('aaaa')
          },
          shareHandler() {
             this.checkHandler();
@@ -41,4 +41,3 @@ export default function ({ apiUrl, pageUrl }) {
       }
    });
 }
-

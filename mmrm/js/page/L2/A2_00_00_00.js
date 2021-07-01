@@ -117,14 +117,14 @@ export default function ({ apiUrl, pageUrl }) {
                this.resetInput();
                return 
             }
-            console.log('upload2');
+            console.log('upload1');
             this.isLoading = true;
             fileReader.readAsDataURL(file);
-            // this.resetInput();
+            this.resetInput();
          },
          async getBase64(evt) {
             let base64 = evt.target.result;
-            console.log(base64);
+            // console.log(base64);
             // this.profile.avatar = await this.updateMemberPhoto(base64);
             // let memberProfile = await this.getMemberProfile();
             // localStorage.setItem('member_profile', JSON.stringify(memberProfile));

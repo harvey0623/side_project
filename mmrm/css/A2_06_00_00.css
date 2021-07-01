@@ -1,3 +1,9 @@
+.formLayout > .formRow > .copyBox {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 #app {
   padding-top: 45px;
 }
@@ -9,6 +15,47 @@
 
 .formLayout {
   margin-bottom: 20px;
+}
+
+.formLayout > .formRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 10px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.formLayout > .formRow > .inviteTitle {
+  width: 75px;
+  color: #292929;
+}
+
+.formLayout > .formRow > .inputContent {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.formLayout > .formRow > .inputContent > input {
+  padding-right: 10px;
+  text-align: right;
+  border: none;
+}
+
+.formLayout > .formRow > .copyBox {
+  width: 22px;
+  height: 22px;
+  background-image: url("../img/btn_common_password_visible_h.png");
+}
+
+.formLayout > .errMsg {
+  margin-top: 0;
+  padding-right: 10px;
+  text-align: right;
 }
 
 .inviteBox {
@@ -24,13 +71,8 @@
   border-radius: 0;
 }
 
-.visibleBox {
-  background-image: url("../img/btn_common_password_visible_h.png");
-  background-size: contain;
-}
-
 .tipBox {
-  padding-left: 15px;
+  padding-left: 10px;
   padding-right: 10px;
 }
 
@@ -50,8 +92,8 @@
   background-color: #494949;
   opacity: 0;
   pointer-events: none;
-  -webkit-transition: opacity 0.2s;
-  transition: opacity 0.2s;
+  -webkit-transition: opacity 0.25s;
+  transition: opacity 0.25s;
 }
 
 .copyTip.active {

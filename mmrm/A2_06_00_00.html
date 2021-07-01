@@ -34,21 +34,19 @@
 			</div>
 			<validation-observer tag="div" class="formLayout" ref="form">
 				<div class="formRow">
-					<p class="formTitle">我的邀請碼</p>
-					<validation-provider 
-						tag="div" 
-						class="formContent" 
-						rules="required"
-						v-slot="{ errors, failed }">
-						<input 
+					<p class="inviteTitle">我的邀請碼</p>
+					<div class="inputContent">
+						<input
 							type="text"
-							class="form-control pwInput fiveInput"
+							class="form-control"
 							placeholder="輸入邀請碼"
+							@keyup="checkHandler"
+							@blur="checkHandler"
 							v-model.trim="user.code">
-						<div class="visibleBox" id="visibleBox"></div>
-						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
-					</validation-provider>
+						</div>
+					<div class="copyBox" id="copyBox"></div>
 				</div>
+				<p class="errMsg" v-show="isEmpty">必填</p>
 			</validation-observer>
 			<div class="tipBox">邀請好友下載 APP 加入會員並輸入您的邀請碼。</div>
 			<div class="btnBox inviteBox">

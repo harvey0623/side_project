@@ -32,7 +32,7 @@
 			<div id="logoBox">
 				<img src="./img/img_common_form_logo_n@3x.png">
 			</div>
-			<validation-observer tag="div" class="formLayout" ref="form">
+			<div class="formLayout">
 				<div class="formRow">
 					<p class="inviteTitle">我的邀請碼</p>
 					<div class="inputContent">
@@ -47,7 +47,7 @@
 					<div class="copyBox" id="copyBox"></div>
 				</div>
 				<p class="errMsg" v-show="isEmpty">必填</p>
-			</validation-observer>
+			</div>
 			<div class="tipBox">邀請好友下載 APP 加入會員並輸入您的邀請碼。</div>
 			<div class="btnBox inviteBox">
 				<button @click="shareHandler" class="variation">分享邀請碼</button>

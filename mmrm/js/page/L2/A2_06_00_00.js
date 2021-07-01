@@ -25,6 +25,9 @@ export default function ({ apiUrl, pageUrl }) {
          checkHandler() {
             this.isEmpty = this.user.code === '';
          },
+         clickHandler() {
+            console.log('aaaa')
+         },
          shareHandler() {
             this.checkHandler();
             if (this.isEmpty) return;

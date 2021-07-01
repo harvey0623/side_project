@@ -45,7 +45,7 @@
 							@blur="checkHandler"
 							v-model.trim="user.code">
 						</div>
-					<div class="copyBox" id="copyBox"></div>
+					<div class="copyBox" id="copyBox" @click="clickHandler"></div>
 				</div>
 				<p class="errMsg" v-show="isEmpty">必填</p>
 			</div>

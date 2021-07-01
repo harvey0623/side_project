@@ -11,7 +11,7 @@ export default function ({ apiUrl, pageUrl }) {
       }),
       methods: {
          initClipboard() {
-            clipboard = new ClipboardJS('#btn', {
+            clipboard = new ClipboardJS('#copyBox', {
                text: () => this.user.code
             });
             clipboard.on('success', (e) => {

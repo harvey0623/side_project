@@ -1,5 +1,6 @@
 export default function ({ apiUrl, pageUrl }) {
    let clipboard = null;
+   console.log('ok');
    new Vue({
       el: '#app',
       data: () => ({

@@ -117,7 +117,6 @@ export default function ({ apiUrl, pageUrl }) {
                this.resetInput();
                return 
             }
-            console.log('upload');
             this.isLoading = true;
             fileReader.readAsDataURL(file);
          },

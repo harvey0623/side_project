@@ -23,7 +23,7 @@
 	<script src="./js/vue-components/veevalidate.js"></script>
 	<script src="./js/src/wm_aes.js"></script>
 	<script src="./js/src/mmrmAxios.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+	<script src="./lib/clipboard/clipboard.min.js"></script>
 </head>
 
 <body>
@@ -45,7 +45,7 @@
 							class="form-control pwInput fiveInput"
 							placeholder="輸入邀請碼"
 							v-model.trim="user.code">
-						<div class="visibleBox" @click="test"></div>
+						<div class="visibleBox" id="visibleBox"></div>
 						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
 					</validation-provider>
 				</div>
@@ -63,44 +63,15 @@
 	</div>
 
 	<script type="module">
-		let clipboard  = null;
-		new Vue({
-			el: '#app',
-			data: () => ({
-				isCopy: false,
-				user: {
-					code: ''
-				},
-			}),
-			methods: {
-				initClipboard() {
-					clipboard = new ClipboardJS('.visibleBox', {
-						text: () => this.user.code
-					});
-					clipboard.on('success', (e) => {
-						this.isCopy = true;
-						e.clearSelection();
-						setTimeout(() => {
-							this.isCopy = false;
-						}, 1500);
-					});
-				},
-				async shareHandler() {
-					let isValid = await this.$refs.form.validate();
-					if (!isValid) return;
-					let text = `Hi ! 好朋友 \n下載王品瘋美食APP\n[wwww.wowfoods.cc/mgm]\n輸入我的好友推薦碼\n[ ${this.user.code} ]，跟我一起享受美食吧`;
-					let url = `line://msg/text/${encodeURIComponent(text)}`;
-					location.href = url;
-				},
-				test() {
-					alert('aaa')
-					$('.fiveInput').blur();
-				}
+		import app from './js/page/L2/A2_06_00_00.js';
+		app({
+			apiUrl: {
+
 			},
-			mounted() {
-				this.initClipboard();
+			pageUrl: {
+				
 			}
-		});
+		})
 	</script>
 </body>
 

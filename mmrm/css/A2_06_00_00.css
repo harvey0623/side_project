@@ -48,5 +48,14 @@
   border-radius: 5px;
   color: #fff;
   background-color: #494949;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+
+.copyTip.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 /*# sourceMappingURL=A2_06_00_00.css.map */

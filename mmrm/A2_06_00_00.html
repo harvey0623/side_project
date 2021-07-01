@@ -56,10 +56,7 @@
 			</div>
 		</div>
 
-		<transition mode="out-in" name="fade">
-			<div class="copyTip" v-show="isCopy">已複製邀請碼</div>
-		</transition>
-
+		<div class="copyTip" :class="{active:isCopy}">已複製邀請碼</div>
 	</div>
 
 	<script type="module">

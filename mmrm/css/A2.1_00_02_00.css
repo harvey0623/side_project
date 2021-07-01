@@ -1,0 +1,245 @@
+.special.swiper-container .swiper-slide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.panel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.panel > .closeBg, .cancelBox > .largeCancel {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+body {
+  min-height: 100vh;
+  padding-top: 50px;
+}
+
+.mask {
+  position: relative;
+  min-height: 100vh;
+  padding: 15px;
+  background-color: #4a4a4a;
+  z-index: 2;
+}
+
+.mask > .maskInner {
+  max-width: 400px;
+  margin: 25px auto 0;
+  position: relative;
+  z-index: 3;
+}
+
+.colorBlock {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 220px;
+  background-image: url("https://handler.travel/wp-content/uploads/2020/03/80745625_1330225683814530_2522022551606001664_o.jpg");
+  background-size: cover;
+  background-position: center center;
+  z-index: 1;
+}
+
+.panel {
+  position: relative;
+  margin-bottom: 60px;
+}
+
+.panel > .closeBg {
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/btn_nav_close_popup_n@2x.png");
+  opacity: 0;
+  cursor: pointer;
+}
+
+.panel > .codeText {
+  color: #fff;
+  cursor: pointer;
+}
+
+.panel > .brandLogo {
+  position: absolute;
+  display: none;
+  left: 50%;
+  top: 0%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.panel > .brandLogo.show {
+  display: block;
+}
+
+.cardBox {
+  background-color: #fff;
+  border-radius: 5px;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.cardHead {
+  position: relative;
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 1px dashed #C9C9C9;
+}
+
+.cardHead > .name {
+  margin-bottom: 10px;
+  color: #292929;
+}
+
+.cardHead > .duration {
+  color: #797979;
+}
+
+.cardHead.active:before, .cardHead.active:after {
+  display: block;
+}
+
+.cardHead:before, .cardHead:after {
+  position: absolute;
+  display: none;
+  content: '';
+  bottom: -10px;
+  width: 20px;
+  height: 20px;
+  background-color: #4a4a4a;
+  border-radius: 50%;
+}
+
+.cardHead:before {
+  left: -10px;
+}
+
+.cardHead:after {
+  right: -10px;
+}
+
+.cardBody {
+  padding: 0px 15px;
+}
+
+#qrcode {
+  padding: 50px 0;
+  text-align: center;
+}
+
+#qrcode > img {
+  margin: 0 auto;
+}
+
+#barCodeBox {
+  padding: 50px 0;
+}
+
+.codeItem {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.codeItem:last-child {
+  margin-bottom: 0;
+}
+
+.codeItem > svg {
+  max-width: 100%;
+}
+
+.enlargeBox {
+  display: none;
+  position: relative;
+  min-height: 100vh;
+  padding: 20px 10px;
+  background-color: #4a4a4a;
+}
+
+.largeInner {
+  height: calc(100vh - 40px);
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.cancelBox {
+  padding: 10px;
+}
+
+.cancelBox > .largeCancel {
+  width: 35px;
+  height: 35px;
+  background-image: url("../img/btn_nav_close_lightbg_n@2x.png");
+}
+
+.special.swiper-container {
+  height: 600px;
+}
+
+.special.swiper-container .rotateBox {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.special.swiper-container .codeItem {
+  width: 600px;
+}
+
+@media (max-width: 375px) {
+  .special.swiper-container {
+    height: 520px;
+  }
+  .special.swiper-container .codeItem {
+    width: 520px;
+  }
+}
+
+.basic.swiper-container {
+  padding-bottom: 30px;
+}
+
+.special.swiper-container {
+  padding-bottom: 40px;
+}
+
+.basic.swiper-container-horizontal > .swiper-pagination-bullets,
+.special.swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: -5px;
+}
+
+@media (max-width: 380px) {
+  .special.swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .cardBox {
+    max-width: 100%;
+  }
+}
+/*# sourceMappingURL=A2.1_00_02_00.css.map */

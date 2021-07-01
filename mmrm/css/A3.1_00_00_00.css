@@ -1,0 +1,303 @@
+.topBlock > .bgBlock > .countdownBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.controlPanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.bottomBlock > p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.pointDesc .pointArrow {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.topBlock > .bgBlock, .topBlock > .bgBlock > .statusCover {
+  border-radius: 5px 5px 0 0;
+}
+
+.topBlock.other > .bgBlock, .topBlock.other > .bgBlock > .statusCover, .topBlock.other > .bgBlock > .countdownBlock {
+  border-radius: 0 0 5px 5px;
+}
+
+#app {
+  padding-top: 95px;
+}
+
+.controlPanel {
+  position: fixed;
+  left: 0;
+  top: 50px;
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.controlPanel > .text {
+  color: #528fff;
+  text-align: right;
+  cursor: pointer;
+}
+
+.pointDesc {
+  position: relative;
+  color: #797979;
+}
+
+.pointDesc .swiper-container {
+  height: 45px;
+}
+
+.pointDesc .swiper-container .swiper-slide {
+  text-align: center;
+  line-height: 45px;
+}
+
+.pointDesc .swiper-container .swiper-slide > span:nth-child(2) {
+  color: var(--variationMain);
+}
+
+.pointDesc .pointArrow {
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+  -webkit-transform: translateY(2px);
+          transform: translateY(2px);
+}
+
+.wrap {
+  padding: 20px 15px;
+}
+
+.emptyBlock > .emptyBg {
+  background-image: url("../img/img_activity_empty_n_n@2x.png");
+}
+
+.activityList > li {
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.activityList > li:last-child {
+  margin-bottom: 0;
+}
+
+.activityList > li.hide {
+  display: none;
+}
+
+.topBlock {
+  display: block;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.topBlock > .bgBlock {
+  position: relative;
+  height: 230px;
+  background-size: cover;
+  background-position: left top;
+  background-image: url("../img/placeholder.jpg");
+}
+
+@media (min-width: 750px) {
+  .topBlock > .bgBlock {
+    height: 460px;
+  }
+}
+
+.topBlock > .bgBlock > .statusCover {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+.topBlock > .bgBlock > .statusCover > span {
+  margin: auto;
+  font-size: 17px;
+}
+
+.topBlock > .bgBlock > .countdownBlock {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 150px;
+  height: 30px;
+  background-image: url("../img/img_activity_countdown_big_n@2x.png");
+  background-size: 100% 100%;
+}
+
+.topBlock > .bgBlock > .countdownBlock.move {
+  left: 15px;
+  top: calc(100% + 15px);
+}
+
+.topBlock > .bgBlock > .countdownBlock > .clockBg {
+  width: 13px;
+  height: 13px;
+  margin-right: 5px;
+  background-image: url("../img/img_activity_countdown_time_n@2x.png");
+  background-size: contain;
+}
+
+.topBlock > .bgBlock > .countdownBlock > .time {
+  font-size: 13px;
+  color: #fff;
+}
+
+.topBlock > .desc {
+  position: relative;
+  padding: 15px;
+}
+
+.topBlock > .desc.move {
+  padding-top: 55px;
+}
+
+.topBlock > .desc > * {
+  margin-bottom: 10px;
+}
+
+.topBlock > .desc > *:last-child {
+  margin-bottom: 0;
+}
+
+.topBlock > .desc > .intro {
+  margin-bottom: 0;
+  color: #292929;
+}
+
+.topBlock > .desc > .intro.multiple {
+  opacity: 0;
+}
+
+.topBlock > .desc > .intro > .brandBg {
+  position: absolute;
+  right: 20px;
+  top: -30px;
+  width: 60px;
+  height: 60px;
+  background-image: url("../img/placeholder.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.topBlock > .desc > .intro > .brandTitle {
+  display: none;
+}
+
+.topBlock > .desc > .activityTitle {
+  color: #292929;
+}
+
+.topBlock > .desc > .duration {
+  color: #797979;
+  font-size: 13px;
+}
+
+.topBlock.other {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 15px;
+}
+
+.topBlock.other > .bgBlock {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 100px;
+          flex: 0 0 100px;
+  height: 100px;
+  background-position: center center;
+}
+
+.topBlock.other > .bgBlock > .countdownBlock {
+  width: 100%;
+  height: 25px;
+  background-image: url("../img/img_activity_countdown_list_n@2x.png");
+}
+
+.topBlock.other > .bgBlock > .countdownBlock > .clockBg {
+  display: none;
+}
+
+.topBlock.other > .desc {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 5px 0 0 15px;
+}
+
+.topBlock.other > .desc > .intro {
+  margin-bottom: 10px;
+}
+
+.topBlock.other > .desc > .intro.multiple {
+  opacity: 0;
+  margin-bottom: 0;
+}
+
+.topBlock.other > .desc > .intro > .brandBg {
+  position: static;
+  margin-right: 2px;
+  width: 18px;
+  height: 18px;
+  -webkit-transform: translateY(3.5px);
+          transform: translateY(3.5px);
+  display: inline-block;
+}
+
+.topBlock.other > .desc > .intro > .brandTitle {
+  display: inline-block;
+}
+
+.bottomBlock {
+  padding: 12px 15px;
+  text-align: right;
+}
+
+.bottomBlock > p {
+  color: var(--variationMain);
+}
+
+.modal-point-header {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=A3.1_00_00_00.css.map */

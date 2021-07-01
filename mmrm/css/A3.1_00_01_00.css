@@ -1,0 +1,201 @@
+.activityIntro, .pointIntro, .activityDesc {
+  padding: 25px;
+}
+
+body {
+  background-color: #fff;
+  padding-top: 50px;
+  padding-bottom: 45px;
+}
+
+.banner {
+  position: relative;
+  min-height: 200px;
+  background-image: url("../img/placeholder.jpg");
+  background-size: cover;
+}
+
+.banner > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wrap {
+  background-color: #f0f0f0;
+}
+
+.activityIntro {
+  position: relative;
+}
+
+.activityIntro.hasBg {
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.activityIntro > .countdownBlock {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 3px 15px;
+  margin-bottom: 10px;
+  background-color: var(--variationMain);
+  border-radius: 5px;
+  color: #fff;
+}
+
+.activityIntro > .countdownBlock > .clockBg {
+  width: 13px;
+  height: 13px;
+  background-image: url("../img/img_activity_countdown_time_n@2x.png");
+  background-size: contain;
+}
+
+.activityIntro > .countdownBlock > .time {
+  margin-left: 5px;
+  font-size: 13px;
+}
+
+.activityIntro > .activityName {
+  margin-bottom: 10px;
+  color: #292929;
+  font-size: 20px;
+}
+
+.activityIntro > .intorList {
+  color: #797979;
+  margin-bottom: 0px;
+}
+
+.activityIntro > .intorList > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.activityIntro > .intorList > li:last-child {
+  margin-bottom: 0;
+}
+
+.activityIntro > .intorList > li > .title {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 65px;
+          flex: 0 0 65px;
+}
+
+.activityIntro > .intorList > li > .colon {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.activityIntro > .intorList > li > .content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.activityIntro > .line {
+  height: 1px;
+  margin-top: 25px;
+  margin-bottom: 0;
+  background-color: #c9c9c9;
+}
+
+.activityIntro > .brandLogo {
+  position: absolute;
+  right: 25px;
+  top: -30px;
+  width: 60px;
+  height: 60px;
+  background-image: url("../img/placeholder.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.pointIntro {
+  margin-bottom: 25px;
+  background-color: #fff;
+}
+
+.pointIntro > .title {
+  color: #292929;
+  margin-bottom: 15px;
+}
+
+.conditionList > li {
+  color: #797979;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+}
+
+.conditionList > li:last-child {
+  margin-bottom: 0;
+}
+
+.conditionList > li > .content {
+  margin-left: auto;
+  color: var(--variationMain);
+}
+
+.conditionList > li > .content > span {
+  margin-left: 10px;
+  color: #797979;
+}
+
+.couponIntro {
+  padding-bottom: 20px;
+}
+
+.couponIntro > .title {
+  padding-left: 25px;
+  margin-bottom: 20px;
+  color: #797979;
+}
+
+.couponIntro > .content {
+  padding: 0 15px;
+}
+
+.activityDesc {
+  color: #797979;
+  background-color: #fff;
+}
+
+.activityDesc ol, .activityDesc ul {
+  padding-left: 40px;
+  list-style: disc;
+}
+
+.activityDesc img,
+.activityDesc iframe {
+  max-width: 100%;
+}
+
+.fixBlock > div {
+  height: 100%;
+}
+
+.fixBlock > div.termActiveButton {
+  color: #fff;
+  background-color: var(--variationMain);
+}
+
+.fixBlock > div.hide {
+  opacity: 0;
+}
+
+.usedBlock {
+  background-color: #c9c9c9;
+  color: #797979;
+}
+/*# sourceMappingURL=A3.1_00_01_00.css.map */

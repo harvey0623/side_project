@@ -1,0 +1,39 @@
+.outerBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profileBox {
+  height: 73px;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #292929;
+  font-size: 16px;
+}
+
+.profileBox > p:first-child {
+  margin-bottom: 5px;
+}
+
+.outerBlock {
+  height: 400px;
+  background-image: url("https://lh3.googleusercontent.com/proxy/HyhYoRHWuYyj4cIY6xVBzqtlt7zrCKjsoAuWy8JSYEg1pWi3uz3DHofw2UPaiZCtVLhTLkzlVcWtI0KoJw68I3883PH6uU4BUzNentQbHEzyJL5V_bnMsV8");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.centerBox > .member_no {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+/*# sourceMappingURL=A2_00_00_01.css.map */

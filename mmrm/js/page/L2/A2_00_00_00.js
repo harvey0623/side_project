@@ -117,17 +117,18 @@ export default function ({ apiUrl, pageUrl }) {
                this.resetInput();
                return 
             }
-            console.log('upload');
-            // this.isLoading = true;
-            // fileReader.readAsDataURL(file);
+            console.log('upload2');
+            this.isLoading = true;
+            fileReader.readAsDataURL(file);
             // this.resetInput();
          },
          async getBase64(evt) {
             let base64 = evt.target.result;
-            this.profile.avatar = await this.updateMemberPhoto(base64);
-            let memberProfile = await this.getMemberProfile();
-            localStorage.setItem('member_profile', JSON.stringify(memberProfile));
-            this.isLoading = false;
+            console.log(base64);
+            // this.profile.avatar = await this.updateMemberPhoto(base64);
+            // let memberProfile = await this.getMemberProfile();
+            // localStorage.setItem('member_profile', JSON.stringify(memberProfile));
+            // this.isLoading = false;
          },
          async logoutHandler() {
             this.isLoading = true;

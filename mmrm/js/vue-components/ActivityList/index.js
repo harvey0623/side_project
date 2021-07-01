@@ -97,6 +97,9 @@ Vue.component('activity-list', {
          let normalArr = this.getPointInfoText('point_condition');
          let externalArr = this.getPointInfoText('external_point_condition');
          return normalArr.concat(externalArr).join(' / ');
+      },
+      isMoveCountdown() { //是否要移動倒數區塊
+         return this.isCountDown && !this.changelayout;
       }
    },
    methods: {
@@ -151,12 +154,12 @@ Vue.component('activity-list', {
                <div class="statusCover" v-if="!isOpen">
                   <span>{{ statusText }}</span>
                </div>
-               <div class="countdownBlock" v-if="isCountDown">
+               <div class="countdownBlock" :class="{move:isMoveCountdown}" v-if="isCountDown">
                   <div class="clockBg"></div>
                   <p class="time" ref="time">{{ timeText }}</p>  
                </div>   
             </div>
-            <div class="desc">
+            <div class="desc" :class="{move:isMoveCountdown}">
                <div class="intro">
                   <div class="brandBg" :style="brandImgUrl"></div>
                   <span class="brandTitle">{{ brandTitle }}</span>

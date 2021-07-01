@@ -9,8 +9,8 @@ export default class Ajax {
       this.couponInfo = props.couponInfo;
       this.brandInfo = props.brandInfo;
    }
-   async getMemberProfile() { //取得會員簡介
-      return await this.axios({
+   getMemberProfile() { //取得會員簡介
+      return mmrmAxios({
          url: this.memberProfile,
          method: 'post',
          data: {}
@@ -18,8 +18,8 @@ export default class Ajax {
          return res.data.results;
       }).catch(err => null);
    }
-   async getCard() { //取得會員卡片資料
-      return await this.axios({
+   getCard() { //取得會員卡片資料
+      return mmrmAxios({
          url: this.memberCard,
          method: 'post',
          data: {}
@@ -27,8 +27,8 @@ export default class Ajax {
          return res.data.results;
       }).catch(err => null);
    }
-   async getMemberSummary() { //取得會員資料
-      return await this.axios({
+   getMemberSummary() { //取得會員資料
+      return mmrmAxios({
          url: this.memberSummary,
          method: 'post',
          data: {}
@@ -36,8 +36,8 @@ export default class Ajax {
          return res.data.results;
       }).catch(err => null);
    }
-   async getLevelInfo(levelId) { //取得等級資訊
-      return await this.axios({
+   getLevelInfo(levelId) { //取得等級資訊
+      return mmrmAxios({
          url: this.levelInfo,
          method: 'post',
          data: {
@@ -47,8 +47,8 @@ export default class Ajax {
          return res.data.results;
       }).catch(err => null);
    }
-   async getCouponDetail(myCouponId) { //取得票券詳情
-      return await axios({
+   getCouponDetail(myCouponId) { //取得票券詳情
+      return mmrmAxios({
          url: this.couponDetail,
          method: 'post',
          data: {
@@ -58,8 +58,8 @@ export default class Ajax {
          return res.data.results.my_coupon_detail;
       }).catch(err => null);
    }
-   async getCouponInfo(couponId) { //取得票券資料
-      return await axios({
+   getCouponInfo(couponId) { //取得票券資料
+      return mmrmAxios({
          url: this.couponInfo,
          method: 'post',
          data: {
@@ -70,8 +70,8 @@ export default class Ajax {
          return res.data.results.coupon_information;
       }).catch(err => null);
    }
-   async getBrandInfo(brandId) { //取得品牌資訊
-      return await axios({
+   getBrandInfo(brandId) { //取得品牌資訊
+      return mmrmAxios({
          url: this.brandInfo,
          method: 'post',
          data: {

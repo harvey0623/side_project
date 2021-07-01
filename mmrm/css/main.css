@@ -86,7 +86,7 @@ a:focus {
           align-items: center;
 }
 
-#memberHeader, .sidebarFilter > li, .criteriaList > li, .sidebarPanel, .subMenu > .clearAll.between, .criteriaList > li > label, .pointContent > .summaryBox, .pointModal .otherBox {
+#memberHeader, #pageHeader, .sidebarFilter > li, .criteriaList > li, .sidebarPanel, .subMenu > .clearAll.between, .criteriaList > li > label, .pointContent > .summaryBox, .pointModal .otherBox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -117,7 +117,8 @@ a:focus {
 }
 
 .hookCheckbox, .popupHeader > .popupClose, .toggleSidebar,
-.backHome, .emptyBlock > .emptyBg, .layoutBox > .layout, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .sidebarFilter > li > .dateOuter > .arrowBox, .filterItem > .arrowBox, .filterItem > .layout, .menuBlock .iconBg, .pointModal .closeBg, .selectBlock > .selectRow > .selectOuter > .downIcon {
+.backHome,
+.backCoupon, .emptyBlock > .emptyBg, .layoutBox > .layout, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .sidebarFilter > li > .dateOuter > .arrowBox, .filterItem > .arrowBox, .filterItem > .layout, .menuBlock .iconBg, .pointModal .closeBg, .selectBlock > .selectRow > .selectOuter > .downIcon {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -220,7 +221,7 @@ textarea {
   left: 0;
   top: 0;
   width: 100%;
-  height: 45px;
+  height: 50px;
   background-color: var(--variationSub);
   z-index: 10;
 }
@@ -233,7 +234,7 @@ textarea {
 
 #memberHeader {
   padding: 0 15px;
-  height: 45px;
+  height: 50px;
   background-color: var(--variationSub);
 }
 
@@ -253,6 +254,27 @@ textarea {
   width: 30px;
   height: 30px;
   background-image: url("../img/placeholder.jpg");
+}
+
+#pageHeader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  padding: 0 15px;
+  background-color: var(--variationSub);
+  z-index: 10;
+}
+
+#pageHeader > .logoBg {
+  width: 100px;
+  height: 30px;
+  background-image: url("../img/placeholder.jpg");
+}
+
+#pageHeader > .userName {
+  color: #fff;
 }
 
 body {
@@ -377,9 +399,10 @@ body.hide {
 }
 
 .toggleSidebar,
-.backHome {
+.backHome,
+.backCoupon {
   position: fixed;
-  right: 20px;
+  right: 15px;
   bottom: 20px;
   width: 50px;
   height: 50px;
@@ -390,6 +413,11 @@ body.hide {
 }
 
 .backHome {
+  background-image: url("../img/btn_brand_pop_official_n@2x.png");
+}
+
+.backCoupon {
+  bottom: 85px;
   background-image: url("../img/btn_brand_pop_official_n@2x.png");
 }
 
@@ -1161,7 +1189,19 @@ body.hide {
   font-size: 17px;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 0 5px 5px 0;
   z-index: 7;
+}
+
+.couponBlockR > .giftIcon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/logo@2x.png");
+  background-size: contain;
+  z-index: 8;
 }
 
 .pointCard {
@@ -1724,5 +1764,64 @@ body.hide {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
   }
+}
+
+.termPopup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.termPopup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.termBody {
+  height: calc(100vh - 45px);
+  padding: 20px 20px 55px;
+  background-color: #f0f0f0;
+  overflow: auto;
+}
+
+.termBody > .termContent {
+  padding: 15px;
+  line-height: 1.8;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #292929;
+  text-align: justify;
+}
+
+.termBody > .termContent ol, .termBody > .termContent ul {
+  padding-left: 40px;
+  list-style: disc;
+}
+
+.termBody > .termContent img {
+  max-width: 100%;
+}
+
+.termFooter {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  background-color: #c9c9c9;
+  text-align: center;
+  cursor: pointer;
+}
+
+.termFooter.termActiveButton {
+  background-color: var(--variationMain);
+  color: #fff;
 }
 /*# sourceMappingURL=main.css.map */

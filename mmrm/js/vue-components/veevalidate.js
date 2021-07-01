@@ -69,3 +69,14 @@ VeeValidate.extend('birthday', {
       return birthday >= minDate && birthday < today;
    }
 });
+
+VeeValidate.extend('memorialDay', {
+   message: '重要日子日期超出範圍，請重新輸入',
+   validate(value) {
+      let today = new Date();
+      today = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+      let birthday = new Date(value).getTime();
+      let minDate = new Date(1902, 0, 1);
+      return birthday >= minDate && birthday < today;
+   }
+});

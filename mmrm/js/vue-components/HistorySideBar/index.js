@@ -70,14 +70,14 @@ Vue.component('history-sidebar', {
       },
       emitMessage(msg) { //錯誤訊息通知
          this.$emit('update:tipmsg', msg);
-         $('#failModal').modal('show');
+         $('#tipModal').modal('show');
       },
       async checkHandler() {
          let isValid = await this.$refs.form.validate().then(res => res);
          if (!isValid) return this.emitMessage(this.dateFillText);
          if (!this.checkIsAfter()) return;
          if (!this.checkInRange()) return;
-         this.$emit('history');
+         this.$emit('search');
       }
    },
    template: `

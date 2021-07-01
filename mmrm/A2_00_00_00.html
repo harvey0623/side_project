@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="aes_key" content="">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
 	<meta name="login_url" content="">
 	<link rel="icon" href="" type="image/jpg" sizes="16x16">
 	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
@@ -29,19 +29,19 @@
 </head>
 
 <body>
-	<div id="app">
+	<div id="app" v-cloak>
 		<header id="memberHeader">
-			<div class="logout"></div>
+			<div class="logout" onclick="$('#logoutModal').modal('show')"></div>
 			<a href="javascript:;" class="logoBg"></a>
 			<a :href="pageUrl.memberBarcode" class="memberBarcode"></a>
 		</header>
 		<div class="profileBlock">
-			<div class="avatarBox" @click="takePicture">
-				<input type="file" ref="file" accept="image/*" capture hidden @change="changeHandler">
+			<div class="avatarBox" :style="avatarBg" @click="toggleMenu(true)">
+				<input type="file" accept="image/*" capture hidden ref="file" @change="selectPhoto">
 			</div>
 			<div class="nameBox">
-				<p>{{ 'harvey' }}</p>
-				<a :href="pageUrl.maintain">會員資料維護</a>
+				<p>{{ profile.name }}</p>
+				<div onclick="$('#verifyModal').modal('show')">會員資料維護</div>
 			</div>
 		</div>
 		<div class="linkBlock">
@@ -49,15 +49,15 @@
 				<div class="icon"></div>
 				<p class="title">消費紀錄</p>
 			</a>
-			<a :href="pageUrl.point" class="linkItem">
+			<a :href="pointPageUrl" class="linkItem">
 				<div class="icon"></div>
 				<p class="title">我的點數</p>
-				<span class="count">1000 點</span>
+				<span class="count">{{ currentPointInfo.amount }} 點</span>
 			</a>
-			<a :href="pageUrl.coupon" class="linkItem">
+			<a :href="pageUrl.couponList" class="linkItem">
 				<div class="icon"></div>
 				<p class="title">我的票券</p>
-				<span class="count">3 點</span>
+				<span class="count">{{ totalTicket }} 張</span>
 			</a>
 			<a :href="pageUrl.friend" class="linkItem">
 				<div class="icon"></div>
@@ -66,10 +66,73 @@
 		</div>
 
 		<div id="iosPicker"></div>
-
 		<div id="loading" v-show="isLoading"></div>
-
 		<a :href="pageUrl.home" class="backHome"></a>
+
+		<!-- 錯誤modal -->
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ errorMsg }}</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#failModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 登出 -->
+		<div class="modal msgModal" id="logoutModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>確定要登出 ?</p>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#logoutModal').modal('hide')">取消</div>
+						<div @click="logoutHandler">確認</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 密碼驗證modal -->
+		<div class="modal inputModal" id="verifyModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">請輸入會員密碼</h1>
+					</div>
+					<validation-observer tag="div" class="modal-body" ref="form">
+						<validation-provider
+							tag="div" 
+							class="inputBox" 
+							rules="required|password"
+							v-slot="{ errors, failed }"
+							name="password">
+							<input
+								type="text"
+								class="form-control verifyInput" 
+								placeholder="6 - 12 碼英數字"
+								v-model.trim="user.password">
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</validation-observer>
+					<div class="modal-footer">
+						<div onclick="$('#verifyModal').modal('hide')">取消</div>
+						<div @click="confirmVerify">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</div>
 
@@ -78,17 +141,22 @@
 		import app from './js/page/L2/A2_00_00_00.js';
 		app({
 			apiUrl: {
-				memberSummary: '',
-				couponList: ''
+				logout: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/logout',
+				memberSummary: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/member_summary',
+				memberProfile: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/member_profile',
+				couponList: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/my_coupon_list',
+				updateMemberPhoto: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/update_member_photo',
+				verifyPw: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/verify_password',
 			},
 			pageUrl: {
 				home: './A0_00_00_00.html',
-				memberBarcode: '',
-				maintain: '',
-				transaction: '',
-				point: '',
-				coupon: '',
-				friend: '',
+				memberBarcode: './A2_00_00_01.html',
+				maintain: './A2_03_01_00.html',
+				transaction: './A2_04_00_00.html',
+				point: './A2_01_01_00.html',
+				couponList: './A2.1_00_00_03.html',
+				friend: './A2_06_00_00.html',
+				logoutOk: './A2_00_00_03.html'
 			}
 		});
 	</script>

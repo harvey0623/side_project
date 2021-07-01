@@ -4,7 +4,6 @@ export default function({ apiUrl }) {
       data: () => ({
          isLoading: false,
          pageData: null,
-         apiUrl
       }),
       computed: {
          pageTitle() {
@@ -19,12 +18,12 @@ export default function({ apiUrl }) {
       methods: {
          getQuery(key) {
             let params = (new URL(document.location)).searchParams;
-            let paramsValue = params.get(key) || 0;
+            let paramsValue = params.get(key);
             return parseInt(paramsValue);
          },
-         async getFaqPage(pageId) { //取得問與答頁面資料
-            return await axios({
-               url: this.apiUrl.pageContent,
+         getFaqPage(pageId) { //取得問與答頁面資料
+            return mmrmAxios({
+               url: apiUrl.pageContent,
                method: 'post',
                data: {
                   page_id: pageId
@@ -37,7 +36,7 @@ export default function({ apiUrl }) {
       async mounted() {
          this.isLoading = true;
          let pageId = this.getQuery('page_id');
-         this.pageData = await this.getFaqPage(pageId).then(res => res);
+         this.pageData = await this.getFaqPage(pageId);
          this.isLoading = false;
       }
    });

@@ -15,6 +15,10 @@ Vue.component('coupon-block', {
       reverse: {
          type: Boolean,
          default: false
+      },
+      currentType: {
+         type: String,
+         default: ''
       }
    },
    data() {
@@ -120,6 +124,9 @@ Vue.component('coupon-block', {
       },
       isTransfer() { //轉贈狀態
          return this.info.status === 'transferred';
+      },
+      showGiftIcon() { //是否顯示轉贈icon
+         return this.info.coupon_transferred && this.currentType === 'valid';
       }
    },
    template: `
@@ -143,11 +150,12 @@ Vue.component('coupon-block', {
                <template v-if="isTransfer">
                   <p>{{ transferredaccount }}{{ info.transfer_account }}</p>
                   <p>{{ transferredtime }}{{ info.transferred_datetime }}</p>
-               </template> 
+               </template>
             </div>
          </div>
          <div class="couponBlockR" :class="{reverse: reverse}" :style="couponTitleBg">
             <div class="usageCover" v-show="!isAvailable">{{ statusText }}</div>
+            <div class="giftIcon" v-if="showGiftIcon"></div>
          </div>
       </a>`
 });

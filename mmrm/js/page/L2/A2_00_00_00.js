@@ -5,12 +5,19 @@ export default function ({ apiUrl, pageUrl }) {
       el: '#app',
       mixins: [localProfile],
       data: () => ({
+         currentPointInfo: { point_id: 0, amount: '0', },
+         totalTicket: 0,
          isLoading: false,
          fileInput: null,
-         pageUrl,
          user: { password: '' },
          errorMsg: '',
+         pageUrl,
       }),
+      computed: {
+         pointPageUrl() {
+            return `${this.pageUrl.point}?point_id=${this.currentPointInfo.point_id}`;
+         }
+      },
       methods: {
          verifyModalEvent() {
             $('#verifyModal').on('shown.bs.modal', () => $('.verifyInput').focus());
@@ -18,13 +25,6 @@ export default function ({ apiUrl, pageUrl }) {
                this.user.password = '';
                this.$refs.form.reset();
             });
-         },
-         memberLogout() { //會員登出
-            return mmrmAxios({
-               url: apiUrl.logout,
-               method: 'post',
-               data: {}
-            }).then(res => res.data);
          },
          updateMemberPhoto(base64) { //更新會員照片
             return mmrmAxios({
@@ -35,6 +35,27 @@ export default function ({ apiUrl, pageUrl }) {
                return res.data.results.photo.url;
             }).catch(() => '')
          },
+         getMemberProfile() {
+            return mmrmAxios({
+               url: apiUrl.memberProfile,
+               method: 'post',
+               data: {}
+            }).then(res => res.data.results.member_profile).catch(() => null);
+         },
+         getMemberSummary() {
+            return mmrmAxios({
+               url: apiUrl.memberSummary,
+               method: 'post',
+               data: {}
+            }).then(res => res.data.results)
+         },
+         memberLogout() { //會員登出
+            return mmrmAxios({
+               url: apiUrl.logout,
+               method: 'post',
+               data: {}
+            }).then(res => res.data);
+         },
          verifyMemberPw() { //驗證會員密碼
             return mmrmAxios({
                url: apiUrl.verifyPw,
@@ -42,7 +63,13 @@ export default function ({ apiUrl, pageUrl }) {
                data: { password: this.$wm_aes(this.user.password) }
             }).then(res => {
                return res.data;
-            }).catch(err => console.log(err))
+            }).catch(err => err.response.data);
+         },
+         setSummaryInfo(summary) {
+            this.totalTicket = summary.coupon_summary.valid_coupon_amount;
+            let { point_id, amount } = summary.point_summary.current_point[0];
+            this.currentPointInfo.point_id = point_id;
+            this.currentPointInfo.amount = amount;
          },
          initMobileSelector() {
             mobileSelect = new MobileSelect({
@@ -85,7 +112,7 @@ export default function ({ apiUrl, pageUrl }) {
             if (file === undefined) return;
             let isValid = this.checkFileFormat(file);
             if (!isValid) {
-               this.errorMsg = '需上傳5MB以內的圖片檔';
+               this.errorMsg = '只能上傳5MB以內的圖片檔';
                $('#failModal').modal('show');
                this.resetInput();
                return 
@@ -97,6 +124,8 @@ export default function ({ apiUrl, pageUrl }) {
          async getBase64(evt) {
             let base64 = evt.target.result;
             this.profile.avatar = await this.updateMemberPhoto(base64);
+            let memberProfile = await this.getMemberProfile();
+            localStorage.setItem('member_profile', JSON.stringify(memberProfile));
             this.isLoading = false;
          },
          async logoutHandler() {
@@ -104,7 +133,7 @@ export default function ({ apiUrl, pageUrl }) {
             $('#logoutModal').modal('hide');
             let logoutResult = await this.memberLogout();
             if (logoutResult.rcrm.RC === 'C01') {
-               location.href = this.apiUrl.logoutOk;
+               location.href = this.pageUrl.logoutOk;
                return;
             }
             this.isLoading = false;
@@ -118,17 +147,22 @@ export default function ({ apiUrl, pageUrl }) {
             if (verifyResult.rcrm.RC === 'C01') {
                location.href = this.pageUrl.maintain;
                return;
+            } else {
+               this.$refs.form.setErrors({ password: [this.errorMsg] });
             }
-            $('#failModal').modal('show');
             this.isLoading = false;
          }
       },
       async mounted() {
+         this.isLoading = true;
+         fileReader.addEventListener('load', this.getBase64);
          this.verifyModalEvent();
          this.getLocalProfile();
          this.fileInput = this.$refs.file;
          this.initMobileSelector();
-         fileReader.addEventListener('load', this.getBase64);
+         let memberSummary = await this.getMemberSummary();
+         this.setSummaryInfo(memberSummary);
+         this.isLoading = false;
       }
    });
 }

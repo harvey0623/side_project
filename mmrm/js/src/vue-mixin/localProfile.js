@@ -15,14 +15,14 @@ window.localProfile = {
    },
    methods: {
       getLocalProfile() {
-         let sotrage = localStorage.getItem('member_profile');
-         let profile = sotrage !== null ? JSON.parse(storage) : null;
+         let storage = localStorage.getItem('member_profile');
+         let profile = storage !== null ? JSON.parse(storage) : null;
          this.profile.name = profile !== null ? profile.name : '';
          if (profile === null || profile.photo === undefined) {
             this.profile.avatar = '';
          } else {
             this.profile.avatar = profile.photo.url;
          }
-      }
+      },
    }
-} 
+}

@@ -3,7 +3,7 @@ export default function ({ apiUrl, pageUrl }) {
    dayjs.extend(window.dayjs_plugin_isSameOrBefore);
    dayjs.extend(window.dayjs_plugin_isBetween);
    let today = dayjs();
-   let vm = new Vue({
+   new Vue({
       el: '#app',
       data: () => ({
          pointId: '',
@@ -27,8 +27,6 @@ export default function ({ apiUrl, pageUrl }) {
             start: today.subtract(6, 'month').format('YYYY-MM-DD'),
             end: today.format('YYYY-MM-DD')
          },
-         apiUrl,
-         pageUrl
       }),
       computed: {
          dateFormat() { //日期格式轉換
@@ -39,16 +37,6 @@ export default function ({ apiUrl, pageUrl }) {
          hasPointInfo() { //是否有點數資訊
             return this.pointInfo.length > 0;
          },
-         // targetPoint() { //點數資料
-         //    if (!this.hasPointInfo) return null;
-         //    let obj = this.pointInfo.find(item => item.point_id = this.pointId);
-         //    return {
-         //       title: obj.title,
-         //       startTime: this.splitDateTime(obj.point_circulate_start_datetime),
-         //       endTime: this.splitDateTime(obj.point_circulate_end_datetime),
-         //       hide_duration: obj.hide_duration
-         //    };
-         // },
          hasExpire() { //是否有過期點數
             return this.expireList.length > 0;
          },
@@ -97,6 +85,11 @@ export default function ({ apiUrl, pageUrl }) {
          }
       },
       methods: {
+         getQuery(key) { //取得網址參數
+            let params = (new URL(document.location)).searchParams;
+            let value = params.get(key);
+            return value;
+         },
          showExpireDetail() {
             if (!this.hasExpire) return;
             $('#expireModal').modal('show');
@@ -108,23 +101,18 @@ export default function ({ apiUrl, pageUrl }) {
             let result = text.replace(/,/g, '');
             return parseInt(result);
          },
-         getQuery(key) { //取得網址參數
-            let params = (new URL(document.location)).searchParams;
-            let value = params.get(key);
-            return value;
-         },
-         async getMemberSummary() { //取得會員簡介
-            return await axios({
-               url: this.apiUrl.memberSummary,
+         getMemberSummary() { //取得會員簡介
+            return mmrmAxios({
+               url: apiUrl.memberSummary,
                method: 'post',
                data: {}
             }).then(res => {
                return res.data.results.point_summary;
             }).catch(err => null);
          },
-         async getPointInfo() { //取得點數資料
-            return await axios({
-               url: this.apiUrl.pointInfo,
+         getPointInfo() { //取得點數資料
+            return mmrmAxios({
+               url: apiUrl.pointInfo,
                method: 'post',
                data: {
                   point_id: [this.pointId],
@@ -134,15 +122,9 @@ export default function ({ apiUrl, pageUrl }) {
                return res.data.results.point_information;
             }).catch(err => null);
          },
-         async getPointAmount() { //取得點數資訊
-            let pointSummary = await this.getMemberSummary().then(res => res);
-            let obj = pointSummary.current_point.find(item => item.point_id === this.pointId);
-            if (obj !== undefined) return obj;
-            else return null;
-         },
-         async getExpirePoint() { //取得過期點數
-            return await axios({
-               url: this.apiUrl.expiredPoint,
+         getExpirePoint() { //取得過期點數
+            return mmrmAxios({
+               url: apiUrl.expiredPoint,
                method: 'post',
                data: {
                   point_id: this.pointId
@@ -151,10 +133,10 @@ export default function ({ apiUrl, pageUrl }) {
                return res.data.results.point_due_to_expire
             }).catch(err => null);
          },
-         async getHistoryPoint() { //取得歷史點數
+         getHistoryPoint() { //取得歷史點數
             let { start, end } = this.dateFormat;
-            return await axios({
-               url: this.apiUrl.pointHistory,
+            return mmrmAxios({
+               url: apiUrl.pointHistory,
                method: 'post',
                data: {
                   point_id: this.pointId,
@@ -166,6 +148,12 @@ export default function ({ apiUrl, pageUrl }) {
                this.currentPage = res.data.next;
                return res.data.results.point_history;
             }).catch(err => null);
+         },
+         async getPointAmount() { //取得點數資訊
+            let pointSummary = await this.getMemberSummary();
+            let obj = pointSummary.current_point.find(item => item.point_id === this.pointId);
+            if (obj !== undefined) return obj;
+            else return null;
          },
          showDetailHandler(id) { //顯示歷史詳情資訊
             this.transactionId = id;
@@ -219,39 +207,38 @@ export default function ({ apiUrl, pageUrl }) {
             this.expireList = await this.getExpirePoint();
          },
          async getPagination() {
-            this.pagLoading = true;
             let historyResult = await this.getHistoryPoint();
             this.tempHistory = this.tempHistory.concat(historyResult);
             let categoryArr = this.createFilterList();
             this.pointHistory = categoryArr.length > 0 ? this.classifyPoint(categoryArr) : [];
-            this.pagLoading = false;
          },
          async scrollHandler() {
-            if (this.pagLoading) return;
+            if (this.isLoading || this.pagLoading) return;
             let documentH = document.documentElement.scrollHeight;
             let windowH = window.innerHeight;
             let distance = documentH - windowH;
             let scrollPos = window.pageYOffset;
             if (scrollPos >= distance * 0.95 && this.hasNextPage) {
+               this.pagLoading = true;
                await this.getPagination();
+               this.pagLoading = false;
             }
          },
          updateHandler() { //更新歷史資料
             let pointId = this.pointId;
             let { start, end } = this.dateFormat;
-            let url = `${this.pageUrl.searchPage}?point_id=${pointId}&start=${start}&end=${end}`;
+            let url = `${pageUrl.searchPage}?point_id=${pointId}&start=${start}&end=${end}`;
             location.href = url;
          },
          descHandler() {
-            let url = `${this.pageUrl.pointDesc}?point_id=${this.pointId}`;
+            let url = `${pageUrl.pointDesc}?point_id=${this.pointId}`;
             location.href = url;
          }
       },
       async mounted() {
          window.addEventListener('scroll', this.scrollHandler);
          this.isLoading = true;
-         await this.initHandler();
-         await this.getPagination();
+         await Promise.all([this.initHandler(), this.getPagination()]);
          this.isLoading = false;
       }
    });

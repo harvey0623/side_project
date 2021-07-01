@@ -126,7 +126,7 @@ export default class CouponCard {
       });
       this.createBarcode({ idKey: 'id', option: { width: 1 }});
       this.initSwiper({ rootEl: 'basic' });
-      this.initLarge();
+      // this.initLarge();
    }
    initLarge() { //執行放大狀態
       $('.largeCancel').on('click', () => {

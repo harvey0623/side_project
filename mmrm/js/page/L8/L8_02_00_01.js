@@ -5,7 +5,6 @@ export default function({ apiUrl }) {
          termList: [],
          termId: '',
          isLoading: false,
-         apiUrl
       }),
       computed: {
          hasTerm() {
@@ -32,9 +31,9 @@ export default function({ apiUrl }) {
             let paramsValue = params.get(key);
             return paramsValue;
          },
-         async getTerm() { //取得條款資料
-            return await axios({
-               url: this.apiUrl.term,
+         getTerm() { //取得條款資料
+            return mmrmAxios({
+               url: apiUrl.term,
                method: 'post',
                data: {
                   type: ['register'] 
@@ -49,7 +48,7 @@ export default function({ apiUrl }) {
       async mounted() {
          this.isLoading = true;
          this.termId = parseInt(this.getQuery('id'));
-         this.termList = await this.getTerm().then(res => res);
+         this.termList = await this.getTerm();
          this.isLoading = false;
       }
    });

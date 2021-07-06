@@ -13,6 +13,10 @@
   padding-bottom: 85px;
 }
 
+.mycontainer > #logoBox {
+  margin-bottom: 15px;
+}
+
 .formLayout {
   margin-bottom: 20px;
 }
@@ -48,9 +52,9 @@
 }
 
 .formLayout > .formRow > .copyBox {
-  width: 22px;
-  height: 22px;
-  background-image: url("../img/btn_common_password_visible_h.png");
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/btn_friend_invitationcode_copy_n@2x.png");
 }
 
 .formLayout > .errMsg {

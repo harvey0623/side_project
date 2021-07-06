@@ -10,7 +10,7 @@
           align-items: center;
 }
 
-.storeBg, .arrowBg, .returnBg {
+.brandBg, .arrowBg, .returnBg {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -38,7 +38,7 @@
 }
 
 .consumptionItem > .infoBox {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   color: #292929;
 }
 
@@ -59,7 +59,7 @@
   margin-bottom: 5px;
 }
 
-.storeBg {
+.brandBg {
   width: 20px;
   height: 20px;
   margin-right: 5px;
@@ -77,11 +77,11 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 60px;
-  height: 60px;
-  -webkit-transform: translate(-20px, -10px);
-          transform: translate(-20px, -10px);
-  background-image: url("../img/placeholder.jpg");
+  width: 45px;
+  height: 45px;
+  -webkit-transform: translate(-22px, -22px);
+          transform: translate(-22px, -22px);
+  background-image: url("../img/img_member_txnhistory_refund_n@2x.png");
 }
 
 .tipBox {
@@ -109,7 +109,15 @@
   color: #797979;
 }
 
-.groupInfo > li {
+.groupInfo > .group-row {
+  margin-bottom: 10px;
+}
+
+.groupInfo > .group-row:last-child {
+  margin-bottom: 0;
+}
+
+.groupInfo > .group-row > .group-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -119,32 +127,63 @@
   margin-bottom: 10px;
 }
 
-.groupInfo > li:last-child {
+.groupInfo > .group-row > .group-content:last-child {
   margin-bottom: 0;
 }
 
-.groupInfo > li > .title {
+.groupInfo > .group-row > .group-content > .title {
   width: 60px;
 }
 
-.groupInfo > li > .colon {
+.groupInfo > .group-row > .group-content > .colon {
   margin: 0 5px;
 }
 
-.groupInfo > li > .content {
+.groupInfo > .group-row > .group-content > .content {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
   word-break: break-all;
 }
 
-.groupInfo > li.space_between {
+.groupInfo > .group-row > .group-content.space_between {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
 
-.groupInfo > li.tableHeader {
+.groupInfo > .group-row > .group-content.tableHeader {
   color: #292929;
+}
+
+.tableOuter {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.consume_table {
+  width: 100%;
+}
+
+.consume_table th, .consume_table td {
+  padding: 7px;
+}
+
+.consume_table th:first-child, .consume_table td:first-child {
+  text-align: left;
+}
+
+.consume_table th:last-child, .consume_table td:last-child {
+  text-align: right;
+}
+
+.consume_table th {
+  font-weight: normal;
+  color: #292929;
+}
+
+.consume_table td {
+  color: #797979;
 }
 /*# sourceMappingURL=A2_04_00_00.css.map */

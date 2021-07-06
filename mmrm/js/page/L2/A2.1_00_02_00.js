@@ -6,6 +6,7 @@ export default function({ appName, apiUrl }) {
       title: '',
       duration: '',
       userName: '',
+      bgImg: '',
       isLoading: false
    };
    let couponProxy = new Proxy(couponObj, {
@@ -23,6 +24,10 @@ export default function({ appName, apiUrl }) {
          if (key === 'duration') {
             let template = window.getSystemLang('missiontaskreward_couponusageduration');
             $('.duration').text(vsprintf(template, [value]));
+         }
+         if (key === 'bgImg') {
+            if (!value) return;
+            $('.colorBlock').css({ backgroundImage: `url(${value})` });
          }
          if (key === 'isLoading') $('#loading')[value ? 'show' : 'hide']();
          return true;
@@ -50,6 +55,7 @@ export default function({ appName, apiUrl }) {
       couponProxy.duration = couponDetail.duration;
       couponProxy.imgUrl = brandInfo.feature_image_small.url;
       couponProxy.userName = memberProfile.member_profile.name;
+      couponProxy.bgImg = couponInfo.feature_image.url;
       $('.cardHead').addClass('active');
       let cardSource = [];
       cardSource.push({

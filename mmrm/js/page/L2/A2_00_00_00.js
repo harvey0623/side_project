@@ -135,6 +135,9 @@ export default function ({ apiUrl, pageUrl }) {
             if (logoutResult.rcrm.RC === 'C01') {
                location.href = this.pageUrl.logoutOk;
                return;
+            } else {
+               this.errorMsg = logoutResult.rcrm.RM;
+               $('#failModal').modal('show');
             }
             this.isLoading = false;
          },

@@ -34,10 +34,10 @@
 }
 
 .profileBlock > .greetBox > .avatar {
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   margin: 0 auto 15px auto;
-  background-image: url("../img/logo@2x.png");
+  background-image: url("../img/img_memberhome_pic_n_n@2x.png");
   background-size: cover;
   border-radius: 50%;
 }
@@ -90,16 +90,16 @@
   background-size: contain;
 }
 
-.bottomMember .iconBox.gift {
-  background-image: url("../img/logo@2x.png");
+.bottomMember .iconBox.service {
+  background-image: url("../img/btn_home_service_n_n@2x.png");
 }
 
-.bottomMember .iconBox.point {
-  background-image: url("../img/logo@2x.png");
+.bottomMember .iconBox.gift {
+  background-image: url("../img/btn_home_couponactivity_n_n@2x.png");
 }
 
 .bottomMember .iconBox.member {
-  background-image: url("../img/logo@2x.png");
+  background-image: url("../img/btn_home_memberhome_n_n@2x.png");
 }
 
 .bottomMember .itemName {

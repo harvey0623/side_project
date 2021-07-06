@@ -17,25 +17,11 @@ body {
 
 .bannerBox {
   position: relative;
-  height: 280px;
-  background-image: url("../img/placeholder.jpg");
-  background-size: cover;
-  background-position: center center;
 }
 
-.bannerBox > .textBlock {
-  position: absolute;
-  left: 0;
-  bottom: 0;
+.bannerBox > img {
   width: 100%;
-  padding: 20px 20px;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.bannerBox > .textBlock > h3 {
-  font-size: 20px;
-  margin-bottom: 5px;
+  height: auto;
 }
 
 .exchangeInfo {
@@ -102,11 +88,22 @@ body {
 }
 
 .linkBlock > .linkItem > .icon {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   margin-bottom: 5px;
-  background-image: url("../img/placeholder.jpg");
   background-size: contain;
+}
+
+.linkBlock > .linkItem > .icon.coupon {
+  background-image: url("../img/btn_activity_tabbar_mycoupon_n@2x.png");
+}
+
+.linkBlock > .linkItem > .icon.immediate {
+  background-image: url("../img/btn_activity_tabbar_usecoupon_n@2x.png");
+}
+
+.linkBlock > .linkItem > .icon.exchange {
+  background-image: url("../img/btn_activity_tabbar_returncoupon_n@2x.png");
 }
 
 .linkBlock > .linkItem > p {

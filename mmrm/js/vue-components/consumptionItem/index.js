@@ -1,21 +1,63 @@
 Vue.component('consumption-item', {
    props: {
-      
+      brand_logo: {
+         required: true
+      },
+      brand_name: {
+         type: String,
+         required: true
+      },
+      invamt: {
+         type: String,
+         required: true
+      },
+      store_name: {
+         type: String,
+         required: true
+      },
+      sale_id_p: {
+         type: String,
+         required: true
+      },
+      date: {
+         type: String,
+         required: true
+      },
+      time: {
+         type: String,
+         required: true
+      },
+      page_url: {
+         type: String,
+         required: true
+      }
+   },
+   computed: {
+      brandBg() {
+         if (!this.brand_logo) return {};
+         else return { backgroundImage: `url(${this.brand_logo})` };
+      },
+      createdTime() {
+         return dayjs(`${this.date} ${this.time}`).format('YYYY/MM/DD HH:mm:ss');
+      },
+      isReturn() {
+         return this.sale_id_p !== '';
+      }
    },
    template: `
-      <a href="javascript:;" class="consumptionItem">
+      <a :href="page_url" class="consumptionItem">
          <div class="infoBox">
             <div>
-               <span class="storeBg"></span>
-               <p>牛排</p>
+               <span class="brandBg" :style="brandBg"></span>
+               <p>{{ brand_name }}</p>
             </div>
             <div>
-               <p>NT1234</p>
+               <p>NT.{{ parseInt(invamt) | currency }}</p>
                <span class="arrowBg"></span>
             </div>
          </div>
-         <p class="normalColor storeName">台北車站店</p>
-         <p class="normalColor time">2021/10/10 11:10:10</p>
-         <div class="returnBg"></div>
+         <p class="normalColor storeName">{{ store_name }}</p>
+         <p class="normalColor time">{{ createdTime }}</p>
+         <div class="returnBg" v-if="isReturn"></div>
       </a>`
 });

@@ -53,9 +53,9 @@
 }
 
 .pointIntro > .pointTotal > .icon {
-  width: 25px;
-  height: 25px;
-  background-image: url("../img/logo@2x.png");
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/img_member_pointhistory_top_point@2x.png");
   background-size: contain;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
@@ -63,7 +63,7 @@
 }
 
 .pointIntro > .pointTotal > .count {
-  margin-left: 10px;
+  margin-left: 5px;
   margin-right: 5px;
   font-size: 30px;
 }

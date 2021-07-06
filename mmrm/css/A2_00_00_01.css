@@ -13,7 +13,6 @@
 .profileBox {
   height: 73px;
   padding-top: 20px;
-  margin-bottom: 20px;
   text-align: center;
   color: #292929;
   font-size: 16px;
@@ -24,9 +23,9 @@
 }
 
 .outerBlock {
-  height: 400px;
-  background-image: url("https://lh3.googleusercontent.com/proxy/HyhYoRHWuYyj4cIY6xVBzqtlt7zrCKjsoAuWy8JSYEg1pWi3uz3DHofw2UPaiZCtVLhTLkzlVcWtI0KoJw68I3883PH6uU4BUzNentQbHEzyJL5V_bnMsV8");
-  background-size: cover;
+  height: 550px;
+  background-image: url("../img/img_member_membercard_n_n@2x.png");
+  background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
 }

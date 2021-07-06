@@ -28,7 +28,14 @@
   width: 120px;
   height: 120px;
   margin-bottom: 27.5px;
-  background-image: url("../img/img_common_result_success_n@2x.png");
+}
+
+.mycontainer > .successImg.authFail {
+  background-image: url("../img/img_register_expired_n_n@3x.png");
+}
+
+.mycontainer > .successImg.logout {
+  background-image: url("../img/img_memberhome_logout_n_n@2x.png");
 }
 
 .mycontainer > .title {

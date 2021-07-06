@@ -227,7 +227,7 @@ export default function ({ apiUrl, pageUrl }) {
          },
          redirectToStoreMap() { //導到店家地圖頁面
             let couponId = this.couponDetail.coupon_id;
-            console.log(couponId)
+            location.href = `${this.pageUrl.storePoint}?coupon_id=${couponId}`;
          }
       },
       async mounted() {

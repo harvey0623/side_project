@@ -86,7 +86,7 @@ a:focus {
           align-items: center;
 }
 
-#memberHeader, #pageHeader, .sidebarFilter > li, .criteriaList > li, .sidebarPanel, .subMenu > .clearAll.between, .criteriaList > li > label, .pointContent > .summaryBox, .pointModal .otherBox {
+#memberHeader, #pageHeader, .sidebarFilter > li, .criteriaList > li, .storeFilter > div.hasBorder, .sidebarPanel, .subMenu > .clearAll.between, .criteriaList > li > label, .pointContent > .summaryBox, .pointModal .otherBox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -104,7 +104,7 @@ a:focus {
   overflow: hidden;
 }
 
-[type=date], .hookCheckbox, .formLayout > .formRow > .formContent select, .dataBox > .dataBody > .dataRow select, .sidebarFilter > li > .dateOuter > input, .selectBlock > .selectRow > .selectOuter > select {
+[type=date], .hookCheckbox, .formLayout > .formRow > .formContent select, .dataBox > .dataBody > .dataRow select, .sidebarFilter > li > .dateOuter > input, .storeAreaBlock > .selectOuter > select, .selectBlock > .selectRow > .selectOuter > select {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -227,9 +227,12 @@ textarea {
 }
 
 #normalHeader > .logoBg {
-  width: 100px;
+  width: 210px;
   height: 30px;
-  background-image: url("../img/placeholder.jpg");
+  background-image: url("../img/img_common_logo_n_n@2x.png");
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 #memberHeader {
@@ -238,22 +241,28 @@ textarea {
   background-color: var(--variationSub);
 }
 
+#memberHeader > * {
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
 #memberHeader > .logout {
-  width: 30px;
-  height: 30px;
-  background-image: url("../img/placeholder.jpg");
+  width: 25px;
+  height: 25px;
+  background-image: url("../img/btn_memberhome_logout_n_n@2x.png");
 }
 
 #memberHeader > .logoBg {
-  width: 100px;
+  width: 210px;
   height: 30px;
-  background-image: url("../img/placeholder.jpg");
+  background-image: url("../img/img_common_logo_n_n@2x.png");
 }
 
 #memberHeader > .memberBarcode {
   width: 30px;
   height: 30px;
-  background-image: url("../img/placeholder.jpg");
+  background-image: url("../img/btn_memberhome_membercard_n_n@2x.png");
 }
 
 #pageHeader {
@@ -268,9 +277,11 @@ textarea {
 }
 
 #pageHeader > .logoBg {
-  width: 100px;
+  width: 210px;
   height: 30px;
-  background-image: url("../img/placeholder.jpg");
+  background-image: url("../img/img_common_logo_n_n@2x.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 #pageHeader > .userName {
@@ -413,12 +424,12 @@ body.hide {
 }
 
 .backHome {
-  background-image: url("../img/btn_brand_pop_official_n@2x.png");
+  background-image: url("../img/btn_common_floating_home_n_n.png");
 }
 
 .backCoupon {
   bottom: 85px;
-  background-image: url("../img/btn_brand_pop_official_n@2x.png");
+  background-image: url("../img/btn_activity_floating_mycoupon_n@2x.png");
 }
 
 #maskCover {
@@ -733,7 +744,7 @@ body.hide {
   background-image: url("../img/btn_common_password_visible_h@2x.png");
 }
 
-.sidebarFilter > li, .criteriaList > li {
+.sidebarFilter > li, .criteriaList > li, .storeFilter > div.hasBorder {
   height: 45px;
   padding-right: 15px;
   border-bottom: 1px solid #C9C9C9;
@@ -946,8 +957,55 @@ body.hide {
           transform: translateY(2px);
 }
 
+.storeFilter {
+  padding-left: 20px;
+}
+
+.storeFilter > div > .areaDownIcon {
+  width: 15px;
+  height: 15px;
+  background-size: contain;
+  background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+}
+
+.storeFilter > div > .areaDownIcon.rotate {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.storeAreaBlock {
+  height: 0px;
+  overflow: hidden;
+  -webkit-transition: height 0.2s;
+  transition: height 0.2s;
+}
+
+.storeAreaBlock.active {
+  height: 92px;
+}
+
+.storeAreaBlock > .selectOuter {
+  position: relative;
+  padding-right: 20px;
+  border-bottom: 1px solid #C9C9C9;
+}
+
+.storeAreaBlock > .selectOuter > select {
+  border: none;
+}
+
+.storeAreaBlock > .selectOuter > .downIcon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 17px;
+  height: 17px;
+  background-image: url("../img/btn_listcore_indicatordown_std_n@2x.png");
+  background-size: contain;
+}
+
 .pointList {
-  padding: 25px 20px;
+  padding: 20px 15px;
 }
 
 .pointList > li {
@@ -984,10 +1042,10 @@ body.hide {
 .pointContent > .summaryBox > .payment:after {
   content: '';
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   margin-left: 5px;
-  background-image: url("../img/logo@2x.png");
+  background-image: url("../img/img_member_pointhistory_list_point@3x.png");
   background-size: contain;
   -webkit-transform: translateY(4px);
           transform: translateY(4px);
@@ -1197,9 +1255,9 @@ body.hide {
   position: absolute;
   right: 0;
   top: 0;
-  width: 30px;
-  height: 30px;
-  background-image: url("../img/logo@2x.png");
+  width: 40px;
+  height: 40px;
+  background-image: url("../img/img_mycoupon_tag_give_n.png");
   background-size: contain;
   z-index: 8;
 }

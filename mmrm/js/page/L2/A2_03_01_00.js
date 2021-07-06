@@ -68,7 +68,7 @@ export default function({ apiUrl, pageUrl }) {
                url: apiUrl.updateMemberProfile,
                method: 'post',
                data: { member_profile: copyData }
-            }).then(res => res.data);
+            }).then(res => res.data).catch(err => err.response.data)
          },
          async setUser(memberProfile) {
             for (let key in this.user) {

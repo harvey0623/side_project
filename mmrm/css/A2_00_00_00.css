@@ -20,7 +20,7 @@
   width: 90px;
   height: 90px;
   margin-right: 20px;
-  background-image: url("../img/placeholder.jpg");
+  background-image: url("../img/img_home_pic_n_n@2x.png");
   background-size: cover;
   border-radius: 50%;
   background-position: center center;
@@ -31,10 +31,10 @@
   position: absolute;
   right: 0px;
   bottom: 0px;
-  width: 25px;
-  height: 25px;
-  background-color: var(--variationMain);
-  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/btn_memberhome_takephoto_n_n@2x.png");
+  background-size: contain;
 }
 
 .nameBox {
@@ -75,7 +75,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 25px 15px;
+  padding: 25px 20px;
   margin-bottom: 20px;
   background-color: #fff;
   border-radius: 5px;
@@ -88,8 +88,24 @@
 .linkBlock > .linkItem > .icon {
   width: 30px;
   height: 30px;
-  background-image: url("../img/logo@2x.png");
   background-size: contain;
+  background-position: cneter top;
+}
+
+.linkBlock > .linkItem > .icon.transaction {
+  background-image: url("../img/img_memberhome_txnhistory_n_n@2x.png");
+}
+
+.linkBlock > .linkItem > .icon.point {
+  background-image: url("../img/img_memberhome_pointhistory_n_n@2x.png");
+}
+
+.linkBlock > .linkItem > .icon.coupon {
+  background-image: url("../img/img_memberhome_mycoupon_n_n@2x.png");
+}
+
+.linkBlock > .linkItem > .icon.friend {
+  background-image: url("../img/img_memberhome_friend_n_n@2x.png");
 }
 
 .linkBlock > .linkItem > .title {

@@ -154,10 +154,11 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 150px;
+  width: 130px;
   height: 30px;
-  background-image: url("../img/img_activity_countdown_big_n@2x.png");
+  background-color: var(--variationMain);
   background-size: 100% 100%;
+  border-radius: 5px;
 }
 
 .topBlock > .bgBlock > .countdownBlock.move {

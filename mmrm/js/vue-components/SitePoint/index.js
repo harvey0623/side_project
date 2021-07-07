@@ -40,7 +40,7 @@ Vue.component('site-point', {
       }
    },
    template: `
-      <a :href="google_map_url" class="storePoint">
+      <a :href="google_map_url" class="storePoint" target="_blank">
          <div class="storeBg" :style="storeBg"></div>
          <div class="storeDesc">
             <div>

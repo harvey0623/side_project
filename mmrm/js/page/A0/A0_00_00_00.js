@@ -90,7 +90,8 @@ export default function({ apiUrl, pageUrl }) {
          },
          setConfig(configArr) {
             if (configArr.length === 0) return;
-            this.vendor.mobile = configArr[0].value;
+            alert('update');
+            this.vendor.mobile = configArr[0].value.replace(/-/g, '')
             this.vendor.email = configArr[1].value;
             this.vendor.subject = configArr[2].value;
          },

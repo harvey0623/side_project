@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>首頁</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A0_00_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<header id="normalHeader">
+			<a href="javascript:;" class="logoBg"></a>
+		</header>
+		<div class="profileBlock">
+			<div class="greetBox">
+				<div class="avatar" :style="avatarBg"></div>
+				<p>Hi ! {{ profile.name }} 您好</p>
+			</div>
+		</div>
+		<section class="utilityBlock">
+			<div class="topMember">
+				<a :href="pointPageUrl" class="utilityItem">
+					<div class="inner">
+						<div class="title">我的點數</div>
+						<p class="itemName">
+							<span class="count">{{ currentPointInfo.amount }}</span> 點
+						</p>
+					</div>
+				</a>
+				<a :href="pageUrl.couponList" class="utilityItem">
+					<div class="inner">
+						<div class="title">我的票券</div>
+						<p class="itemName">
+							<span class="count">{{ totalTicket }}</span> 張
+						</p>
+					</div>
+				</a>
+				<a :href="pageUrl.memberCard" class="utilityItem">
+					<div class="inner">
+						<div class="title">會員卡</div>
+						<p class="itemName">累點 / 扣點</p>
+					</div>
+				</a>
+			</div>
+			<div class="bottomMember">
+				<a href="javascript:;" class="utilityItem" @click="talkHandler">
+					<div class="inner">
+						<div class="iconBox service"></div>
+						<p class="itemName">客服中心</p>
+					</div>
+				</a>
+				<a :href="pageUrl.activity" class="utilityItem">
+					<div class="inner">
+						<div class="iconBox gift"></div>
+						<p class="itemName">來換禮物</p>
+					</div>
+				</a>
+				<a :href="pageUrl.member" class="utilityItem">
+					<div class="inner">
+						<div class="iconBox member"></div>
+						<p class="itemName">會員專區</p>
+					</div>
+				</a>
+			</div>
+		</section>
+
+		<div id="loading" v-show="isLoading"></div>
+
+		<!-- option modal -->
+		<div class="modal optionModal" id="optionModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">請選擇服務</h1>
+					</div>
+					<div class="modal-body">
+						<div 
+							class="couponItem"
+							v-for="service in serviceList"
+							:key="service.type"
+							@click="serviceHandler(service.type)">
+							<a href="javascript:;">{{ service.title }}</a>
+						</div>
+						<div class="couponItem">
+							<div onclick="$('#optionModal').modal('hide')">取消</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+	<script type="module">
+		import app from './js/page/A0/A0_00_00_00.js';
+		app({
+			apiUrl: {
+				config: 'http://localhost:3034/mmrmProd/config/brief_config',
+				memberSummary: 'http://localhost:3034/mmrmProd/member_summary',
+			},
+			pageUrl: {
+				point: './A2_01_01_00.html',
+				couponList: './A2.1_00_00_03.html',
+				memberCard: './A2_00_00_01.html',
+				activity: './A3.1_00_00_00.html',
+				member: './A2_00_00_00.html',
+				term: './A0_01_00_00.html',
+				qa: './A0_02_00_00.html'
+			}
+		});
+	</script>
+</body>
+
+</html>

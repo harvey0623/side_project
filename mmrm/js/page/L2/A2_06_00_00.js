@@ -2,17 +2,15 @@ export default function ({ apiUrl, pageUrl }) {
    let clipboard = null;
    new Vue({
       el: '#app',
+      mixins: [localProfile],
       data: () => ({
          isEmpty: false,
          isCopy: false,
-         user: {
-            code: ''
-         }
       }),
       methods: {
          initClipboard() {
             clipboard = new ClipboardJS('#copyBox', {
-               text: () => this.user.code
+               text: () => this.profile.referral_code
             });
             clipboard.on('success', (e) => {
                this.isCopy = true;
@@ -26,7 +24,7 @@ export default function ({ apiUrl, pageUrl }) {
             
          },
          checkHandler() {
-            this.isEmpty = this.user.code === '';
+            this.isEmpty = this.profile.referral_code === '';
          },
          shareHandler() {
             this.checkHandler();
@@ -38,6 +36,7 @@ export default function ({ apiUrl, pageUrl }) {
       },
       mounted() {
          this.initClipboard();
+         this.getLocalProfile();
       }
    });
 }

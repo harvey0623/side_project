@@ -30,6 +30,10 @@
 
 <body>
 	<div id="app" v-cloak>
+		<div id="pageHeader">
+			<a href="javascript:;" class="logoBg"></a>
+			<div class="userName">{{ profile.name }}</div>
+		</div>
 		<div class="mycontainer">
 			<div id="logoBox">
 				<img src="./img/img_friend_invitationcode_bg_n@2x.png">
@@ -44,8 +48,8 @@
 							placeholder="輸入邀請碼"
 							@input="checkHandler"
 							@blur="checkHandler"
-							v-model.trim="user.code">
-						</div>
+							v-model.trim="profile.referral_code">
+					</div>
 					<div class="copyBox" id="copyBox" @click="copyHandler"></div>
 				</div>
 				<p class="errMsg" v-show="isEmpty">必填</p>

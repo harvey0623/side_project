@@ -1,0 +1,32 @@
+// .modal.fade .modal-dialog {
+//    transform: none;
+//    opacity: 0;
+//    transition: opacity 0s;
+// }
+
+// .modal.show .modal-dialog {
+//    opacity: 1;
+// }
+
+@media (min-width: 576px) {
+   .modal {
+      .modal-dialog {
+         max-width: 400px;
+      }
+   }
+}
+
+@media (max-width: 576px) {
+   .modal {
+      .modal-dialog {
+         max-width: 85%;
+         margin: 0 auto;
+      }
+   }
+}
+
+@import './msgModal';
+@import './inputModal';
+@import './pointModal';
+@import './optionModal';
+@import './selectModal';

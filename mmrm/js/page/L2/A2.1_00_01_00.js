@@ -139,7 +139,7 @@ export default function ({ apiUrl, pageUrl }) {
                }
             }).then(res => {
                let { term_information } = res.data.results;
-                if (term_information.length === 0) return [];
+               if (term_information.length === 0) return [];
                return term_information[0].terms;
             }).catch(err => null);
          },
@@ -226,8 +226,9 @@ export default function ({ apiUrl, pageUrl }) {
             }
          },
          redirectToStoreMap() { //導到店家地圖頁面
-            let couponId = this.couponDetail.coupon_id;
-            location.href = `${this.pageUrl.storePoint}?coupon_id=${couponId}`;
+            // let couponId = this.couponDetail.coupon_id;
+            // location.href = `${this.pageUrl.storePoint}?coupon_id=${couponId}`;
+            location.href = `${this.pageUrl.storePoint}?ids=${this.couponInfo.brand_ids[0]}`;
          }
       },
       async mounted() {

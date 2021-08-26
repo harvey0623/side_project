@@ -1,0 +1,217 @@
+@import './utility/index';
+$basicRadius: map-get($radius, basic);
+
+%bgStyle {
+   background-size: 100% 100%;
+   background-position: center top;
+}
+
+body {
+   min-height: 100vh;
+   padding-top: map-get($heightObj, header);
+}
+
+.mask {
+   position: relative;
+   min-height: 100vh;
+   padding: 15px;
+   background-color: map-get($elBgColor, variationSub);
+   z-index: 2;
+   >.maskInner {
+      max-width: 400px;
+      margin: 25px auto 0;
+      position: relative;
+      z-index: 3;
+   }
+}
+
+.colorBlock {
+   position: absolute;
+   left: 0;
+   top: 0;
+   @include size(100%, 220px);
+   background-image: url("../img/placeholder.jpg");
+   background-size: cover;
+   background-position: center center;
+   z-index: 1;
+}
+
+.panel {
+   position: relative;
+   @extend %bwtFlex;
+   margin-bottom: 60px;
+   >.closeBg {
+      @include size(30px);
+      background-image: url("../img/btn_nav_close_popup_n@2x.png");
+      @extend %bgImgCenter;
+      opacity: 0;
+      cursor: pointer;
+   }
+   >.codeText {
+      color: #fff;
+      cursor: pointer;
+   }
+   >.brandLogo {
+      position: absolute;
+      display: none;
+      left: 50%;
+      top: 0%;
+      transform: translateX(-50%);
+      @include size(60px);
+      border-radius: 50%;
+      object-fit: cover;
+      &.show {
+         display: block;
+      }
+   }
+}
+
+.cardBox {
+   background-color: #fff;
+   border-radius: $basicRadius;
+   max-width: 95%;
+   margin: 0 auto;
+}
+
+.cardHead {
+   position: relative;
+   padding: 30px 20px;
+   text-align: center;
+   border-bottom: 1px dashed map-get($borderColor, placeholder);
+   >.name {
+      margin-bottom: 10px;
+      color: map-get($fontColor, formTitle);
+   }
+   >.duration {
+      color: map-get($fontColor, input);
+   }
+   &.active {
+      &:before,
+      &:after {
+         display: block;
+      }
+   }
+   &:before,
+   &:after {
+      position: absolute;
+      display: none;
+      content: '';
+      bottom: -10px;
+      @include size(20px);
+      background-color: map-get($elBgColor, variationSub);
+      border-radius: 50%;
+   }
+   &:before {
+      left: -10px;
+   }
+   &:after {
+      right: -10px;
+   }
+}
+
+.cardBody {
+   padding: 0px 15px;
+}
+
+#qrcode {
+   padding: 50px 0;
+   text-align: center;
+   >img {
+      margin: 0 auto;
+   }
+}
+
+#barCodeBox {
+   padding: 50px 0;
+}
+
+.codeItem {
+   @include elGutter(margin-bottom, 25px);
+   text-align: center;
+   >svg {
+      max-width: 100%;
+   }
+}
+
+.enlargeBox {
+   display: none;
+   position: relative;
+   min-height: 100vh;
+   padding: 20px 10px;
+   background-color: map-get($elBgColor, variationSub);
+}
+
+.largeInner {
+   height: calc(100vh - 40px);
+   background-color: #fff;
+   border-radius: $basicRadius;
+}
+
+.cancelBox {
+   padding: 10px;
+   >.largeCancel {
+      @include size(35px);
+      background-image: url("../img/btn_nav_close_lightbg_n@2x.png");
+      @extend %bgImgCenter;
+   }
+}
+
+.special.swiper-container {
+   height: 600px;
+   .swiper-slide {
+      @extend %centerFlex;
+   }
+   .rotateBox {
+      transform: rotate(-90deg);
+   }
+   .codeItem {
+      width: 600px;
+   }
+}
+
+@media (max-width: 375px) {
+   .special.swiper-container {
+      height: 520px;
+      .codeItem {
+         width: 520px;
+      }
+   } 
+}
+
+//===swiper
+.basic{
+   &.swiper-container {
+      padding-bottom: 30px;
+   }
+}
+
+.special {
+   &.swiper-container {
+      padding-bottom: 40px;
+   }
+}
+
+.basic,
+.special {
+   &.swiper-container-horizontal {
+      >.swiper-pagination-bullets {
+         bottom: -5px;
+      }
+   }
+}
+
+@media (max-width: 380px) {
+   .special {
+      &.swiper-container-horizontal {
+         >.swiper-pagination-bullets {
+            bottom: 15px;
+         }
+      }
+   }
+}
+
+@media (max-width: 360px) {
+   .cardBox {
+      max-width: 100%;
+   }
+}

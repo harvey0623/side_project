@@ -1,0 +1,36 @@
+$cancelColor: map-get($fontColor, modalCancel);
+
+.optionModal {
+   .modal-content {
+      background-color: map-get($elBgColor, modal);
+   }
+   .modal-header {
+      padding: 15px 15px;
+      border-bottom-color: map-get($borderColor, placeholder);
+      .modal-title {
+         flex: 1;
+         text-align: center;
+         font-size: 18px;
+         line-height: initial;
+      } 
+   }
+   .modal-body {
+      padding: 0;
+      >.couponItem {
+         height: map-get($heightObj, basic);
+         line-height: map-get($heightObj, basic);
+         border-bottom: 1px solid map-get($borderColor, placeholder);
+         text-align: center;
+         &.cancelColor{ 
+            color: $cancelColor;
+         }
+         &:last-child {
+            border-bottom: none;
+            color: $cancelColor;
+         }
+         >a {
+            color: $cancelColor;
+         }
+      }
+   }
+}

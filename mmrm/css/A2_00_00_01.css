@@ -30,6 +30,11 @@
   background-repeat: no-repeat;
 }
 
+.centerBox {
+  -webkit-transform: translateY(-20px);
+          transform: translateY(-20px);
+}
+
 .centerBox > .member_no {
   margin-top: 10px;
   font-size: 16px;

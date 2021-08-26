@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>票券詳情</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/swiper/swiper.min.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2.1_00_01_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div id="pageHeader">
+			<a href="javascript:;" class="logoBg"></a>
+			<div class="userName">{{ profile.name }}</div>
+		</div>
+		<div class="banner">
+			<img :src="couponImg" v-show="hasCouponImg">
+		</div>
+		<div class="couponIntro" v-if="couponInfo !== null">
+			<div class="couponName">{{ couponInfo.title }}</div>
+			<ul class="intorList">
+				<li>
+					<div class="title">使用期限</div>
+					<div class="colon">:</div>
+					<div class="content">{{ couponDetail.duration }}</div>
+				</li>
+				<li v-show="!isAllBrand">
+					<div class="title">適用品牌</div>
+					<div class="colon">:</div>
+					<div class="content">{{ brandTitle }}</div>
+				</li>
+				<li v-show="canTransfer">
+					<div class="title">轉贈票券</div>
+					<div class="colon">:</div>
+					<div class="content">{{ transferStatus }}</div>
+				</li>
+			</ul>
+			<div class="brandLogo" v-show="!isAllBrand" :style="brandLogo"></div>
+		</div>
+
+		<div class="usageBox" v-if="couponInfo !== null">
+			<div class="storeBox">
+				<div class="title arrow" @click="redirectToStoreMap">適用門市</div>
+				<div class="content">
+					<template v-if="allAvailable">
+						<span class="unit">全門市適用</span>
+					</template>
+					<template v-else>
+						<span class="number">{{ availableCount }}</span>
+						<span class="unit">家</span>
+					</template>
+				</div>
+			</div>
+			<div class="countBox">
+				<div class="title">可用次數</div>
+				<div class="content">
+					<span class="number">{{ couponDetail.amount }}</span>
+					<span class="unit">/ {{ couponInfo.total }} 次</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="couponDesc" v-html="couponDesc"></div>
+
+		<!-- 操作按鈕 -->
+		<div class="fixBlock">
+			<div 
+				class="normalBlock" 
+				:class="{hide: hideFixBlock}" 
+				v-if="checkCouponStatus">
+				<div v-if="canTransfer" @click="openTermPopup">我要轉贈</div>
+				<div v-if="couponIsAvailable" @click="useHandler">我要使用</div>
+			</div>
+			<div class="usedBlock" :class="{hide: hideFixBlock}" v-else>
+				{{ couponStatusText }}
+			</div>
+		</div>
+
+		<div id="loading" v-if="isLoading"></div>
+
+		<term-popup
+			v-for="term in termsList" :key="term.id"
+			:id="term.id"
+			:showpopup.sync="term.show"
+			:checked.sync="term.checked"
+			:title="term.title"
+			:content="term.content"
+			@changechecked="updateChecked"
+		></term-popup>
+
+		<!-- 轉贈modal -->
+		<div class="modal inputModal" id="transferModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">請輸入轉贈手機帳號</h1>
+					</div>
+					<validation-observer tag="div" class="modal-body" ref="form">
+						<div class="tipText">*轉贈票券將送出本票券可用次數。</div>
+						<div class="tipText">*一經轉贈後無法收回。</div>
+						<validation-provider
+							tag="div" class="inputBox" 
+							rules="required|phone"
+							v-slot="{ errors,failed }">
+							<input
+								type="number"
+								class="form-control" 
+								placeholder="請輸入手機號碼"
+								v-model.trim="user.account">
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</validation-observer>
+					<div class="modal-footer">
+						<div @click="cancelHandler">取消</div>
+						<div @click="submitHandler">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 成功modal -->
+		<div class="modal msgModal" id="okModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">轉贈成功</h1>
+					</div>
+					<div class="modal-body">
+						<p>您的優惠券已轉贈成功給</p>
+						<p>會員帳號 {{ user.account }}</p>
+					</div>
+					<div class="modal-footer">
+						<a :href="pageUrl.couponList">確認</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 失敗modal -->
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">轉贈失敗</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ errMsg }}</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#failModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+	<script src="./js/vue-components/TermPopup/index.js"></script>
+	<script type="module">
+		import app from './js/page/L2/A2.1_00_01_00.js';
+		app({
+			apiUrl: {
+            couponDetail: 'http://localhost:3034/mmrmProd/my_coupon_detail',
+            couponInfo: 'http://localhost:3034/mmrmProd/coupon_information',
+            brandInfo: 'http://localhost:3034/mmrmProd/brand_information',
+            storeList: 'http://localhost:3034/mmrmProd/search_coupon_available_store',
+            transfer: 'http://localhost:3034/mmrmProd/transfer_my_coupon',
+            briefTerm: 'http://localhost:3034/mmrmProd/brief_term'
+         },
+         pageUrl: {
+            couponList: './A2.1_00_00_03.html',
+            couponBarCode: './A2.1_00_02_00.html',
+            storePoint: './A6_00_00_05.html',
+         }
+		});
+	</script>
+</body>
+
+</html>

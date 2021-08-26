@@ -16,8 +16,8 @@
   background-repeat: no-repeat;
 }
 
-.emptyBlock > .emptyBg {
-  background-image: url("../img/img_member_txnhistory_empty_n@2x.png");
+#app {
+  padding-top: 50px;
 }
 
 .historyList.mb {

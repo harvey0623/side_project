@@ -1,0 +1,73 @@
+@import './utility/index';
+
+$basicGutter: map-get($gutter,basic);
+$inputColor: map-get($fontColor, input);
+
+%listStyle {
+   @extend %bwtFlex;
+   padding: 15px;
+   @include elGutter(margin-bottom, $basicGutter);
+   border-radius: map-get($radius, basic);
+   background-color: #fff;
+}
+
+%arrowStyle {
+   flex: 0 0 15px;
+   height: 15px;
+   background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+   @extend %bgImgCenter;
+}
+
+#app {
+   &.hasPt {
+      padding-top: map-get($heightObj, header);
+   }
+}
+
+.chapter {
+   @include elGutter(margin-bottom, 25px);
+   >.chapterTitle {
+      padding-left: 15px;
+      margin-bottom: $basicGutter / 2;
+      color: $inputColor;
+   }
+   >.pageBox {
+      >.pageList {
+         @extend %listStyle;
+         cursor: pointer;
+         >.title {
+            color: $inputColor;
+            padding-right: 15px;
+         }
+         >.arrowBox {
+            @extend %arrowStyle;
+         }
+      }
+   }
+}
+
+.termList {
+   >a {
+      @extend %listStyle;
+      >.title {
+         color: $inputColor;
+         padding-right: 15px;
+      }
+      >.arrowBox {
+         @extend %arrowStyle;
+      }
+   }   
+}
+
+.termContent {
+   padding: 20px;
+   background-color: #fff;
+   border-radius: map-get($radius, basic);
+   ol, ul {
+      padding-left: 40px;
+      list-style: disc;
+   }
+   img {
+      max-width: 100%;
+   }
+}

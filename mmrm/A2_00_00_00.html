@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>會員專區</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/mobileSelect/index.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_00_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="./lib/mobileSelect/index.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<header id="memberHeader">
+			<div class="logout" onclick="$('#logoutModal').modal('show')"></div>
+			<a href="javascript:;" class="logoBg"></a>
+			<a :href="pageUrl.memberBarcode" class="memberBarcode"></a>
+		</header>
+		<div class="profileBlock">
+			<div class="avatarBox" :style="avatarBg" @click="toggleMenu(true)">
+				<input type="file" accept="image/*" capture hidden ref="file" @change="selectPhoto">
+			</div>
+			<div class="nameBox">
+				<p>{{ profile.name }}</p>
+				<div onclick="$('#verifyModal').modal('show')">會員資料維護</div>
+			</div>
+		</div>
+		<div class="linkBlock">
+			<a :href="pageUrl.transaction" class="linkItem">
+				<div class="icon transaction"></div>
+				<p class="title">消費紀錄</p>
+			</a>
+			<a :href="pointPageUrl" class="linkItem">
+				<div class="icon point"></div>
+				<p class="title">我的點數</p>
+				<span class="count">{{ currentPointInfo.amount }} 點</span>
+			</a>
+			<a :href="pageUrl.couponList" class="linkItem">
+				<div class="icon coupon"></div>
+				<p class="title">我的票券</p>
+				<span class="count">{{ totalTicket }} 張</span>
+			</a>
+			<a :href="pageUrl.friend" class="linkItem">
+				<div class="icon friend"></div>
+				<p class="title">好友推薦</p>
+			</a>
+		</div>
+
+		<div id="iosPicker"></div>
+		<div id="loading" v-show="isLoading"></div>
+		<a :href="pageUrl.home" class="backHome"></a>
+
+		<!-- 錯誤modal -->
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ errorMsg }}</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#failModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 登出 -->
+		<div class="modal msgModal" id="logoutModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>確定要登出 ?</p>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#logoutModal').modal('hide')">取消</div>
+						<div @click="logoutHandler">確認</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 密碼驗證modal -->
+		<div class="modal inputModal" id="verifyModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">請輸入會員密碼</h1>
+					</div>
+					<validation-observer tag="div" class="modal-body" ref="form">
+						<validation-provider
+							tag="div" 
+							class="inputBox" 
+							rules="required|password"
+							v-slot="{ errors, failed }"
+							name="password">
+							<input
+								type="text"
+								class="form-control verifyInput" 
+								placeholder="6 - 12 碼英數字"
+								v-model.trim="user.password">
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</validation-observer>
+					<div class="modal-footer">
+						<div onclick="$('#verifyModal').modal('hide')">取消</div>
+						<div @click="confirmVerify">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+	<script type="module">
+		import app from './js/page/L2/A2_00_00_00.js';
+		app({
+			apiUrl: {
+				logout: 'http://localhost:3034/mmrmProd/logout',
+				memberSummary: 'http://localhost:3034/mmrmProd/member_summary',
+				memberProfile: 'http://localhost:3034/mmrmProd/member_profile',
+				couponList: 'http://localhost:3034/mmrmProd/my_coupon_list',
+				updateMemberPhoto: 'http://localhost:3034/mmrmProd/update_member_photo',
+				verifyPw: 'http://localhost:3034/mmrmProd/verify_password',
+			},
+			pageUrl: {
+				home: './A0_00_00_00.html',
+				memberBarcode: './A2_00_00_01.html',
+				maintain: './A2_03_01_00.html',
+				transaction: './A2_04_00_00.html',
+				point: './A2_01_01_00.html',
+				couponList: './A2.1_00_00_03.html',
+				friend: './A2_06_00_00.html',
+				logoutOk: './A2_00_00_03.html'
+			}
+		});
+	</script>
+</body>
+
+</html>

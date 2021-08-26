@@ -94,7 +94,8 @@ export default function({ apiUrl, pageUrl }) {
             }).catch(err => null);
          },
          redirectToStoreMap() { //導到店家地圖頁面
-            console.log(this.couponId);
+            // location.href = `${this.pageUrl.storePoint}?coupon_id=${this.couponId}`;
+            location.href = `${this.pageUrl.storePoint}?ids=${this.couponInfo.brand_ids[0]}`;
          }
        },
       async mounted() {

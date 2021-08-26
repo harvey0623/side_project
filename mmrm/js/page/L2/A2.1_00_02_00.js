@@ -26,7 +26,7 @@ export default function({ appName, apiUrl }) {
             $('.duration').text(vsprintf(template, [value]));
          }
          if (key === 'bgImg') {
-            if (!value) return;
+            if (!value) return true;
             $('.colorBlock').css({ backgroundImage: `url(${value})` });
          }
          if (key === 'isLoading') $('#loading')[value ? 'show' : 'hide']();

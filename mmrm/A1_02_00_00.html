@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>會員註冊(1)</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A1_02_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<div id="processBox" class="step1"></div>
+
+			<validation-observer tag="div" class="dataOuter" ref="form">
+				<div class="dataBox">
+					<p class="dataTitle">必填資料</p>
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required|phone"
+							v-slot="{ errors,failed }">
+							<input
+								type="number" 
+								class="form-control"
+								placeholder="為您的帳號，共 10 碼" 
+								v-model.trim="user.mobile">
+							<p class="dataName">手機號碼</p>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required|password"
+							vid="a"
+							v-slot="{ errors,failed }">
+							<input
+								type="password" 
+								class="form-control pwInput"
+								placeholder="6 - 12 碼英數字"
+								ref="pwInput"
+								v-model.trim="user.password">
+							<p class="dataName">密碼</p>
+							<div 
+								class="visibleBox" @click="see1Handler"
+								:class="{ show: visible1, hide: !visible1 }"
+							></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required|confirmPw:@a"
+							v-slot="{ errors,failed }">
+							<input
+								type="password" 
+								class="form-control pwInput"
+								placeholder="6 - 12 碼英數字"
+								ref="confirmInput"
+								v-model.trim="user.confirmedPw">
+							<p class="dataName">密碼確認</p>
+							<div 
+								class="visibleBox" @click="see2Handler"
+								:class="{ show: visible2, hide: !visible2 }"
+							></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required"
+							v-slot="{ errors,failed }">
+							<input
+								type="text" 
+								class="form-control"
+								placeholder="請輸入您的姓名" 
+								v-model.trim="user.name">
+							<p class="dataName">姓名</p>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required"
+							v-slot="{ errors,failed }">
+							<select 
+								class="form-control"
+								:class="{selectDown: user.gender === ''}"
+								v-model="user.gender">
+								<option value="" disabled></option>
+								<option 
+									v-for="item in genderList"
+									:key="item.value"
+									:value="item.value"
+								>{{ item.title }}</option>
+							</select>
+							<p class="dataName">性別</p>
+							<div class="downIcon" :class="{ hide: user.gender !== '' }"></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required"
+							v-slot="{ errors, failed }">
+							<select 
+								class="form-control eigthInput"
+								:class="{selectDown: user.security_question === ''}"
+								v-model="user.security_question">
+								<option value="" disabled></option>
+								<option 
+									v-for="item in questionList"
+									:key="item.value"
+									:value="item.value"
+								>{{ item.title }}</option>
+							</select>
+							<p class="dataName">忘記密碼安全問題</p>
+							<div class="downIcon" :class="{ hide: user.security_question !== '' }"></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required"
+							v-slot="{ errors, failed }">
+							<input
+								type="text" 
+								class="form-control sixInput"
+								placeholder="請輸入答案" 
+								v-model.trim="user.security_answer">
+							<p class="dataName">安全問題答案</p>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+			</validation-observer>
+
+			<validation-observer tag="div" class="termOuter" ref="term">
+				<p class="termTitle" v-show="termsList.length !== 0">其他</p>
+				<div 
+					v-for="term in termsList"
+					:key="term.id"
+					class="termRow"
+					@click="showHandler(term.id)">
+					<validation-provider
+						tag="label"
+						rules="term"
+						v-slot="{ errors,failed }">
+						<input
+							:class="{ checked: term.checked }" type="checkBox"
+							disabled v-model="term.checked">
+						<span>{{ term.title }}</span>
+						<p class="errMsg" v-show="failed">
+							{{ `請同意${term.title}` }}
+						</p>
+					</validation-provider>
+					<div class="leftIcon"></div>
+				</div>
+			</validation-observer>
+
+			<div class="btnBox">
+				<button @click="submitHandler" class="variation">下一步</button>
+			</div>
+		</div>
+
+		<div id="loading" v-show="isLoading"></div>
+
+		<!-- 條款組件 -->
+		<term-popup
+			v-for="term in termsList" :key="term.id"
+			:id="term.id"
+			:showpopup.sync="term.show"
+			:checked.sync="term.checked"
+			:title="term.title"
+			:content="term.content"
+			@changechecked="updateChecked"
+		></term-popup>
+
+		<div class="modal msgModal" id="expireModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>請重新填寫表單</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#expireModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/modules/StepController/index.js"></script>
+	<script src="./js/vue-components/TermPopup/index.js"></script>
+	<script>
+		let stepController = new StepController({
+			duration: 60 * 60 * 1000
+		});
+		new Vue({
+			el: '#app',
+			data: () => ({
+				visible1: false,
+				visible2: false,
+				termsList: [],
+				isLoading: false,
+				user: {
+					mobile: '',
+					password: '',
+					confirmedPw: '',
+					name: '',
+					gender: '',
+					security_question: '',
+					security_answer: '',
+				},
+				genderList: [
+					{ title: window.getSystemLang('membergender_male'), value: 'M' },
+					{ title: window.getSystemLang('membergender_female'), value: 'F' },
+					{ title: window.getSystemLang('membergender_secret'), value: 'S' },
+				],
+				questionList: [
+					{ title: window.getSystemLang('membersecurityquestion_sq01'), value: 'sq01' },
+					{ title: window.getSystemLang('membersecurityquestion_sq02'), value: 'sq02' },
+					{ title: window.getSystemLang('membersecurityquestion_sq03'), value: 'sq03' },
+					{ title: window.getSystemLang('membersecurityquestion_sq04'), value: 'sq04' },
+					{ title: window.getSystemLang('membersecurityquestion_sq05'), value: 'sq05' }
+				],
+				apiUrl: {
+					term: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/brief_term'
+				},
+				pageUrl: {
+					step1: './A1_02_00_00.html',
+					step2: './A1_02_01_00.html',
+				}
+			}),
+			methods: {
+				see1Handler() {
+					this.visible1 = !this.visible1;
+					this.setInputType({ status: this.visible1, el: this.$refs.pwInput });
+				},
+				see2Handler() {
+					this.visible2 = !this.visible2;
+					this.setInputType({ status: this.visible2, el: this.$refs.confirmInput });
+				},
+				setInputType({ status, el }) {
+					el.type = status ? 'text' : 'password';
+				},
+				initInputType() { //初始input type
+					this.setInputType({ status: this.visible1, el: this.$refs.pwInput });
+					this.setInputType({ status: this.visible2, el: this.$refs.confirmInput });
+				},
+				showHandler(id) {
+					let obj = this.termsList.find(item => item.id === id);
+					obj.show = true;
+				},
+			 	getTerms() { //取得條款資料
+					return mmrmAxios({
+						url: this.apiUrl.term,
+						method: 'post',
+						data: {
+							type: ['register']
+						}
+					}).then(res => {
+						let { term_information } = res.data.results;
+ 						if (term_information.length === 0) return [];
+						return term_information[0].terms;
+					}).catch(err => null);
+				},
+				convertTerms(data) { //條款資料轉換
+					if (data.length === 0) return [];
+					let termData = stepController.getTerm();
+					return data.reduce((prev, current, index) => {
+						prev.push({ 
+							...current, 
+							show: false, 
+							checked: termData !== null ? termData[index].checked : false
+						});
+						return prev;
+					}, []);
+				},
+				updateChecked({ id }) { //更新條款確認狀態
+					let obj = this.termsList.find(item => item.id === id);
+					obj.checked = true;
+					obj.show = false;
+				},
+				getTermStatus() { //取得條款狀態
+					return this.termsList.reduce((prev, current) => {
+						let { id, checked } = current;
+						prev.push({ id, checked });
+						return prev;
+					}, []);
+				},
+				restartFill() { //重新填寫
+					stepController.clearAll();
+				},
+				checkExpire() { //檢查是否過期
+					let isExpire = stepController.checkIsExpire();
+					if (isExpire) {
+						this.restartFill();
+						$('#expireModal').modal('show');
+					} else {
+						let stepData = stepController.getLS('step1');
+						if (stepData === null) return;
+						for (let step in stepData) {
+							this.user[step] = stepData[step];
+						}
+					}
+				},
+				getRecordData() { //取得紀錄資料
+					if (stepController.checkHasTimestamp()) this.checkExpire();
+					else this.restartFill();
+				},
+				async submitHandler() {
+					let isValid = await this.$refs.form.validate();
+					let isAgree = await this.$refs.term.validate();
+					if (!isValid || !isAgree) return;
+					stepController.setTimestamp();
+					stepController.setStep1(this.user);
+					stepController.setTerm(this.getTermStatus());
+					location.href = this.pageUrl.step2;
+				},
+			},
+			async mounted() {
+				this.isLoading = true;
+				this.initInputType();
+				let termsData = await this.getTerms().then(res => res);
+				this.termsList = this.convertTerms(termsData);
+				this.getRecordData();
+				this.isLoading = false;
+			}
+		});
+	</script>
+</body>
+
+</html>

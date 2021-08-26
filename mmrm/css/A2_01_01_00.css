@@ -39,8 +39,12 @@
   z-index: 3;
 }
 
+#pageHeader {
+  position: static;
+}
+
 .pointIntro {
-  height: 90px;
+  height: 70px;
 }
 
 .pointIntro > .pointTotal {
@@ -110,7 +114,7 @@
 }
 
 .contentBox {
-  padding-top: 180px;
+  padding-top: 210px;
   padding-bottom: 45px;
 }
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>點數說明</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_01_02_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div id="pageHeader">
+			<a href="javascript:;" class="logoBg"></a>
+			<div class="userName">{{ profile.name }}</div>
+		</div>
+		<div class="wrap" v-if="pointData !== null">
+			<div class="introBox">
+				<div class="topBlock">
+					<img :src="pointData.feature_image.url" alt="">
+					<p>{{ pointData.title }}</p>
+				</div>
+				<ul class="descList" v-if="metaList.length !== 0">
+					<li 
+						v-for="(item,index) in metaList"
+						:key="index">
+						<div>{{ item.key }}</div>
+						<div class="colon">:</div>
+						<div>{{ item.value }}</div>
+					</li>
+				</ul>
+			</div>
+			<div class="content" v-html="pointData.content"></div>
+		</div>
+
+		<div id="loading" v-if="isLoading"></div>
+	</div>
+
+	<script type="module">
+		import app from './js/page/L2/A2_01_02_00.js';
+		app({
+			apiUrl: {
+            pointInfo: 'http://localhost:3034/mmrmProd/point_information'
+         }
+		});
+	</script>
+</body>
+
+</html>

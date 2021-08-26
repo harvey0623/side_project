@@ -9,6 +9,7 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          ],
          layoutId: 'a',
          currentPage: 0,
+         totalCoupon: 0,
          couponActivityId: [],
          pointList: [],
          activityList: [],
@@ -47,6 +48,9 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          },
          noActivity() { //沒活動資料
             return !this.pagLoading && !this.hasNextPage && !this.hasActivity;
+         },
+         hasSeeMore() {
+            return !this.searchLoading && !this.hasActivity;
          }
       },
       methods: {
@@ -112,6 +116,7 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                method: 'post',
                data: {}
             }).then(res => {
+               this.totalCoupon = res.data.results.coupon_summary.valid_coupon_amount;
                return res.data.results.point_summary.current_point;
             }).catch(err => null);
          },

@@ -90,8 +90,7 @@ export default function({ apiUrl, pageUrl }) {
          },
          setConfig(configArr) {
             if (configArr.length === 0) return;
-            alert('update');
-            this.vendor.mobile = configArr[0].value.replace(/-/g, '')
+            this.vendor.mobile = configArr[0].value.replace(/-/g, '');
             this.vendor.email = configArr[1].value;
             this.vendor.subject = configArr[2].value;
          },
@@ -105,10 +104,7 @@ export default function({ apiUrl, pageUrl }) {
       async mounted() {
          this.isLoading = true;
          this.getLocalProfile();
-         let [ configArr, memberSummary ] = await Promise.all([
-            this.getSystemConfig(), this.getMemberSummary()
-         ]);
-         this.setConfig(configArr);
+         let memberSummary = await this.getMemberSummary();
          this.setSummaryInfo(memberSummary);
          this.isLoading = false;
       }

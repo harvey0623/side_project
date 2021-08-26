@@ -35,6 +35,10 @@
   background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
 }
 
+#app.hasPt {
+  padding-top: 50px;
+}
+
 .chapter {
   margin-bottom: 25px;
 }

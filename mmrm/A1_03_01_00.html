@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>舊會員升級(2)</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A1_02_01_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<div id="processBox" class="step2"></div>
+
+			<validation-observer tag="div" class="dataOuter" ref="form">
+				<div class="dataBox">
+					<p class="dataTitle">會員資訊</p>
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="email"
+							v-slot="{ errors,failed }">
+							<input
+								type="email" 
+								class="form-control"
+								placeholder="請輸入電子信箱" 
+								v-model.trim="user.email">
+							<p class="dataName">電子信箱</p>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider
+							tag="div" 
+							class="dataRow"
+							rules="birthday"
+							v-slot="{ errors,failed }">
+							<input
+								type="date"
+								class="form-control dateInput"
+								:class="{ hide: user.birthday !== '' }"
+								v-model.trim="user.birthday">
+							<p class="dataName">出生日期</p>
+							<div class="dateDown" :class="{ hide: user.birthday !== '' }"></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+			</validation-observer>
+
+			<div class="tipBox importantDay">
+				重要的日子與類別兩個欄位請同時填寫。提供出生日期可獲得壽心專屬優惠，送出後即無法修改喔 !
+			</div>
+
+			<validation-observer tag="div" class="dataOuter" ref="day">
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules=""
+							v-slot="{ errors,failed }">
+							<select 
+								class="form-control sevenInput"
+								:class="{selectDown: user.memorial_day_type === ''}"
+								v-model="user.memorial_day_type">
+								<option value=""></option>
+								<option v-for="item in memorialList" :key="item.value" :value="item.value">
+									{{ item.title }}
+								</option>
+							</select>
+							<p class="dataName">重要的日子類別</p>
+							<div class="downIcon" :class="{ hide: user.memorial_day_type !== '' }"></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider
+							tag="div" 
+							class="dataRow"
+							:rules="criteriaText"
+							v-slot="{ errors,failed }">
+							<input
+								type="date"
+								class="form-control dateInput"
+								:class="{ hide: user.memorial_day !== '' }"
+								v-model="user.memorial_day"
+								:disabled="!isDateRequired">
+							<p class="dataName">重要的日子</p>
+							<div class="dateDown" :class="{ hide: user.memorial_day !== '' }"></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+			</validation-observer>
+
+			<div class="dataOuter">
+				<div class="dataBox">
+					<p class="dataTitle">好友推薦</p>
+					<div class="friendBlock">
+						<img src="./img/img_friend_register_bg_n@3x.png" alt="">
+						<div class="tipBox center">
+							註冊完成後，逾七天內完成第一筆消費，你跟推薦人可同時獲得 10 點瘋點數喔!
+						</div>
+						<div class="inputBlock">
+							<p>好友邀請碼</p>
+							<input 
+								type="text" 
+								class="form-control"
+								placeholder="請輸入邀請碼(選填)"
+								autocapitalize="characters"
+								v-model.trim="user.referral_code">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="btnBox">
+				<button @click="submitHandler" class="variation">下一步 ( 可略過此步驟，直接註冊 )</button>
+			</div>
+		</div>
+
+		<div id="loading" v-show="isLoading"></div>
+
+		<!-- 邀請碼modal -->
+		<div class="modal msgModal" id="invitedModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>您輸入的好友推薦碼為「{{ user.referral_code }}」請確認是否正確 ?</p>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#invitedModal').modal('hide')">否</div>
+						<div @click="inviteHandler">是</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal msgModal" id="expireModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>請重新填寫表單</p>
+					</div>
+					<div class="modal-footer">
+						<a :href="pageUrl.step1">確認</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p></p>
+					</div>
+					<div class="modal-footer">
+						<div onclick="$('#failModal').modal('hide')">確認</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/modules/StepController/index.js"></script>
+	<script>
+		let stepController = new StepController({
+			duration: 60 * 60 * 1000
+		});
+		new Vue({
+			el: '#app',
+			data: () => ({
+				isLoading: false,
+				user: {
+					email: '',
+					birthday: '',
+					memorial_day_type: '',
+					memorial_day: '',
+					referral_code: ''
+				},
+				memorialList: [
+					{ title: '愛情紀念日', value: 'md01' },
+					{ title: '加薪紀念日', value: 'md02' },
+					{ title: '好友紀念日', value: 'md03' },
+					{ title: '畢業紀念日', value: 'md04' },
+					{ title: '家人生日',  value: 'md05' },
+					{ title: '其他', value: 'md99' }
+				],
+				pageUrl: {
+					step1: './A1_03_00_00.html',
+					step3: './A1_03_02_00.html',
+				}
+			}),
+			computed: {
+				isDateRequired() {
+					return this.user.memorial_day_type !== ''; 
+				},
+				criteriaText() {
+					return this.isDateRequired ? 'required|memorialDay' : '';
+				}
+			},
+			methods: {
+				restartFill() { //重新填寫
+					stepController.clearAll();
+					$('#expireModal').modal('show');
+				},
+				async checkExpire() { //檢查是否過期
+					let isExpire = stepController.checkIsExpire();
+					if (isExpire) {
+						this.restartFill();
+					} else {
+						let stepData = stepController.getLS('step2');
+						if (stepData === null) return;
+						for (let step in stepData) {
+							this.user[step] = stepData[step] || '';
+						}
+						await this.$nextTick();
+						this.user.memorial_day = stepData.memorial_day || '';
+					}
+				},
+				getRecordData() { //取得紀錄資料
+					if (stepController.checkHasTimestamp()) this.checkExpire();
+					else this.restartFill();
+				},
+				inviteHandler() {
+					$('#invitedModal').modal('hide');
+				},
+				async submitHandler() {
+					let isValid1 = await this.$refs.form.validate();
+					let isValid2 = await this.$refs.day.validate();
+					if (!isValid1 || !isValid2) return;
+					stepController.setStep2(this.user);
+					if (this.user.referral_code !== '') {
+						$('#invitedModal').modal('show');
+						return;
+					}
+				},
+			},
+			mounted() {
+				this.getRecordData();
+			},
+			watch: {
+				isDateRequired(val) {
+					this.user.memorial_day = '';
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

@@ -1,7 +1,6 @@
 .header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 50px;
   width: 100%;
   background-color: #fff;
   z-index: 1;
@@ -437,5 +436,9 @@
 
 .chooseBrand.multiple {
   display: none;
+}
+
+.container.pt-141 {
+  padding-top: 141px;
 }
 /*# sourceMappingURL=L4.3_00_01_00.css.map */

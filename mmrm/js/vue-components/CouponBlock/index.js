@@ -1,5 +1,9 @@
 Vue.component('coupon-block', {
    props: {
+      index: {
+         type: Number,
+         required: true
+      },
       info: {
          type: Object,
          required: true
@@ -19,7 +23,7 @@ Vue.component('coupon-block', {
       currentType: {
          type: String,
          default: ''
-      }
+      },
    },
    data() {
       return {
@@ -127,12 +131,14 @@ Vue.component('coupon-block', {
       },
       showGiftIcon() { //是否顯示轉贈icon
          return this.info.coupon_transferred && this.currentType === 'valid';
+      },
+      couponIndex() { //票券流水編號
+         let index = this.index + 1;
+         return index >= 10 ? `${index}` : `0${index}`;
       }
    },
    template: `
-      <a 
-         :href="pageLink" 
-         class="couponBlock" :class="{reverse: reverse}">
+      <a :href="pageLink" class="couponBlock" :class="{reverse: reverse}">
          <div class="couponBlockL">
             <div class="brandInfo" :class="{allBrand:isAllBrand}">
                <div class="brandLogo" :style="brandImage"></div>
@@ -156,6 +162,7 @@ Vue.component('coupon-block', {
          <div class="couponBlockR" :class="{reverse: reverse}" :style="couponTitleBg">
             <div class="usageCover" v-show="!isAvailable">{{ statusText }}</div>
             <div class="giftIcon" v-if="showGiftIcon"></div>
+            <div class="index">{{ couponIndex }}</div>
          </div>
       </a>`
 });

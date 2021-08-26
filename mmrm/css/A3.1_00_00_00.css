@@ -34,14 +34,6 @@
   background-repeat: no-repeat;
 }
 
-.topBlock > .bgBlock, .topBlock > .bgBlock > .statusCover {
-  border-radius: 5px 5px 0 0;
-}
-
-.topBlock.other > .bgBlock, .topBlock.other > .bgBlock > .statusCover, .topBlock.other > .bgBlock > .countdownBlock {
-  border-radius: 0 0 5px 5px;
-}
-
 #app {
   padding-top: 95px;
 }
@@ -95,10 +87,6 @@
   padding: 20px 15px;
 }
 
-.emptyBlock > .emptyBg {
-  background-image: url("../img/img_activity_empty_n_n@2x.png");
-}
-
 .activityList > li {
   background-color: #fff;
   border-radius: 5px;
@@ -124,6 +112,7 @@
   background-size: cover;
   background-position: left top;
   background-image: url("../img/placeholder.jpg");
+  border-radius: 5px 5px 0 0;
 }
 
 @media (min-width: 750px) {
@@ -143,6 +132,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
+  border-radius: 5px 5px 0 0;
 }
 
 .topBlock > .bgBlock > .statusCover > span {
@@ -245,11 +235,17 @@
           flex: 0 0 100px;
   height: 100px;
   background-position: center center;
+  border-radius: 5px;
+}
+
+.topBlock.other > .bgBlock > .statusCover {
+  border-radius: 5px;
 }
 
 .topBlock.other > .bgBlock > .countdownBlock {
   width: 100%;
   height: 25px;
+  border-radius: 0 0 5px 5px;
   background-image: url("../img/img_activity_countdown_list_n@2x.png");
 }
 

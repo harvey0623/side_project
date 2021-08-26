@@ -1,0 +1,134 @@
+@import './utility/index';
+
+$inputColor: map-get($fontColor, input);
+$basicRadius: map-get($radius, basic);
+
+#app {
+   padding-top: map-get($heightObj, header);
+}
+
+.historyList {
+   &.mb {
+      margin-bottom: 20px;
+   }
+}
+
+.consumptionItem {
+   position: relative;
+   display: block;
+   padding: 20px 20px;
+   @include elGutter(margin-bottom, 15px);
+   background-color: #fff;
+   border-radius: $basicRadius;
+   >.infoBox {
+      @extend %bwtFlex;
+      margin-bottom: 15px;
+      color: map-get($fontColor, formTitle);
+      >div {
+         display: flex;
+         align-items: center;
+      }
+   }
+   >.normalColor {
+      color: $inputColor;
+   }
+   >.storeName {
+      margin-bottom: 5px;
+   }
+}
+
+.brandBg {
+   @include size(20px);
+   margin-right: 5px;
+   background-image: url("../img/logo@2x.png");
+   @extend %bgImgCenter;
+}
+
+.arrowBg {
+   @include size(15px);
+   margin-left: 5px;
+   background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+   @extend %bgImgCenter;
+}
+
+.returnBg {
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   @include size(45px);
+   transform: translate(-22px, -22px);
+   background-image: url("../img/img_member_txnhistory_refund_n@2x.png");
+   @extend %bgImgCenter;
+}
+
+.tipBox {
+   margin-top: 20px;
+}
+
+//====detail page
+.groupBlock {
+   @include elGutter(margin-bottom, 20px);
+}
+
+.groupTitle {
+   margin-bottom: 10px;
+   padding-left: 8px;
+   color: $inputColor;
+}
+
+.groupInfo {
+   padding: 20px 20px;
+   background-color: #fff;
+   border-radius: $basicRadius;
+   color: $inputColor;
+   >.group-row {
+      @include elGutter(margin-bottom, 10px);
+      >.group-content {
+         display: flex;
+         align-items: flex-top;
+         @include elGutter(margin-bottom, 10px);
+         >.title {
+            width: 60px;
+         }
+         >.colon {
+            margin: 0 5px;
+         }
+         >.content {
+            flex: 1;
+            word-break: break-all;
+         }
+         &.space_between {
+            justify-content: space-between;
+         }
+         &.tableHeader {
+            color: map-get($fontColor, formTitle);
+         }
+      }
+   }
+}
+
+.tableOuter {
+   padding: 15px;
+   background-color: #fff;
+   border-radius: map-get($radius, basic);
+}
+
+.consume_table {
+   width: 100%;
+   th, td {
+      padding: 7px;
+      &:first-child {
+         text-align: left;
+      }
+      &:last-child {
+         text-align: right;
+      }
+   }
+   th {
+      font-weight: normal;
+      color: map-get($fontColor, formTitle);
+   }
+   td {
+      color: map-get($fontColor, input);
+   }
+}

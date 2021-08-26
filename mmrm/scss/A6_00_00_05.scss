@@ -1,0 +1,93 @@
+@import './utility/index';
+
+$basicRadius: map-get($radius, basic);
+$itemHeight: 120px;
+$headerHeight: map-get($heightObj, header);
+
+#app {
+   padding-top: $headerHeight + 40px;
+}
+
+.filterPanel {
+   position: fixed;
+   top: $headerHeight;
+   left: 0;
+   @include size(100%, 40px);
+   padding: 10px 15px;
+   background-color: #fff;
+   display: flex;
+   justify-content: flex-end;
+   >.filterText {
+      color: map-get($fontColor, search);
+      >.count {
+         margin-left: 5px;
+         @include size(25px);
+         line-height: 25px;
+         color: #fff;
+         background-color: #528fff;
+         border-radius: 50%;
+         text-align: center;
+         font-size: 12px;
+         transform: translateY(-2px);
+      }
+   }
+}
+
+.emptyBlock {
+   >.emptyBg {
+      background-image: url("../img/img_store_empty_n_n@2x.png");
+   }
+}
+
+.storePoint {
+   display: block;
+   @include size(100%, $itemHeight);
+   @include elGutter(margin-bottom, 15px);
+   background-color: #fff;
+   border-radius: $basicRadius;
+   @extend %clearFix;
+   overflow: hidden;
+   >* {
+      float: left;
+   }
+   >.storeBg {
+      @include size($itemHeight, 100%);
+      background-image: url("../img/placeholder.jpg");
+      background-size: cover;
+      background-position: center center;
+      border-radius: $basicRadius 0 0 $basicRadius;
+   }
+   >.storeDesc {
+      width: calc(100% - #{$itemHeight});
+      padding: 15px 15px 5px;
+      >div {
+         display: flex;
+         align-items: flex-start;
+         flex-wrap: no-wrap;
+         @include elGutter(margin-bottom, 5px);
+         color: map-get($fontColor, input);
+         font-size: 14px;
+         &.contact {
+            flex-wrap: wrap;
+         }
+         >* {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+         }
+      }
+      .brandLogo {
+         flex: 0 0 20px;
+         height: 20px;
+         background-image: url("../img/logo@2x.png");
+         background-size: cover;
+      }
+      .storeName {
+         margin-left: 5px;
+         color: map-get($fontColor, formTitle);
+      }
+      .distance {
+         margin-left: 5px;
+      }
+   }
+}

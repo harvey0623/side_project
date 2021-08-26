@@ -1,0 +1,36 @@
+@import './utility/index';
+
+.importantDay {
+   padding: 0 15px;
+}
+
+.friendBlock {
+   padding: 20px;
+   background-color: #fff;
+   border-radius: map-get($radius, basic);
+   >* {
+      @include elGutter(margin-bottom, 20px);
+   }
+   >img {
+      display: block;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+   }
+   >.tipBox {
+      padding: 0 15px;
+   }
+   >.inputBlock {
+      position: relative;
+      >p {
+         position: absolute;
+         left: 10px;
+         top: 12px;
+         color: map-get($fontColor, formTitle);
+      }
+      >input {
+         text-align: right;
+         padding-left: 90px;
+      }
+   }
+}

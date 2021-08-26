@@ -306,3 +306,7 @@ ul.slick-dots li button{
 ul.slick-dots li.slick-active button {
   background-color: var(--variationMain);
 }
+
+body {
+	padding-top: 50px;
+}

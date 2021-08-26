@@ -1,0 +1,64 @@
+@import './utility/index';
+
+$pageRadius: 5px;
+
+#app {
+   padding-top: map-get($heightObj, basic);
+}
+
+.chapterList {
+   @include elGutter(margin-bottom, 25px);
+   >.chapterTitle {
+      padding-left: 10px;
+      color: map-get($fontColor, input);
+      margin-bottom: map-get($gutter, basic) / 2;
+   }
+}
+
+.pageList {
+   display: flex;
+   align-items: flex-start;
+   height: 100px;
+   @include elGutter(margin-bottom, map-get($gutter, basic));
+   >.pageBg {
+      flex: 0 0 140px;
+      height: 100%;
+      border-top-left-radius: $pageRadius;
+      border-bottom-left-radius: $pageRadius;
+      background-image: url("../img/placeholder.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+   }
+   >.pageDesc {
+      flex: 1;
+      height: 100%;
+      padding: 10px 15px;
+      background-color: #fff;
+      border-top-right-radius: $pageRadius;
+      border-bottom-right-radius: $pageRadius;
+      >.pageTitle {
+         margin-bottom: 5px;
+         color: map-get($fontColor, formTitle);
+         @include setWebkitLimitRow(2);
+      }
+      >.pageNumber {
+         text-align: right;
+         color: map-get($fontColor, input);
+      }
+   }
+}
+
+//===側邊欄修改
+.filterItem {
+   padding-right: 0px;
+   >.numberText {
+      margin-right: 5px;
+      color: map-get($fontColor, input);
+   }
+   >.arrowBg {
+      @include size(15px);
+      background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+      @extend %bgImgCenter;
+   }
+}

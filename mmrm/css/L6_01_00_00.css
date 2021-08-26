@@ -302,3 +302,12 @@ window{
 .chooseBrand.multiple {
 	display: none;
 }
+
+/* 2021/08/24 */
+body {
+	padding-top: 50px;
+}
+
+#filter_menu {
+	z-index: 10;
+}

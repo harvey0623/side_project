@@ -1,4 +1,16 @@
-.utilityBlock > div {
+.profileBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mainFunction, .subFunction {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,7 +22,7 @@
           align-items: center;
 }
 
-.profileBlock > .greetBox, .utilityItem > .inner {
+.function-inner, .utilityItem > .inner {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -24,36 +36,105 @@
 
 .profileBlock {
   position: relative;
-  min-height: 250px;
+  height: 220px;
   background-color: gray;
 }
 
 .profileBlock > .greetBox {
-  color: #fff;
-  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .profileBlock > .greetBox > .avatar {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 15px auto;
+  width: 90px;
+  height: 90px;
+  margin-right: 15px;
   background-image: url("../img/img_memberhome_pic_n_n@2x.png");
   background-size: cover;
+  background-position: center center;
   border-radius: 50%;
 }
 
-.profileBlock > .greetBox > p {
-  font-size: 16px;
+.profileBlock > .greetBox > .rightInfo > p {
+  margin-bottom: 3px;
+  color: #fff;
+}
+
+.profileBlock > .greetBox > .rightInfo > a {
+  color: #fff;
+}
+
+.profileBlock > .greetBox > .rightInfo > a:after {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 3px;
+  -webkit-transform: translateY(3.5px);
+          transform: translateY(3.5px);
+  background-image: url("../img/btn_member_indicatorright_n_n@2x.png");
+  background-size: contain;
 }
 
 .utilityBlock {
   padding: 15px;
 }
 
-.utilityItem {
+.mainFunction {
+  margin-bottom: 12px;
+  border: 1px solid #C9C9C9;
+  border-radius: 5px;
+}
+
+.mainFunction > .function-item {
   position: relative;
   width: 31%;
   padding-top: 31%;
+}
+
+.mainFunction > .function-item:after {
+  content: '';
+  position: absolute;
+  right: -5.5%;
+  top: 20%;
+  width: 1px;
+  height: 60%;
+  background-color: #c9c9c9;
+}
+
+.mainFunction > .function-item:last-child:after {
+  display: none;
+}
+
+.function-inner {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.function-inner > .title {
+  color: #292929;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.function-inner > .itemName {
+  color: var(--variationMain);
+  font-size: 15px;
+}
+
+.function-inner > .itemName > .count {
+  font-size: 24px;
+  line-height: initial;
+}
+
+.utilityItem {
+  position: relative;
+  width: 31%;
+  padding-top: calc(31% - 2px);
   border-radius: 5px;
   border: 1px solid #C9C9C9;
 }
@@ -63,46 +144,47 @@
   text-align: center;
 }
 
-.topMember {
-  margin-bottom: 10px;
-}
-
-.topMember .title {
-  margin-bottom: 5px;
-  color: #292929;
-  font-size: 16px;
-}
-
-.topMember .itemName {
-  color: var(--variationMain);
-  font-size: 15px;
-}
-
-.topMember .itemName > .count {
-  font-size: 24px;
-  line-height: initial;
-}
-
-.bottomMember .iconBox {
+.utilityItem > .inner > .iconBox {
   width: 40px;
   height: 40px;
   margin: 0 auto 7px;
   background-size: contain;
 }
 
-.bottomMember .iconBox.service {
-  background-image: url("../img/btn_home_service_n_n@2x.png");
+.utilityItem > .inner > .iconBox.meals {
+  background-image: url("../img/btn_home_takeout_n_n@2x.png");
 }
 
-.bottomMember .iconBox.gift {
+.utilityItem > .inner > .iconBox.gift {
   background-image: url("../img/btn_home_couponactivity_n_n@2x.png");
 }
 
-.bottomMember .iconBox.member {
-  background-image: url("../img/btn_home_memberhome_n_n@2x.png");
+.utilityItem > .inner > .iconBox.store {
+  background-image: url("../img/btn_home_store_n_n@2x.png");
 }
 
-.bottomMember .itemName {
+.utilityItem > .inner > .iconBox.eat {
+  background-image: url("../img/btn_home_brand_n_n@2x.png");
+}
+
+.utilityItem > .inner > .iconBox.news {
+  background-image: url("../img/btn_home_news_n_n@2x.png");
+}
+
+.utilityItem > .inner > .itemName {
   color: #292929;
+}
+
+.subFunction {
+  margin-bottom: 12px;
+}
+
+.subFunction:last-child {
+  margin-bottom: 0;
+}
+
+.subFunction.half > .utilityItem {
+  width: 48%;
+  padding-top: 30%;
 }
 /*# sourceMappingURL=A0_00_00_00.css.map */

@@ -74,7 +74,7 @@ a:focus {
   outline: none;
 }
 
-#normalHeader, .menuBlock {
+#normalHeader, .popup-panel, .menuBlock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -98,6 +98,14 @@ a:focus {
           align-items: center;
 }
 
+#loading:after {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
 .couponBlockL > .couponTitle, .couponBlockL > .detail > p {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -116,9 +124,9 @@ a:focus {
   clear: both;
 }
 
-.hookCheckbox, .popupHeader > .popupClose, .toggleSidebar,
+.hookCheckbox, .popup-panel > .popup-toggle:after, .popupHeader > .popupClose, .toggleSidebar,
 .backHome,
-.backCoupon, .emptyBlock > .emptyBg, .layoutBox > .layout, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .sidebarFilter > li > .dateOuter > .arrowBox, .filterItem > .arrowBox, .filterItem > .layout, .menuBlock .iconBg, .pointModal .closeBg, .selectBlock > .selectRow > .selectOuter > .downIcon {
+.backCoupon, .emptyBlock > .emptyBg, .layoutBox > .layout, .seeMore > a > .bg, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .sidebarFilter > li > .dateOuter > .arrowBox, .filterItem > .arrowBox, .filterItem > .layout, .menuBlock .iconBg, .pointModal .closeBg, .selectBlock > .selectRow > .selectOuter > .downIcon {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -296,6 +304,10 @@ body.hide {
   overflow: hidden;
 }
 
+#app.hasPt {
+  padding-top: 50px;
+}
+
 [v-cloak] {
   display: none;
 }
@@ -386,6 +398,30 @@ body.hide {
   text-align: center;
 }
 
+.popup-panel {
+  position: fixed;
+  left: 0;
+  top: 50px;
+  width: 100%;
+  height: 40px;
+  background-color: #797979;
+}
+
+.popup-panel > .popup-toggle {
+  color: #fff;
+  cursor: pointer;
+}
+
+.popup-panel > .popup-toggle:after {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-image: url("../img/btn_filter_category_darkbg_n@3x.png");
+  -webkit-transform: translate(5px);
+          transform: translate(5px);
+}
+
 .popupHeader {
   position: relative;
   height: 45px;
@@ -425,6 +461,10 @@ body.hide {
 
 .backHome {
   background-image: url("../img/btn_common_floating_home_n_n.png");
+}
+
+.backHome.translate {
+  bottom: 80px;
 }
 
 .backCoupon {
@@ -487,6 +527,22 @@ body.hide {
   margin: 0 auto 46px;
 }
 
+.emptyBlock > .emptyBg.noBrand {
+  background-image: url("../img/../img/img_edm_empty_n_n@2x.png");
+}
+
+.emptyBlock > .emptyBg.noCoupon {
+  background-image: url("../img/img_mycoupon_list_empty_n@2x.png");
+}
+
+.emptyBlock > .emptyBg.noTransaction {
+  background-image: url("../img/img_member_txnhistory_empty_n@2x.png");
+}
+
+.emptyBlock > .emptyBg.noActivity {
+  background-image: url("../img/img_activity_empty_n_n@2x.png");
+}
+
 .emptyBlock > p {
   color: #797979;
   text-align: center;
@@ -524,6 +580,35 @@ body.hide {
 
 .layoutBox > .layoutB.active {
   background-image: url("../img/btn_filter_view_list_h@2x.png");
+}
+
+.seeMore {
+  position: fixed;
+  left: 0;
+  bottom: 20px;
+  width: 100%;
+  height: 45px;
+  padding: 0 40px;
+}
+
+.seeMore > a {
+  position: relative;
+  display: block;
+  height: 100%;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  background-color: var(--variationMain);
+  line-height: 45px;
+}
+
+.seeMore > a > .bg {
+  position: absolute;
+  left: 15px;
+  top: 8px;
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/img_mycoupon_list_morecoupon_n@2x.png");
 }
 
 .formLayout {
@@ -1122,7 +1207,7 @@ body.hide {
   height: 120px;
   background-color: #fff;
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .couponBlock:last-child {
@@ -1260,6 +1345,22 @@ body.hide {
   background-image: url("../img/img_mycoupon_tag_give_n.png");
   background-size: contain;
   z-index: 8;
+}
+
+.couponBlockR > .index {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-right: 10px;
+  padding-left: 10px;
+  -webkit-transform: translateX(10px);
+          transform: translateX(10px);
+  color: #fff;
+  background-color: var(--variationSub);
+  border-radius: 10px 0 0 10px;
+  font-size: 12px;
+  z-index: 8;
+  display: none;
 }
 
 .pointCard {
@@ -1778,9 +1879,6 @@ body.hide {
 
 #loading {
   position: fixed;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   left: 0;
   top: 0;
   width: 100%;
@@ -1789,12 +1887,14 @@ body.hide {
   z-index: 1200;
 }
 
+#loading.loading {
+  display: none;
+}
+
 #loading:after {
   content: '';
-  display: block;
   width: 120px;
   height: 120px;
-  margin: auto;
   border: 5px solid var(--variationMain);
   border-top-color: transparent;
   border-radius: 50%;
@@ -1804,23 +1904,23 @@ body.hide {
 
 @-webkit-keyframes rotate {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
 @keyframes rotate {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -1843,7 +1943,7 @@ body.hide {
 
 .termBody {
   height: calc(100vh - 45px);
-  padding: 20px 20px 55px;
+  padding: 20px 20px 145px;
   background-color: #f0f0f0;
   overflow: auto;
 }
@@ -1881,5 +1981,34 @@ body.hide {
 .termFooter.termActiveButton {
   background-color: var(--variationMain);
   color: #fff;
+}
+
+.menu-brand-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #f0f0f0;
+  z-index: 10;
+}
+
+.menu-brand-item {
+  width: 33.33%;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+.menu-brand-item > .logo {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 5px;
+  background-size: contain;
+  background-image: url("../img/logo@2x.png");
+}
+
+.menu-brand-item > p {
+  padding: 0 5px;
+  text-align: center;
 }
 /*# sourceMappingURL=main.css.map */

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>消費紀錄</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_04_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/dayjs/dayjs.min.js"></script>
+	<script src="./lib/dayjs/isSameOrAfter.min.js"></script>
+	<script src="./lib/dayjs/isSameOrBefore.min.js"></script>
+	<script src="./lib/dayjs/isBetween.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div id="pageHeader">
+			<a href="javascript:;" class="logoBg"></a>
+			<div class="userName">{{ profile.name }}</div>
+		</div>
+		<div class="mycontainer">
+			<div class="historyList">
+				<consumption-item
+					v-for="history in historyList"
+					:key="history.sale_id"
+					:brand_logo="history.brandLogo"
+					:brand_name="history.brnd_name"
+					:invamt="history.sale_invamt"
+					:store_name="history.stor_name"
+					:sale_id_p="history.sale_id_p"
+					:date="history.d_sale"
+					:time="history.t_sale"
+					:page_url="history.pageUrl"
+				></consumption-item>
+			</div>
+
+			<div class="emptyBlock" v-show="shwoEmptyBlock">
+				<div class="emptyBg noTransaction"></div>
+				<p>您目前沒有消費紀錄喔 !</p>
+			</div>
+
+			<div class="tipBox center" v-show="pagLoading">資料加載中</div>
+		</div>
+
+		<div id="loading" v-if="isLoading"></div>
+
+		<div class="toggleSidebar" @click="turnOn = true"></div>
+
+		<transition name="fade">
+			<div id="maskCover" v-if="turnOn" @click="turnOn = false"></div>
+		</transition>
+
+		<history-sidebar
+			:turnon="turnOn"
+			:startdate.sync="dateRange.start"
+			:enddate.sync="dateRange.end"
+			:tipmsg.sync="tipMsg"
+			@search="searchHandler"
+		></history-sidebar>
+
+		<!-- 錯誤提示 -->
+		<div class="modal msgModal" id="tipModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p v-html="tipMsg"></p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#tipModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+	<script src="./js/vue-components/HistorySideBar/index.js"></script>
+	<script src="./js/vue-components/ConsumptionItem/index.js"></script>
+	<script type="module">
+		import app from './js/page/L2/A2_04_00_00.js';
+		app({
+			apiUrl: {
+				searchBrand: 'http://localhost:3034/mmrmProd/search_brand',
+				brandInfo: 'http://localhost:3034/mmrmProd/brand_information',
+				memberCard: 'http://localhost:3034/mmrmProd/member_card',
+            tradeList: 'http://localhost:3034/wowprime/function/encrypt_relay',
+         },
+			pageUrl: {
+				detail: './A2_04_01_00.html'
+			}
+		});
+	</script>
+</body>
+
+</html>

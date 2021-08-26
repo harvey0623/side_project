@@ -61,6 +61,7 @@ window{
   padding:0px;
   position:relative;
   background-color: #fff;
+  display: none;
 }
 #index.multiple {
   display: none;
@@ -345,4 +346,9 @@ window{
     /*opacity: 0;*/
     opacity: 1;
     z-index: 1002;
+}
+
+/*  */
+body {
+	padding-top: 50px;
 }

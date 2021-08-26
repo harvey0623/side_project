@@ -5,6 +5,7 @@ export default function ({ apiUrl, pageUrl }) {
    let today = dayjs();
    new Vue({
       el: '#app',
+      mixins: [localProfile],
       data: () => ({
          brandList: [],
          historyList: [],
@@ -70,7 +71,7 @@ export default function ({ apiUrl, pageUrl }) {
                      "merchant": "wowprime_cct",
                      "http_method": "POST",
                      "body": {
-                        "jrsyring": "", //授權金鑰
+                        "jrsyring": "666666666666666666666666666666666666", //授權金鑰
                         "d_rvnm_f": dayjs(this.dateRange.start).format('YYYYMMDD'), //開始日
                         "d_rvnm_t": dayjs(this.dateRange.end).format('YYYYMMDD'), //結束日
                         "pageat": this.nextPage.toString(), //頁碼
@@ -79,7 +80,15 @@ export default function ({ apiUrl, pageUrl }) {
                      },
                   }
                }
-            }).then(res => res.data.results.data.payload)
+            }).then(res => {
+               return res.data.results.data.payload;
+            }).catch(err => {
+               return {
+                  "isdone": "F",
+                  "message": "error",
+                  "data": { "sale": [], "lastdata": "0", "lastpage": "0" }
+               }
+            });
          },
          createHistoryList(saleArr) {
             if (saleArr.length === 0) return [];
@@ -127,6 +136,7 @@ export default function ({ apiUrl, pageUrl }) {
       async mounted() {
          this.isLoading = true;
          window.addEventListener('scroll', this.scrollHandler);
+         this.getLocalProfile();
          this.memberCard = await this.getMemberCard();
          let brandIds = await this.getBrandList();
          this.brandList = await this.getBrandInfo(brandIds);

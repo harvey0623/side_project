@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>點數資訊</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_01_01_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./lib/dayjs/dayjs.min.js"></script>
+	<script src="./lib/dayjs/isSameOrAfter.min.js"></script>
+	<script src="./lib/dayjs/isSameOrBefore.min.js"></script>
+	<script src="./lib/dayjs/isBetween.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="fixBox">
+			<div id="pageHeader">
+				<a href="javascript:;" class="logoBg"></a>
+				<div class="userName">{{ profile.name }}</div>
+			</div>
+			<div class="pointIntro">
+				<div class="pointTotal" v-if="currentPoint !== null">
+					<div class="icon"></div>
+					<p class="count">{{ currentPoint.amount }}</p>
+					<span>點</span>
+				</div>
+			</div>
+			<div class="expireBox">
+				<div class="inner" @click="showExpireDetail">
+					<p>30天內到期的點數</p>
+					<div>
+						<span class="expirePoint">{{ expireAmount }}</span>
+						<span>點</span>
+						<span class="pointArrow"></span>
+					</div>
+				</div>
+			</div>
+			<div class="pointTab">
+				<div 
+					v-for="(value, key) in tabInfo" 
+					:key="key"
+					:class="{ active: currentPointType === key }"
+					@click="changePointType(key)">
+					{{ value.title }}
+				</div>
+			</div>
+		</div>
+
+		<div class="contentBox">
+			<div class="noRecord" v-show="isNoAccmulate">
+				<div class="pigBg"></div>
+				<div class="tipBox center">
+					您沒有加點記錄呦！若您已經有消費但尚未獲得點數，您的點數會在交易完成後入帳，或請洽詢客服人員。
+				</div>
+			</div>
+			<div class="noRecord" v-show="isNoDiscount">
+				<div class="pigBg"></div>
+				<div class="tipBox center">您沒有扣點紀錄喔 !</div>
+			</div>
+			<ul class="pointList">
+				<point-list
+					v-for="item in pointHistory"
+					:key="item.timeStamp"
+					:point="item"
+					@showdetail="showDetailHandler"
+				></point-list>
+			</ul>
+			<div v-show="pagLoading" class="pagTip">資料加載中...</div>
+			<div v-show="reachBottom" class="pagTip">已經到最底囉～</div>
+		</div>
+
+		<transition name="fade">
+			<div id="maskCover" v-if="turnOn" @click="turnOn = false"></div>
+		</transition>
+
+		<point-sidebar
+			:turnon="turnOn"
+			:startdate.sync="dateRange.start"
+			:enddate.sync="dateRange.end"
+			:tipmsg.sync="tipMsg"
+			@history="updateHandler"
+		></point-sidebar>
+
+		<div class="toggleSidebar" @click="turnOn = !turnOn"></div>
+
+		<div id="loading" v-if="isLoading"></div>
+
+		<div class="fixBlock" @click="descHandler">點數說明</div>
+
+		<!-- 點數到期提示modal -->
+		<div class="modal pointModal" id="expireModal" data-backdrop="static">
+			<div class="closeBg" onclick="$('#expireModal').modal('hide');"></div>
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header modal-point-header">
+						<div>30天內到期的點數</div>
+						<div>
+							<span class="pointNumber">{{ expireAmount }}</span>點
+						</div>
+					</div>
+					<div class="modal-body">
+						<p class="expireTitle">30天內共 {{ expireTotal }} 筆到期點數</p>
+						<ul class="expireList">
+							<li v-for="(item,index) in expireList" :key="index">
+								<div>{{ splitDateTime(item.datetime) }}</div>
+								<div class="textBlock">到期</div>
+								<div class="pointBlock">
+									<span class="pointNumber">{{ item.amount }}</span>
+									<span>點</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<div>總點數</div>
+						<div>
+							<span class="pointNumber">{{ expireAmount }}</span>點
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 歷史點數modal -->
+		<div class="modal pointModal" id="historyModal" data-backdrop="static">
+			<div class="closeBg" onclick="$('#historyModal').modal('hide');"></div>
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content" v-if="targetHistory !== null">
+					<div class="modal-header modal-point-header">
+						<div>{{ targetHistory.transaction_type }}</div>
+						<div>
+							<span class="pointNumber">{{ amountText }}</span>點
+						</div>
+					</div>
+					<div class="modal-body">
+						<ul class="historyList">
+							<li>
+								<div class="title">交易序號</div>
+								<div class="colon">:</div>
+								<div class="content">{{ targetHistory.transaction_id }}</div>
+							</li>
+							<li>
+								<div class="title">點數交易</div>
+								<div class="colon">:</div>
+								<div class="content">{{ targetHistory.datetime }}</div>
+							</li>
+							<li v-for="(item,index) in metaList" :key="index">
+								<div class="title">{{ item.key }}</div>
+								<div class="colon">:</div>
+								<div class="content">{{ item.value }}</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 查詢錯誤提示 -->
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p v-html="tipMsg"></p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#failModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/PointSideBar/index.js"></script>
+	<script src="./js/vue-components/PointList/PointItem.js"></script>
+	<script src="./js/vue-components/PointList/index.js"></script>
+	<script type="module">
+		import app from './js/page/L2/A2_01_01_00.js';
+		app({
+			apiUrl: {
+            pointInfo: 'http://localhost:3034/mmrmProd/point_information',
+            memberSummary: 'http://localhost:3034/mmrmProd/member_summary',
+            expiredPoint: 'http://localhost:3034/mmrmProd/point_due_to_expire',
+            pointHistory: 'http://localhost:3034/mmrmProd/point_history'
+         },
+         pageUrl: {
+				searchPage: './A2_01_01_06.html',
+            pointDesc: './A2_01_02_00.html'
+         }
+		});
+	</script>
+
+</body>
+
+</html>

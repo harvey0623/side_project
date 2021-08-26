@@ -1,0 +1,93 @@
+#app {
+  padding-top: 90px;
+}
+
+.slideBox {
+  padding: 40px 15px 15px;
+}
+
+.slideBox .swiper-container {
+  padding-bottom: 30px;
+}
+
+.slideBox .swiper-container .swiper-slide {
+  width: 80%;
+}
+
+.slideBox .swiper-container .swiper-pagination.hide {
+  display: none;
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: 0;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--variationMain);
+}
+
+.swiper-content {
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.swiper-content > * {
+  margin-bottom: 8px;
+}
+
+.swiper-content > *:last-child {
+  margin-bottom: 0;
+}
+
+.swiper-content > h2 {
+  font-size: 16px;
+  color: #292929;
+}
+
+.swiper-content > .duration {
+  color: #797979;
+  font-size: 14px;
+}
+
+.swiper-content > .brandInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.swiper-content > .brandInfo > .logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  background-image: url("../img/logo@2x.png");
+  background-size: contain;
+}
+
+.swiper-content > .brandInfo > .name {
+  color: #292929;
+}
+
+.swiper-content > .menuCover {
+  height: 350px;
+  background-image: url("../img/placeholder.jpg");
+  background-position: center center;
+  background-size: cover;
+}
+
+.menu-brand-popup > .popup-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 25px 15px;
+  height: calc(100vh - 45px);
+  overflow: auto;
+}
+/*# sourceMappingURL=A4.5_00_00_02.css.map */

@@ -169,6 +169,7 @@ body {
 .activityDesc {
   color: #797979;
   background-color: #fff;
+  word-break: break-all;
 }
 
 .activityDesc ol, .activityDesc ul {

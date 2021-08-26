@@ -1,6 +1,7 @@
 export default function ({ apiUrl, pageUrl }) {
    new Vue({
       el: '#app',
+      mixins: [localProfile],
       data: () => ({
          tempHistory: [],
          pointHistory: [],
@@ -117,6 +118,7 @@ export default function ({ apiUrl, pageUrl }) {
       async mounted() {
          this.isLoading = true;
          window.addEventListener('scroll', this.scrollHandler);
+         this.getLocalProfile();
          this.getQuery();
          await this.getPagination();
          this.isLoading = false;

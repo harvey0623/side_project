@@ -1,0 +1,56 @@
+$pointInputColor: map-get($fontColor, input);
+$pointBasicGutter: map-get($gutter, basic);
+
+.pointList {
+   padding: 20px 15px;
+   >li {
+      @include elGutter(margin-bottom, 25px);
+      >.title {
+         padding-left: 15px;
+         margin-bottom: map-get($gutter, basic);
+         color: $pointInputColor;
+      }
+      .pointContent {
+         @include elGutter(margin-bottom, $pointBasicGutter);
+         padding: 25px;
+         background-color: #fff;
+         border-radius: map-get($radius, basic);
+         cursor: pointer;
+      }
+   }
+}
+
+.pointContent {
+   >.summaryBox {
+      @extend %bwtFlex;
+      margin-bottom: $pointBasicGutter;
+      color: map-get($fontColor, formTitle);
+      >.payment {
+         &:after {
+            content: '';
+            display: inline-block;
+            @include size(25px);
+            margin-left: 5px;
+            background-image: url("../img/img_member_pointhistory_list_point@3x.png");
+            background-size: contain;
+            transform: translateY(4px);
+         }
+      }
+   }
+   >.invoiceInfo {
+      >.invoiceRow {
+         display: flex;
+         align-items: flex-start;
+         color: $pointInputColor;
+         @include elGutter(margin-bottom, 7.5px);
+         >.colon {
+            margin-left: 15px;
+            margin-right: 10px;
+         }
+         >.value {
+            flex: 1;
+            word-break: break-all;
+         }
+      }
+   }
+}

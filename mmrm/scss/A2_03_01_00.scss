@@ -1,0 +1,42 @@
+@import './utility/index';
+$basicHeight: map-get($heightObj, basic);
+$inputColor: map-get($fontColor, input);
+
+.dataRow {
+   >.block {
+      position: relative;
+      height: $basicHeight;
+      line-height: $basicHeight;
+      padding-right: 15px;
+      padding-left: 70px;
+      text-align: right;
+      color: $inputColor;
+      &.bind {
+         padding-right: 15px;
+      }
+      a,
+      span {
+         display: block;
+         width: 100%;
+         color: $inputColor;
+      }
+      .leftIcon {
+         height: 100%;
+         background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+         background-size: 15px 15px;
+         background-repeat: no-repeat;
+         background-position: right center;
+      }
+   }
+}
+
+.btnBox {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   @include size(100%, $basicHeight);
+   padding: 0;
+   >button {
+      border-radius: 0px;
+   }
+}

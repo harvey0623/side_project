@@ -1,0 +1,29 @@
+#loading {
+	position: fixed;
+	left: 0;
+	top: 0;
+	@include size(100%);
+	background-color: rgba(#000, 0.5);
+	z-index: 1200;
+	&.loading { 
+		display: none;
+	}
+	&:after {
+		content: '';
+		@extend %posCenter;
+		@include size(120px);
+		border: 5px solid var(--variationMain);
+		border-top-color: transparent;
+		border-radius: 50%;
+		animation: rotate 1s linear infinite;
+	}
+}
+
+@keyframes rotate {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}

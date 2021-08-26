@@ -1,0 +1,214 @@
+@mixin flexBetween {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+@mixin flexCenter {
+   display: flex;
+   align-items: center;
+   justify-content:center;
+}
+
+@mixin linearGradient1 {
+   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5)15%, rgba(255, 255, 255, 0)100%);
+   background: -moz-linear-gradient(0deg, rgba(0, 0, 0, 0.5)15%, rgba(255, 255, 255, 0)100%);
+   background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 0.5)15%, rgba(255, 255, 255, 0)100%);
+   background: -o-linear-gradient(0deg, rgba(0, 0, 0, 0.5)15%, rgba(255, 255, 255, 0)100%);
+}
+
+$variationMainPoint: #0088bb;
+
+.header{
+   position: fixed;
+   top: 50px;
+   width: 100%;
+   background-color: #fff;
+   z-index: 1;
+   >.topBar{
+      @include flexBetween;
+      width: 100%;height: 35px;
+      background-color: transparent;
+      padding: 0 15px;
+      &.detail{
+         background-color: #797979;
+      }
+   }
+}
+
+.content{
+   position: relative;
+   width: 100%;
+   padding: 10px; 
+   >.title{
+      font-size: 16px;
+      margin:5px 0 5px 20px;
+      color: #797979;
+   }
+   .card{
+      display: flex;
+      flex-direction: initial;
+      border:none;
+      border-radius: 5px;      
+      overflow: hidden;
+      +.card{
+         margin-top: 10px;
+      }
+      >.card-body{
+         width: 140px;
+         height:90px;
+         padding: 0;
+         >img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+         }
+      }
+
+      >.card-footer{
+         position: relative;
+         width: calc(100% - 140px);
+         padding: 10px;
+         background-color: #fff;
+         border: none;
+         display: grid;
+         >.title{
+            height:44px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #292929;
+         }
+         >.pageNumber{
+            margin-left: auto;
+            color: #797979;
+         }         
+      }
+   } 
+}
+
+.emptyBox {
+   width: 90px;
+   height: 90px;
+   margin: 30px auto;
+   background-image: url(../img/img_news_empty_n_n@2x.png);
+   background-size: contain;
+}
+
+.ellipsis{
+   display: -webkit-box;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}
+
+#sidebar{
+   .btnGroup{
+      .btn{
+         color: #ccc;
+         &.active{
+            color: #333;
+         }
+      }
+   }
+   .dateOuter {
+      .arrowBox {
+         position: absolute;
+         right: 0px;
+         top: 5px;
+         background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");          
+      }
+   }
+}
+
+.checkCircle{
+   position: relative;
+   width:15px;
+   height: 15px;
+   border-radius: 50%;
+   background-color: #fff;
+   .icon{
+      @include flexCenter;
+      width:15px;
+      height:15px;
+      z-index: 2;
+      line-height: 0;
+      color: #444;
+      display: none;
+   }
+   >.bg{
+      @include flexCenter;
+      position: absolute;
+      top: 0;
+      width:15px;
+      height:15px;
+      line-height: 0;
+      color: #aaa;
+      display: block;
+   }
+   &.checked{
+      >.icon{
+         display: block;
+      }
+      >.bg{
+         display: none;
+      }
+   }
+}
+
+.sidebarPage{
+   position: fixed;
+   right: 0;
+   top: 0;
+   width: 300px;
+   height: 100vh;
+   transform: translateX(100%);
+   transition: transform 0.25s;
+   background-color: #fff;
+   z-index: 3;
+   &.show{
+      transform: translateX(0);
+   }
+   .serviceKind{
+      display: flex;
+      align-items: center;
+      width:100%;
+      >.name{
+         font-family: PingFangTC;
+         font-size: 14px;
+         color: #292929;
+         line-height: 14px;
+      }
+      >.icon{
+         position: relative;
+         width:16px;
+         height: 16px;
+         border-radius: 50%;
+         margin-right: 8px;
+         background-color: #998db2;
+         overflow: hidden;
+         >img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+         }
+      }
+   }  
+}
+
+.pt-85 {
+   padding-top: 85px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

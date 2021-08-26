@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>兌換成功頁面</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A3.1_00_03_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div id="pageHeader">
+			<a href="javascript:;" class="logoBg"></a>
+			<div class="userName">{{ profile.name }}</div>
+		</div>
+		<div class="bannerBox">
+			<img src="./img/img_result_activity_top_n@2x.png" alt="">
+		</div>
+		<ul class="exchangeInfo">
+			<li v-for="(meta,index) in metaList" :key="index">
+				<div class="title">{{ meta.key }}</div>
+				<div class="colon">:</div>
+				<div class="content">{{ meta.value }}</div>
+			</li>
+		</ul>
+		<div class="linkBlock">
+			<a :href="pageUrl.couponList" class="linkItem">
+				<div class="icon coupon"></div>
+				<p>我的票券</p>
+			</a>
+			<a href="javascript:;" class="linkItem active" @click="seeCoupon">
+				<div class="icon immediate"></div>
+				<p>立即使用</p>
+			</a>
+			<a :href="pageUrl.activityList" class="linkItem">
+				<div class="icon exchange"></div>
+				<p>繼續兌換</p>
+			</a>
+		</div>
+
+		<!-- loading -->
+		<div id="loading" v-show="isLoading"></div>
+
+		<!-- 票券選單modal -->
+		<div class="modal optionModal" id="optionModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">請選擇票券</h1>
+					</div>
+					<div class="modal-body">
+						<div 
+							class="couponItem" 
+							v-for="item in couponList"
+							:key="item.coupon_id">
+							<a :href="item.href">{{ item.title }}</a>
+						</div>
+						<div class="couponItem">
+							<a href="javascript:;" onclick="$('#optionModal').modal('hide')">取消</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+	<script type="module">
+		import app from './js/page/L3/A3.1_00_03_00.js';
+		app({
+			apiUrl: {
+            couponDetail: 'http://localhost:3034/mmrmProd/my_coupon_detail',
+            couponInfo: 'http://localhost:3034/mmrmProd/coupon_information',
+         },
+         pageUrl: {
+            couponList: './A2.1_00_00_03.html',
+            couponInfo: './A2.1_00_01_00.html',
+            activityList: './A3.1_00_00_00.html'
+         }
+		});
+	</script>
+</body>
+
+</html>

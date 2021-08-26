@@ -6,6 +6,7 @@ export default function({ appName ,apiUrl }) {
          memberProfile: null,
          levelName: '',
          isLoading: false,
+         cardNo: ''
       },
       computed: {
          hasMemberProfile() {
@@ -14,9 +15,6 @@ export default function({ appName ,apiUrl }) {
          memberName() {
             return this.hasMemberProfile ? this.memberProfile.name : '';
          },
-         memberNo() {
-            return this.hasMemberProfile ? this.memberProfile.member_no : '';
-         }
       },
       methods: {
          getMemberProfile() {
@@ -68,6 +66,9 @@ export default function({ appName ,apiUrl }) {
                height: 180,
                text: JSON.stringify(schema)
             });
+         },
+         getCardNo(cardSource) { //取得會員卡號
+            return cardSource[0].value;
          }
       },
       async mounted() {
@@ -81,6 +82,7 @@ export default function({ appName ,apiUrl }) {
          let vehicleCode = this.memberProfile.einvoice_carrier_no;
          let cardSource = memberCard.member_card.code_info.card_info;
          this.createQrcode(vehicleCode, cardSource);
+         this.cardNo = this.getCardNo(cardSource);
          this.isLoading = false;
       }
    })

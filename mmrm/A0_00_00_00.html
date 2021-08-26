@@ -36,51 +36,68 @@
 		<div class="profileBlock">
 			<div class="greetBox">
 				<div class="avatar" :style="avatarBg"></div>
-				<p>Hi ! {{ profile.name }} 您好</p>
+				<div class="rightInfo">
+					<p>Hi ! {{ profile.name }} 您好</p>
+					<a :href="pageUrl.member">前往會員專區</a>
+				</div>
 			</div>
 		</div>
 		<section class="utilityBlock">
-			<div class="topMember">
-				<a :href="pointPageUrl" class="utilityItem">
-					<div class="inner">
+			<div class="mainFunction">
+				<a :href="pointPageUrl" class="function-item">
+					<div class="function-inner">
 						<div class="title">我的點數</div>
 						<p class="itemName">
 							<span class="count">{{ currentPointInfo.amount }}</span> 點
 						</p>
 					</div>
 				</a>
-				<a :href="pageUrl.couponList" class="utilityItem">
-					<div class="inner">
+				<a :href="pageUrl.couponList" class="function-item">
+					<div class="function-inner">
 						<div class="title">我的票券</div>
 						<p class="itemName">
 							<span class="count">{{ totalTicket }}</span> 張
 						</p>
 					</div>
 				</a>
-				<a :href="pageUrl.memberCard" class="utilityItem">
-					<div class="inner">
+				<a :href="pageUrl.memberCard" class="function-item">
+					<div class="function-inner">
 						<div class="title">會員卡</div>
 						<p class="itemName">累點 / 扣點</p>
 					</div>
 				</a>
 			</div>
-			<div class="bottomMember">
-				<a href="javascript:;" class="utilityItem" @click="talkHandler">
+			<div class="subFunction half">
+				<a :href="pageUrl.meals" class="utilityItem">
 					<div class="inner">
-						<div class="iconBox service"></div>
-						<p class="itemName">客服中心</p>
+						<div class="iconBox meals"></div>
+						<p class="itemName">外帶餐點</p>
 					</div>
 				</a>
 				<a :href="pageUrl.activity" class="utilityItem">
 					<div class="inner">
 						<div class="iconBox gift"></div>
-						<p class="itemName">來換禮物</p>
+						<p class="itemName">優惠好康</p>
 					</div>
 				</a>
-				<a :href="pageUrl.member" class="utilityItem">
+			</div>
+			<div class="subFunction half">
+				<a :href="pageUrl.store" class="utilityItem">
 					<div class="inner">
-						<div class="iconBox member"></div>
-						<p class="itemName">會員專區</p>
+						<div class="iconBox store"></div>
+						<p class="itemName">門市據點</p>
+					</div>
+				</a>
+				<!-- <a :href="pageUrl.eat" class="utilityItem">
+					<div class="inner">
+						<div class="iconBox eat"></div>
+						<p class="itemName">想吃什麼</p>
+					</div>
+				</a> -->
+				<a :href="pageUrl.news" class="utilityItem">
+					<div class="inner">
+						<div class="iconBox news"></div>
+						<p class="itemName">最新消息</p>
 					</div>
 				</a>
 			</div>
@@ -118,8 +135,8 @@
 		import app from './js/page/A0/A0_00_00_00.js';
 		app({
 			apiUrl: {
-				config: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/config/brief_config',
-				memberSummary: 'https://boiling-fortress-97054.herokuapp.com/mmrmProd/member_summary',
+				config: 'http://localhost:3034/mmrmProd/config/brief_config',
+				memberSummary: 'http://localhost:3034/mmrmProd/member_summary',
 			},
 			pageUrl: {
 				point: './A2_01_01_00.html',
@@ -127,8 +144,10 @@
 				memberCard: './A2_00_00_01.html',
 				activity: './A3.1_00_00_00.html',
 				member: './A2_00_00_00.html',
-				term: './A0_01_00_00.html',
-				qa: './A0_02_00_00.html'
+				store: 'javascript:;',
+				meals: 'https://inline.app/zh/wowprime',
+				eat: 'javascript:;',
+				news: 'javascript:;',
 			}
 		});
 	</script>

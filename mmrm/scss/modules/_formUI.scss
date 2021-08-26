@@ -1,0 +1,62 @@
+input {
+   &:focus {
+      outline: none;
+   }
+}
+
+select {
+   background-color: #fff;
+   &:focus {
+      outline: none;
+   }
+}
+
+textarea {
+   resize: none;
+}
+
+//===input
+.form-control {
+   height: map-get($heightObj, basic);
+   color: map-get($fontColor, input);
+   border-radius: map-get($radius, basic);
+   background-color: #fff;
+   &::placeholder {
+      color: map-get($fontColor, placeholder);
+   }
+   &:focus {
+      box-shadow: none;
+   }
+   &:disabled,
+   &[readonly] {
+      background-color: #fff;
+   }
+}
+
+//===date
+[type=date] {
+   @extend %resetForm;
+   text-align-last: right;
+}
+
+[type=date]::-webkit-calendar-picker-indicator {
+   background-color: gray;
+   @media(max-width: 768px) {
+      display: none;
+   }
+}
+
+//===checkbox or radio
+.hookCheckbox {
+   @extend %resetForm;
+   @include size(18px);
+   background-color: #fff;
+   border-radius: 50%;
+   border: 1px solid map-get($borderColor, placeholder);
+   @extend %bgImgCenter;
+   background-image: url("../img/btn_filter_check_n_n@3x.png");
+   border: none;
+   &:checked {
+      background-image: url("../img/btn_filter_check_n_h@3x.png");
+   }
+}

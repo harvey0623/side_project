@@ -1,6 +1,7 @@
 export default function({ apiUrl }) {
    new Vue({
       el: '#app',
+      mixins: [localProfile],
       data: {
          isLoading: false,
          brandList: [],
@@ -76,18 +77,22 @@ export default function({ apiUrl }) {
                      "http_method": "POST",
                      "body": {
                         "sale_id": this.getQuery('sale_id'),
-                        "jrsyring": "",
+                        "jrsyring": "666666666666666666666666666666666666",
                         "memb_fmscard": this.memberCard,
                         "version": "00001"
                      },
                   }
                }
-            }).then(res => res.data.results.data.payload)
+            }).then(res => {
+               return res.data.results.data.payload;
+            }).catch(err => {
+               return { isdone: "F", message: "error", data: {} };
+            });
          },
          processTrade(tradeInfo) {
             let { saleh, listp, listi, listd } = tradeInfo;
             let targetBrand = this.brandList.find(brand => brand.brand_code === saleh.brnd_id);
-            this.primaryInfo.brandLogo = targetBrand.feature_image_small.url;
+            this.primaryInfo.brandLogo = targetBrand ? targetBrand.feature_image_small.url : '';
             this.primaryInfo.brandName = saleh.brnd_name;
             this.primaryInfo.storeName = saleh.stor_name;
             this.primaryInfo.sale_invamt = saleh.sale_invamt;
@@ -101,11 +106,12 @@ export default function({ apiUrl }) {
       },
       async mounted() {
          this.isLoading = true;
+         this.getLocalProfile();
          this.memberCard = await this.getMemberCard();
          let brandIds = await this.searchBrand();
          this.brandList = await this.getBrandInfo(brandIds);
          let tradeData = await this.getTradeDetail();
-         this.processTrade(tradeData.data);
+         if (tradeData.isdone === 'T') this.processTrade(tradeData.data);
          this.isLoading = false;
       }
    })

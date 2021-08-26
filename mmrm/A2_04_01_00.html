@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>消費詳情</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_04_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/dayjs/dayjs.min.js"></script>
+	<script src="./lib/dayjs/isSameOrAfter.min.js"></script>
+	<script src="./lib/dayjs/isSameOrBefore.min.js"></script>
+	<script src="./lib/dayjs/isBetween.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div id="pageHeader">
+			<a href="javascript:;" class="logoBg"></a>
+			<div class="userName">{{ profile.name }}</div>
+		</div>
+		<div class="mycontainer">
+			<div class="historyList mb">
+				<p class="groupTitle">交易資訊</p>
+				<div class="consumptionItem">
+					<div class="infoBox">
+						<div>
+							<span class="brandBg" :style="brandBg"></span>
+							<p>{{ primaryInfo.brandName }}</p>
+						</div>
+						<div>
+							<p>NT.{{ parseInt(primaryInfo.sale_invamt) | currency }}</p>
+						</div>
+					</div>
+					<p class="normalColor storeName">{{ primaryInfo.storeName }}</p>
+					<p class="normalColor time">{{ createdTime }}</p>
+					<div class="returnBg" v-if="primaryInfo.isReturn"></div>
+				</div>
+			</div>
+			<section>
+				<div class="groupBlock">
+					<p class="groupTitle">發票資訊</p>
+					<div class="groupInfo">
+						<trade-group-row
+							v-for="invoice in invoiceList"
+							:key="invoice.recno"
+							group_type="invoice"
+							:column_value_1="invoice.sale_invno"
+							:column_value_2="invoice.sale_invamt"
+							:taxid="invoice.sale_taxid"
+							column_name_1="sale_invno"
+							column_name_2="sale_invamt"
+							column_name_3="sale_taxid"
+						></trade-group-row>
+					</div>
+				</div>
+				<div class="groupBlock">
+					<p class="groupTitle">支付工具</p>
+					<div class="groupInfo">
+						<trade-group-row
+							v-for="payment in paymentList"
+							:key="payment.recno"
+							group_type="payment"
+							:column_value_1="payment.payd_type_name"
+							:column_value_2="payment.sale_payamt"
+							column_name_1="payd_type_name"
+							column_name_2="sale_payamt"
+						></trade-group-row>
+					</div>
+				</div>
+				<div class="groupBlock">
+					<p class="groupTitle">消費明細</p>
+					<div class="tableOuter">
+						<table class="consume_table">
+							<thead>
+								<tr>
+									<th>商品名稱</th>
+									<th width="100px">數量</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="goods in goodsList" :key="goods.part_id">
+									<td>{{ goods.part_name }}</td>
+									<td>{{ parseInt(goods.part_qty) | currency }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+
+		</div>
+
+		<div id="loading" v-if="isLoading"></div>
+
+	</div>
+	
+	<script src="./js/vue-components/TradeGroupRow/index.js"></script>
+	<script type="module">
+		import app from './js/page/L2/A2_04_01_00.js';
+		app({
+			apiUrl: {
+				searchBrand: 'http://localhost:3034/mmrmProd/search_brand',
+				brandInfo: 'http://localhost:3034/mmrmProd/brand_information',
+				memberCard: 'http://localhost:3034/mmrmProd/member_card',
+				tradeDetail: 'http://localhost:3034/wowprime/function/encrypt_relay2',
+         },
+			pageUrl: {
+
+			}
+		});
+	</script>
+</body>
+
+</html>

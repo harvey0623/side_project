@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>想吃什麼</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A5_00_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div id="pageHeader">
+			<a href="javascript:;" class="logoBg"></a>
+			<div class="userName">{{ profile.name }}</div>
+		</div>
+
+		<div class="popup-panel">
+			<div class="popup-toggle" @click="openPopup">選擇品牌</div>
+		</div>
+
+		<div class="mycontainer">
+			<div class="emptyBlock noBrand" v-show="!hasBrand">
+				<div class="emptyBg"></div>
+				<p>目前沒有任何品牌喔 !</p>
+			</div>
+			<div class="brand-wrap">
+				<menu-brand-item
+					v-for="brand in filteredList"
+					:key="brand.brand_id"
+					:brand_id="brand.brand_id"
+					:title="brand.title"
+					:brand_img="brand.feature_image_big.url"
+					@brand_event="openBrandPage"
+				></menu-brand-item>
+			</div>
+		</div>
+
+		<!-- 篩選popup -->
+		<menu-brand-popup 
+			:is_open.sync="popupInfo.isOpen"
+			:category_list="categoryList"
+			:current_category.sync="currentCategory">
+			<template v-slot-default>
+				<div class="criteria-content" v-show="currentCategory === 'category'">
+					<p class="criteria-title">品牌類別</p>
+					<div class="criteriaBox">
+						<criteria-item 
+							v-for="item in config.category" 
+							:key="item.tag_id"
+							:images="item.image"
+							:is_click.sync="item.isClick"
+							:tag_id="item.tag_id"
+							:title="item.title"
+						></criteria-item>
+					</div>
+				</div>
+				<div class="criteria-content" v-show="currentCategory === 'situation'">
+					<p class="criteria-title">用餐情境</p>
+					<div class="criteriaBox">
+						<criteria-item 
+							v-for="item in config.situation" 
+							:key="item.tag_id"
+							:images="item.image"
+							:is_click.sync="item.isClick"
+							:tag_id="item.tag_id"
+							:title="item.title"
+						></criteria-item>
+					</div>
+				</div>
+				<div class="brand-wrap popup" :class="{show:currentCategory === 'brand'}">
+					<menu-brand-item
+						v-for="brand in brandList"
+						:key="brand.brand_id"
+						:brand_id="brand.brand_id"
+						:title="brand.title"
+						:brand_img="brand.feature_image_big.url"
+						@brand_event="openBrandPage"
+					></menu-brand-item>
+				</div>
+			</template>
+		</menu-brand-popup>
+
+		<div class="btn-confirm" v-show="isShowBtnCategory" @click="confirmHandler('category')">
+			確定類別
+		</div>
+		<div class="btn-confirm" v-show="isShowBtnSituation" @click="confirmHandler('situation')">
+			確定情境
+		</div>
+		<div id="loading" v-show="isLoading"></div>
+		<a :href="pageUrl.home" class="backHome"></a>
+
+	</div>
+
+	<script src="./js/vue-components/MenuBrandPopup/index2.js"></script>
+	<script src="./js/vue-components/MenuBrandPopup/menu-brand-item.js"></script>
+	<script src="./js/vue-components/MenuBrandPopup/criteria-item.js"></script>
+	<script type="module">
+		import app from './js/page/A5/A5_00_00_00.js';
+		app({
+			apiUrl: {
+				searchBrand: 'http://localhost:3034/mmrmProd/search_brand',
+				brandInfo: 'http://localhost:3034/mmrmProd/brand_information',
+				brefConfig: 'http://localhost:3034/mmrmProd/config/brief_config'
+			},
+			pageUrl: {
+				home: './A0_00_00_00.html',
+				brandDetail: ''
+			}
+		});
+	</script>
+
+</body>
+
+</html>

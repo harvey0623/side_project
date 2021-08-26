@@ -1,0 +1,214 @@
+@import './utility/index';
+$basicHeight: map-get($heightObj, basic);
+$searchColor: map-get($fontColor, search);
+$basicRadius: map-get($radius, basic);
+$basicGutter: map-get($gutter, basic);
+$inputColor: map-get($fontColor, input);
+$formTitleColor: map-get($fontColor, formTitle);
+$headerHeight: map-get($heightObj, header);
+
+#app {
+   padding-top: $headerHeight + $basicHeight;
+}
+
+.controlPanel {
+   position: fixed;
+   left: 0;
+   top: $headerHeight;
+   @include size(100%, $basicHeight);
+   padding: 0 20px;
+   @extend %bwtFlex;
+   background-color: #fff;
+   z-index: 10;
+   >.text {
+      color: $searchColor;
+      text-align: right;
+      cursor: pointer;
+   }
+}
+
+.pointDesc {
+   position: relative;
+   color: $inputColor;
+   .swiper-container {
+      height: $basicHeight;
+      .swiper-slide {
+         text-align: center;
+         line-height: $basicHeight;
+         >span:nth-child(2) {
+            color: var(--variationMain);
+         }
+      }
+   }
+   .pointArrow {
+      content: '';
+      display: inline-block;
+      @include size(15px);
+      @extend %bgImgCenter;
+      background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+      transform: translateY(2px);
+   }
+}
+
+.wrap {
+   padding: 20px 15px;
+} 
+
+.activityList {
+   >li {
+      background-color: #fff;
+      border-radius: $basicRadius;
+      @include elGutter(margin-bottom, $basicGutter);
+      &.hide {
+         display: none;
+      }
+   }
+}
+
+.topBlock {
+   display: block;
+   border-bottom: 1px solid #f0f0f0;
+   >.bgBlock {
+      position: relative;
+      height: 230px;
+      background-size: cover;
+      background-position: left top;
+      background-image: url("../img/placeholder.jpg");
+      border-radius: $basicRadius $basicRadius 0 0;
+      @media (min-width: 750px) {
+         height: 460px;
+      }
+      >.statusCover {
+         display: flex;
+         position: absolute;
+         left: 0;
+         top: 0;
+         @include size(100%);
+         background-color: rgba(#000, 0.7);
+         color: #fff;
+         border-radius: $basicRadius $basicRadius 0 0;
+         >span {
+            margin: auto;
+            font-size: 17px;
+         }
+      }
+      >.countdownBlock {
+         @extend %centerFlex;
+         position: absolute;
+         left: 0;
+         bottom: 0;
+         @include size(130px, 30px);
+         background-color: var(--variationMain);
+         background-size: 100% 100%;
+         border-radius: $basicRadius;
+         &.move {
+            left: 15px;
+            top: calc(100% + 15px);
+         }
+         >.clockBg {
+            @include size(13px);
+            margin-right: 5px;
+            background-image: url("../img/img_activity_countdown_time_n@2x.png");
+            background-size: contain;
+         }
+         >.time {
+            font-size: 13px;
+            color: #fff;
+         }
+      }
+   }
+   >.desc {
+      position: relative;
+      padding: 15px;
+      &.move {
+         padding-top: 55px;
+      }
+      >* {
+         @include elGutter(margin-bottom, 10px);
+      }
+      >.intro {
+         margin-bottom: 0;
+         color: $formTitleColor;
+         &.multiple {
+            opacity: 0;
+         }
+         >.brandBg {
+            position: absolute;
+            right: 20px;
+            top: -30px;
+            @include size(60px);
+            background-image: url("../img/placeholder.jpg");
+            background-size: cover;
+            background-position: center center;
+         }
+         >.brandTitle {
+            display: none;
+         }
+      }
+      >.activityTitle {
+         color: $formTitleColor;
+      }
+      >.duration {
+         color: $inputColor;
+         font-size: 13px;
+      }
+   }
+}
+
+.topBlock.other {
+   display: flex;
+   align-items: flex-start;
+   padding: 15px;
+   >.bgBlock {
+      flex: 0 0 100px;
+      height: 100px;
+      background-position: center center;
+      border-radius: $basicRadius;
+      >.statusCover {
+         border-radius: $basicRadius;
+      }
+      >.countdownBlock {
+         @include size(100%, 25px);
+         border-radius: 0 0 $basicRadius $basicRadius;
+         background-image: url("../img/img_activity_countdown_list_n@2x.png");
+         >.clockBg {
+            display: none;
+         }
+      }
+   }
+   >.desc {
+      flex: 1;
+      padding: 5px 0 0 15px;
+      >.intro {
+         margin-bottom: 10px;
+         &.multiple {
+            opacity: 0;
+            margin-bottom: 0;
+         }
+         >.brandBg {
+            position: static;
+            margin-right: 2px;
+            @include size(18px);
+            transform: translateY(3.5px);
+            display: inline-block;
+         }
+         >.brandTitle {
+            display: inline-block;
+         }
+      }
+   }
+}
+
+.bottomBlock {
+   padding: 12px 15px;
+   text-align: right;
+   >p {
+      @extend %hideTxt;
+      color: var(--variationMain);
+   }
+}
+
+//===modal
+.modal-point-header {
+   justify-content: center;
+}

@@ -1,0 +1,87 @@
+@import './utility/index';
+$height: map-get($heightObj, basic);
+
+#app {
+   padding-top: map-get($heightObj, header);
+   padding-bottom: $height;
+}
+
+.mycontainer {
+   padding-top: 0px;
+   padding-bottom: 85px;
+   >#logoBox {
+      margin-bottom: 15px;
+   }
+}
+
+.formLayout {
+   margin-bottom: 20px;
+   >.formRow {
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      margin-bottom: 0;
+      background-color: #fff;
+      border-radius: map-get($radius, basic);
+      >.inviteTitle {
+         width: 75px;
+         color: map-get($fontColor, formTitle);
+      }
+      >.inputContent {
+         flex: 1;
+         >input {
+            padding-right: 10px;
+            text-align: right;
+            border: none;
+         }
+      }
+      >.copyBox {
+         @include size(20px);
+         background-image: url("../img/btn_friend_invitationcode_copy_n@2x.png");
+         @extend %bgImgCenter;
+      }   
+   }
+   >.errMsg {
+      margin-top: 0;
+      padding-right: 10px;
+      text-align: right;
+   }
+}
+
+.inviteBox {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   padding: 0;
+   @include size(100%, $height);
+   >button {
+      border-radius: 0;
+   }
+}
+
+.tipBox {
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+.formLayout > .formRow > .formContent .pwInput {
+   padding-right: 60px;
+}
+
+.copyTip {
+   position: fixed;
+   left: 50%;
+   bottom: 70px;
+   transform: translateX(-50%);
+   padding: 4px 15px;
+   border-radius: map-get($radius, basic);
+   color: #fff;
+   background-color: #494949;
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 0.25s;
+   &.active {
+      opacity: 1;
+      pointer-events: auto;
+   }
+}

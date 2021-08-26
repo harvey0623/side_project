@@ -1,0 +1,55 @@
+$termsHeight: map-get($heightObj, basic);
+$termsRadius: map-get($radius, basic);
+
+.termPopup {
+   position: fixed;
+   left: 0;
+   top: 0;
+   @include size(100%, 100vh);
+   background-color: #fff;
+   opacity: 0;
+   pointer-events: none;
+   z-index: 10;
+   &.show {
+      opacity: 1;
+      pointer-events: auto;
+   }
+}
+
+.termBody {
+   height: calc(100vh - #{$termsHeight});
+   padding: 20px 20px ($termsHeight + 100px);
+   background-color: map-get($elBgColor, body);
+   overflow: auto;
+   >.termContent {
+      padding: 15px;
+      line-height: 1.8;
+      background-color: #fff;
+      border-radius: $termsRadius;
+      color: map-get($fontColor, formTitle);
+      text-align: justify;
+      ol, ul {
+         padding-left: 40px;
+         list-style: disc;
+      }
+      img {
+         max-width: 100%;
+      }
+   }
+}
+
+.termFooter {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   @include size(100%, $termsHeight);
+   line-height: $termsHeight;
+   background-color: map-get($elBgColor, placeholder);
+   color: map-get($fontColor, inputColor);
+   text-align: center;
+   cursor: pointer;
+   &.termActiveButton {
+      background-color: var(--variationMain);
+		color: #fff;
+   }
+}

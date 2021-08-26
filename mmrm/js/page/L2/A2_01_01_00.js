@@ -5,6 +5,7 @@ export default function ({ apiUrl, pageUrl }) {
    let today = dayjs();
    new Vue({
       el: '#app',
+      mixins: [localProfile],
       data: () => ({
          pointId: '',
          pointInfo: [],
@@ -238,6 +239,7 @@ export default function ({ apiUrl, pageUrl }) {
       async mounted() {
          window.addEventListener('scroll', this.scrollHandler);
          this.isLoading = true;
+         this.getLocalProfile();
          await Promise.all([this.initHandler(), this.getPagination()]);
          this.isLoading = false;
       }

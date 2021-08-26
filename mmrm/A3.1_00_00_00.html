@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>兌換票券列表</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<meta name="aes_key" content="791701991223a6d7193e964b6690b58a">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="http://localhost:3034/mmrmProd/member_profile">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/mobileSelect/index.css">
+	<link rel="stylesheet" href="./lib/swiper/swiper.min.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A3.1_00_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./lib/sprintf/sprintf.js"></script>
+	<script src="./lib/swiper/swiper.min.js"></script>
+	<script src="./lib/countdown/jquery.countdown.min.js"></script>
+	<script src="./lib/mobileSelect/index.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div id="pageHeader">
+			<a href="javascript:;" class="logoBg"></a>
+			<div class="userName">{{ profile.name }}</div>
+		</div>
+
+		<div class="controlPanel">
+			<div class="layoutBox">
+				<span 
+					v-for="layout in layoutList"
+					:key="layout.id"
+					:class="['layout', layout.class, { active: layoutId === layout.id }]"
+					@click="layoutHandler(layout.id)"
+				></span>
+			</div>
+			<div class="pointDesc" @click="showPointDetail">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div 
+							class="swiper-slide"
+							v-for="point in pointList"
+							:key="point.point_id">
+						  <span>{{ point.pointInfo.title }}</span>
+						  <span>{{ point.amount }}</span>
+						  <span>點</span>
+						  <span class="pointArrow"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="text" @click="openHandler">篩選</div>
+		</div>
+
+		<div class="wrap">
+			<div class="emptyBlock" v-show="noActivity">
+				<div class="emptyBg noActivity"></div>
+				<p>目前沒有優惠活動呦！</p>
+			</div>
+			<ul class="activityList">
+				<activity-list
+					v-for="(item,index) in activityList"
+					:key="item.coupon_activity_id"
+					:detail="item"
+					:changelayout="changeLayout"
+					:brandlist="brandList"
+					:pageurl="pageUrl.activityDetail"
+					:systemtime="systemTime"
+					:projecttime="projectTime"
+					@exchange="readyExchange"
+				></activity-list>
+			</ul>
+			<div class="pagTip" v-show="pagLoading">資料加載中...</div>
+			<div class="pagTip" v-show="reachBottom">已經到最底囉～</div>
+		</div>
+
+		<div class="seeMore" v-show="hasSeeMore">
+			<a :href="pageUrl.couponList">
+				<span class="bg"></span>
+				<span class="text">你有 {{ totalCoupon }} 張票券，去看看吧</span>
+			</a>
+		</div>
+
+		<activity-sidebar
+			ref="sidebar"
+			:turnon.sync="turnOn"
+			:apiurl="apiUrl"
+			:layoutid="layoutId"
+			@switchlayout="layoutHandler"
+			@search="searchHandler"
+		></activity-sidebar>
+		
+		<transition name="fade">
+			<div id="maskCover" v-if="turnOn"></div>
+		</transition>
+
+		<a :href="pageUrl.home" class="backHome" :class="{translate:hasSeeMore}"></a>
+
+		<a :href="pageUrl.couponList" class="backCoupon" v-show="hasActivity"></a>
+
+		<!-- loading畫面 -->
+		<div id="loading" v-show="searchLoading"></div>
+
+		<!-- iosPicker -->
+		<div id="iosPicker"></div>
+
+		<!-- 擁有點數資訊modal -->
+		<div class="modal pointModal" id="ownPointModal" data-backdrop="static">
+			<div class="closeBg" @click="hideOwn"></div>
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header modal-point-header">
+						<div>目前擁有點數</div>
+					</div>
+					<div class="modal-body">
+						<ul class="expireList" v-if="pointList.length !== 0">
+							<li 
+								v-for="item in pointList"
+								:key="item.point_id">
+								<div>{{ item.pointInfo.title }}</div>
+								<div class="pointBlock">
+									<span class="pointNumber">{{ item.amount }}</span>
+									<span>點</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 免費兌換modal -->
+		<div class="modal msgModal" id="freeModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>您確定要免費兌換「{{ modalTitle.free }}」嗎?</p>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#freeModal').modal('hide')">取消</div>
+						<div @click="gatherParams">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 兌換失敗modal -->
+		<div class="modal msgModal" id="errorModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ modalTitle.errMsg }}</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#errorModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 代碼兌換modal -->
+		<div class="modal inputModal" id="redeemModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">請輸入兌換碼</h1>
+					</div>
+					<validation-observer tag="div" class="modal-body" ref="form">
+						<validation-provider
+							tag="div" class="inputBox" 
+							rules="required"
+							v-slot="{ errors }">
+							<input
+								type="text"
+								class="form-control" 
+								placeholder="請輸入兌換碼"
+								v-model.trim="user.code">
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+					</validation-observer>
+					<div class="modal-footer">
+						<div onclick="$('#redeemModal').modal('hide')">取消</div>
+						<div @click="gatherParams">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 代碼兌換失敗modal -->
+		<div class="modal msgModal" id="redeemFailModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ modalTitle.errMsg  }}</p>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#redeemFailModal').modal('hide')">取消</div>
+						<div @click="reWriteHandler">重新輸入</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 點數兌換modal -->
+		<div class="modal msgModal" id="pointModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ modalTitle.point }}</p>
+						<p>*一經使用點數兌換後，恕不得對退還或更換其他品項，逾期未使用將視同放棄使用。</p>
+					</div>
+					<div class="modal-footer split">
+						<div onclick="$('#pointModal').modal('hide')">取消</div>
+						<div @click="gatherParams">確定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+	<script src="./js/vue-components/ActivityList/index.js"></script>
+	<script src="./js/vue-components/ActivitySideBar/index.js"></script>
+	<script type="module">
+		import app from './js/page/L3/A3.1_00_00_00.js';
+		app({
+			projectTime: 15552000 * 1000, //剩餘倒數時間
+			apiUrl: {
+            memberSymmary: 'http://localhost:3034/mmrmProd/member_summary',
+            pointInfo: 'http://localhost:3034/mmrmProd/point_information',
+            brandInfo: 'http://localhost:3034/mmrmProd/brand_information',
+            searchActivity: 'http://localhost:3034/mmrmProd/search_coupon_activity',
+            activityInfo: 'http://localhost:3034/mmrmProd/coupon_activity_information',
+            searchBrand: 'http://localhost:3034/mmrmProd/search_brand',
+				brefType: 'http://localhost:3034/mmrmProd/brief_coupon_activity_type',
+				externalPoint: 'http://localhost:3034/mmrmProd/external_point_information',
+				redeemCouponActivity: 'http://localhost:3034/mmrmProd/redeem_coupon_activity',
+         },
+         pageUrl: {
+				home: './A0_00_00_00.html',
+				couponList: './A2.1_00_00_03.html',
+            activityDetail: './A3.1_00_01_00.html',
+            exchangeOk: './A3.1_00_03_00.html'
+         },
+		});
+	</script>
+</body>
+
+</html>

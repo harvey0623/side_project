@@ -30,6 +30,7 @@ Vue.component('term-popup', {
    },
    methods: {
       closeHandler() {
+         document.body.style.overflow = '';
          this.$emit('update:showpopup', false);
       },
       agreeHandler() {

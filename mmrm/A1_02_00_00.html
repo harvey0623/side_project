@@ -283,6 +283,7 @@
 				showHandler(id) {
 					let obj = this.termsList.find(item => item.id === id);
 					obj.show = true;
+					document.body.style.overflow = 'hidden';
 				},
 			 	getTerms() { //取得條款資料
 					return mmrmAxios({
@@ -313,6 +314,7 @@
 					let obj = this.termsList.find(item => item.id === id);
 					obj.checked = true;
 					obj.show = false;
+					document.body.style.overflow = '';
 				},
 				getTermStatus() { //取得條款狀態
 					return this.termsList.reduce((prev, current) => {

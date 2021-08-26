@@ -1943,7 +1943,7 @@ body.hide {
 
 .termBody {
   height: calc(100vh - 45px);
-  padding: 20px 20px 145px;
+  padding: 20px 20px 125px;
   background-color: #f0f0f0;
   overflow: auto;
 }

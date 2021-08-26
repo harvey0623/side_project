@@ -18,7 +18,7 @@ $termsRadius: map-get($radius, basic);
 
 .termBody {
    height: calc(100vh - #{$termsHeight});
-   padding: 20px 20px ($termsHeight + 100px);
+   padding: 20px 20px ($termsHeight + 80px);
    background-color: map-get($elBgColor, body);
    overflow: auto;
    >.termContent {

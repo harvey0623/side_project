@@ -72,6 +72,7 @@ export default function({ apiUrl, pageUrl }) {
             } else {
                this.config[this.currentCategory].forEach(item => item.isClick = false);
             }
+            document.body.style.overflow = 'hidden';
             this.popupInfo.isOpen = true;
          },
          async processConfig() {
@@ -90,8 +91,10 @@ export default function({ apiUrl, pageUrl }) {
             let targetList = this.config[configKey];
             let tag_ids = targetList.filter(item => item.isClick).map(item => item.tag_id);
             this.filteredList = this.createFilteredList({ tag_ids, configKey });
-            this.popupInfo.isOpen = false;
             this.backUpCriteria = JSON.parse(JSON.stringify(targetList));
+            document.body.style.overflow = '';
+            window.scrollTo(0, 0);
+            this.popupInfo.isOpen = false;
          },
          createFilteredList({ tag_ids, configKey }) {
             let mappingKey = { category: 'category_id', situation: 'situation_id' };

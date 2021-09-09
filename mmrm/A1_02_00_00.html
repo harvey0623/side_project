@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>會員註冊(1   )</title>
+	<title>會員註冊(1)</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -282,8 +282,8 @@
 				},
 				showHandler(id) {
 					let obj = this.termsList.find(item => item.id === id);
-					obj.show = true;
 					document.body.style.overflow = 'hidden';
+					obj.show = true;
 				},
 			 	getTerms() { //取得條款資料
 					return mmrmAxios({
@@ -313,8 +313,8 @@
 				updateChecked({ id }) { //更新條款確認狀態
 					let obj = this.termsList.find(item => item.id === id);
 					obj.checked = true;
-					obj.show = false;
 					document.body.style.overflow = '';
+					obj.show = false;
 				},
 				getTermStatus() { //取得條款狀態
 					return this.termsList.reduce((prev, current) => {

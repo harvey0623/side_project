@@ -15,7 +15,6 @@
 }
 
 .menu-brand-popup {
-  position: absolute;
   overflow: hidden;
 }
 
@@ -45,8 +44,8 @@
 }
 
 .criteria-content {
-  padding: 20px 15px;
-  height: calc(100vh - 135px);
+  padding: 20px 15px 120px;
+  height: calc(100vh - 90px);
   overflow: auto;
 }
 

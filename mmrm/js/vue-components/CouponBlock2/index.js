@@ -1,5 +1,9 @@
 Vue.component('coupon-block', {
    props: {
+      coupon_type: {
+         type: String,
+         required: true
+      },
       info: {
          type: Object,
          required: true
@@ -24,7 +28,9 @@ Vue.component('coupon-block', {
    }),
    computed: {
       pageLink() {
-         return `${this.pageurl}?coupon_id=${this.info.coupon_id}`;
+         let key = this.coupon_type === 'coupon' ? 'coupon_id' : 'voucher_id';
+         let couponId = this.info[key];
+         return `${this.pageurl}?coupon_type=${this.coupon_type}&coupon_id=${couponId}`;
       },
       couponTitle() {
          return this.info.title;

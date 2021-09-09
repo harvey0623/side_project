@@ -78,7 +78,17 @@
 					<coupon-block
 						v-for="coupon in couponBlock"
 						:key="coupon.coupon_id"
+						coupon_type="coupon"
 						:info="coupon"
+						:pageurl="pageUrl.couponInfo"
+						:brandlist="brandList"
+						:reverse="true"
+					></coupon-block>
+					<coupon-block
+						v-for="voucher in voucherBlock"
+						:key="voucher.voucher_id"
+						coupon_type="voucher"
+						:info="voucher"
 						:pageurl="pageUrl.couponInfo"
 						:brandlist="brandList"
 						:reverse="true"
@@ -221,6 +231,8 @@
             storeList: 'http://localhost:3034/mmrmProd/search_coupon_available_store',
 				redeemCouponActivity: 'http://localhost:3034/mmrmProd/redeem_coupon_activity',
 				externalPoint: 'http://localhost:3034/mmrmProd/external_point_information',
+				voucherInfo: 'http://localhost:3034/mmrmProd/voucher_information',
+				voucherStore: 'http://localhost:3034/mmrmProd/search_voucher_available_store'
          },
          pageUrl: {
             couponInfo: './A3.1_02_00_00.html',

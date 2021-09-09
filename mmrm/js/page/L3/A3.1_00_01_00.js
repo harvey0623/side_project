@@ -9,6 +9,7 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          brandInfo: null,
          brandList: [],
          couponBlock: [],
+         voucherBlock: [],
          storeData: null,
          isLoading: false,
          mobileSelect: null,
@@ -227,8 +228,49 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                return res.data.results.search_coupon_available_store_results;
             }).catch(err => null);
          },
+         getVoucherInfo(voucherIds) { //取得代金券詳情
+            return mmrmAxios({
+               url: this.apiUrl.voucherInfo,
+               method: 'post',
+               data: {
+                  voucher_ids: voucherIds,
+                  full_info: false
+               }
+            }).then(res => {
+               return res.data.results.voucher_information;
+            }).catch(err => []);
+         },
+         getVoucherStore(voucherId) { //取得代金券適用門市
+            return mmrmAxios({
+               url: this.apiUrl.voucherStore,
+               method: 'post',
+               data: { voucher_id: voucherId }
+            }).then(res => {
+               return res.data.results;
+            }).catch(err => []);
+         },
          gatherPointId(data) { //蒐集點數id
             return data.map(item => item.point_id);
+         },
+         async getCouponBlock(couponIds) {
+            if (couponIds.length === 0) return { brandIdArr: [], couponList: [] };
+            let couponInfoData = await this.getCouponInfo(couponIds);
+            let brandIdArr = this.getBrandArr(couponInfoData);
+            let storeData = await this.getAvailableStore(couponIds);
+            let couponList = this.mergeCouponAndStore(couponInfoData, storeData);
+            return { brandIdArr, couponList };
+         },
+         async getVoucherBlock(voucherIds) {
+            if (voucherIds.length === 0) return { brandIdArr: [], voucherList: [] };
+            let voucherInfo = await this.getVoucherInfo(voucherIds);
+            let brandIdArr = this.getBrandArr(voucherInfo);
+            let voucherList = [];
+            for (let i = 0; i < voucherInfo.length; i++) {
+               let voucher = voucherInfo[i];
+               let storeInfo = await this.getVoucherStore(voucher.voucher_id);
+               voucherList.push({ ...voucher, storeList: storeInfo || null });
+            }
+            return { brandIdArr, voucherList };
          },
          async getPointCategoryInfo(key) { //取得點數分類資訊
             if (this.activityInfo[key] === undefined) return [];
@@ -350,15 +392,16 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          this.activityId = parseInt(this.getQuery('coupon_activity_id'));
          this.activityInfo = await this.getActivityInfo().then(res => res[0]);
          if (this.isCountDown) this.startCountDown();
-         let { brand_id, coupon_ids } = this.activityInfo;
+         let { brand_id, coupon_ids, voucher_ids } = this.activityInfo;
          this.brandInfo = await this.getBrandInfo([brand_id]).then(res => res[0]);
-         let couponInfoData = await this.getCouponInfo(coupon_ids).then(res => res);
-         let brandIdArr = this.getBrandArr(couponInfoData);
-         if (brandIdArr.length !== 0) {
-            this.brandList = await this.getBrandInfo(brandIdArr).then(res => res);
+         let normalCoupon = await this.getCouponBlock(coupon_ids);
+         let voucherCoupon = await this.getVoucherBlock(voucher_ids);
+         let allCouponBrandIds = normalCoupon.brandIdArr.concat(voucherCoupon.brandIdArr);
+         if (allCouponBrandIds.length > 0) {
+            this.brandList = await this.getBrandInfo(allCouponBrandIds);
          }
-         let storeData = await this.getAvailableStore(coupon_ids).then(res => res);
-         this.couponBlock = this.mergeCouponAndStore(couponInfoData, storeData);
+         this.couponBlock = normalCoupon.couponList;
+         this.voucherBlock = voucherCoupon.voucherList;
 
          if (this.showPointIntro) {
             let normalPoint = await this.getPointCategoryInfo('point_condition');
@@ -374,12 +417,12 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
          if (this.getQuery('codeAuto') === 'true') {
             if (this.isOpening) $('#redeemModal').modal('show');
          }
-         
+
          //===自動兌換 ?coupon_activity_id=1&auto=true&type=point&point_id=1&category=point_id
          if (this.getQuery('auto') === 'true') {
             if (this.isOpening) await this.autoExchange();
          }
-         
+
       }
    });
 }

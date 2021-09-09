@@ -15,6 +15,7 @@ Vue.component('menu-brand-popup', { //想吃什麼專用
    },
    methods: {
       closeHandler() {
+         document.body.style.overflow = '';
          this.$emit('update:is_open', false);
       },
       clickTab(id) {

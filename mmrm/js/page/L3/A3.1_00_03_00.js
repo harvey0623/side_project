@@ -41,14 +41,6 @@ export default function({ apiUrl, pageUrl }) {
                return res.data.results.coupon_information;
             }).catch(err => null);
          },
-         async getCouponIds() { //取得couponId
-            for (let i = 0; i < this.myCouponIds.length; i++) {
-               let id = this.myCouponIds[i];
-               let result = await this.getCouponDetail(id).then(res => res);
-               this.couponDetail.push(result);
-               this.couponIds.push(result.coupon_id);
-            }
-         },
          getLS(key) { //取得localStorage資料
             let data = localStorage.getItem(key);
             return data !== null ? JSON.parse(data) : null;
@@ -58,6 +50,14 @@ export default function({ apiUrl, pageUrl }) {
             if (storageData === null) return;
             this.myCouponIds = storageData.my_coupon_ids;
             this.metaList = storageData.meta;
+         },
+         async getCouponIds() { //取得couponId
+            for (let i = 0; i < this.myCouponIds.length; i++) {
+               let id = this.myCouponIds[i];
+               let result = await this.getCouponDetail(id);
+               this.couponDetail.push(result);
+               this.couponIds.push(result.coupon_id);
+            }
          },
          mergeCouponData(couponInfo) { //合併票券相關資料
             return couponInfo.reduce((prev, current) => {
@@ -77,6 +77,7 @@ export default function({ apiUrl, pageUrl }) {
             if (this.isMoreOne) {
                $('#optionModal').modal('show');
             } else {
+               if (this.myCouponIds.length === 0) return;
                let id = this.myCouponIds[0];
                location.href = `${this.pageUrl.couponInfo}?my_coupon_id=${id}`;
             }

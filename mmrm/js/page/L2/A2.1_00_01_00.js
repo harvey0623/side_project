@@ -109,8 +109,12 @@ export default function ({ apiUrl, pageUrl }) {
          },
          openTermPopup() { //打開條款popup
             let termData = this.termsList[0];
-            if (termData.checked) $('#transferModal').modal('show');
-            else termData.show = true;
+            if (termData.checked) {
+               $('#transferModal').modal('show');
+            } else {
+               document.body.style.overflow = 'hidden';
+               termData.show = true;
+            }
          },
          cancelHandler() {
             $('#transferModal').modal('hide');
@@ -128,6 +132,7 @@ export default function ({ apiUrl, pageUrl }) {
             let obj = this.termsList.find(item => item.id === id);
             obj.checked = true;
             obj.show = false;
+            document.body.style.overflow = '';
             $('#transferModal').modal('show');
          },
          getTerms() { //取得條款資料

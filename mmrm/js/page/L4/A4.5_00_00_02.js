@@ -6,14 +6,17 @@ export default function({ apiUrl, pageUrl }) {
       data: {
          isLoading: false,
          brandList: [],
-         hasMenu: false,
+         edmList: [],
          pageUrl,
          popupInfo: {
             isOpen: true
          },
       },
       computed: {
-         allBrandIds() { //所有品牌id
+         hasMenu() {
+            return this.edmList.length > 0;
+         },
+         allBrandIds() {
             return this.brandList.map(brand => brand.brand_id);
          }
       },
@@ -68,16 +71,16 @@ export default function({ apiUrl, pageUrl }) {
          },
          async getEdm({ brandIds }) {
             this.isLoading = true;
-            let edmList = await this.searchEdm(brandIds);
-            this.hasMenu = edmList.length > 0;
-            this.updateSwiperSlide(edmList);
+            this.edmList = await this.searchEdm(brandIds);
+            this.updateSwiperSlide();
             this.popupInfo.isOpen = false;
             this.isLoading = false;
          },
-         updateSwiperSlide(edmList) {
+         updateSwiperSlide() {
             mySwiper.removeAllSlides();
+            this.displaySwiperPagination();
             if (!this.hasMenu) return;
-            edmList.forEach(edm => {
+            this.edmList.forEach(edm => {
                let startDate = this.splitBlank(edm.release_starts_at);
                let endDate = this.splitBlank(edm.release_ends_at);
                let brandObj = this.brandList.find(brand => brand.brand_id === edm.brand_id);
@@ -105,11 +108,10 @@ export default function({ apiUrl, pageUrl }) {
             });
             mySwiper.slideTo(0);
             // mySwiper.setTranslate(0);
-            mySwiper.allowTouchMove = edmList.length > 1;
-            this.displaySwiperPagination();
+            mySwiper.allowTouchMove = this.edmList.length > 1;
          },
          displaySwiperPagination() {
-            let totalSlides = mySwiper.slides.length;
+            let totalSlides = this.edmList.length;
             let mehtod = totalSlides <= 1 ? 'add' : 'remove';
             mySwiper.pagination.el.classList[mehtod]('hide');
          },

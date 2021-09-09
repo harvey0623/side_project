@@ -66,8 +66,8 @@ export default function({ apiUrl, pageUrl }) {
             let paramsValue = params.get(key);
             return paramsValue;
          },
-         async getBookData() { //取得書本資料
-            return axios({
+         getBookData() { //取得書本資料
+            return mmrmAxios({
                url: this.apiUrl.book,
                method: 'post',
                data: { book_id: this.bookId }
@@ -76,7 +76,7 @@ export default function({ apiUrl, pageUrl }) {
             }).catch(err => null);
          },
          async getChapterInfo() { //取得章節資訊
-            let bookInfo = await this.getBookData().then(res => res);
+            let bookInfo = await this.getBookData();
             this.chapterData = bookInfo.chapters;
          },
          getStartNumber(index, arr) { //計算起始頁碼
@@ -99,8 +99,8 @@ export default function({ apiUrl, pageUrl }) {
          }
       },
       created() {
-         this.currentPage = parseInt(this.getQuery('currentPage')) || 0;
-         this.isSwitch = this.getQuery('isSwitch') === 'true';
+         // this.currentPage = parseInt(this.getQuery('currentPage')) || 0;
+         // this.isSwitch = this.getQuery('isSwitch') === 'true';
       },
       async mounted() {
          this.isLoading = true;

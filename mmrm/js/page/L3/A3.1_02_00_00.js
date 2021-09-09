@@ -56,7 +56,7 @@ export default function({ apiUrl, pageUrl }) {
          getQuery(key) { //取得網址參數
             let params = (new URL(document.location)).searchParams;
             let paramsValue = params.get(key);
-            return parseInt(paramsValue);
+            return paramsValue;
          },
          getCouponInfo() { //取得票券資料
             return mmrmAxios({
@@ -67,8 +67,8 @@ export default function({ apiUrl, pageUrl }) {
                   full_info: true
                }
             }).then(res => {
-               return res.data.results.coupon_information;
-            }).catch(err => null);
+               return res.data.results.coupon_information[0];
+            }).catch(err => []);
          },
          getBrandInfo() { //取得品牌資訊
             return mmrmAxios({
@@ -79,7 +79,7 @@ export default function({ apiUrl, pageUrl }) {
                   full_info: false
                }
             }).then(res => {
-               return res.data.results.brand_information;
+               return res.data.results.brand_information[0];
             }).catch(err => null);
          },
          getAvailableStore() { //取得門市列表
@@ -90,7 +90,28 @@ export default function({ apiUrl, pageUrl }) {
                   coupon_ids: [this.couponId],
                }
             }).then(res => {
-               return res.data.results.search_coupon_available_store_results;
+               return res.data.results.search_coupon_available_store_results[0];
+            }).catch(err => null);
+         },
+         getVoucherInfo() {
+            return mmrmAxios({
+               url: this.apiUrl.voucherInfo,
+               method: 'post',
+               data: {
+                  voucher_ids: [this.couponId],
+                  full_info: false
+               }
+            }).then(res => {
+               return res.data.results.voucher_information[0];
+            }).catch(err => null);
+         },
+         getVoucherStore() {
+            return mmrmAxios({
+               url: this.apiUrl.voucherStore,
+               method: 'post',
+               data: { voucher_id: this.couponId }
+            }).then(res => {
+               return res.data.results;
             }).catch(err => null);
          },
          redirectToStoreMap() { //導到店家地圖頁面
@@ -101,12 +122,13 @@ export default function({ apiUrl, pageUrl }) {
       async mounted() {
          this.isLoading = true;
          this.getLocalProfile();
-         this.couponId = this.getQuery('coupon_id');
-         this.couponInfo = await this.getCouponInfo().then(res => res[0]);
-         if (!this.isAllBrand) {
-            this.brandInfo = await this.getBrandInfo().then(res => res[0]);
-         }
-         this.storeData = await this.getAvailableStore().then(res => res[0]);
+         this.couponId = parseInt(this.getQuery('coupon_id'));
+         let couponType = this.getQuery('coupon_type');
+         let couponInfoMethod = couponType === 'coupon' ? 'getCouponInfo' : 'getVoucherInfo';
+         let storeInfoMethod = couponType === 'coupon' ? 'getAvailableStore' : 'getVoucherStore';
+         this.couponInfo = await this[couponInfoMethod]();
+         if (!this.isAllBrand) this.brandInfo = await this.getBrandInfo();
+         this.storeData = await this[storeInfoMethod]();
          this.isLoading = false;
       }
    });

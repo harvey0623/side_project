@@ -7,6 +7,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>firebase-test</title>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/TimeMe.js/2.0.0/timeme.min.js"></script>
+   <script src="https://static.line-scdn.net/liff/edge/versions/2.18.2/sdk.js"></script>
 </head>
 
 <body>
@@ -21,26 +22,32 @@
    </script>
    <script type="module" src="./firebase-ga.js"></script>
    <script>
-      let button = document.querySelector('button');
-      let timeText = document.querySelector('.timeText');
+      (async () => {
+         await liff.init({ liffId: "1655380649-1GwY0XXg" })
+         
+         let firebaseGa = new FirebaseGa();
 
-      TimeMe.initialize({
-	      currentPageName: 'current-page',
-	      idleTimeoutInSeconds: 30
-      });
+         let button = document.querySelector('button');
+         let timeText = document.querySelector('.timeText');
 
-      setInterval(() => {
-         timeText.textContent = TimeMe.getTimeOnCurrentPageInSeconds();
-      }, 1000 / 60);
+         TimeMe.initialize({
+            currentPageName: 'current-page',
+            idleTimeoutInSeconds: 30
+         });
 
-      button.addEventListener('click', () => {
-         console.log('wopin-test-ios')
-         firebaseGa.logEvent('wopin-test-ios')
-      });
-      
-      window.addEventListener('beforeunload', () => {
-         firebaseGa.logTime()
-      });
+         setInterval(() => {
+            timeText.textContent = TimeMe.getTimeOnCurrentPageInSeconds();
+         }, 1000 / 60);
+
+         button.addEventListener('click', () => {
+            console.log('wopin-test-ios')
+            firebaseGa.logEvent('wopin-test-ios')
+         });
+
+         window.addEventListener('beforeunload', () => {
+            firebaseGa.logTime()
+         });
+      })();
    </script>
 </body>
 

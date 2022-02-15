@@ -33,4 +33,4 @@ class FirebaseGa {
    }
 }
 
-window.firebaseGa = new FirebaseGa();
+window.FirebaseGa = FirebaseGa

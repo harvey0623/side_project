@@ -25,7 +25,7 @@
       (async () => {
          await liff.init({ liffId: "1655380649-1GwY0XXg" })
          
-         let firebaseGa = new FirebaseGa();
+         let firebaseGa = new window.FirebaseGa();
 
          let button = document.querySelector('button');
          let timeText = document.querySelector('.timeText');

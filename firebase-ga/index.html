@@ -17,16 +17,12 @@
 
    <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
    <script>
-      // VConsole will be exported to `window.VConsole` by default.
       var vConsole = new window.VConsole();
    </script>
    <script type="module" src="./firebase-ga.js"></script>
    <script>
       (async () => {
-         await liff.init({ liffId: "1655380649-1GwY0XXg" })
-         
-         let firebaseGa = new window.FirebaseGa();
-
+         console.log('update')
          let button = document.querySelector('button');
          let timeText = document.querySelector('.timeText');
 
@@ -40,12 +36,8 @@
          }, 1000 / 60);
 
          button.addEventListener('click', () => {
-            console.log('wopin-test-ios')
-            firebaseGa.logEvent('wopin-test-ios')
-         });
-
-         window.addEventListener('beforeunload', () => {
-            firebaseGa.logTime()
+            console.log('side-project-test')
+            firebaseGa.logEvent('side-project-test')
          });
       })();
    </script>

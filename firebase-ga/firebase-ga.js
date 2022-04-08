@@ -27,6 +27,7 @@ class FirebaseGa {
    }
    logEvent(eventName, payload) {
       console.log(logEvent)
+      console.log('ok')
       logEvent(this.analytics, eventName, payload);
    }
    logTime(eventName) {

@@ -1,9 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-app.js";
 import { getAnalytics, logEvent  } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-analytics.js";
-console.log('aaa')
-// console.log(initializeApp)
 class FirebaseGa {
    constructor() {
+      console.log('aaaaa')
       this.analytics = null;
       this.initFirebase();
       this.initTimeMe();

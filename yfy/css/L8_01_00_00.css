@@ -1,0 +1,80 @@
+.chapter > .pageBox > .pageList, .termList > a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.chapter > .pageBox > .pageList > .arrowBox, .termList > a > .arrowBox {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.chapter > .pageBox > .pageList, .termList > a {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.chapter > .pageBox > .pageList:last-child, .termList > a:last-child {
+  margin-bottom: 0;
+}
+
+.chapter > .pageBox > .pageList > .arrowBox, .termList > a > .arrowBox {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 15px;
+          flex: 0 0 15px;
+  height: 15px;
+  background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+}
+
+.chapter {
+  margin-bottom: 25px;
+}
+
+.chapter:last-child {
+  margin-bottom: 0;
+}
+
+.chapter > .chapterTitle {
+  padding-left: 15px;
+  margin-bottom: 10px;
+  color: #797979;
+}
+
+.chapter > .pageBox > .pageList {
+  cursor: pointer;
+}
+
+.chapter > .pageBox > .pageList > .title {
+  color: #797979;
+  padding-right: 15px;
+}
+
+.termList > a > .title {
+  color: #797979;
+  padding-right: 15px;
+}
+
+.termContent {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.termContent ol, .termContent ul {
+  padding-left: 40px;
+  list-style: disc;
+}
+
+.termContent img {
+  max-width: 100%;
+}
+/*# sourceMappingURL=L8_01_00_00.css.map */

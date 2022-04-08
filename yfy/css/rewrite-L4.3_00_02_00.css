@@ -1,0 +1,98 @@
+.filterItem > .arrowBg {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.pageList > .pageDesc > .pageTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  padding: 0;
+  height: auto;
+}
+
+#app {
+  padding-top: 45px;
+}
+
+.chapterList {
+  margin-bottom: 25px;
+}
+
+.chapterList:last-child {
+  margin-bottom: 0;
+}
+
+.chapterList > .chapterTitle {
+  padding-left: 10px;
+  color: #797979;
+  margin-bottom: 10px;
+}
+
+.pageList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.pageList:last-child {
+  margin-bottom: 0;
+}
+
+.pageList > .pageBg {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 140px;
+          flex: 0 0 140px;
+  height: 100%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-image: url("../img/placeholder.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.pageList > .pageDesc {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 100%;
+  padding: 10px 15px;
+  background-color: #fff;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.pageList > .pageDesc > .pageTitle {
+  margin-bottom: 5px;
+  color: #292929;
+  -webkit-line-clamp: 2;
+}
+
+.pageList > .pageDesc > .pageNumber {
+  text-align: right;
+  color: #797979;
+}
+
+.filterItem {
+  padding-right: 0px;
+}
+
+.filterItem > .numberText {
+  margin-right: 5px;
+  color: #797979;
+}
+
+.filterItem > .arrowBg {
+  width: 15px;
+  height: 15px;
+  background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+}
+/*# sourceMappingURL=rewrite-L4.3_00_02_00.css.map */

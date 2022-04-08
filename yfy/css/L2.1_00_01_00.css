@@ -1,0 +1,211 @@
+.usageBox > div > .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.usageBox:after {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.couponIntro > .brandLogo, .usageBox > div > .arrow:after {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.couponIntro, .usageBox, .couponDesc {
+  padding: 25px;
+}
+
+body {
+  background-color: #fff;
+  padding-bottom: 45px;
+}
+
+.banner {
+  position: relative;
+  min-height: 200px;
+  background-image: url("../img/placeholder.jpg");
+  background-size: cover;
+}
+
+.banner > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.couponIntro {
+  position: relative;
+}
+
+.couponIntro > .couponName {
+  margin-bottom: 10px;
+  color: #292929;
+  font-size: 17px;
+}
+
+.couponIntro > .brandLogo {
+  position: absolute;
+  right: 25px;
+  top: -30px;
+  width: 60px;
+  height: 60px;
+  background-image: url("../img/placeholder.jpg");
+  background-size: cover;
+}
+
+.intorList {
+  margin-bottom: 0;
+  color: #797979;
+}
+
+.intorList > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.intorList > li:last-child {
+  margin-bottom: 0;
+}
+
+.intorList > li > .title {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 65px;
+          flex: 0 0 65px;
+}
+
+.intorList > li > .colon {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.intorList > li > .content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.usageBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.usageBox > div {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+
+.usageBox > div > .title {
+  color: #797979;
+  margin-bottom: 10px;
+}
+
+.usageBox > div > .arrow:after {
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-image: url("../img/btn_listcore_indicatorright_std_n@2x.png");
+  -webkit-transform: translate(5px, 2px);
+          transform: translate(5px, 2px);
+}
+
+.usageBox > div > .content > .number {
+  margin-right: 5px;
+  font-size: 20px;
+  color: var(--variationMain);
+}
+
+.usageBox > div > .content > .unit {
+  color: #797979;
+}
+
+.usageBox:after {
+  content: '';
+  width: 0.5px;
+  height: 30px;
+  background-color: #c0c0c0;
+}
+
+.couponDesc {
+  color: #797979;
+}
+
+.couponDesc ol, .couponDesc ul {
+  padding-left: 40px;
+  list-style: disc;
+}
+
+.couponDesc img,
+.couponDesc iframe {
+  max-width: 100%;
+}
+
+.fixBlock > div {
+  height: 100%;
+}
+
+.fixBlock > div.hide {
+  opacity: 0;
+}
+
+.normalBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  line-height: initial;
+  background-color: var(--variationMain);
+}
+
+.normalBlock > div {
+  position: relative;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  line-height: 45px;
+}
+
+.normalBlock > div:after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 30%;
+  width: 1px;
+  height: 20px;
+  background-color: #fff;
+}
+
+.normalBlock > div:last-child:after {
+  display: none;
+}
+
+.usedBlock {
+  background-color: #c9c9c9;
+  color: #797979;
+}
+/*# sourceMappingURL=L2.1_00_01_00.css.map */

@@ -1,0 +1,198 @@
+.controlPanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.filterTree > ul > li, .prodItem > .descBox > .title, .prodItem > .descBox > .summary {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.prodMenuBlock.other .prodItem:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.filterTree > .iconBox {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+#app {
+  padding-top: 45px;
+}
+
+#app.tall {
+  padding-top: 90px;
+}
+
+.fixedBlock {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.menuBlock {
+  position: static;
+}
+
+.controlPanel {
+  position: static;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 45px;
+  padding: 0 15px;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.filterTree {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.filterTree > ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 3px;
+}
+
+.filterTree > ul > li {
+  margin-right: 5px;
+  max-width: 150px;
+}
+
+.filterTree > ul > li:last-child {
+  margin-right: 0;
+}
+
+.filterTree > .iconBox {
+  width: 12px;
+  height: 12px;
+  background-image: url("../img/btn_filter_category_lightbg_n@3x.png");
+  background-size: 8px 8px;
+}
+
+.menuInfo {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #797979;
+}
+
+.prodMenuBlock {
+  margin-bottom: 20px;
+}
+
+.prodMenuBlock:last-child {
+  margin-bottom: 0;
+}
+
+.prodMenuBlock > p {
+  padding-left: 5px;
+  margin-bottom: 15px;
+  color: #797979;
+}
+
+.prodMenuBlock.other .prodItem {
+  height: 120px;
+}
+
+.prodMenuBlock.other .prodItem > * {
+  float: left;
+  height: 100%;
+}
+
+.prodMenuBlock.other .prodItem > .itemBg {
+  width: 120px;
+  border-radius: 10px 0px 0 10px;
+}
+
+.prodMenuBlock.other .prodItem > .descBox {
+  display: block;
+  width: calc(100% - 120px);
+  padding: 15px;
+  border-radius: 0 10px 10px 0;
+}
+
+.prodMenuBlock.other .prodItem > .descBox > .title {
+  margin-bottom: 0px;
+}
+
+.prodMenuBlock.other .prodItem > .descBox > .summary {
+  margin-bottom: 10px;
+}
+
+.prodItem {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.prodItem:last-child {
+  margin-bottom: 0;
+}
+
+.prodItem > .itemBg {
+  height: 240px;
+  background-image: url("../img/placeholder.jpg");
+  background-size: cover;
+  background-position: center top;
+  border-radius: 10px 10px 0 0;
+}
+
+.prodItem > .descBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  padding: 15px 60px 15px 15px;
+  background-color: #fff;
+  position: relative;
+  border-radius: 0 0 10px 10px;
+}
+
+.prodItem > .descBox > .title {
+  color: #797979;
+  font-size: 14px;
+}
+
+.prodItem > .descBox > .title.mb {
+  margin-bottom: 10px;
+}
+
+.prodItem > .descBox > .summary {
+  font-size: 15px;
+  color: #292929;
+}
+
+.prodItem > .descBox > .price {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  font-size: 17px;
+  color: var(--variationMain);
+}
+/*# sourceMappingURL=L7_00_02_00.css.map */

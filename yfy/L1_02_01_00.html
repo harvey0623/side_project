@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>會員註冊(2)</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel="stylesheet" href="./lib/fontIcon/css/all.min.css">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L1_02_01_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./js/src/setColor.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<div id="processBox" class="step2"></div>
+			<validation-observer tag="div" class="dataOuter" ref="form">
+				<div class="dataBox">
+					<p class="dataTitle">選填資料</p>
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules=""
+							v-slot="{ errors }">
+							<input
+								type="email" 
+								class="form-control"
+								placeholder="請輸入電子信箱" 
+								v-model.trim="user.email">
+							<p class="dataName">電子信箱</p>
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider
+							tag="div" 
+							class="dataRow"
+							rules="birthday"
+							v-slot="{ errors }">
+							<input
+								type="date"
+								class="form-control dateInput"
+								:class="{ hide: user.birthday !== '' }"
+								v-model.trim="user.birthday">
+							<p class="dataName">出生日期</p>
+							<div class="dateDown" :class="{ hide: user.birthday !== '' }"></div>
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required"
+							v-slot="{ errors }">
+							<select 
+								class="form-control"
+								:class="{selectDown: user.city === ''}"
+								v-model="user.city">
+								<option value=""></option>
+								<option 
+									v-for="city in cityList" :key="city"
+									:value="city"
+								>{{ city }}</option>
+							</select>
+							<p class="dataName">縣市</p>
+							<div class="downIcon" :class="{ hide: user.city !== '' }"></div>
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required"
+							v-slot="{ errors }">
+							<select 
+								class="form-control"
+								:class="{selectDown: user.district === ''}"
+								v-model="user.district">
+								<option value=""></option>
+								<option 
+									v-for="area in areaList" :key="area"
+									:value="area"
+								>{{ area }}</option>
+							</select>
+							<p class="dataName">地區</p>
+							<div class="downIcon" :class="{ hide: user.district !== '' }"></div>
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules=""
+							v-slot="{ errors }">
+							<input
+								type="text" 
+								class="form-control"
+								placeholder="請輸入地址" 
+								v-model.trim="user.address">
+							<p class="dataName">詳細地址</p>
+							<p class="errMsg" v-show="errors.length !== 0">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+			</validation-observer>
+			<div class="tipBox nonFix">小提醒:生日送出後無法修改喔！</div>
+			<div class="tipBox center skip" @click="submitHandler">略過此步驟，直接註冊</div>
+			<div class="btnBox">
+				<button @click="submitHandler" class="variation">下一步</button>
+			</div>
+		</div>
+
+		<div class="modal msgModal" id="expireModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>請重新填寫表單</p>
+					</div>
+					<div class="modal-footer">
+						<a :href="pageUrl.step1">確認</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- 提示modal -->
+	<div class="modal msgModal" id="failModal" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			  <div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title">提示</h1>
+				</div>
+				<div class="modal-body">
+					<p>生日日期無法修改喔 !</p>
+				</div>
+				<div class="modal-footer">
+					<p onclick="$('#failModal').modal('hide')">確認</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/zipCode.js"></script>
+	<script src="./js/modules/StepController/index.js"></script>
+	<script>
+		let stepController = new StepController({
+			duration: 60 * 60 * 1000
+		});
+		let vm = new Vue({
+			el: '#app',
+			data: () => ({
+				zipCodeData: zipCodeData,
+				user: {
+					email: '',
+					birthday: '',
+					city: '',
+					district: '',
+					address: ''
+				},
+				pageUrl: {
+					step1: '/L1_02_00_00.html',
+					step2: '/L1_02_01_00.html',
+					// step1: 'http://hh-demo.pin2wall.com/harvey/mmrm/L1_02_00_00.html',
+					// step2: '/harvey/mmrm/L1_02_01_00.html'
+				}
+			}),
+			computed: {
+				cityList() {
+					if (this.zipCodeData.length === 0) return [];
+					return this.zipCodeData.map(item => item.name);
+				},
+				areaList() {
+					let region = this.zipCodeData.find(item => item.name === this.user.city);
+					if (region !== undefined) return region['districts'];
+					else return [];
+				}
+			},
+			methods: {
+				async submitHandler() {
+					let isValid = await this.$refs.form.validate().then(res => res);
+					if (!isValid) return;
+					if (!stepController.checkIsExpire()) {
+						stepController.setStep2(this.user);
+						location.href = 'http://localhost:5500/L1_02_02_00.html';
+						// location.href = 'http://hh-demo.pin2wall.com/harvey/mmrm/L1_02_02_00.html';
+					} else {
+						this.restartFill();
+					}
+				},
+				restartFill() { //重新填寫
+					stepController.clearAll();
+					$('#expireModal').modal('show');
+				},
+				checkExpire() { //檢查是否過期
+					let isExpire = stepController.checkIsExpire();
+					if (isExpire) {
+						this.restartFill();
+					} else {
+						let stepKey = '';
+						for (let key in this.pageUrl) {
+							if (this.pageUrl[key] === location.pathname) stepKey = key;
+						}
+						let stepData = stepController.getLS(stepKey);
+						if (stepData !== null) {
+							for (let step in stepData) {
+								this.user[step] = stepData[step];
+							}
+						}
+					}
+				},
+				getRecordData() { //取得紀錄資料
+					if (stepController.checkHasTimestamp()) this.checkExpire();
+					else this.restartFill();
+				}
+			},
+			mounted() {
+				// this.getRecordData();
+			}
+		});
+	</script>
+</body>
+
+</html>

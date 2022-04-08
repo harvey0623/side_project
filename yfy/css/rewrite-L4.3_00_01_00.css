@@ -1,0 +1,194 @@
+.controlPanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.newsItem > .descBox > .newTitle {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.newsItem.other:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+#app {
+  padding-top: 45px;
+}
+
+.emptyBg {
+  background-image: url("../img/img_news_empty_n_n@3x.png");
+}
+
+.newsFilterBox {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.controlPanel {
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  background-color: #fff;
+}
+
+.controlPanel > .text {
+  color: #528fff;
+  text-align: right;
+  cursor: pointer;
+}
+
+.newsItem {
+  margin-bottom: 20px;
+}
+
+.newsItem:last-child {
+  margin-bottom: 0;
+}
+
+.newsItem > .imgBox {
+  position: relative;
+}
+
+.newsItem > .imgBox > .newsBg {
+  height: 230px;
+  background-image: url("../img/placeholder.jpg");
+  background-position: center top;
+  background-size: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+@media (min-width: 750px) {
+  .newsItem > .imgBox > .newsBg {
+    height: 460px;
+  }
+}
+
+.newsItem > .imgBox > .shadowBox {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 15px;
+  color: #fff;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(15%, rgba(0, 0, 0, 0.5)), to(rgba(255, 255, 255, 0)));
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 15%, rgba(255, 255, 255, 0) 100%);
+}
+
+.newsItem > .descBox {
+  padding: 15px 15px;
+  background-color: #fff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.newsItem > .descBox > .brandInfo {
+  position: relative;
+}
+
+.newsItem > .descBox > .brandInfo.multiple {
+  opacity: 0;
+}
+
+.newsItem > .descBox > .brandInfo > .brandBg {
+  position: absolute;
+  right: 0;
+  top: -45px;
+  width: 60px;
+  height: 60px;
+  background-image: url("../img/placeholder.jpg");
+  background-size: contain;
+}
+
+.newsItem > .descBox > .brandInfo > .brandTitle {
+  display: none;
+  color: #292929;
+}
+
+.newsItem > .descBox > .newsTime {
+  color: #797979;
+  margin-bottom: 8px;
+}
+
+.newsItem > .descBox > .newTitle {
+  color: #292929;
+}
+
+.newsItem.other {
+  height: 120px;
+}
+
+.newsItem.other > div {
+  float: left;
+}
+
+.newsItem.other > .imgBox {
+  width: 120px;
+  height: 100%;
+}
+
+.newsItem.other > .imgBox > .newsBg {
+  height: 100%;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 5px;
+}
+
+.newsItem.other > .imgBox > .shadowBox {
+  display: none;
+}
+
+.newsItem.other > .descBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: calc(100% - 120px);
+  height: 100%;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 5px;
+}
+
+.newsItem.other > .descBox > .brandInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.newsItem.other > .descBox > .brandInfo > .brandBg {
+  position: static;
+  width: 20px;
+  height: 20px;
+}
+
+.newsItem.other > .descBox > .brandInfo > .brandTitle {
+  display: block;
+  margin-left: 5px;
+}
+
+.newsItem.other > .descBox > .newTitle {
+  margin-bottom: 8px;
+}
+/*# sourceMappingURL=rewrite-L4.3_00_01_00.css.map */

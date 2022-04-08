@@ -1,4 +1,5 @@
 import { sessionStorageObj } from '../../src/storage.js';
+console.log(sessionStorageObj)
 export default function({ apiUrl, pageUrl }) {
    new Vue({
       el: '#app',

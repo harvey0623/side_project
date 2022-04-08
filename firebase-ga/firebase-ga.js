@@ -2,7 +2,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.4/firebase
 import { getAnalytics, logEvent  } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-analytics.js";
 class FirebaseGa {
    constructor() {
-      console.log('aaaaa')
       this.analytics = null;
       this.initFirebase();
       this.initTimeMe();
@@ -27,6 +26,7 @@ class FirebaseGa {
       });
    }
    logEvent(eventName, payload) {
+      console.log(logEvent)
       logEvent(this.analytics, eventName, payload);
    }
    logTime(eventName) {

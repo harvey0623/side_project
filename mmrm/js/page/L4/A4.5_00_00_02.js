@@ -11,6 +11,7 @@ export default function({ apiUrl, pageUrl }) {
          popupInfo: {
             isOpen: true
          },
+         currentBrandCode: ''
       },
       computed: {
          hasMenu() {
@@ -21,6 +22,10 @@ export default function({ apiUrl, pageUrl }) {
          }
       },
       methods: {
+         getQuery(key) { //取得網址參數
+            let params = (new URL(document.location)).searchParams;
+            return params.get(key);
+         },
          splitBlank(text) {
             return text.split(' ')[0];
          },
@@ -58,7 +63,9 @@ export default function({ apiUrl, pageUrl }) {
                   //    if (mySwiper.realIndex === 0) mySwiper.setTranslate(0);
                   // },
                   click: () => {
-                     let slide = mySwiper.slides[mySwiper.clickedIndex];
+                     let index = mySwiper.clickedIndex;
+                     if (index === undefined) return;
+                     let slide = mySwiper.slides[index];
                      this.redirect({ ...slide.dataset });
                   }
                },
@@ -69,8 +76,10 @@ export default function({ apiUrl, pageUrl }) {
             // mySwiper.setTranslate(0);
             this.displaySwiperPagination();
          },
-         async getEdm({ brandIds }) {
+         async getEdm({ brandIds, brandCode }) {
             this.isLoading = true;
+            this.currentBrandCode = brandCode;
+            firebaseGa.logEvent(`menu_brand_${brandCode}`, {}, true);
             this.edmList = await this.searchEdm(brandIds);
             this.updateSwiperSlide();
             this.popupInfo.isOpen = false;
@@ -117,8 +126,16 @@ export default function({ apiUrl, pageUrl }) {
          },
          redirect(payload) {
             let { type, book_id, hyperlink } = payload;
-            if (type === 'book') return location.href = `${this.pageUrl.book}?book_id=${book_id}`;
+            if (type === 'book') {
+               firebaseGa.logEvent(`menu_${book_id}_${this.currentBrandCode}`, {}, true);
+               location.href = `${this.pageUrl.book}?book_id=${book_id}`;
+               return;
+            }
             location.href = hyperlink;
+         },
+         aTagClick(evt) {
+            firebaseGa.logEvent(`menu_home_${this.currentBrandCode}`);
+            location.href = evt.currentTarget.href;
          }
       },
       async mounted() {
@@ -127,6 +144,16 @@ export default function({ apiUrl, pageUrl }) {
          this.initSwiper();
          let brandIds = await this.searchBrand();
          this.brandList = await this.getBrandInfo(brandIds);
+         
+         //===如果網址有帶參數就直接拿品牌edm
+         let queryId = this.getQuery('brand_id');
+         if (queryId !== null) {
+            let brandId = parseInt(queryId);
+            let targetBrand = this.brandList.find(item => item.brand_id === brandId);
+            this.currentBrandCode = targetBrand !== undefined ? targetBrand.brand_code : '';
+            await this.getEdm({ brandIds: [brandId], brandCode: this.currentBrandCode });
+         }
+         
          this.isLoading = false;
       }
    })

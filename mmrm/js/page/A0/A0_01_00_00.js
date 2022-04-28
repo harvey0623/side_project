@@ -34,7 +34,6 @@ export default function({ apiUrl, pageUrl }) {
       },
       async mounted() {
          this.isLoading = true;
-         this.getLocalProfile();
          this.termList = await this.getTerm();
          if (this.termLength === 0 || this.termLength > 1) this.isLoading = false;
          else this.autoNavigate();

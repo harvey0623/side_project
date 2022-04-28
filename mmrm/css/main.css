@@ -74,7 +74,7 @@ a:focus {
   outline: none;
 }
 
-#normalHeader, .popup-panel, .menuBlock {
+#normalHeader, .popup-panel, .einvoice-trigger, .menuBlock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -126,7 +126,7 @@ a:focus {
 
 .hookCheckbox, .popup-panel > .popup-toggle:after, .popupHeader > .popupClose, .toggleSidebar,
 .backHome,
-.backCoupon, .emptyBlock > .emptyBg, .layoutBox > .layout, .seeMore > a > .bg, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .sidebarFilter > li > .dateOuter > .arrowBox, .filterItem > .arrowBox, .filterItem > .layout, .menuBlock .iconBg, .pointModal .closeBg, .selectBlock > .selectRow > .selectOuter > .downIcon {
+.backCoupon, .emptyBlock > .emptyBg, .layoutBox > .layout, .seeMore > a > .bg, .formLayout .visibleBox, .formLayout .downIcon, .dataBox > .dataBody .downIcon, .dataBox > .dataBody .dateDown, .dataBox > .dataBody .visibleBox, .sidebarFilter > li > .dateOuter > .arrowBox, .filterItem > .arrowBox, .filterItem > .layout, .menuBlock .iconBg, .pointModal .closeBg, .selectBlock > .selectRow > .selectOuter > .downIcon, .einvoiceModal .closeBg {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -405,6 +405,7 @@ body.hide {
   width: 100%;
   height: 40px;
   background-color: #797979;
+  z-index: 2;
 }
 
 .popup-panel > .popup-toggle {
@@ -609,6 +610,24 @@ body.hide {
   width: 30px;
   height: 30px;
   background-image: url("../img/img_mycoupon_list_morecoupon_n@2x.png");
+}
+
+.einvoice-trigger {
+  max-width: var(--max, auto);
+  margin: 0 auto;
+  padding: 8px 0;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+}
+
+.einvoice-trigger > .icon {
+  width: 20px;
+  height: 15px;
+  margin-right: 5px;
+  background-image: url("../img/img_common_invoicecarrier_n_n@2x.png");
+  background-size: contain;
 }
 
 .formLayout {
@@ -1854,6 +1873,78 @@ body.hide {
   width: 15px;
   height: 15px;
   background-image: url("../img/btn_listcore_indicatordown_std_n@2x.png");
+}
+
+.einvoiceModal .modal-content {
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.einvoiceModal .modal-header {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 15px;
+  border-bottom: none;
+  color: #fff;
+  background-color: var(--variationMain);
+}
+
+.einvoiceModal .modal-body {
+  padding: 0 20px;
+}
+
+.einvoiceModal .modal-body > .barcode-block {
+  padding-top: 60px;
+  padding-bottom: 20px;
+}
+
+.einvoiceModal .modal-body > .barcode-block > svg {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto 30px;
+}
+
+.einvoiceModal .modal-body > .barcode-block > .remove {
+  text-align: center;
+  text-decoration: underline;
+  color: #528fff;
+}
+
+.einvoiceModal .modal-body > .add-block {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.einvoiceModal .modal-body > .add-block > a {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 50px;
+  background-image: url("../img/btn_common_invoicecarrier_add_n@2x.png");
+  background-size: contain;
+  background-position: center center;
+}
+
+.einvoiceModal .modal-body > .add-block > p {
+  margin-bottom: 5px;
+  color: #797979;
+  text-align: center;
+}
+
+.einvoiceModal .modal-body > .add-block > p:last-child {
+  margin-bottom: 0;
+}
+
+.einvoiceModal .closeBg {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/btn_nav_close_popup_n@2x.png");
+  cursor: pointer;
 }
 
 .swiper-slide > img {

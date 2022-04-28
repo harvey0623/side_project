@@ -30,6 +30,7 @@ $(document).ready(function(){
 	});
 	$("#filter").click(function(){
 		filter_show();
+		firebaseGa.logEvent('nearby_sift');
 	})
 	$("#filter_menu_all .sure").click(function(){
 		filter_hide();
@@ -67,6 +68,7 @@ $(document).ready(function(){
 		}else{
 			$(this).attr('src','/portal_assets/img/btn_filter_check_n_h@3x.png');
 			brand.attr('select',true);
+			firebaseGa.logEvent(`nearby_navbar_${brand.attr('brand_code')}`);
 		}
 	});
 	$("#filter_menu_brand .cancel_all span").click(function(){
@@ -82,7 +84,9 @@ $(document).ready(function(){
 
 	$("#list").on('click','.list_block',function(){
 			var id =  $(this).attr('store_id');
-			window.location.href = '/line_bot_portal/store?store_id='+id;
+			var obj = store_list.find(item => item.store_id === parseInt(id));
+			firebaseGa.logEvent(`nearby_store_${obj.store_code}`);
+			window.location.href = '/line_portal/store?store_id='+id;
 			// window.open("{{url('store')}}/"+id);
 		})
 
@@ -319,7 +323,7 @@ function do_ajax(){
 
 function getMultipleBrand() { //取得多品牌資料
 	$.ajax({
-		url: '/line_bot_portal_api/v1/doConfig',
+		url: '/line_portal_api/v1/doConfig',
 		method: 'post',
 		data: {},
 		success(res) {
@@ -332,3 +336,10 @@ function getMultipleBrand() { //取得多品牌資料
 }
 
 getMultipleBrand();
+
+// 2022/03/08 ga設置
+$('.backHome').on('click', function(evt) {
+	evt.preventDefault();
+	firebaseGa.logEvent('nearby_storelist_home');
+	location.href = this.href;
+});

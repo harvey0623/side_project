@@ -22,7 +22,7 @@
           align-items: center;
 }
 
-.bottomBlock > p {
+.topBlock > .desc > .activityTitle, .bottomBlock > p {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -212,6 +212,7 @@
 
 .topBlock > .desc > .activityTitle {
   color: #292929;
+  max-width: 80%;
 }
 
 .topBlock > .desc > .duration {
@@ -281,6 +282,13 @@
 
 .topBlock.other > .desc > .intro > .brandTitle {
   display: inline-block;
+}
+
+.topBlock.other > .desc > .activityTitle {
+  max-width: 100%;
+  white-space: initial;
+  overflow: initial;
+  text-overflow: initial;
 }
 
 .bottomBlock {

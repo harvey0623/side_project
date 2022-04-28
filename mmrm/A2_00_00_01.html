@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>我的會員卡</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="c35eae68c868bd516ed64469e1e30e36">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_profile">
+	<meta name="get_member_card_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_card">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_00_00_01.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./lib/lodash/lodash.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<!-- page -->
+	<script src="./lib/jsBarcode/JsBarcode.all.min.js"></script>
+	<script src="./lib/qrcode/qrcode.min.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="popupHeader">
+			<!-- <div class="popupClose"></div> -->
+			<span>累扣點</span>
+		</div>
+		<div class="wrap">
+			<div class="profile-block">
+				<p class="name">{{ user.name }}</p>
+				<p class="member">{{ user.level }}</p>
+			</div>
+			<div class="card-block">
+				<div id="qrcode"></div>
+				<div class="card-no" v-show="hasCardNo">會員卡號 {{ user.cardNo }}</div>
+				<div class="einvoice-trigger" @click="openBarcodeModal">
+					<div class="icon"></div>
+					<p>手機條碼載具</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="loading" v-show="isLoading"></div>
+
+		<einvoice-modal
+			:barcode="user.einvoice"
+			:unbined-page="pageUrl.invoice_unbinded"
+			back-site="memberCard"
+			ref="barcodeModal"
+			@check-remove="checkRemove"
+		></einvoice-modal>
+
+		<div class="modal msgModal" id="checkModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">即將刪除</h1>
+					</div>
+					<div class="modal-body">
+						<p>刪除後必須重新綁定，是否確定刪除此手機號碼載具?</p>
+					</div>
+					<div class="modal-footer split">
+						<div data-dismiss="modal">我再想想</div>
+						<div @click="removeHandler">確定刪除</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+      <div class="modal msgModal" id="removeOkModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ tipInfo.message }}</p>
+					</div>
+					<div class="modal-footer">
+						<p data-dismiss="modal" @click="openBarcodeModal">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/vue-components/EinvoiceModal/index.js"></script>
+	<script type="module">
+		import app from './js/page/L2/A2_00_00_01.js';
+		app({
+			apiUrl: {
+				memberProfile: 'https://project-mock-server.herokuapp.com/mmrmProd/member_profile',
+				memberCard: 'https://project-mock-server.herokuapp.com/mmrmProd/member_card',
+				memberSummary: 'https://project-mock-server.herokuapp.com/mmrmProd/member_summary',
+				levelInfo: 'https://project-mock-server.herokuapp.com/mmrmProd/level_information',
+				updateMemberProfile: 'https://project-mock-server.herokuapp.com/mmrmProd/update_member_profile',
+			},
+			pageUrl: {
+				invoice_unbinded: './A2_07_00_00.html',
+			}
+		});
+	</script>
+</body>
+
+</html>

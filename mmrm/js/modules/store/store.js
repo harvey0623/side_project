@@ -21,19 +21,23 @@ $(document).ready(function(){
 			$('.bot_btn').slideUp();
 		});
 
-		$(window).bind('scroll', function() {
-		    if ($(window).scrollTop() > 0) {
-		     	$('.bot_indicator').hide();
-		     	$('#distance').hide();
-		     	$('.bot_btn').slideUp();
-		    }
-		    else {
-		    	$('.bot_btn').slideDown('fast',function(){
-		    		$('.bot_indicator').show();
-		    		$('#distance').show();
-		    	});
-		    }
-		});
+		$('.bot_btn').show();
+
+
+
+		//$(window).bind('scroll', function() {
+		//    if ($(window).scrollTop() > 0) {
+		//     	$('.bot_indicator').hide();
+		//     	$('#distance').hide();
+		//     	$('.bot_btn').slideUp();
+		//    }
+		//    else {
+		//    	$('.bot_btn').slideDown('fast',function(){
+		//    		$('.bot_indicator').show();
+		//    		$('#distance').show();
+		//    	});
+		//    }
+		//});
 		// 底部按鍵 end
 
 		// phone(modal) start
@@ -47,7 +51,6 @@ $(document).ready(function(){
 		});
 		// phone(modal) end
 });
-
 
 
 function contact(){
@@ -107,7 +110,7 @@ function service(){
 
 		if(i<4){
 			let brand_service_content =
-				'<div class="bot_block bot_btn_blk"'+brand_service_func+'>' +
+				'<div class="bot_block bot_btn_blk"'+brand_service_func+ 'data-event="' + brand_service[i]['dataset-event'] +'">' +
 					'<div class="bot_block_img">' +
 						'<img src="'+brand_service[i].img+'">' +
 					'</div>' +
@@ -169,8 +172,44 @@ function service(){
 
 	$('#bottom').on('click','.bot_btn_blk',function(){
 		let link = $(this).attr('link');
+		firebaseGa.logEvent(`${this.dataset.event}${storeCode}`, {}, true);
 		if(link && link !=''){
-			window.location.href = link;
+            //@wadeku@ for online booking +++++
+            inline_companyid = $("#inline_companyid").text();
+            inline_branchid = $("#inline_branchid").text();
+
+            if (inline_companyid === "empty" || inline_branchid === "empty") {
+                let modal = $("#failModal");
+                modal.modal();
+                return;
+            }
+
+            if (link === "line_portal_start_booking") {
+                return mmrmAxios({
+                    url: '/line_portal_api/v1/booking/doBookingStart',
+                    method: 'post',
+                    data: {
+                        vCompanyId: inline_companyid
+                    }
+                }).then(res => {
+                    if (res.data.results) {
+                        let encodedWord = CryptoJS.enc.Utf8.parse(res.data.results["perFilledFromData"]);
+                        let encoded = CryptoJS.enc.Base64.stringify(encodedWord);
+                        let perFilledFromData = encodeURIComponent(encoded);
+                        let url = res.data.results["urlBase"] + inline_companyid + "/" + inline_branchid + res.data.results["perFilledFrom"] + perFilledFromData;
+                        window.open(url + "&openExternalBrowser=1", '_blank');
+                        //window.open(url, '_blank');
+                    }
+                    else {
+
+                    }
+                    return;
+                }).catch(err => null);
+            }
+            else {
+                window.location.href = link;
+            }
+            //@wadeku@ for online booking -----
 		}
 
 	});
@@ -182,3 +221,35 @@ function service(){
 		}
 	});
 }
+
+//====harvey埋ga
+let storeCode = '';
+
+function getQuery(key) {
+	let params = (new URL(document.location)).searchParams;
+	return params.get(key);
+}
+
+function getStoreInfo(storeIds) {
+	return mmrmAxios({
+		url: '/line_portal_api/v1/store/doStoreInformation',
+		method: 'post',
+		data: {
+			store_ids: storeIds,
+			query_info: 'summary'
+		}
+	}).then(res => {
+		return res.data.results.store_information[0].code;
+	}).catch(err => {
+		console.log(err);
+	})
+}
+
+async function init() {
+	$('.loading').show();
+	let storeId = getQuery('store_id');
+	storeCode = await getStoreInfo([storeId]);
+	$('.loading').hide();
+}
+
+init();

@@ -10,6 +10,10 @@
           align-items: center;
 }
 
+#app {
+  padding-bottom: 60px;
+}
+
 .profileBlock {
   height: 200px;
   background-color: var(--variationSub);
@@ -89,7 +93,8 @@
   width: 30px;
   height: 30px;
   background-size: contain;
-  background-position: cneter top;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 .linkBlock > .linkItem > .icon.transaction {
@@ -106,6 +111,11 @@
 
 .linkBlock > .linkItem > .icon.friend {
   background-image: url("../img/img_memberhome_friend_n_n@2x.png");
+}
+
+.linkBlock > .linkItem > .icon.barcode {
+  background-image: url("../img/img_common_invoicecarrier_n_n@2x.png");
+  background-position: center center;
 }
 
 .linkBlock > .linkItem > .title {

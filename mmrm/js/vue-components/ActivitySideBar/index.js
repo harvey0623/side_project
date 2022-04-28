@@ -68,7 +68,7 @@ Vue.component('activity-sidebar', {
             method: 'post',
             data: {
                brand_ids: brandIdArr,
-               full_info: false
+               full_info: true
             }
          }).then(res => {
             return res.data.results.brand_information;
@@ -116,6 +116,7 @@ Vue.component('activity-sidebar', {
       },
       showSubMenu(id) { //顯示次選單
          this.subId = id;
+         if (id === 'sub1') firebaseGa.logEvent('eventlist_search_brand');
       },
       backHandler() { //返回上一頁 
          if (this.subId !== '') {
@@ -129,9 +130,15 @@ Vue.component('activity-sidebar', {
          }, 250);
       },
       tidyBrand(data) { //整理品牌資料
+         // let filterData = data.filter(item => {
+         //    if (item.external_meta === undefined) return true;
+         //    let obj = item.external_meta.find(extra => extra.key === 'display_enable');
+         //    if (obj === undefined) return true;
+         //    return obj.value !== 'false';
+         // });
          return data.reduce((prev, current) => {
-            let { brand_id:id, title, feature_image_small } = current;
-            prev.push({ id, title, url: feature_image_small.url, checked: true });
+            let { brand_id:id, title, feature_image_small, brand_code } = current;
+            prev.push({ id, title, url: feature_image_small.url, brand_code, checked: true });
             return prev;
          }, []);
       },
@@ -141,9 +148,15 @@ Vue.component('activity-sidebar', {
          let checked = el.checked;
          let obj = this.brandList.find(item => item.id === brandId);
          obj.checked = checked;
+         if (checked) firebaseGa.logEvent(`eventlist_search_brand_${obj.brand_code}`);
       },
       clearAllBrand() { //清除全部品牌
          this.brandList.forEach(item => item.checked = false);
+         firebaseGa.logEvent('eventlist_search_brand_clear');
+      },
+      selectAllItem(dataKey) { //全選所有項目
+         this[dataKey].forEach(item => item.checked = true);
+         if (dataKey === 'brandList') firebaseGa.logEvent('eventlist_search_brand_all');
       },
       async getAboutBrand() { //取品牌選項列表
          let brandIdArr = await this.getAllBrand().then(res => res);
@@ -316,8 +329,9 @@ Vue.component('activity-sidebar', {
             </li>
          </ul>
          <div class="subMenu brandMenu" :class="{show: subId === 'sub1'}">
-            <div class="clearAll">
+            <div class="clearAll between">
                <span @click="clearAllBrand">{{ clearText }}</span>
+               <span @click="selectAllItem('brandList')">全部勾選</span>
             </div>
             <ul class="criteriaList">
                <li v-for="brand in brandList" :key="brand.id">
@@ -335,8 +349,9 @@ Vue.component('activity-sidebar', {
             </ul>
          </div>
          <div class="subMenu pointMenu" :class="{show: subId === 'sub2'}">
-            <div class="clearAll">
+            <div class="clearAll between">
                <span @click="clearAllPoint">{{ clearText }}</span>
+               <span @click="selectAllItem('pointList')">全部勾選</span>
             </div>
             <ul class="criteriaList">
                <li v-for="(point,index) in pointList" :key="index">

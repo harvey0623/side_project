@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>首頁</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="c35eae68c868bd516ed64469e1e30e36">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_profile">
+	<meta name="get_member_card_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_card">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A0_00_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./lib/dayjs/dayjs.min.js"></script>
+	<script src="./lib/timeme/timeme.min.js"></script>
+	<script src="./lib/js-cookie/js.cookie.min.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script>
+		window.firebaseInitConfig = {
+			apiKey: "AIzaSyDK-Z3og32hr4aUCis-EBszTXAUuTKZ0fc",
+         authDomain: "analysic-4d1f3.firebaseapp.com",
+         projectId: "analysic-4d1f3",
+         storageBucket: "analysic-4d1f3.appspot.com",
+         messagingSenderId: "493926805475",
+         appId: "1:493926805475:web:965856ed0ca88762a9bad6",
+         measurementId: "G-P6YEP2HBY4"
+		}
+	</script>
+	<script type="module" src="./js/src/firebase-ga.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<header id="normalHeader">
+			<a href="javascript:;" class="logoBg"></a>
+		</header>
+		<div class="profileBlock">
+			<div class="greetBox">
+				<div class="avatar" :style="avatarBg"></div>
+				<div class="rightInfo">
+					<p>Hi ! {{ profile.name }} 您好</p>
+					<a :href="pageUrl.member" @click.prevent="aTagClick(false, $event)" data-event="index_member">前往會員專區</a>
+				</div>
+			</div>
+		</div>
+		<section class="utilityBlock">
+			<div class="mainFunction">
+				<a :href="pointPageUrl" class="function-item" @click.prevent="aTagClick(true, $event)" data-event="index_mypoints">
+					<div class="function-inner">
+						<div class="title">我的點數</div>
+						<p class="itemName">
+							<span class="count">{{ currentPointInfo.amount }}</span> 點
+						</p>
+					</div>
+				</a>
+				<a :href="pageUrl.couponList" class="function-item" @click.prevent="aTagClick(false, $event)" data-event="index_voucherbasket">
+					<div class="function-inner">
+						<div class="title">我的票券</div>
+						<p class="itemName">
+							<span class="count">{{ totalTicket }}</span> 張
+						</p>
+					</div>
+				</a>
+				<a :href="pageUrl.memberCard" class="function-item" @click.prevent="aTagClick(false, $event)" data-event="index_VIP">
+					<div class="function-inner">
+						<div class="title">會員卡</div>
+						<p class="itemName">累點 / 扣點</p>
+					</div>
+				</a>
+			</div>
+			<div class="myBooking">
+				<p class="text">我的訂位</p>
+				<div class="info">
+					<template v-if="hasOrderInfo">
+						<p>{{ myOrderData.time }}</p>
+						<p>{{ myOrderData.title }}</p>
+					</template>
+					<template v-else>
+						<p class="no-order">尚無訂位</p>
+					</template>
+				</div>
+				<a :href="pageUrl.orderRecord" @click.prevent="aTagClick(false, $event)" data-event="index_reservationrecord">更多訂位</a>
+			</div>
+			<div class="subFunction">
+				<a :href="pageUrl.meals" class="utilityItem" @click.prevent="aTagClick(false, $event)" data-event="index_takeout">
+					<div class="inner">
+						<div class="iconBox meals"></div>
+						<p class="itemName">外帶餐點</p>
+					</div>
+				</a>
+				<a :href="pageUrl.onlineOrder" class="utilityItem" @click.prevent="aTagClick(false, $event)" data-event="index_reserve">
+					<div class="inner">
+						<div class="iconBox onlineOrder"></div>
+						<p class="itemName">線上訂位</p>
+					</div>
+				</a>
+				<a :href="pageUrl.activity" class="utilityItem" @click.prevent="aTagClick(false, $event)" data-event="index_voucherevent">
+					<div class="inner">
+						<div class="iconBox gift"></div>
+						<p class="itemName">優惠好康</p>
+					</div>
+				</a>
+			</div>
+			<div class="subFunction">
+				<a :href="pageUrl.store" class="utilityItem" @click.prevent="aTagClick(false, $event)" data-event="index_navbar">
+					<div class="inner">
+						<div class="iconBox store"></div>
+						<p class="itemName">附近餐廳</p>
+					</div>
+				</a>
+				<a :href="pageUrl.eat" class="utilityItem" @click.prevent="aTagClick(false, $event)" data-event="index_brandinfo">
+					<div class="inner">
+						<div class="iconBox eat"></div>
+						<p class="itemName">品牌情報</p>
+					</div>
+				</a>
+				<a :href="pageUrl.news" class="utilityItem" @click.prevent="aTagClick(true, $event)" data-event="index_news">
+					<div class="inner">
+						<div class="iconBox news"></div>
+						<p class="itemName">最新消息</p>
+					</div>
+				</a>
+			</div>
+		</section>
+
+		<div id="loading" v-show="isLoading"></div>
+
+		<!-- option modal -->
+		<div class="modal optionModal" id="optionModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">請選擇服務</h1>
+					</div>
+					<div class="modal-body">
+						<div 
+							class="couponItem"
+							v-for="service in serviceList"
+							:key="service.type"
+							@click="serviceHandler(service.type)">
+							<a href="javascript:;">{{ service.title }}</a>
+						</div>
+						<div class="couponItem">
+							<div onclick="$('#optionModal').modal('hide')">取消</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+	<script type="module">
+		import app from './js/page/A0/A0_00_00_00.js';
+		app({
+			apiUrl: {
+				config: 'https://project-mock-server.herokuapp.com/mmrmProd/config/brief_config',
+				memberSummary: 'https://project-mock-server.herokuapp.com/mmrmProd/member_summary',
+				searchBrand: 'https://project-mock-server.herokuapp.com/mmrmProd/search_brand',
+				brandInfo: 'https://project-mock-server.herokuapp.com/mmrmProd/brand_information',
+				orderHistory: 'https://project-mock-server.herokuapp.com/wowprime/relay/send_payload',
+			},
+			pageUrl: {
+				point: './A2_01_01_00.html',
+				couponList: './A2.1_00_00_03.html',
+				memberCard: './A2_00_00_01.html',
+				activity: './A3.1_00_00_00.html',
+				member: './A2_00_00_00.html',
+				store: '',
+				meals: 'https://wowfoods.wowprime.com/event/news/2021/2109_takeout.php',
+				eat: './A5_00_00_00.html',
+				news: '',
+				onlineOrder: '',
+				orderRecord: ''
+			}
+		});
+	</script>
+</body>
+
+</html>

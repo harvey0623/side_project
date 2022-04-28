@@ -10,6 +10,10 @@ Vue.component('menu-brand-item', {
       },
       brand_img: {
          required: true
+      },
+      brand_code: {
+         type: String,
+         required: true
       }
    },
    computed: {
@@ -20,7 +24,10 @@ Vue.component('menu-brand-item', {
    },
    methods: {
       clickHandler() {
-         this.$emit('brand_event', { brandIds: [this.brand_id] });
+         this.$emit('brand_event', { 
+            brandIds: [this.brand_id],
+            brandCode: this.brand_code 
+         });
       }
    },
    template: `

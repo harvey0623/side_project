@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>手機條碼載具(已註冊)</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="c35eae68c868bd516ed64469e1e30e36">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_profile">
+	<meta name="get_member_card_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_card">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/mobileSelect/index.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_07_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./lib/timeme/timeme.min.js"></script>
+	<script src="./lib/js-cookie/js.cookie.min.js"></script>
+	<script src="./lib/lodash/lodash.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="./lib/mobileSelect/index.js"></script>
+	<!-- page -->
+	<script src="./lib/jsBarcode/JsBarcode.all.min.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+      <div class="mycontainer">
+			<div class="barcode-block">
+				<div class="barcode-center">
+					<p class="title">此條碼為手機載具條碼，非付款條碼</p>
+					<svg id="einvoice"></svg>
+				</div>
+				<div class="remove" @click="checkRemove">刪除條碼載具</div>
+			</div>
+         <div class="note-block">
+            <p class="title">注意事項</p>
+            <div class="content" v-html="noteContent"></div>
+         </div>
+      </div>
+
+      <div id="loading" v-show="isLoading"></div>
+
+		<div class="modal msgModal" id="checkModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">即將刪除</h1>
+					</div>
+					<div class="modal-body">
+						<p>刪除後必須重新綁定，是否確定刪除此手機號碼載具?</p>
+					</div>
+					<div class="modal-footer split">
+						<div data-dismiss="modal">我再想想</div>
+						<div @click="removeHandler">確定刪除</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+      <div class="modal msgModal" id="okModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ tipInfo.message }}</p>
+					</div>
+					<div class="modal-footer">
+                  <a :href="pageUrl.invoice_unbinded" v-show="tipInfo.status">確認</a>
+						<p data-dismiss="modal" v-show="!tipInfo.status">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script type="module">
+		import app from './js/page/L2/A2_07_00_01.js';
+		app({
+			apiUrl: {
+            brefConfig: 'https://project-mock-server.herokuapp.com/mmrmProd/config/brief_copywriting_config',
+				memberProfile: 'https://project-mock-server.herokuapp.com/mmrmProd/member_profile',
+				updateMemberProfile: 'https://project-mock-server.herokuapp.com/mmrmProd/update_member_profile',
+			},
+			pageUrl: {
+				invoice_unbinded: './A2_07_00_00.html',
+				invoice_binded: './A2_07_00_01.html',
+			}
+		});
+	</script>
+</body>
+
+</html>

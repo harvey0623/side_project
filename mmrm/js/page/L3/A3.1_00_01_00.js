@@ -361,6 +361,7 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
             }).then(res => {
                let resData = res.data.results.coupon_redeem_result;
                localStorage.setItem('exchange', JSON.stringify(resData));
+               this.dispatchGaPromoteCode();
                location.href = this.pageUrl.exchangeOk;
                return { status: true };
             }).catch(err => {
@@ -383,12 +384,16 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
             let autoResult = await this.confirmExchange(payload).then(res => res);
             if (!autoResult.status) $('#errorModal').modal('show');
          },
+         dispatchGaPromoteCode() { //暫時不考慮voucher
+            this.couponBlock.forEach(item => {
+               firebaseGa.logEvent(`event_exchange_${item.third_party_promotion_code || ''}`);
+            });
+         }
       },
       async mounted() {
          this.bindModalEvent();
          this.isLoading = true;
-
-         this.getLocalProfile();
+         
          this.activityId = parseInt(this.getQuery('coupon_activity_id'));
          this.activityInfo = await this.getActivityInfo().then(res => res[0]);
          if (this.isCountDown) this.startCountDown();

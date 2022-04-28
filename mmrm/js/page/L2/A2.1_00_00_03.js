@@ -20,17 +20,20 @@ export default function ({ apiUrl, pageUrl }) {
             {
                id: 'valid',
                title: window.getSystemLang('mycouponlist_optionmycoupon'),
-               isOpenTransfer: true
+               isOpenTransfer: true,
+               event: 'voucherbasket_wcoupon_usable',
             },
             {
                id: 'invalid',
                title: window.getSystemLang('mycouponlist_optionhistory'),
-               isOpenTransfer: true
+               isOpenTransfer: true,
+               event: 'voucherbasket_wcoupon_history',
             },
             {
                id: 'transferred',
                title: window.getSystemLang('mycouponlist_optiontransferred'),
-               isOpenTransfer
+               isOpenTransfer,
+               event: 'voucherbasket_wcoupon_transfer',
             }
          ],
          couponType: couponType,
@@ -156,6 +159,7 @@ export default function ({ apiUrl, pageUrl }) {
             if (this.currentType === id) return;
             this.targetType.scrollPos = window.pageYOffset;
             this.currentType = id;
+            this.dispatchCouponTypeGa();
             if (this.targetType.isFirst) await this.getPagination();
             await this.$nextTick();
             window.scrollTo(0, this.targetType.scrollPos);
@@ -226,15 +230,24 @@ export default function ({ apiUrl, pageUrl }) {
             if (scrollPos >= distance * 0.95 && hasNextPage) {
                await this.getPagination();
             }
+         },
+         dispatchCouponTypeGa() {
+            let targetTab = this.tabList.find(item => item.id === this.currentType);
+            if (targetTab === undefined) return;
+            firebaseGa.logEvent(targetTab.event);
+         },
+         getMoreGa(evt) {
+            firebaseGa.logEvent('voucherbasket_wcoupon_transfer_receive');
+            location.href = evt.currentTarget.href;
          }
       },
       created() {
          let couponType = this.getQuery('couponType');
          let isInclude = this.statusArr.includes(couponType);
          this.currentType = isInclude ? couponType : 'valid';
+         this.dispatchCouponTypeGa();
       },
       async mounted() {
-         this.getLocalProfile();
          window.addEventListener('scroll', this.scrollHandler);
          await this.getPagination();
       }

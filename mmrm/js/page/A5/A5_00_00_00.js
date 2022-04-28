@@ -4,7 +4,7 @@ export default function({ apiUrl, pageUrl }) {
       mixins: [localProfile],
       data: {
          isLoading: false,
-         currentCategory: 'category',
+         currentCategory: 'brand',
          brandList: [],
          filteredList: [],
          backUpCategory: '',
@@ -15,8 +15,8 @@ export default function({ apiUrl, pageUrl }) {
             { id: 'situation', title: '情境', pos: 0 },
             { id: 'brand', title: '品牌', pos: 0 }
          ],
-         popupInfo: {
-            isOpen: true
+         popupInfo: { 
+            isOpen: true 
          },
          config: {
             category: [],
@@ -62,16 +62,17 @@ export default function({ apiUrl, pageUrl }) {
                return { category, situation };
             })
          },
-         openBrandPage({ brandIds }) {
-            location.href = `${this.pageUrl.brandDetail}?id=${brandIds[0]}`;
+         openBrandPage({ brandIds, brandCode }) {
+            firebaseGa.logEvent(`brandlist_return_${brandCode}`);
+            location.href = `${this.pageUrl.brandDetail}?id=${brandIds[0]}&brandCode=${brandCode}`;
          },
-         openPopup() {
-            this.currentCategory = this.backUpCategory || 'category';
-            if (this.backUpCategory !== '') {
-               this.config[this.currentCategory] = JSON.parse(JSON.stringify(this.backUpCriteria));
-            } else {
-               this.config[this.currentCategory].forEach(item => item.isClick = false);
-            }
+         openPopup() { //威許機車印要把做好的功能拿掉
+            this.currentCategory = this.backUpCategory || 'brand';
+            // if (this.backUpCategory !== '') {
+            //    this.config[this.currentCategory] = JSON.parse(JSON.stringify(this.backUpCriteria));
+            // } else {
+            //    this.config[this.currentCategory].forEach(item => item.isClick = false);
+            // }
             document.body.style.overflow = 'hidden';
             this.popupInfo.isOpen = true;
          },
@@ -85,6 +86,14 @@ export default function({ apiUrl, pageUrl }) {
                prev.push({ ...current, isClick: false });
                return prev;
             }, []);
+         },
+         createBrandList(brandInfo) {
+            return brandInfo.filter(brand => {
+               let metaObj = brand.external_meta.find(item => item.key === 'display_enable');
+               if (metaObj === undefined) return true;
+               if (metaObj.value === 'false') return false;
+               return true;
+            });
          },
          confirmHandler(configKey) {
             this.backUpCategory = this.currentCategory;
@@ -116,10 +125,10 @@ export default function({ apiUrl, pageUrl }) {
       },
       async mounted() {
          this.isLoading = true;
-         this.getLocalProfile();
          await this.processConfig();
          let brandIds = await this.searchBrand();
-         this.brandList = await this.getBrandInfo(brandIds);
+         let brandInfo = await this.getBrandInfo(brandIds);
+         this.brandList = this.createBrandList(brandInfo);
          this.isLoading = false;
       }
    })

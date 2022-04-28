@@ -116,4 +116,20 @@
   color: #fff;
   z-index: 11;
 }
+
+.tabList {
+  display: none;
+}
+
+.brand-wrap.popup {
+  height: calc(100vh - 45px);
+}
+
+.popupClose {
+  display: none;
+}
+
+.backHome {
+  z-index: 11;
+}
 /*# sourceMappingURL=A5_00_00_00.css.map */

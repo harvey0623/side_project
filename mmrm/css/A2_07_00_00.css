@@ -1,0 +1,97 @@
+.barcode-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mycontainer {
+  padding-top: 30px;
+}
+
+.formLayout {
+  margin-bottom: 20px;
+}
+
+.note-block {
+  margin: 30px 0;
+  color: #797979;
+}
+
+.note-block > .title {
+  margin-bottom: 10px;
+}
+
+.note-block > .content {
+  white-space: pre-line;
+}
+
+.register-block {
+  padding: 30px 20px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.register-block > .btn-register {
+  display: block;
+  max-width: 80%;
+  height: 60px;
+  line-height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 16px;
+  background-color: #fff;
+  color: var(--variationMain);
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.register-block > p {
+  margin-bottom: 5px;
+  text-align: center;
+  color: #797979;
+  font-size: 14px;
+}
+
+.register-block > p:last-child {
+  margin-bottom: 0;
+}
+
+.barcode-block {
+  position: relative;
+  padding: 20px;
+  height: 300px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.barcode-block > .barcode-center > .title {
+  margin-bottom: 5px;
+  color: #797979;
+  text-align: center;
+}
+
+.barcode-block > .barcode-center > #einvoice {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.barcode-block > .remove {
+  position: absolute;
+  left: 50%;
+  bottom: 15px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  color: #528fff;
+  text-decoration: underline;
+}
+/*# sourceMappingURL=A2_07_00_00.css.map */

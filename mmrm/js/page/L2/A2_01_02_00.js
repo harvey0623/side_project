@@ -32,7 +32,6 @@ export default function({ apiUrl }) {
       },
       async mounted() {
          this.isLoading = true;
-         this.getLocalProfile();
          let pointId = parseInt(this.getQuery('point_id'));
          this.pointData = await this.getPointData(pointId);
          this.isLoading = false;

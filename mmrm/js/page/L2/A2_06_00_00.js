@@ -30,13 +30,13 @@ export default function ({ apiUrl, pageUrl }) {
             this.checkHandler();
             if (this.isEmpty) return;
             let text = `Hi 好朋友\n下載王品瘋美食APP\nhttps://wowfoods.cc/mgm\n首次註冊輸入我的好友推薦碼﹝${this.profile.referral_code}﹞，一起享受美食吧!`;
+            firebaseGa.logEvent('mgm_sharecode');
             let url = `line://msg/text/${encodeURIComponent(text)}`;
             location.href = url;
          }
       },
       mounted() {
          this.initClipboard();
-         this.getLocalProfile();
       }
    });
 }

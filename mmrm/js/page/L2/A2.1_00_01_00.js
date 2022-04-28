@@ -110,6 +110,7 @@ export default function ({ apiUrl, pageUrl }) {
          openTermPopup() { //打開條款popup
             let termData = this.termsList[0];
             if (termData.checked) {
+               firebaseGa.logEvent('voucherbasket_weticket_usable_transfer_number');
                $('#transferModal').modal('show');
             } else {
                document.body.style.overflow = 'hidden';
@@ -133,6 +134,8 @@ export default function ({ apiUrl, pageUrl }) {
             obj.checked = true;
             obj.show = false;
             document.body.style.overflow = '';
+            firebaseGa.logEvent('voucherbasket_weticket_usable_transfer_policy');
+            firebaseGa.logEvent('voucherbasket_weticket_usable_transfer_number');
             $('#transferModal').modal('show');
          },
          getTerms() { //取得條款資料
@@ -215,12 +218,15 @@ export default function ({ apiUrl, pageUrl }) {
          async submitHandler() {
             let isValid = await this.$refs.form.validate().then(res => res);
             if (!isValid) return;
+            firebaseGa.logEvent('voucherbasket_weticket_usable_transfer_ok');
             $('#transferModal').modal('hide');
             let transferResult = await this.doTransfer().then(res => res);
             let modalId = transferResult.status ? '#okModal' : '#failModal';
             $(modalId).modal('show');
+            if (transferResult.status) firebaseGa.logEvent('voucherbasket_weticket_usable_transfer_success');
          },
          useHandler() {
+            firebaseGa.logEvent(`voucherbasket_wcoupon_usable_use_${this.couponInfo.third_party_promotion_code}`, {}, true);
             let url = this.pageUrl.couponBarCode;
             location.href = `${url}?my_coupon_id=${this.myCouponId}`;
          },
@@ -233,13 +239,14 @@ export default function ({ apiUrl, pageUrl }) {
          redirectToStoreMap() { //導到店家地圖頁面
             // let couponId = this.couponDetail.coupon_id;
             // location.href = `${this.pageUrl.storePoint}?coupon_id=${couponId}`;
+            let code = this.couponInfo.third_party_promotion_code;
+            firebaseGa.logEvent(`voucherbasket_wcoupon_usable_${code}_usablestore`, {}, true);
             location.href = `${this.pageUrl.storePoint}?ids=${this.couponInfo.brand_ids[0]}`;
          }
       },
       async mounted() {
          this.bindModalEvent();
          this.isLoading = true;
-         this.getLocalProfile();
          this.myCouponId = parseInt(this.getQuery('my_coupon_id'));
          let termsData = await this.getTerms();
          this.termsList = this.convertTerms(termsData);

@@ -1,22 +1,22 @@
-$(document).ready(function(){		
+$(document).ready(function(){
 		// 底部按鍵 start
 		$('.bot_indicator img').click(function(){
 			$('.bot_indicator').hide();
 			// $('.bot_btn').slideUp();
 		});
 
-		$(window).bind('scroll', function() { 
-		    if ($(window).scrollTop() > 0) { 
+		$(window).bind('scroll', function() {
+		    if ($(window).scrollTop() > 0) {
 		     	$('.bot_indicator').hide();
 		     	// $('.bot_btn').slideUp();
-		    } 
-		    else { 
+		    }
+		    else {
 		    	// $('.bot_btn').slideDown('fast',function(){
 		    	// 	$('.bot_indicator').show();
 		    	// });
 		    	$('.bot_indicator').show();
-		    } 
-		}); 
+		    }
+		});
 		// 底部按鍵 end
 
 		// 相關連結版型3 start
@@ -38,6 +38,9 @@ $(document).ready(function(){
 		$('#connectModal_3').on('click','.con_body_blk',function(){
 			let link = $(this).attr('link');
 			if(link){
+				let index = $(this).index() - 1;
+				let eventList = ['otherlink_web_', 'otherlink_FB_'];
+				firebaseGa.logEvent(`${eventList[index]}${brandCode}`);
 				window.location.href = link;
 			}
 		});
@@ -95,16 +98,16 @@ function brand(parameter){
 
 	$('.index_content').scrollLeft( $('#index').width() / 5);
 
-	$('.index_content').bind('scroll', function() { 
+	$('.index_content').bind('scroll', function() {
 		let block_width = $('#index').width() / 5 ;
-	    if ($('.index_content').scrollLeft() > block_width+2 ) { 
+	    if ($('.index_content').scrollLeft() > block_width+2 ) {
 	    	$('.index_content').unbind();
 	    	$('#index_right').trigger('click');
 	    }else if($('.index_content').scrollLeft() < block_width-2 ){
 	    	$('.index_content').unbind();
 	    	$('#index_left').trigger('click');
 	    }
-	}); 
+	});
 
 	function index_got(index){
 		let temp = 0 ;
@@ -133,7 +136,7 @@ function right_function(){
         $('#bottom .bot_btn').empty();
 		get_detail();
 	});
-	
+
 }
 
 function left_function(){
@@ -163,20 +166,22 @@ function store(){
 	if(brand_store.display){
 		let brand_store_content = "<p>最近的門市</p>" ;
 		if(brand_store.gps){
-			brand_store_content += 
+			brand_store_content +=
 			'<p>'+brand_store.addr+'</p>' +
 			'<p>'+brand_store.tel+'</p>' ;
 			$('#distance').text(brand_store.distance);
 			$('#distance').click(function(){
+				firebaseGa.logEvent('brandlist_nearby');
 				window.location.href = brand_store.url;
 			});
 			$('#store').find('img').click(function(){
+				firebaseGa.logEvent('brandlist_nearby');
 				window.location.href = brand_store.url;
 			});
 			$('#store').show();
 			$('#distance').show();
 		}else{
-			brand_store_content += 
+			brand_store_content +=
 			'<p>無法存取您目前的位置資訊，請先開啟設定功能</p>';
 			$('#store .indicator').hide();
 			$('#distance').hide();
@@ -202,6 +207,7 @@ function html(){
 }
 
 function news(){
+	brand_news['dataset-event'] = 'brandlist_news_';
 	if(brand_news.display){
 		block(brand_news,$('#news'));
 		$("#news").show();
@@ -211,6 +217,7 @@ function news(){
 }
 
 function ticket(){
+	brand_ticket['dataset-event'] = 'brandlist_voucherevent_';
 	if(brand_ticket.display){
 		block(brand_ticket,$('#ticket'));
 		$("#ticket").show();
@@ -220,13 +227,14 @@ function ticket(){
 }
 
 function point(){
+	brand_point['dataset-event'] = '';
 	if(brand_point.display){
 		block(brand_point,$('#point'));
 		$("#point").show();
 	}else{
 		$("#point").hide();
 	}
-}	
+}
 
 function block(parameter,zone){
 	if(parameter.list.length < 2){
@@ -237,13 +245,13 @@ function block(parameter,zone){
 	zone.find('.block_block').remove();
 	for(i=0 ;  i<parameter.list.length && i<2 ;i++){
 		let content = '' ;
-		content += 
+		content +=
 			'<div class="col-6 col_panding block_block">' +
 				'<div class="white_back">' +
 					'<div class="block_img_div">' +
 						'<img src="'+parameter.list[i].img+'" width="100%">' +
 					'</div>' +
-					'<div class="padd-10 block_url" url="'+parameter.list[i].url+'">' +
+					'<div class="padd-10 block_url" url="'+parameter.list[i].url+'"' + 'data-event="' + parameter['dataset-event'] + '"' + 'data-code="' + parameter.list[i]['event_code']  +'">' +
 						'<p class="one_line"><b>'+parameter.list[i].title+'</b></p>' +
 						'<p>'+parameter.list[i].date+'</p>' +
 					'</div>' +
@@ -252,6 +260,10 @@ function block(parameter,zone){
 		zone.append(content);
 	}
 	zone.on('click','div.block_url',function(){
+		let eventName = this.dataset.event;
+		let eventCode = this.dataset.code;
+		if (eventName === '') return;
+		firebaseGa.logEvent(`${eventName}${brandCode}_${eventCode}`);
 		window.location.href = $(this).attr('url');
 	})
 }
@@ -262,7 +274,7 @@ function contact(){
 		if(brand_contact.content.tel){
 			$('#tel').text(brand_contact.content.tel);
 			modal_content += '<li class="tel_link">' +
-						'<div class="" ><a href="tel:'+brand_contact.content.tel+'">撥打電話</a></div>' +
+						'<div class="" ><a href="tel:'+brand_contact.content.tel+'" data-event="brand_contact_call_">撥打電話</a></div>' +
 					'</li>';
 		}else{
 			$('.tel_link').remove();
@@ -270,7 +282,7 @@ function contact(){
 		if(brand_contact.content.mail){
 			$('#email').text(brand_contact.content.mail);
 			modal_content += '<li class="email_link">' +
-						'<div class="" ><a href="mailto:'+brand_contact.content.mail+'">電子郵件</a></div>' +
+						'<div class="" ><a href="mailto:'+brand_contact.content.mail+'" data-event="brand_contact_email_">電子郵件</a></div>' +
 					'</li>';
 		}else{
 			$('.email_link').remove();
@@ -292,6 +304,11 @@ function contact(){
 	}
 }
 
+function getQuery(key) {
+	let params = (new URL(document.location)).searchParams;
+	return params.get(key);
+}
+
 function service(){
 	for(i=0 ; i<brand_service.length ; i++){
         let brand_service_func = '' ;
@@ -300,13 +317,13 @@ function service(){
                 $('#connectModal_1 .contactList').empty();
 				brand_service_func = 'data-toggle="modal" data-target="#connectModal_1"' ;
 				for(j=0 ; j<brand_link.link_block.links.length; j++ ){
-					let other_link = 
+					let other_link =
 						'<li>' +
 							'<a href="'+brand_link.link_block.links[j].hyperlink_url+'">' +
 								'<div>'+brand_link.link_block.links[j].title+'</div>' +
 							'</a>' +
 						'</li>' ;
-						
+
 					$('#connectModal_1 .contactList').append(other_link);
 				}
 				let other_link = '<li><div class="cancel" data-dismiss="modal">取消</div></li>'
@@ -315,7 +332,7 @@ function service(){
                 $('#connectModal_2 .contactList').empty();
 				brand_service_func = 'data-toggle="modal" data-target="#connectModal_2"' ;
 				for(j=0 ; j<brand_link.link_block.links.length; j++ ){
-					let other_link = 
+					let other_link =
 						'<div class="col-4 connect_block">' +
 							'<a href="'+brand_link.link_block.links[j].hyperlink_url+'">' +
 								'<div class="connect_img">' +
@@ -326,14 +343,14 @@ function service(){
 								'</div>' +
 							'</a>' +
 						'</div>' ;
-						
+
 					$('#connectModal_2 .modal-body').append(other_link);
 				}
 			}else{
 				$('#connectModal_3 .con_body_blk').remove();
 				brand_service_func = 'data-toggle="connectModal_3"' ;
 				for(j=0 ; j<brand_link.link_block.links.length; j++ ){
-					let other_link = 
+					let other_link =
 					'<div class="con_body_blk" link="'+brand_link.link_block.links[j].hyperlink_url+'">' +
 			        	'<div class="con_body_blk_img">' +
 			        		'<img src="'+brand_link.link_block.links[j].feature_image.url+'">' +
@@ -347,10 +364,10 @@ function service(){
 			        		'</div>' +
 			        	'</div>' +
 			        	'<div class="con_link">' +
-			        		'<img src="portal_assets/img/btn_listcore_indicatorright_std_n@3x.png">' +
+			        		'<img src="../portal_assets/img/btn_listcore_indicatorright_std_n@3x.png">' +
 			        	'</div>' +
 			        '</div>';
-						
+
 					$('#connectModal_3 .fixedArea').append(other_link);
 				}
 			}
@@ -361,6 +378,9 @@ function service(){
             else if(brand_service[i]['key'] === 'story' && brand_story.display){
                 brand_service_func = 'link="'+brand_service[i].link+'?book_id='+brand_story.brand_book_id+'"';
             }
+			else if(brand_service[i]['key'] === 'menu' && brand_menu.display){
+                brand_service_func = 'link="'+brand_service[i].link+'?brand_id='+brand_paramenter.show+'"';
+			}
             else{
                 brand_service_func = 'link="'+brand_service[i].link+'"' ;
             }
@@ -384,11 +404,11 @@ function service(){
                 break;
         }
         console.log(brand_service[i]);
-        
+
         if(brand_service[i]){
             if(i<4){
-                let brand_service_content = 
-                    '<div class="bot_block bot_btn_blk"'+brand_service_func+'>' +
+                let brand_service_content =
+                    '<div class="bot_block bot_btn_blk"'+brand_service_func+ 'data-event="' + brand_service[i]['dataset-event'] +'">' +
                         '<div class="bot_block_img">' +
                             '<img src="'+brand_service[i].img+'">' +
                         '</div>' +
@@ -400,17 +420,17 @@ function service(){
             }else if(i == 4){
                 let brand_service_content = '' ;
                 if(brand_service.length > 5){
-                    brand_service_content = 
+                    brand_service_content =
                     '<div class="bot_block" data-toggle="modal" data-target="#moreModal">' +
                         '<div class="bot_block_img">' +
-                            '<img src="/portal_assets/img/btn_brand_tabbar_more_n@3x.png">' +
+                            '<img src="../portal_assets/img/btn_brand_tabbar_more_n@3x.png">' +
                         '</div>' +
                         '<div class="bot_block_content">' +
                             '更多服務' +
                         '</div>' +
                     '</div>' ;
                     $('#bottom .bot_btn').append(brand_service_content);
-                    brand_service_content = 
+                    brand_service_content =
                         '<div class="col-4 connect_block bot_btn_blk" '+brand_service_func+'>' +
                             '<div class="connect_img">' +
                                 '<img src="'+brand_service[i].img+'">' +
@@ -420,9 +440,9 @@ function service(){
                             '</div>' +
                         '</div>';
                     $("#moreModal .modal-body").append(brand_service_content);
-    
+
                 }else{
-                    brand_service_content = 
+                    brand_service_content =
                     '<div class="bot_block bot_btn_blk" '+brand_service_func+'>' +
                         '<div class="bot_block_img">' +
                             '<img src="'+brand_service[i].img+'">' +
@@ -434,7 +454,7 @@ function service(){
                     $('#bottom .bot_btn').append(brand_service_content);
                 }
             }else{
-                let brand_service_content = 
+                let brand_service_content =
                     '<div class="col-4 connect_block bot_btn_blk" '+brand_service_func+'>' +
                         '<div class="connect_img">' +
                             '<img src="'+brand_service[i].img+'">' +
@@ -451,11 +471,46 @@ function service(){
 	let window_width = $('body').width();
 
 	$('#bottom').on('click','.bot_btn_blk',function(){
+		if (this.dataset.event !== '') {
+			firebaseGa.logEvent(`${this.dataset.event}${brandCode}`, {}, true);
+		}
 		let link = $(this).attr('link');
 		if(link){
-			window.location.href = link;
+            //@wadeku@ for online booking +++++
+		    if (link === "line_portal_start_booking") {
+                if (brand_inline_companyid === "empty") {
+                    let modal = $("#failModal");
+                    modal.modal();
+                    return;
+                }
+
+		        return mmrmAxios({
+                    url: '/line_portal_api/v1/booking/doBookingStart',
+                    method: 'post',
+                    data: {
+                        vCompanyId: brand_inline_companyid
+                    }
+                }).then(res => {
+                    if (res.data.results) {
+                        let encodedWord = CryptoJS.enc.Utf8.parse(res.data.results["perFilledFromData"]);
+                        let encoded = CryptoJS.enc.Base64.stringify(encodedWord);
+                        let perFilledFromData = encodeURIComponent(encoded);
+                        let url = res.data.results["urlBase"] + brand_inline_companyid + res.data.results["perFilledFrom"] + perFilledFromData;
+                        window.open(url + "&openExternalBrowser=1", '_blank');
+                        //window.open(url, '_blank');
+                    }
+                    else {
+
+                    }
+                    return;
+                }).catch(err => null);
+            }
+            else {
+                window.location.href = link;
+            }
+            //@wadeku@ for online booking -----
 		}
-		
+
 	});
 
 	$('#moreModal').on('click','.bot_btn_blk',function(){
@@ -470,7 +525,7 @@ var ajax_num = 0 ;
 function get_detail(){
 	if (navigator.geolocation) {
 	    navigator.geolocation.getCurrentPosition(showPosition,errorPosition);
-	} else { 
+	} else {
 	    	console.log('location_error');
 	    	latitude = null;
 			longitude = null;
@@ -518,6 +573,7 @@ function do_ajax(){
 	    	brand_ticket = rtndata.brand_ticket ;
 	    	brand_point = rtndata.brand_point ;
 	        brand_contact = rtndata.brand_contact ;
+            brand_inline_companyid = rtndata.inline_companyid ; //@wadeku@ for online booking
 	        img();
 	    	summary();
 	    	store();
@@ -562,3 +618,21 @@ function do_ajax(){
 	});
 }
 
+//===harvey埋ga
+const brandCode = getQuery('brandCode') || '';
+
+$('.backHome').on('click', function(evt) {
+	evt.preventDefault();
+	firebaseGa.logEvent(`brand_home_${brandCode}`);
+	location.href = this.href;
+})
+
+$('#info_more').on('click', function() {
+	firebaseGa.logEvent(`brand_contact_${brandCode}`);
+});
+
+$('#brandContact').on('click', 'a', function(evt) {
+	evt.preventDefault();
+	firebaseGa.logEvent(`${this.dataset.event}${brandCode}`);
+	location.href = this.href;
+});

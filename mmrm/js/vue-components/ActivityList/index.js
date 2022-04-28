@@ -132,6 +132,10 @@ Vue.component('activity-list', {
             prev.push(`${obj.title}${current.amount}${this.pointUnit}`);
             return prev;
          }, []);
+      },
+      aTagClick(evt) {
+         firebaseGa.logEvent(`eventlist_${this.detail.coupon_activity_id}`);
+         location.href = evt.currentTarget.href;
       }
    },
    mounted() {
@@ -149,7 +153,7 @@ Vue.component('activity-list', {
    },
    template: `
       <li :class="{ hide: isFinish }">
-         <a class="topBlock" :href="pageLink" :class="{other: changelayout}">
+         <a class="topBlock" :href="pageLink" :class="{other: changelayout}" @click.prevent="aTagClick">
             <div class="bgBlock" :style="activityBg">
                <div class="statusCover" v-if="!isOpen">
                   <span>{{ statusText }}</span>

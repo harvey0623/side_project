@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>修改手機號碼(會員資料維護)</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="c35eae68c868bd516ed64469e1e30e36">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_profile">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<div id="logoBox">
+				<img src="./img/img_common_form_logo_n@3x.png">
+			</div>
+			<validation-observer tag="div" class="formLayout" ref="form">
+				<div class="formRow">
+					<p class="formTitle">手機號碼</p>
+					<validation-provider 
+						tag="div" 
+						class="formContent" 
+						rules="required|phone"
+						v-slot="{ errors,failed }">
+						<input
+							type="number"
+							class="form-control" 
+							placeholder="請輸入新的手機號碼"
+							v-model.trim="user.mobile">
+						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+					</validation-provider>
+				</div>
+				<div class="formRow">
+					<p class="formTitle">密碼</p>
+					<validation-provider 
+						tag="div" 
+						class="formContent" 
+						rules="required|password"
+						v-slot="{ errors, failed }">
+						<input 
+							type="password"
+							class="form-control pwInput"
+							placeholder="請輸入會員密碼"
+							maxLength="12"
+							ref="pwInput"
+							v-model.trim="user.password">
+						<div 
+							class="visibleBox" @click="seeHandler"
+							:class="{ show: visible, hide: !visible }"
+						></div>
+						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+					</validation-provider>
+				</div>
+			</validation-observer>
+			<div class="btnBox">
+				<button @click="submitHandler" class="variation">確定</button>
+			</div>
+		</div>
+
+		<div id="loading" v-show="isLoading"></div>
+
+		<div class="modal msgModal" id="failModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ tipMsg }}</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#failModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script type="module">
+		import app from './js/page/L2/A2_03_02_00.js';
+		app({
+			apiUrl: {
+				updateMemberMobile: 'https://project-mock-server.herokuapp.com/mmrmProd/update_member_mobile',
+			},
+			pageUrl: {
+				verify: './A2_03_02_01.html'
+			}
+		})
+	</script>
+</body>
+
+</html>

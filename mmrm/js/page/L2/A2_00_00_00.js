@@ -9,13 +9,20 @@ export default function ({ apiUrl, pageUrl }) {
          totalTicket: 0,
          isLoading: false,
          fileInput: null,
-         user: { password: '' },
+         user: { password: '', einvoice: '' },
          errorMsg: '',
          pageUrl,
       }),
       computed: {
          pointPageUrl() {
             return `${this.pageUrl.point}?point_id=${this.currentPointInfo.point_id}`;
+         },
+         einvoiceText() {
+            return this.user.einvoice !== '' ? this.user.einvoice : '尚未綁定';
+         },
+         bindPageUrl() {
+            let { invoice_unbinded, invoice_binded } = this.pageUrl;
+            return this.user.einvoice === '' ? invoice_unbinded : invoice_binded;
          }
       },
       methods: {
@@ -70,6 +77,10 @@ export default function ({ apiUrl, pageUrl }) {
             let { point_id, amount } = summary.point_summary.current_point[0];
             this.currentPointInfo.point_id = point_id;
             this.currentPointInfo.amount = amount;
+         },
+         setEinvoice(profile) {
+            let { einvoice_carrier_no } = profile;
+            this.user.einvoice = _.isEmpty(einvoice_carrier_no) ? '' : einvoice_carrier_no;
          },
          initMobileSelector() {
             mobileSelect = new MobileSelect({
@@ -154,17 +165,24 @@ export default function ({ apiUrl, pageUrl }) {
                this.$refs.form.setErrors({ password: [this.errorMsg] });
             }
             this.isLoading = false;
+         },
+         aTagClick(needTime, evt) {
+            let linkObj = evt.currentTarget;
+            firebaseGa.logEvent(linkObj.dataset.event, {}, needTime);
+            location.href = linkObj.href;
          }
       },
       async mounted() {
          this.isLoading = true;
          fileReader.addEventListener('load', this.getBase64);
          this.verifyModalEvent();
-         this.getLocalProfile();
          this.fileInput = this.$refs.file;
          this.initMobileSelector();
-         let memberSummary = await this.getMemberSummary();
+         let [ memberSummary, memberProfile ] = await Promise.all([
+            this.getMemberSummary(), this.getMemberProfile()
+         ]);
          this.setSummaryInfo(memberSummary);
+         this.setEinvoice(memberProfile);
          this.isLoading = false;
       }
    });

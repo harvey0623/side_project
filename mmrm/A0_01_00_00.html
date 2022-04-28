@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>條款與細則</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="c35eae68c868bd516ed64469e1e30e36">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_profile">
+	<meta name="get_member_card_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_card">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/L8_01_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="./js/src/vue-mixin/localProfile.js"></script>
+</head>
+
+<body>
+	<div id="app" class="hasPt">
+		<div id="pageHeader">
+			<a href="javascript:;" class="logoBg"></a>
+			<div class="userName">{{ profile.name }}</div>
+		</div>
+		<div class="mycontainer">
+			<div class="termList">
+				<term-list
+					v-for="term in termList"
+					:key="term.id"
+					:term="term"
+					:pageurl="pageUrl.content"
+				></term-list>
+			</div>
+		</div>
+
+		<div id="loading" v-if="isLoading"></div>
+		<a :href="pageUrl.home" class="backHome"></a>
+
+	</div>
+
+	<script src="./js/vue-components/TermList/index.js"></script>
+	<script type="module">
+		import app from './js/page/A0/A0_01_00_00.js';
+		app({
+			apiUrl: {
+            term: 'https://project-mock-server.herokuapp.com/mmrmProd/brief_term'
+         },
+         pageUrl: {
+				home: './A0_00_00_00.html',
+            content: './L8_02_00_01.html'
+         }
+		});
+	</script>
+</body>
+
+</html>

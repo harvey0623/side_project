@@ -4,7 +4,7 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
       mixins: [localProfile],
       data: () => ({
          layoutList: [
-            { id: 'a', class: 'layoutA' },
+            { id: 'a', class: 'layoutA'},
             { id: 'b', class: 'layoutB' }
          ],
          layoutId: 'a',
@@ -68,6 +68,7 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
             $('#redeemFailModal').modal('hide');
          },
          showPointDetail() { //顯示點數詳情
+            firebaseGa.logEvent('eventlist_points');
             $('#ownPointModal').modal('show');
          },
          hideOwn() { //隱藏點數詳情
@@ -83,10 +84,12 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
             setTimeout(() => {
                window.addEventListener('scroll', this.scrollHandler);
             }, 50);
+            firebaseGa.logEvent(this.changeLayout ? 'eventlist_style02' : 'eventlist_style01');
          },
          openHandler() { //打開選單
             if (this.pagLoading) return;
             this.turnOn = true;
+            firebaseGa.logEvent('eventlist_search');
          },
          cammaToNumber(text) { //千分位轉數字
             let result = text.replace(/,/g, '');
@@ -392,11 +395,15 @@ export default function ({ projectTime, apiUrl, pageUrl }) {
                   this.gatherParams();
                }
             });
+         },
+         backGaClick(evt) {
+            let linkObj = evt.currentTarget;
+            firebaseGa.logEvent(linkObj.dataset.event);
+            location.href = linkObj.href;
          }
       },
       async mounted() {
          this.bindModalEvent();
-         this.getLocalProfile();
          this.initIosPicker();
          this.searchLoading = true;
          await this.doPointSlider();

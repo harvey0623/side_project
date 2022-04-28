@@ -47,7 +47,7 @@ export default class CouponCard {
       let schema = {
          "source": {
             "system": "MMRM",
-            "app": `{{${this.appName}}}`,
+            "app": this.appName,
             "type": "coupon"
          },
          "card_info": memberCard,

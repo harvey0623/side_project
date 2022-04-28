@@ -441,4 +441,9 @@
 .container.pt-141 {
   padding-top: 141px;
 }
+
+.sidebarFilter {
+  height: calc(100vh - 40px);
+  overflow: auto;
+}
 /*# sourceMappingURL=L4.3_00_01_00.css.map */

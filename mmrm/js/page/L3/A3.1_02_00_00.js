@@ -116,12 +116,14 @@ export default function({ apiUrl, pageUrl }) {
          },
          redirectToStoreMap() { //導到店家地圖頁面
             // location.href = `${this.pageUrl.storePoint}?coupon_id=${this.couponId}`;
+            let brandCode = this.brandInfo !== null ? this.brandInfo.brand_code : '';
+            let promotionCode = this.couponInfo.third_party_promotion_code;
+            firebaseGa.logEvent(`event_voucher_usestore_${brandCode}_${promotionCode}`);
             location.href = `${this.pageUrl.storePoint}?ids=${this.couponInfo.brand_ids[0]}`;
          }
        },
       async mounted() {
          this.isLoading = true;
-         this.getLocalProfile();
          this.couponId = parseInt(this.getQuery('coupon_id'));
          let couponType = this.getQuery('coupon_type');
          let couponInfoMethod = couponType === 'coupon' ? 'getCouponInfo' : 'getVoucherInfo';

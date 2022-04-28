@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>會員資料維護</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="c35eae68c868bd516ed64469e1e30e36">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_profile">
+	<meta name="get_member_card_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_card">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_03_01_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<div class="mycontainer">
+			<validation-observer tag="div" class="dataOuter" ref="form">
+				<div class="dataBox">
+					<p class="dataTitle">基本資料</p>
+					<div class="dataBody">
+						<div class="dataRow">
+							<div class="block">
+								<a :href="pageUrl.updateMobile">{{ user.mobile }}</a>
+							</div>
+							<p class="dataName">帳號</p>
+						</div>
+						<div class="dataRow">
+							<div class="block">
+								<a :href="pageUrl.updatePassword" class="leftIcon"></a>
+							</div>
+							<p class="dataName">密碼</p>
+						</div>
+					</div>
+				</div>
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow"
+							rules="required"
+							v-slot="{ errors,failed }">
+							<input
+								type="text" 
+								class="form-control"
+								placeholder="請輸入您的姓名" 
+								v-model.trim="user.name">
+							<p class="dataName">姓名</p>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider
+							tag="div"
+							class="dataRow"
+							rules="required"
+							v-slot="{ errors,failed }">
+							<select class="form-control" v-model="user.gender">
+								<option 
+									v-for="item in genderList" 
+									:key="item.value"
+									:value="item.value"
+								>{{ item.title }}</option>
+							</select>
+							<p class="dataName">性別</p>
+							<div class="downIcon" :class="{ hide: user.gender !== '' }"></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="email"
+							v-slot="{ errors,failed }">
+							<input
+								type="email" 
+								class="form-control"
+								placeholder="請輸入電子信箱" 
+								v-model.trim="user.email">
+							<p class="dataName">電子信箱</p>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<div class="dataRow">
+							<div class="block">
+								<span @click="birthdayHandler">{{ user.birthday }}</span>
+							</div>
+							<p class="dataName">出生日期</p>
+						</div>
+					</div>
+				</div>
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules="required"
+							v-slot="{ errors, failed }">
+							<select 
+								class="form-control eigthInput"
+								:class="{selectDown: user.security_question === ''}"
+								v-model="user.security_question">
+								<option value="" disabled></option>
+								<option 
+									v-for="item in questionList"
+									:key="item.value"
+									:value="item.value"
+								>{{ item.title }}</option>
+							</select>
+							<p class="dataName">忘記密碼安全問題</p>
+							<div class="downIcon" :class="{ hide: user.security_question !== '' }"></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider
+							tag="div"
+							class="dataRow"
+							rules="required"
+							v-slot="{ errors, failed }">
+							<input
+								type="text" 
+								class="form-control sixInput"
+								placeholder="請輸入答案"
+								v-model.trim="user.security_answer">
+							<p class="dataName">安全問題答案</p>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+				<div class="dataBox">
+					<div class="dataBody">
+						<validation-provider 
+							tag="div" 
+							class="dataRow" 
+							rules=""
+							v-slot="{ errors,failed }">
+							<select 
+								class="form-control sevenInput"
+								:class="{selectDown: user.memorial_day_type === ''}"
+								v-model="user.memorial_day_type">
+								<option value=""></option>
+								<option v-for="item in memorialList" :key="item.value" :value="item.value">
+									{{ item.title }}
+								</option>
+							</select>
+							<p class="dataName">重要的日子類別</p>
+							<div class="downIcon" :class="{ hide: user.memorial_day_type !== '' }"></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+						<validation-provider
+							tag="div" 
+							class="dataRow"
+							:rules="criteriaText"
+							v-slot="{ errors,failed }">
+							<input
+								type="date"
+								class="form-control dateInput"
+								:class="{ hide: user.memorial_day !== '' }"
+								v-model="user.memorial_day"
+								:disabled="!isDateRequired">
+							<p class="dataName">重要的日子</p>
+							<div class="dateDown" :class="{ hide: user.memorial_day !== '' }"></div>
+							<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+						</validation-provider>
+					</div>
+				</div>
+			</validation-observer>
+
+			<div class="btnBox">
+				<button @click="submitHandler" class="variation">儲存</button>
+			</div>
+		</div>
+
+		<div id="loading" v-show="isLoading"></div>
+
+		<!-- 提示modal -->
+		<div class="modal msgModal" id="birthdayModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>出生日期無法修改唷！</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#birthdayModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal msgModal" id="tipModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">提示</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ tipMsg }}</p>
+					</div>
+					<div class="modal-footer">
+						<p onclick="$('#tipModal').modal('hide')">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script type="module">
+		import app from './js/page/L2/A2_03_01_00.js';
+		app({
+			apiUrl: {
+				memberProfile: 'https://project-mock-server.herokuapp.com/mmrmProd/member_profile',
+				updateMemberProfile: 'https://project-mock-server.herokuapp.com/mmrmProd/update_member_profile',
+			},
+			pageUrl: {
+				updateMobile: './A2_03_02_00.html',
+				updatePassword: './A2_03_03_00.html'
+			}
+		})
+	</script>
+</body>
+
+</html>

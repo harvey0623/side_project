@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>手機條碼載具(未註冊)</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="aes_key" content="c35eae68c868bd516ed64469e1e30e36">
+	<meta name="login_url" content="">
+	<meta name="get_member_profile_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_profile">
+	<meta name="get_member_card_url" content="https://project-mock-server.herokuapp.com/mmrmProd/member_card">
+	<link rel="icon" href="" type="image/jpg" sizes="16x16">
+	<link rel='stylesheet' href='./lib/bs4/bootstrap.min.css'/>
+	<link rel="stylesheet" href="./lib/mobileSelect/index.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/A2_07_00_00.css">
+	<script src='./lib/jquery/jquery.min.js'></script>
+	<script src='./lib/bs4/bootstrap.bundle.min.js'></script>
+	<script src='./lib/vue/vue.js'></script>
+	<script src="./lib/vue/vee-validate.js"></script>
+	<script src="./lib/axios/axios.min.js"></script>
+	<script src="./lib/crypto/crypto-js.min.js"></script>
+	<script src="./lib/timeme/timeme.min.js"></script>
+	<script src="./lib/js-cookie/js.cookie.min.js"></script>
+	<script src="./js/src/setColor.js"></script>
+	<script src="./js/src/systemLang.js"></script>
+	<script src="./js/vue-components/veevalidate.js"></script>
+	<script src="./js/vue-components/filter.js"></script>
+	<script src="./js/src/wm_aes.js"></script>
+	<script src="./js/src/mmrmAxios.js"></script>
+	<script src="./lib/mobileSelect/index.js"></script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+      <div class="mycontainer">
+         <validation-observer tag="div" class="formLayout" ref="form">
+				<div class="formRow">
+					<p class="formTitle">手機條碼載具</p>
+					<validation-provider
+						tag="div"
+						class="formContent"
+						rules="required"
+						v-slot="{ errors, failed }">
+						<input
+	                  type="text"
+							class="form-control sixInput"
+                     v-model.trim="user.einvoice"
+							placeholder="例: /ABC+123">
+						<p class="errMsg" v-show="failed">{{ errors[0] }}</p>
+					</validation-provider>
+				</div>
+			</validation-observer>
+         <div class="btnBox">
+				<button @click="submitHandler" class="variation">確認送出</button>
+			</div>
+         <div class="note-block">
+            <p class="title">注意事項</p>
+            <div class="content" v-html="noteContent"></div>
+         </div>
+         <div class="register-block">
+            <a href="javascript:;" class="btn-register" @click="redirectHandler">註冊手機條碼</a>
+            <p>若您尚未有手機條碼，</p>
+            <p>請至財政部網站進行註冊。</p>
+         </div>
+      </div>
+
+      <div id="loading" v-show="isLoading"></div>
+
+      <div class="modal msgModal" id="invoiceModal" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">{{ modalTitle }}</h1>
+					</div>
+					<div class="modal-body">
+						<p>{{ modalContent }}</p>
+					</div>
+					<div class="modal-footer">
+                  <a :href="backSiteUrl" v-show="tipInfo.status">確認</a>
+						<p data-dismiss="modal" v-show="!tipInfo.status">確認</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="module">
+		import app from './js/page/L2/A2_07_00_00.js';
+		app({
+			apiUrl: {
+            brefConfig: 'https://project-mock-server.herokuapp.com/mmrmProd/config/brief_copywriting_config',
+            registerInvoice: 'https://project-mock-server.herokuapp.com/wowprime/register_einvoice',
+				updateMemberProfile: 'https://project-mock-server.herokuapp.com/mmrmProd/update_member_profile',
+			},
+			pageUrl: {
+				invoice_unbinded: './A2_07_00_00.html',
+				invoice_binded: './A2_07_00_01.html',
+				memberCard: './A2_00_00_01.html',
+				couponCard: './A2.1_00_02_00.html'
+			}
+		});
+	</script>
+</body>
+
+</html>

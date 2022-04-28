@@ -25,7 +25,7 @@ Vue.component('menu-brand-popup', { //想吃什麼專用
    template: `
       <div class="menu-brand-popup" v-show="is_open">
          <div class="popupHeader">
-            <span>查找品牌</span>
+            <span>選擇品牌</span>
             <div class="popupClose" @click="closeHandler"></div>
          </div>
          <ul class="tabList">

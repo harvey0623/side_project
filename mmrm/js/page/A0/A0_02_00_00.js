@@ -41,7 +41,6 @@ export default function({ apiUrl, pageUrl }) {
       },
       async mounted() {
          this.isLoading = true;
-         this.getLocalProfile();
          let faqResult = await this.getFaq();
          if (faqResult.length === 0) return this.isLoading = false; 
          let linkObj = faqResult[0].link_block.links[0];

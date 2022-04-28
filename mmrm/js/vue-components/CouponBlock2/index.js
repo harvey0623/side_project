@@ -76,10 +76,20 @@ Vue.component('coupon-block', {
          else return vsprintf(this.redeemcouponinfo, [this.totalStore, this.info.total]);
       },
    },
+   methods: {
+      aTagClick(evt) {
+         let couponBrandId = this.info.brand_ids[0];
+         let targetBrand = this.brandlist.find(item => item.brand_id === couponBrandId);
+         if (targetBrand !== undefined) {
+            firebaseGa.logEvent(`event_voucher_${targetBrand.brand_code}_${this.info.third_party_promotion_code}`, {}, true);
+         }
+         location.href = evt.currentTarget.href;
+      }
+   },
    template: `
       <a 
          :href="pageLink" 
-         class="couponBlock" :class="{reverse: reverse}">
+         class="couponBlock" :class="{reverse: reverse}" @click.prevent="aTagClick">
          <div class="couponBlockL">
             <div class="brandInfo" :class="{allBrand: isAllBrand}">
                <div class="brandLogo" :style="brandImage"></div>

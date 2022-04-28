@@ -81,6 +81,7 @@ export default function ({ apiUrl, pageUrl }) {
                   }
                }
             }).then(res => {
+               if (res.data.results.data.payload.isdone === 'F') throw new Error();
                return res.data.results.data.payload;
             }).catch(err => {
                return {
@@ -136,7 +137,6 @@ export default function ({ apiUrl, pageUrl }) {
       async mounted() {
          this.isLoading = true;
          window.addEventListener('scroll', this.scrollHandler);
-         this.getLocalProfile();
          this.memberCard = await this.getMemberCard();
          let brandIds = await this.getBrandList();
          this.brandList = await this.getBrandInfo(brandIds);

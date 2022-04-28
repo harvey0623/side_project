@@ -56,7 +56,7 @@ Vue.component('coupon-block', {
          return this.info.status === 'available';
       },
       pageLink() {
-         if (this.isAvailable) return `${this.pageurl}?my_coupon_id=${this.info.my_coupon_id}`;
+         if (this.info.status !== 'notyet') return `${this.pageurl}?my_coupon_id=${this.info.my_coupon_id}`;
          else return 'javascript:;';
       },
       couponInfo() {
@@ -137,8 +137,21 @@ Vue.component('coupon-block', {
          return index >= 10 ? `${index}` : `0${index}`;
       }
    },
+   methods: {
+      couponClick(evt) {
+         let mapping = { 
+            valid: 'voucherbasket_wcoupon_usable_',
+            invalid: 'voucherbasket_wcoupon_history_',
+            transferred: 'voucherbasket_wcoupon_transfer_'
+         };
+         let eventName = mapping[this.currentType];
+         let promoteCode = this.info.couponInfo.third_party_promotion_code;
+         firebaseGa.logEvent(`${eventName}${promoteCode}`, {}, true);
+         location.href = evt.currentTarget.href;
+      }
+   },
    template: `
-      <a :href="pageLink" class="couponBlock" :class="{reverse: reverse}">
+      <a :href="pageLink" class="couponBlock" :class="{reverse: reverse}" @click.prevent="couponClick">
          <div class="couponBlockL">
             <div class="brandInfo" :class="{allBrand:isAllBrand}">
                <div class="brandLogo" :style="brandImage"></div>

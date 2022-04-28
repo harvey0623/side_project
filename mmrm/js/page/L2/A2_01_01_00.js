@@ -12,8 +12,8 @@ export default function ({ apiUrl, pageUrl }) {
          currentPoint: null,
          currentPointType: 'accumulate',
          tabInfo: {
-            accumulate: { title: '累點', pos: 0 },
-            discount: { title: '扣點', pos: 0 }
+            accumulate: { title: '累點', pos: 0, event: 'mypoints_reward' },
+            discount: { title: '扣點', pos: 0, event: 'mypoints_redeem' }
          },
          expireList: [],
          tempHistory: [],
@@ -92,6 +92,7 @@ export default function ({ apiUrl, pageUrl }) {
             return value;
          },
          showExpireDetail() {
+            firebaseGa.logEvent('mypoints_30day_seach');
             if (!this.hasExpire) return;
             $('#expireModal').modal('show');
          },
@@ -165,6 +166,7 @@ export default function ({ apiUrl, pageUrl }) {
             window.removeEventListener('scroll', this.scrollHandler);
             this.tabInfo[this.currentPointType].pos = window.pageYOffset;
             this.currentPointType = type;
+            this.dispatchPointTypeGa();
             let categoryArr = this.createFilterList();
             this.pointHistory = categoryArr.length > 0 ? this.classifyPoint(categoryArr) : [];
             await this.$nextTick();
@@ -229,17 +231,23 @@ export default function ({ apiUrl, pageUrl }) {
             let pointId = this.pointId;
             let { start, end } = this.dateFormat;
             let url = `${pageUrl.searchPage}?point_id=${pointId}&start=${start}&end=${end}`;
+            firebaseGa.logEvent('mypoints_seach');
             location.href = url;
          },
          descHandler() {
+            firebaseGa.logEvent('mypoints_reward_description');
+            firebaseGa.logEvent('mypoints_exchange_description');
             let url = `${pageUrl.pointDesc}?point_id=${this.pointId}`;
             location.href = url;
+         },
+         dispatchPointTypeGa() {
+            firebaseGa.logEvent(this.tabInfo[this.currentPointType].event);
          }
       },
       async mounted() {
          window.addEventListener('scroll', this.scrollHandler);
          this.isLoading = true;
-         this.getLocalProfile();
+         this.dispatchPointTypeGa();
          await Promise.all([this.initHandler(), this.getPagination()]);
          this.isLoading = false;
       }

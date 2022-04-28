@@ -1,88 +1,119 @@
-import QrcodeMaker from '../../modules/QrcodeMaker/index.js';
-export default function({ appName ,apiUrl }) {
+export default function({ apiUrl, pageUrl }) {
    new Vue({
       el: '#app',
       data: {
-         memberProfile: null,
-         levelName: '',
+         user: { name: '', einvoice: '', cardNo: '', level: '' },
+         tipInfo: { status: false, message: '' },
          isLoading: false,
-         cardNo: ''
+         pageUrl
       },
       computed: {
-         hasMemberProfile() {
-            return this.memberProfile !== null;
-         },
-         memberName() {
-            return this.hasMemberProfile ? this.memberProfile.name : '';
-         },
+         hasCardNo() {
+            return this.user.cardNo !== '';
+         }
       },
       methods: {
-         getMemberProfile() {
+         profileApi() {
             return mmrmAxios({
                url: apiUrl.memberProfile,
                method: 'post',
                data: {}
-            }).then(res => res.data.results.member_profile).catch(() => null);
+            }).then(res => {
+               return res.data;
+            }).catch(err => {
+               return err.response.data;
+            })
          },
-         getMemberCard() {
+         memberCardApi() {
             return mmrmAxios({
                url: apiUrl.memberCard,
                method: 'post',
                data: {}
-            }).then(res => res.data.results)
+            }).then(res => {
+               return res.data;
+            })
          },
-         getMemberSummary() {
+         memberSummaryApi() {
             return mmrmAxios({
                url: apiUrl.memberSummary,
                method: 'post',
                data: {}
-            }).then(res => res.data.results)
+            }).then(res => {
+               return res.data;
+            })
          },
-         getLevelInfo(levelId) {
+         updateProfileApi(payload) {
             return mmrmAxios({
-               url: apiUrl.levelInfo,
+               url: apiUrl.updateMemberProfile,
                method: 'post',
-               data: { level_id: [levelId] }
-            }).then(res => res.data.results)
+               data: payload
+            }).then(res => {
+               return res.data;
+            })
          },
-         createQrcode(vehicleCode, cardSource) {
+         getQuery(key) {
+            let params = (new URL(document.location)).searchParams;
+            return params.get(key);
+         },
+         createQrcode(payload) {
             let schema = {
                "source": {
                   "system": "MMRM",
-                  "app": `{{${appName}}}`,
+                  "app": "FMS",
                   "type": "member"
                },
-               "card_info": cardSource,
+               "card_info": payload.cardSource,
                "invoice_info": [
                   {
                      "key": "einvoice_carrier_no",
-                     "value": vehicleCode !== undefined ? vehicleCode : ''
+                     "value": payload.einvoice_carrier_no
                   }
                ]
             };
-            new QrcodeMaker({
-               rootEl: '#qrcode',
+            new QRCode(document.querySelector('#qrcode'), {
                width: 180,
                height: 180,
-               text: JSON.stringify(schema)
+               colorDark : '#000000',
+               colorLight : '#ffffff',
+               text: JSON.stringify(schema),
+               correctLevel : QRCode.CorrectLevel.H
             });
          },
-         getCardNo(cardSource) { //取得會員卡號
-            return cardSource[0].value;
+         openBarcodeModal() {
+            this.$refs.barcodeModal.open();
+         },
+         checkRemove() {
+            this.$refs.barcodeModal.close();
+            $('#checkModal').modal('show');
+         },
+         async removeHandler() {
+            this.isLoading = true;
+            $('#checkModal').modal('hide');
+            let response = await this.updateProfileApi({
+               member_profile : { einvoice_carrier_no: null }
+            });
+            this.tipInfo.status = response.rcrm.RC === 'C01';
+            this.tipInfo.message = response.rcrm.RM;
+            if (this.tipInfo.status) this.user.einvoice = '';
+            $('#removeOkModal').modal('show');
+            this.isLoading = false;
          }
       },
       async mounted() {
          this.isLoading = true;
-         this.memberProfile = await this.getMemberProfile();
-         let memberCard = await this.getMemberCard();
-         let memberSummary = await this.getMemberSummary();
-         let levelId = memberSummary.level_summary.current_level.level_id;
-         let levelInfo = await this.getLevelInfo(levelId);
-         this.levelName = levelInfo.level_information[0].title;
-         let vehicleCode = this.memberProfile.einvoice_carrier_no;
-         let cardSource = memberCard.member_card.code_info.card_info;
-         this.createQrcode(vehicleCode, cardSource);
-         this.cardNo = this.getCardNo(cardSource);
+         let profile = await this.profileApi();
+         let memberCard = await this.memberCardApi();
+         let summary = await this.memberSummaryApi();
+         let cardSource = memberCard.results.member_card.code_info.card_info;
+         this.user.name = profile.results.member_profile.name;
+         this.user.einvoice = profile.results.member_profile.einvoice_carrier_no || '';
+         this.user.cardNo = cardSource[0].value;
+         this.user.level = summary.results.level_summary.current_level.title;
+         this.createQrcode({
+            einvoice_carrier_no: this.user.einvoice,
+            cardSource,
+         });
+         if (this.getQuery('openModal') === 'true') this.openBarcodeModal();
          this.isLoading = false;
       }
    })
